@@ -45,7 +45,7 @@
 
     span multiple paragraphs.
 
-
+\vskip 2cm
 	    
 Main contributions:
 \begin{itemize}
@@ -81,6 +81,15 @@ TODO: discuss privacy issues (where?)
 \usepackage{url}      %% Hyperlinks
 \usepackage{markdown} %% Lightweight Markup
 
+% TODO notes
+\usepackage{xargs}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improve}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
 % \usepackage{graphicx}
 % \usepackage{a4wide}
 % \usepackage{tabularx}
@@ -102,6 +111,7 @@ TODO: discuss privacy issues (where?)
 \chapter{Introduction}
 
 % TODO: pouzit sablonu z hab prace
+\todo[inline]{blah}
 
 \begin{itemize}
 	\item Motivation for the thesis
@@ -272,6 +282,11 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 
 \section{Further Research}
 
+%------------------------------------------------------------------------------
+
+% Print bibliography at the end (should happen automatically,
+% but this removes overleaf's warning)
+\printbibliography[heading=bibintoc] %% Print the bibliography.
 
 %------------------------------------------------------------------------------
 
@@ -280,6 +295,8 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 \phantomsection %% Print the index and insert it into the
 \addcontentsline{toc}{chapter}{\indexname} %% table of contents.
 \printindex
+
+%------------------------------------------------------------------------------
 
 \appendix %% Start the appendices.
 % List of authored publications
@@ -292,9 +309,5 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 \fullcite{1120462}
 
 \section{Other Publications}
-
-% Print bibliography at the end (should happen automatically,
-% but this removes overleaf's warning)
-\printbibliography[heading=bibintoc] %% Print the bibliography.
 
 \end{document}
