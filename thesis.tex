@@ -1,0 +1,261 @@
+\documentclass[
+  digital, %% This option enables the default options for the
+           %% digital version of a document. Replace with `printed`
+           %% to enable the default options for the printed version
+           %% of a document.
+  notable,   %% Causes the coloring of tables. Replace with `notable`
+           %% to restore plain tables.
+  nolof,     %% Prints the List of Figures. Replace with `nolof` to
+           %% hide the List of Figures.
+  nolot,     %% Prints the List of Tables. Replace with `nolot` to
+           %% hide the List of Tables.
+  %% More options are listed in the user guide at
+  %% <http://mirrors.ctan.org/macros/latex/contrib/fithesis/guide/mu/fi.pdf>.
+]{fithesis3}
+
+%% The following section sets up the locales used in the thesis.
+\usepackage[resetfonts]{cmap} %% cmap makes the PDF searchable and copyable
+\usepackage[T1]{fontenc}
+\usepackage[
+  main=english, %% By using `czech` or `slovak` as the main locale
+                %% instead of `english`, you can typeset the thesis
+                %% in either Czech or Slovak, respectively.
+  czech         %% The additional keys allow
+]{babel}        %% foreign texts to be typeset as follows:
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+
+%% The following section sets up the metadata of the thesis.
+\thesissetup{
+    date          = \the\year/\the\month/\the\day,
+    university    = mu,
+    faculty       = fi,
+    type          = d,
+    author        = Petr Velan,
+    gender        = m,
+    advisor       = doc. Ing. Pavel Čeleda, Ph.D.,
+    title         = {Next Generation Application-Aware Flow Monitoring},
+    TeXtitle      = {Next Generation Application-Aware Flow Monitoring},
+    keywords      = {network, monitoring, network flow, NetFlow, IPFIX},
+    TeXkeywords   = {network, monitoring, network flow, NetFlow, IPFIX},
+    bib           = bibliography.bib,
+}
+\thesislong{abstract}{
+    This is the abstract of my thesis, which can
+
+    span multiple paragraphs.
+}
+\thesislong{thanks}{
+    This is the acknowledgement for my thesis, which can
+
+    span multiple paragraphs.
+}
+\usepackage{makeidx}      %% The `makeidx` package contains
+\makeindex                %% helper commands for index typesetting.
+%% These additional packages are used within the document:
+\usepackage{paralist} %% Compact list environments
+\usepackage{amsmath}  %% Mathematics
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{url}      %% Hyperlinks
+\usepackage{markdown} %% Lightweight Markup
+
+\begin{document}
+
+%------------------------------------------------------------------------------
+% Intro
+\chapter{Introduction}
+
+% TODO: pouzit sablonu z hab prace
+
+\begin{itemize}
+	\item Motivation for the thesis
+	\item Terminology, frequently used terms
+	\item Research questions
+	\item Thesis structure
+\end{itemize}
+
+
+% \section{Terminology}
+% 
+\section{Research Questions}
+
+ 
+\section{Thesis Structure}
+
+
+
+%------------------------------------------------------------------------------
+% Background
+\chapter{Thesis Background}
+\label{chap:thesis-background}
+
+This chapter describes the flow monitoring process from raw data acquisition to network anomaly detection.
+
+% Use section 2.2 from thesis proposal
+
+\section{Flow Definition}
+
+\section{Flow Monitoring Architecture}
+
+\subsection{Flow Exporter}
+
+\subsection{Flow Collector}
+
+%------------------------------------------------------------------------------
+% State of the art
+\chapter{State of the Art}
+\label{chap:state-of-the-art}
+
+This chapter should map the state of the art for the selected research questions.
+
+\section{High-speed Packet Capture}
+This section describes how the packets are captured on network and delivered to software for further processing.
+
+Start with related work from IM2015 paper.
+
+\section{Application Classification}
+\subsection{Classification Using DPI/Signatures}
+Start with 2.1.1 from thesis proposal. Describe existing approaches and tools. Performance limitations.
+
+\subsection{Classification Using Flow-based Techniques}
+Start with 2.4.1 from thesis proposal.
+Cite only relevant surveys, there are too many works.
+Nobody is concerned with performance.
+
+
+\section{Extracting Information From Application Layer}
+
+\section{High-speed Traffic Generation}
+Existing approaches, problems.
+
+\section{Open Issues}
+Describe what are the open issues in this field.
+\begin{itemize}
+	\item Impact, limits and benefits of application flow monitoring
+	\item Quality and availability of data sets
+	\item Unified benchmarking environment
+	\item Dealing with encrypted traffic
+	\item Identifying user events in flows
+\end{itemize}
+
+
+\section{Summary}
+
+% \section{Relevant Publications}
+
+
+%------------------------------------------------------------------------------
+
+\chapter{Flow Measurement Benchmarking Environment}
+Describe an idea for benchmarking flow exporters or other applications that require application data.
+
+\section{Network Traffic Characteristics}
+How can we describe network traffic in general? How to differentiate between types of traffic for benchmarking purposes?
+
+\section{Flow-preserving Traffic Generator}
+Describe ideas behind new packet generator that is capable of generating traffic with real-world properties.
+
+\section{Application Data Sets}
+Describe data sets for the pfgen.
+
+\section{Relevant Publications}
+TODO: two publications, one for the data sets, one for the generator.
+
+%------------------------------------------------------------------------------
+% 
+\chapter{Application Flow}
+
+\section{Impacts of Application Flow}
+
+\begin{itemize}
+	\item What are the impacts of application protocol measurement on flow exporters?
+\end{itemize}
+
+
+\section{Application Flow Performance}
+
+\begin{itemize}
+	\item What are the limits of application protocol measurement on high-speed networks?
+	\item 100\,G flow vs 10\,G application flow
+\end{itemize}
+
+
+\section{Application Flow Benefits}
+
+\begin{itemize}
+	\item How can application protocol information be used to improve flow measurement quality?
+\end{itemize}
+
+
+\section{Relevant Publications}
+
+[1] Petr Velan, Tomáš Jirsík and Pavel Čeleda. Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement. In Lecture Notes in Computer Science, Vol. 8115, pages 136-147, Chemnitz, Germany, 2013.
+
+TODO: NOMS 2016 (Experience session paper, August 2015): Paper on impact - CPU, memory impact. Large flow cache, maybe IPFIX stream compression. (Q2 2015)
+
+IM2015
+
+TODO: Journal paper Computer Networks (1.282 IF, check deadline): Similar paper as IM2015 on application measurement. Maybe together with paper on app measurement impact. (Q3 2015)
+
+TODO: IMC 2015 (April): 100\,G flow measurement (need machine with bifurcation and good CPUs)
+
+[3] Pavel Celeda, Petr Velan, Martin Rábek, Rick Hofstede and Aiko Pras. Large-Scale Geolocation for NetFlow. In IFIP/IEEE International Symposium on Integrated Network Management (IM 2013), pages 1015-1020, Ghent, Belgium, 2013.
+
+[4] Martin Elich, Petr Velan, Tomáš Jirsík and Pavel Celeda. An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis. In 38th Annual IEEE Conference on Local Computer Networks (LCN 2013), pages 1046-1052, Sydney, Australia, 2013.
+
+%------------------------------------------------------------------------------
+% 
+\chapter{Measurement of Encrypted Traffic}
+
+\begin{itemize}
+	\item What can be done about encrypted traffic visibility?
+\end{itemize}
+
+\section{Relevant Publications}
+TODO: IJNM2014 survey (Q3 2014)
+
+%------------------------------------------------------------------------------
+% 
+\chapter{Next Generation Flow}
+
+\begin{itemize}
+	\item How to add application level events to flow measurements? We want logical grouping of flow records based on user actions.
+\end{itemize}
+
+\section{Relevant Publications}
+TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
+
+%------------------------------------------------------------------------------
+% Conclusion
+\chapter{Conclusion}
+\label{chap:conclusions}
+
+
+\section{Answers to Research Questions}
+
+
+
+\section{Further Research}
+
+
+%------------------------------------------------------------------------------
+
+  \makeatletter\thesis@blocks@clear\makeatother
+  \phantomsection %% Print the index and insert it into the
+  \addcontentsline{toc}{chapter}{\indexname} %% table of contents.
+  \printindex
+
+\appendix %% Start the appendices.
+% List of authored publications
+\chapter{List of Authored Publications}
+
+\section{Impacted Journals}
+
+\section{Conference Proceedings}
+
+\cite{1120462}
+
+\section{Other Publications}
+
+\end{document}
