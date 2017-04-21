@@ -1,5 +1,5 @@
-\documentclass[oneside,
-  digital, %% This option enables the default options for the
+\documentclass[oneside,11pt,nocover,
+  printed, %% This option enables the default options for the
            %% digital version of a document. Replace with `printed`
            %% to enable the default options for the printed version
            %% of a document.
@@ -45,11 +45,13 @@
 
     span multiple paragraphs.
 }
+
 \thesislong{thanks}{
     This is the acknowledgement for my thesis, which can
 
     span multiple paragraphs.
 }
+
 \usepackage{makeidx}      %% The `makeidx` package contains
 \makeindex                %% helper commands for index typesetting.
 %% These additional packages are used within the document:
@@ -59,6 +61,20 @@
 \usepackage{amsfonts}
 \usepackage{url}      %% Hyperlinks
 \usepackage{markdown} %% Lightweight Markup
+
+% \usepackage{graphicx}
+% \usepackage{a4wide}
+% \usepackage{tabularx}
+% \usepackage{amssymb}
+% \usepackage[hyphens]{url}
+% \usepackage[titletoc]{appendix}
+% \usepackage{color}
+% \usepackage{textcomp}
+% \usepackage[hidelinks]{hyperref}
+% \usepackage{pifont}
+% \usepackage[table]{xcolor}
+% \usepackage{subfig}
+% \usepackage[ruled, lined, linesnumbered,norelsize]{algorithm2e}
 
 \begin{document}
 
@@ -231,7 +247,6 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 \chapter{Conclusion}
 \label{chap:conclusions}
 
-
 \section{Answers to Research Questions}
 
 
@@ -241,10 +256,11 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 
 %------------------------------------------------------------------------------
 
-  \makeatletter\thesis@blocks@clear\makeatother
-  \phantomsection %% Print the index and insert it into the
-  \addcontentsline{toc}{chapter}{\indexname} %% table of contents.
-  \printindex
+% Print index
+\makeatletter\thesis@blocks@clear\makeatother
+\phantomsection %% Print the index and insert it into the
+\addcontentsline{toc}{chapter}{\indexname} %% table of contents.
+\printindex
 
 \appendix %% Start the appendices.
 % List of authored publications
@@ -254,8 +270,12 @@ TODO: Use the thesis of Jakub Melichar to write a paper (Q1 2015)
 
 \section{Conference Proceedings}
 
-\cite{1120462}
+\fullcite{1120462}
 
 \section{Other Publications}
+
+% Print bibliography at the end (should happen automatically,
+% but this removes overleaf's warning)
+\printbibliography[heading=bibintoc] %% Print the bibliography.
 
 \end{document}
