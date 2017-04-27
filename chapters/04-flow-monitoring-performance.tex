@@ -1,0 +1,81 @@
+\chapter{Application Flow Monitoring Performance}
+
+\iinfo{Text below is mostly from Challenges of Application Flow Monitoring.}
+
+\itodo{FIX CITATIONS}
+
+\itodo{TODO: Howto measure flow monitoring performance - skoro samostatná kapitola}
+\itodo{TODO: biflow}
+\itodo{TODO: Include more details}
+\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc.}
+\itodo{TODO: Put in papers from IM2015}
+\itodo{TODO: Title is Flow Monitoring Performance, split to application and classic}
+
+\section{Accelerating Application Flow Monitoring}
+
+We have shown that there are many different challenges when building application flow monitoring system. Most of the described processes are performance sensitive, especially packet reception, packet parsing, and flow aggregation. To achieve application flow monitoring throughput of tens of gigabits per second, several optimization and acceleration techniques can be applied. This section focuses on these techniques. Note that we avoid the use of sampling since it degrades the quality of exported data, as shown by the authors of [8]. Although we describe acceleration techniques, their design, and main ideas, we will not go into details about their evaluation and testing, which is out of the scope of this article. 
+
+It has been shown by the authors of [9] that standard flow monitoring can achieve more than 100 Gb/s throughput on a commodity CPU when hardware accelerated NICs are used. The work of Kekely et al. [10] shows that it is possible to utilize these NICs to achieve 100 Gb/s throughput even for application flow monitoring. We discuss both hardware accelerated techniques and software optimizations in this section. Table~\ref{tab:flow-acc-techniques} gives an overview of the discussed techniques.
+
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Hardware acceleration} & \textbf{Software acceleration} \\ \hline
+	Multiple reception buffers & Multithreading \\
+	Packet trimming & NUMA awareness \\
+	Packet header preprocessing & Flow state in parsers \\
+	Flow processing offloading & Flow cache design \\
+	Application identification & Flow cache timeouts \\ \hline
+	\end{tabular}
+	\caption{Flow Acceleration Techniques}
+	\label{tab:flow-acc-techniques}
+\end{table}
+
+
+\subsection{Hardware Accelerated Techniques}
+
+A field-programmable gate array (FPGA) is usually used in hardware accelerated network interface cards. It allows to parse packet headers and perform other tasks such as packet trimming or computing hashes to identify flows in the NICs. It usually supports transferring data to multiple buffers in RAM so that the software can efficiently use a multi-threading model. There are several manufacturers that provide such NICs, such as Napatech, Myricom, Mellanox Technologies, or Netcope Technologies. NICs can support hardware acceleration even without an FPGA chip, however, the capabilities are usually more limited and cannot be extended after the card is produced. For example, Intel produces many NICs without an FPGA chip that provide basic hardware acceleration such as packet hashing and transport to multiple RAM buffers.
+
+By transferring data to multiple buffers in RAM, the NIC allows multiple CPU cores to process the data without any kind of locking mechanism. The data parsing is usually the most CPU intensive part of the application flow creation process, therefore it is very desirable to parallelize the computation. It is often necessary for the application packet parsing process to see multiple packets from the same flow. Therefore, it is desirable to store packets belonging to single flow to a single buffer in RAM, so that they are not processed by multiple different threads. To achieve this, the NIC must be able to correctly categorize packets belonging to the same flow. However, it is not necessary for the NIC to differentiate between every flow record. For example, when eight buffers are used, each flow must be sent to exactly one of the buffers. The easiest way to achieve this is to compute a three-bit hash from some of the flow-defining fields in the packet headers. IP addresses and transport layer ports are often used for this purpose, however, most manufacturers do not realize that this works incorrectly for fragmented packets. Therefore, it is better, in most scenarios, to use only IP addresses to distribute the flows to different buffers. The performance improvement achieved when using multiple buffers is directly related to the number of buffers. However, too many buffers introduce a high load on a memory controller causing the performance to be degraded. It is best to experiment with different numbers of buffers to find an optimal value for the target system. We have achieved the best results with 8-16 buffers, depending on the specific scenario and the number of CPU cores.
+
+Memory throughput can easily become a bottleneck when data from 100 Gb/s link are sent to RAM. One of the options to reduce the amount of processed data is to trim the received packets. Flow measurement without application protocols requires only packet headers up to the transport layer. Capturing the first 100 bytes of each packet is usually enough to contain various MPLS, VLAN, Ethernet, IPv6, and TCP headers. The rest of the packet can be discarded. The performance improvement achieved by this method depends on the average length of processed packets. However, application flow measurement requires also the packet payload. The amount of data that can be discarded varies depending on the measured application protocols. Unless the NIC has additional knowledge about measured traffic, it should not trim the packets at all for application flow measurement.
+
+More radical way to save memory bandwidth and CPU cycles is to let the NIC extract the information required for flow monitoring and send only a special message with this information to the RAM. This process requires very specialized FPGA-based cards, such as COMBO series from CESNET. The performance gain can be quite high, as shown in [9]. However, this method is not applicable for application flow measurement since application layer parsing is too complex and dynamic to be fully handled in the FPGA.
+
+Packet trimming and packet parsing in the NIC are not usable for application flow monitoring. The main reason is that application layer parsing needs to be done in software. However, most packets do not carry application protocol headers. These packets can be processed by NIC and only extracted information transferred to software. Such a solution is proposed in [10] and is called Software Defined Monitoring (SDM). It is based on offloading of heavy flows to the NIC. The important information from application layer is usually transferred in first N packets, where N can be expected to be lower than 20 in most cases. Therefore, after the software processing encounters the Nth packet, it instructs the NIC to process the rest of the flow. Only aggregated information about the flow is sent from NIC to software. The flow cache in the NIC is rather limited in comparison to the amount of RAM available in the software. However, only heavy flows need to be kept in this cache and it can be expired more often to reduce memory requirements. The authors show that 85 percent of traffic is observed in five percent of heavy flows. Therefore, the benefit of SDM has been shown to be an aggregation of 85 percent of packets to flow records in the NIC. This significant acceleration allows application flows to be monitored on 100 Gb/s traffic. However, there is a downside to the SDM as well. Once a flow is offloaded to NIC, software parsers cannot observe further payloads containing subsequent application headers. For example, in the case of HTTP protocol the HTTP pipelining cannot be detected and information about further requests and responses in the same connection is lost.
+
+Since only a small portion of all packets carry important application protocol information, it is beneficial to recognize such packets in the NIC and mark them for further processing in software. As the NIC cannot do complex application header processing, only a simple mechanism, such as pattern matching, can be utilized for packet classification. The work of the WAND Research Group [11] shows that it is possible to achieve reasonable traffic classification accuracy using only the beginning of a packet payload. Once the packets carrying application protocol headers are marked, the software parsers can process only these important packets. Moreover, other packets can be trimmed or parsed in the NIC and only important information can be passed for processing in the software. Packet classification can also benefit the SDM. When a flow is offloaded to NIC and a packet with application protocol header is matched, the processing of such a flow can be returned to the software. This approach would efficiently solve the abovementioned problem of HTTP pipelining. The accuracy and usability of pattern matching for packet classification depend on target application protocols and resource limitation of the NIC as well. Further research is needed to determine whether this method can be used for real world application flow monitoring.
+
+
+\subsection{Acceleration in Software}
+
+The performance of flow monitoring can be greatly enhanced by offloading as much of the necessary packet processing as possible to the NIC. However, to build a high-performance flow monitoring solution the software processing must be carefully tuned as well. Moreover, the FPGA-based NICs are much more expensive than commodity NICs and cannot always be deployed. This section focuses on flow monitoring optimizations that can be achieved by careful software design and system configuration.
+
+The development of modern CPUs has a tendency to substitute raw power (frequency) by a higher number of CPU cores. To fully utilize the potential of a multi-core CPUs and achieve high flow monitoring performance, it is necessary to create multithreaded flow monitoring software. For NICs that support storing data in multiple buffers in RAM, the solution is to have different threads process the packets from different buffers. The resulting flow records are aggregated either in a single flow cache or in multiple flow caches, one per each thread, as shown in Figure~\ref{fig:exporter-thread-schema}. In either case, it must be ensured that there is a single thread used for exporting the resulting flow records where the data from multiple processing threads are merged. The latter approach is more effective as it clearly prevents the flow cache to become a point of contention. However, when there are multiple flow caches, it is necessary to ensure that each flow is aggregated in a single flow cache. This is ensured by having the NIC correctly distribute the packets to the buffers according to their association with their respective flow. Special care needs to be taken when the application protocol parsers need to process reverse flows as well. Both directions of the communication must be processed by the same thread. Using this approach, N+2 threads in case the first case or 2N+1 threads in the second case can be utilized, where N is the number of buffers and the last thread is used for flow export. 
+
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/exporter-thread-schema}
+  \end{center}
+  \caption{Multithreaded flow measurement with separate flow cache: a) single flow cache; b) multiple flow caches.}
+  \label{fig:exporter-thread-schema}
+\end{figure}
+
+Separating packet parsing from flow cache management increases performance, however, processing application protocols may require a state of the connection to be kept. In such a case the flow cache record must be made available to the packet processing thread, which results in a use of synchronization primitives and overall performance decrease. One possible solution to this problem is to keep a different, smaller cache for chosen flow records directly in the packet processing thread. The only communication between the packet processing thread and the flow cache thread is a one-way passing of flow records, which can be done very effectively.
+
+When a server with multiple CPUs is used, it is necessary to take care to assign each thread to correct CPU core. When the data is uploaded to RAM physically connected to different CPU than the packet processing core is running on, there is a performance hit for accessing the local memory of that CPU.
+
+It is not effective to try every available application header parser on every packet to see which one is able to process it. When a packet from a flow was already matched by some application parser, it will usually not be matched by others. Therefore, by keeping the information about which flow is to be processed by each parser, most of the unnecessary and possibly expensive calls to application parsers can be eliminated. Moreover, when the flow is yet unmatched by any application parser, it is best to execute the application protocol parsers from the most common to the least common protocol.
+
+One of the most performance critical parts of any flow measurement software is a flow cache. The cache needs to be designed to hold hundreds of thousands of flow records, do fast inserts, updates, and manage record expiration after active and inactive timeouts. It also needs to be robust and resilient enough to handle excessive workloads during DDoS attacks [12]. The flow cache design has been studied in the literature, for example in [13] and [14]. Although authors propose to use various data structures such as linked lists, trees, or multidimensional hashing table, our experience shows that the simplest solution is the best. The flow cache has to maintain data locality to make good use of CPU caches, therefore the dynamic structures do not perform as well as a simple hash table.
+
+Flow cache inactive timeout expiration has a large impact on the performance, as shown in [7,15]. The flow cache needs to be checked periodically to find and expire inactive records. However, doing the periodic checking in a separate thread requires extensive flow cache locking, which hinders the performance. Therefore, it is more efficient to dedicate part of the processing time of the flow cache thread itself to search for the inactive records. Carefully balancing the flow cache management tasks is a complex problem which offers a considerable potential for further research.
+
+There are many other optimizations that can be performed to increase application flow monitoring performance, such as efficient flow key computation, processing packets in batches, ensuring CPU cache line alignment of flow records and so on. However, they are mostly a code micro-optimization no different from fine-tuning any other high-performance application and are out of the scope of this article.
+
+
+\section{Conclusions}
+
+\section{Relevant Publications}

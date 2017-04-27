@@ -1,0 +1,42 @@
+\chapter{Introduction}
+
+\itodo{
+Motivation for flow monitoring: Rick’s thesis (data retention!) \\
+Use introduction from Challenges of Application Flow Monitoring
+}
+
+\iimprove{Rewrite, the following is copied from COMSOC article}
+A passive network traffic monitoring is an essential tool for network management, analysis, and security. There are several approaches to the passive network traffic monitoring which differ in the amount of reported information. On one hand, router interface counters can be reported using Simple Network Management Protocol to provide basic accounting information. On the other hand, deep packet inspection (DPI) provides detailed information about the content of the traffic and can be used for enforcing security policies or malware detection. The more detailed the analysis is, the more computing power it requires. Flow monitoring is a way of balancing the level of acquired information and necessary resources. Origins of flow monitoring date back to 1991 and the basic idea is to describe each network connection by a single record using the common properties of all packets in such a connection. Detailed information on the history and the current state of flow monitoring can be found in~\cite{Hofstede-2014-Flow}. Due to the level of information aggregation, the flow monitoring can achieve 100\, Gb/s throughput, and is, therefore, suitable for monitoring of large networks of internet service providers (ISP) and data centers.
+
+Flow monitoring support is implemented in practically all enterprise routers and switches. It provides enough information to detect malicious or anomalous behavior and serves as a data source for many network security appliances. However, application-level attacks do not necessarily exhibit anomalous behavior on the network level and may remain undiscovered. As a DPI can discover these attacks more easily, flow monitoring is being enhanced with aspects of the DPI. The resulting method is called application flow monitoring (or measurement). Application flow records contain not only network level data but also information extracted from a payload of packets. Application flow monitoring can be seen as a compromise between the standard flow monitoring and full deep packet inspection: it balances performance and traffic visibility to provide as much information about the traffic as possible while being able to work on high-speed networks. The works of \cite{Cejka-2015-Using} and \citeauthor{Husak-2015-Security}~\cite{Cejka-2015-Using, Husak-2015-Security} are examples of how application flow monitoring can be utilized to discover attacks on application protocol layer.
+
+\section{Network Monitoring}
+
+\itodo{
+Little introduction to the network monitoring and especially the flow monitoring.\\
+Introduce application flow monitoring as well, so that the reader knows what the RQs are about.
+}
+
+\itodo{
+Anomaly detection and mitigation at internet scale: a survey\\
+\url{http://dl.acm.org/citation.cfm?id=2525023.2525033}\\
+\url{http://link.springer.com/chapter/10.1007/978-3-642-38998-6\_7}\\
+Popisuje kdo všecko umí měřit flow, ipfix, ...
+}
+
+\section{Research Questions \& Approach}
+
+\begin{enumerate}
+	\item How can flow measurement benefit from application layer information. [chap 3]
+	\item What is the performance impact of adding application layer information to flow monitoring. [chap 4]
+	\item How to monitor high-speed networks (100G+), what can be done to accelerate (application) flow monitoring. [chap 4]
+	\item Can application layer information be used to derive more information about the traffic (EventFlow). [chap 6]
+	\item How can flow monitoring cope with increasing share of encrypted traffic. [chap 5]
+\end{enumerate}
+
+
+\section{Contributions}
+
+\section{Thesis Structure}
+
+\itodo{Network Flow Monitoring - Introduction, explanation of the used terms and concepts. Serves as a thesis background.}

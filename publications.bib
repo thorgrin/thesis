@@ -1,0 +1,247 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF8
+
+
+@InProceedings{my-Celeda-2013-Large,
+  Title                    = {{Large-Scale Geolocation for NetFlow}},
+  Author                   = {Čeleda, Pavel and Velan, Petr and Rábek, Martin and Hofstede, Rick and Pras, Aiko},
+  Booktitle                = {IFIP/IEEE International Symposium on Integrated Network Management (IM 2013)},
+  Year                     = {2013},
+
+  Address                  = {Ghent, Belgium},
+  Editor                   = {De Turck, Filip and Diao, Yixin and Se on Hong, Choong and Medhi, Deep and Sadre, Ramin},
+  Month                    = {May},
+  Pages                    = {1015-1020},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {Current approaches perform geolocation mostly on-demand and in a small-scale fashion. As soon as geolocation needs to be performed in real-time in high-speed and large-scale networks, these approaches are not scalable anymore. To solve this problem, we propose two approaches to large-scale geolocation. Firstly, we present an exporter-based approach, which adds geolocation data to flow records in a way that is transparent to any flow collector. Secondly, we present a flow collector-based approach, which adds native geolocation to NetFlow data from any flow exporter. After presenting prototypes for both approaches, we demonstrate the applicability of large-scale geolocation by means of use cases.},
+  ISBN                     = {978-1-4673-5229-1},
+  Keywords                 = {geolocation; GeoIP; ISO 3166; NetFlow; NFDUMP; NfSen; security; detection; anomaly},
+  Location                 = {Ghent, Belgium},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6573124}
+}
+
+@InProceedings{my-Elich-2013-Investigation,
+  Title                    = {{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}},
+  Author                   = {Elich, Martin and Velan, Petr and Jirsík, Tomáš and Čeleda, Pavel},
+  Booktitle                = {IEEE 38th Conference on Local Computer Networks Workshops (LCN Workshops)},
+  Year                     = {2013},
+
+  Address                  = {Sydney, Australia},
+  Editor                   = {Damla Turgut, Nils Aschenbruck, Jens T\"{o}lle},
+  Month                    = {Oct},
+  Pages                    = {1046-1052},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {The exhaustion of IPv4 address space increases pressure on network operators and content providers to continue the transition to IPv6. The IPv6 transition mechanisms such as Teredo and 6to4 allow IPv4 hosts to connect to IPv6 hosts. On the other hand, they increase network complexity and render ineffective many methods to observe IP traffic. In this paper, we modified our flow-based measurement system to involve transition mechanisms information to provide full IPv6 visibility. Our traffic analysis focuses on IPv6 tunneled traffic and uses data collected over one week in the Czech national research and education network. The results expose various traffic characteristics of native and tunneled IPv6 traffic, among others the TTL and HOP limit distribution, geolocation aspect of the traffic, and list of Teredo servers used in the network. Furthermore, we show how the traffic of IPv6 transition mechanisms has evolved since 2010.},
+  Doi                      = {10.1109/LCNW.2013.6758546},
+  ISBN                     = {978-1-4799-0540-9},
+  Keywords                 = {Teredo; 6to4; IPv6; Transition Mechanisms},
+  Location                 = {Sydney, Australia},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6758546}
+}
+
+@InProceedings{my-Husak-2015-Security,
+  Title                    = {{Security Monitoring of HTTP Traffic Using Extended Flows}},
+  Author                   = {Husák, Martin and Velan, Petr and Vykopal, Jan},
+  Booktitle                = {2015 10th International Conference on Availability, Reliability and Security},
+  Year                     = {2015},
+  Month                    = {Aug},
+  Pages                    = {258-265},
+
+  Abstract                 = {In this paper, we present an analysis of HTTP traffic in a large-scale environment which uses network flow monitoring extended by parsing HTTP requests. In contrast to previously published analyses, we were the first to classify patterns of HTTP traffic which are relevant to network security. We described three classes of HTTP traffic which contain brute-force password attacks, connections to proxies, HTTP scanners, and web crawlers. Using the classification, we were able to detect up to 16 previously undetectable brute-force password attacks and 19 HTTP scans per day in our campus network. The activity of proxy servers and web crawlers was also observed. Symptoms of these attacks may be detected by other methods based on traditional flow monitoring, but detection using the analysis of HTTP requests is more straightforward. We, thus, confirm the added value of extended flow monitoring in comparison to the traditional method.},
+  Doi                      = {10.1109/ARES.2015.42},
+  Keywords                 = {computer network security;program compilers;telecommunication traffic;transport protocols;HTTP request parsing;HTTP traffic;brute-force password attack;network flow monitoring;network security monitoring;Crawlers;IP networks;Monitoring;Protocols;Security;Web servers},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
+@InProceedings{my-Pus-2015-Hardware,
+  Title                    = {{Hardware Accelerated Flow Measurement of 100 Gb Ethernet}},
+  Author                   = {Puš, Viktor and Velan, Petr and Kekely, Lukáš and Kořenek, Jan and Minařík, Pavel},
+  Booktitle                = {2015 IFIP/IEEE International Symposium on Integrated Network Management (IM)},
+  Year                     = {2015},
+
+  Address                  = {Ottawa, Canada},
+  Editor                   = {Badonnel, Remi and Xiao, Jin and Ata, Shingo and De Turck, Filip and Groza, Voicu and dos Santos, Carlos Raniery P.},
+  Month                    = {May},
+  Pages                    = {1147-1148},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {This demo demonstrates results of a joint research project of CESNET and INVEA-TECH focused on 100 GbE network flow monitoring using FPGA. It shows, to the best of our knowledge, the first flow monitoring setup capable of handling fully saturated 100 G Ethernet line. We present COMBO-CG card that provides accurate timestamps for high-resolution traffic monitoring. The card is complemented by fast DMA engine and optimized Linux drivers which were designed and implemented to achieve 100 Gbps data transfers through PCIe bus with low CPU utilization. Network traffic can be distributed among multiple CPU cores based on configurable hash functions. Our flow exporter is able to fully utilize available CPU cores to provide wire-speed performance for processing of the 100 Gbps traffic. The demo will show complete 100 G flow monitoring setup - from packet generator to flow collector.},
+  Doi                      = {10.1109/INM.2015.7140452},
+  ISSN                     = {1573-0077},
+  Keywords                 = {hardware; accelerated; flow monitoring; network monitoring; measurement; 100G; Ethernet},
+  Language                 = {eng},
+  Location                 = {Ottawa, Canada},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
+@InProceedings{my-Velan-2013-Practical,
+  Title                    = {{Practical Experience with IPFIX Flow Collectors}},
+  Author                   = {Velan, Petr},
+  Booktitle                = {IFIP/IEEE International Symposium on Integrated Network Management (IM 2013)},
+  Year                     = {2013},
+
+  Address                  = {Ghent, Belgium},
+  Editor                   = {De Turck, Filip and Diao, Yixin and Se on Hong, Choong and Medhi, Deep and Sadre, Ramin},
+  Month                    = {May},
+  Pages                    = {1021-1026},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {As the number of Internet applications grows, the number of applications that use data encapsulation increases as well. Flow monitoring using NetFlow version 5 or 9 is only able to analyze the encapsulating protocol, therefore it becomes too limited to detect new threats. For this reason, more thorough knowledge of such traffic is needed. The IPFIX protocol can be used in such situations, because it provides enough flexibility for monitoring tools to be extended by new elements. Along with greater flexibility, IPFIX support results in a higher performance footprint on collectors and tools for querying the collected data. Currently, there is a lack of flow collection frameworks with IPFIX support that would allow flow data to be extended. The aim of this paper is to compare open-source flow collectors that provide support for the IPFIX protocol. We focus on evaluating performance of query tools and the level of IPFIX support provided by the collection frameworks.},
+  ISBN                     = {978-1-4673-5229-1},
+  Keywords                 = {IPFIX; IPFIX support; collector; nfdump; SiLK; IPFIXcol; flow; NetFlow; query performance},
+  Location                 = {Ghent, Belgium},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6573125}
+}
+
+@InProceedings{my-Velan-2016-EventFlow,
+  Title                    = {{EventFlow: Network Flow Aggregation Based on User Actions}},
+  Author                   = {Velan, Petr},
+  Booktitle                = {NOMS 2016 - 2016 IEEE/IFIP Network Operations and Management Symposium},
+  Year                     = {2016},
+  Month                    = {April},
+  Pages                    = {767-771},
+
+  Abstract                 = {Network flow monitoring is being supplemented with an application flow visibility to provide more detailed information about network traffic. However, the current concept of flows does not provide a mechanism to keep track of semantic relations between individual flows that are created as a part of a single user action. We propose an extension to the flow measurement, called EventFlow, which allows to preserve relations between HTTP and DNS application flows that are a part of single user action, most typically browsing a web page. We describe an architecture of the EventFlow extension and its limitations. A prototype implementation of the EventFlow is introduced and evaluated on a packet trace from an ISP network. We show that a significant number of flow records can be recognised as a part of a single user action.},
+  Doi                      = {10.1109/NOMS.2016.7502895},
+  Keywords                 = {telecommunication network management;telecommunication traffic;DNS;EventFlow;HTTP;ISP network;flow measurement;flow visibility;network flow monitoring;network traffic;semantic;web page;IP networks;Monitoring;Ports (Computers);Protocols;Prototypes;Uniform resource locators;Web pages},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
+@InProceedings{my-Velan-2014-Next,
+  Title                    = {{Next Generation Application-Aware Flow Monitoring}},
+  Author                   = {Velan, Petr and Čeleda, Pavel},
+  Booktitle                = {Monitoring and Securing Virtualized Networks and Services},
+  Year                     = {2014},
+  Editor                   = {Sperotto, Anna and Doyen, Guillaume and Latré, Steven and Charalambides, Marinos and Stiller, Burkhard},
+  Pages                    = {173-178},
+  Publisher                = {Springer Berlin Heidelberg},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {8508},
+
+  Abstract                 = {Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides less details about the traffic itself. Application-aware flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. However, the impacts, benefits and disadvantages of application flow monitoring have not been studied in detail yet. The work proposed in this paper attempts to rectify this lack of research. We also propose a next generation flow measurement for application monitoring. The flows will represent events within the application protocol, e.g., web page download, instead of packet stream. Finally, we will investigate the performance of different approaches to application classification and application parsing with a computational complexity in mind.},
+  Doi                      = {10.1007/978-3-662-43862-6_20},
+  ISBN                     = {978-3-662-43861-9},
+  ISSN                     = {0302-9743},
+  Keywords                 = {flow; network measurement; application monitoring; IPFIX},
+  Language                 = {English},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.07.09},
+  Url                      = {http://dx.doi.org/10.1007/978-3-662-43862-6_20}
+}
+
+@Article{my-Velan-2015-Survey,
+  Title                    = {{A Survey of Methods for Encrypted Traffic Classification and Analysis}},
+  Author                   = {Velan, Petr and Čermák, Milan and Čeleda, Pavel and Drašar, Martin},
+  Journal                  = {International Journal of Network Management},
+  Year                     = {2015},
+  Number                   = {5},
+  Pages                    = {355--374},
+  Volume                   = {25},
+
+  Abstract                 = {With the widespread use of encrypted data transport, network traffic encryption is becoming a standard nowadays. This presents a challenge for traffic measurement, especially for analysis and anomaly detection methods, which are dependent on the type of network traffic. In this paper, we survey existing approaches for classification and analysis of encrypted traffic. First, we describe the most widespread encryption protocols used throughout the Internet. We show that the initiation of an encrypted connection and the protocol structure give away much information for encrypted traffic classification and analysis. Then, we survey payload and feature-based classification methods for encrypted traffic and categorize them using an established taxonomy. The advantage of some of described classification methods is the ability to recognize the encrypted application protocol in addition to the encryption protocol. Finally, we make a comprehensive comparison of the surveyed feature-based classification methods and present their weaknesses and strengths.},
+  Doi                      = {10.1002/nem.1901},
+  Keywords                 = {encrypted traffic, monitoring, network, traffic classification, traffic analysis, machine learning, encryption protocols},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2016.01.18},
+  Url                      = {http://dx.doi.org/10.1002/nem.1901}
+}
+
+@InProceedings{my-Velan-2013-Design,
+  Title                    = {{Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement}},
+  Author                   = {Velan, Petr and Jirs\'{i}k, Tom\'{a}\v{s} and \v{C}eleda, Pavel},
+  Booktitle                = {Advances in Communication Networking},
+  Year                     = {2013},
+
+  Address                  = {Heidelberg},
+  Editor                   = {Thomas Bauschert},
+  Pages                    = {136-147},
+  Publisher                = {Springer Berlin Heidelberg},
+  Volume                   = {8115},
+
+  Abstract                 = {In this paper we analyze HTTP protocol parsers that provide a web traffic visibility to IP flow. Despite extensive work, flow meters generally fall short of performance goals due to extracting application layer data. Constructing effective protocol parser for in-depth analysis is a challenging and error-prone affair. We designed and evaluated several HTTP protocol parsers representing current state-of-the-art approaches used in today’s flow meters. We show the packet rates achieved by respective parsers, including the throughput decrease (performance implications of application parser) which is of the utmost importance for high-speed deployments. We believe that these results provide researchers and network operators with important insight into application visibility and IP flow.},
+  Doi                      = {10.1007/978-3-642-40552-5_13},
+  ISBN                     = {978-3-642-40551-8},
+  Keywords                 = {HTTP; protocol; parser; traffic; measurement; flow; IPFIX},
+  Location                 = {Heidelberg},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-40552-5_13}
+}
+
+@InProceedings{my-Velan-2012-Flow,
+  Title                    = {{Flow Information Storage Assessment Using IPFIXcol}},
+  Author                   = {Velan, Petr and Krejčí, Radek},
+  Booktitle                = {Dependable Networks and Services},
+  Year                     = {2012},
+
+  Address                  = {Heidelberg},
+  Editor                   = {Sadre, Ramin and Novotný, Jiří and Čeleda, Pavel and Waldburger, Martin and Stiller, Burkhard},
+  Pages                    = {155-158},
+  Publisher                = {Springer Berlin Heidelberg},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {7279},
+
+  Abstract                 = {Network monitoring has became a significant part of network management. Each environment and type of network have their specific, different needs. To allow network traffic monitoring in various environments, a necessity of flexible approach thus grows. The current generation of flow collectors provides only a limited flexibility, mainly due to limits of their data storage formats. Moreover, it is quite a challenging task to compare particular storage formats and their suitability for the specific environment and usage. In this paper we present IPFIXcol – a flow collector framework designed for easy data storage formats changing. This way, we plan to evaluate performance and suitability of various data storage formats for specific tasks. Results can be used to build the most appropriate data storage for the specific production environments.},
+  Doi                      = {10.1007/978-3-642-30633-4_21},
+  ISBN                     = {978-3-642-30632-7},
+  Keywords                 = {collector;flow;IPFIX;NetFlow;network monitoring},
+  Location                 = {Heidelberg},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-30633-4_21}
+}
+
+@InProceedings{my-Velan-2016-Network,
+  Title                    = {{Network Traffic Characterisation Using Flow-Based Statistics}},
+  Author                   = {Velan, Petr and Medková, Jana and Jirsík, Tomáš and P. Čeleda},
+  Booktitle                = {NOMS 2016 - 2016 IEEE/IFIP Network Operations and Management Symposium},
+  Year                     = {2016},
+  Month                    = {April},
+  Pages                    = {907-912},
+
+  Abstract                 = {Performing research on live network traffic requires the traffic to be well documented and described. The results of such research are heavily dependent on the particular network. This paper presents a study of network characteristics, which can be used to describe the behaviour of a network. We propose a number of characteristics that can be collected from the networks and evaluate them on five different networks of Masaryk University. The proposed characteristics cover IP, transport and application layers of the network traffic. Moreover, they reflect strong day-night and weekday patterns that are present in most of the networks. Variation in the characteristics between the networks indicates that they can be used for the description and differentiation of the networks. Furthermore, a weak correlation between the chosen characteristics implies their independence and contribution to network description.},
+  Doi                      = {10.1109/NOMS.2016.7502924},
+  Keywords                 = {IP networks;telecommunication traffic;IP network;Masaryk University;application layer;flow-based statistics;network traffic characterisation;transport layer;Computer vision;Computers;IP networks;Image motion analysis;Monitoring;Ports (Computers);Servers},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
+@InProceedings{my-Velan-2015-High,
+  Title                    = {{High-Density Network Flow Monitoring}},
+  Author                   = {Velan, Petr and Puš, Viktor},
+  Booktitle                = {2015 IFIP/IEEE International Symposium on Integrated Network Management (IM)},
+  Year                     = {2015},
+  Month                    = {May},
+  Pages                    = {996-1001},
+
+  Abstract                 = {Monitoring of high-speed networks is becoming a resource intensive task. There are dedicated flow monitoring probes built with commodity hardware support up to 10G links, but multiple 10G or even 100 G optical networks are being used for transport networks and a data center connectivity. Running and maintaining many separate probes is uneconomical and time-consuming. Therefore, we explore the possibility to facilitate network interface cards (NICs) with multiple 10G interfaces to build probes which can replace many existing boxes, leading to reduced management and operational costs. The monitoring performance is critical for such a high-density solution. We use two custom-built, FPGA-based NICs, each with eight 10G interfaces to test current CPU limits and to propose improvements for the near future commodity NICs.},
+  Doi                      = {10.1109/INM.2015.7140424},
+  ISSN                     = {1573-0077},
+  Keywords                 = {computer centres;cost reduction;field programmable gate arrays;network interfaces;optical fibre networks;FPGA-based NIC;data center connectivity;high-density network flow monitoring;management cost reduction;network interface cards;operational cost reduction;optical networks;resource intensive task;transport networks;Hardware;Instruction sets;Monitoring;Probes;Random access memory;Throughput},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
