@@ -92,6 +92,22 @@ TODO: discuss privacy issues (where?)
 \newcommandx{\iinfo}[2][1=]{\info[inline,#1]{#2}}
 \newcommandx{\iimprove}[2][1=]{\improve[inline,#1]{#2}}
 
+% Following fixes use of cline in tables, which is broken by 
+% czech babel (- is made into active character)
+\makeatletter
+\begingroup
+\toks0=\expandafter{\@cline{#1}-{#2}\@nil}
+\@ifpackageloaded{booktabs}{%
+  \toks2=\expandafter{\@@@cmidrule[{#1}-{#2}]{#3}{#4}}%
+}{}
+\catcode`-=\active
+\edef\x{\gdef\unexpanded{\@cline#1-#2\@nil}{\the\toks0}}\x
+\@ifpackageloaded{booktabs}{%
+  \edef\x{\gdef\unexpanded{\@@@cmidrule[#1-#2]#3#4}{\the\toks2}}\x
+}{}
+\endgroup
+\makeatother
+
 % \usepackage{graphicx}
 % \usepackage{a4wide}
 % \usepackage{tabularx}
@@ -105,7 +121,7 @@ TODO: discuss privacy issues (where?)
 % \usepackage[table]{xcolor}
 % \usepackage{subfig}
 % \usepackage[ruled, lined, linesnumbered,norelsize]{algorithm2e}
-
+\usepackage{multirow}
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload

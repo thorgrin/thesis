@@ -114,17 +114,19 @@ The IPFIX Protocol is an internet standard~\cite{rfc7011} with its own definitio
     Each property is defined as the result of applying a function to
     the values of:
 
-    1.  one or more packet header fields (e.g., destination IP
+    \begin{enumerate}
+    \item one or more packet header fields (e.g., destination IP
         address), transport header fields (e.g., destination port
         number), or application header fields (e.g., RTP header fields
         [5]).
 
-    2.  one or more characteristics of the packet itself (e.g., number
+    \item one or more characteristics of the packet itself (e.g., number
         of MPLS labels)
 
-    3.  one or more fields derived from packet treatment (e.g., next
+    \item one or more fields derived from packet treatment (e.g., next
         hop IP address, output interface)
-
+	\end{enumerate}
+        
     A packet is defined as belonging to a Flow if it completely
     satisfies all the defined properties of the Flow.
 
@@ -138,46 +140,61 @@ Although this definition is a part of the IPFIX internet standard, there are sev
 	\item Flows using transport header fields cannot be correctly defined for fragmented IP packets, since transport layer information is present only in the first packet fragment. The NetFlow v9 definition states that the properties are \emph{derived} from packet data, therefore, it does not rule out a use of a cache for correctly assigning or reassembling fragmented packets to correct flow. However, the use of the word \emph{function} in the IPFIX definition limits what can be done with the values of the header fields.
 \end{enumerate}
 
-In order to provide the most complete definition of flow, we must address all the above mentioned issues. The most direct solution is to start with the NetFlow v9 definition and allow non-IP packets. Therefore, the definition used in this thesis is as follows:
+In order to provide the most complete definition of flow, we must address all the above mentioned issues. The most direct solution is to start with the NetFlow v9 definition, allow non-IP packets and be more clear about deriving data from previous packets of the same flow which is used for correct handling of the packet fragmentation. Therefore, the definition used in this thesis is as follows:
 
 \begin{displayquote}
 
-    An Flow is defined as a set of packets passing an Observation Point
+    A Flow is defined as a set of packets passing an Observation Point
     in the network during a certain time interval. All packets that belong
     to a particular Flow have a set of common properties derived from
-    the data contained in the packet and from the packet treatment
-    at the Observation Point.
+    the data contained in the packet, previous packets of the same flow,
+    and from the packet treatment at the Observation Point.
    
 \end{displayquote}
 
-\itodo{Flow expiration/termination vs app flow splitting}
+There are two more terms that are connected to low and that need to be defined: \emph{Flow Keys} and \emph{Flow Records}. The IPFIX definition of Flow Key needs to be adapted to our definition of Flow. We can conveniently shorten the definition to the following:
 
-\itodo{
-   * Flow Key
+\begin{displayquote}
 
-      Each of the fields that:
+    Each of the common properties that is used to specify a flow is called a Flow Key.
 
-      1.  belongs to the packet header (e.g., destination IP address),
+\end{displayquote}
 
-      2.  is a property of the packet itself (e.g., packet length),
+A Flow Record is basically a tuple containing flow keys and other properties measured for the flow. The following definition reflects that:
 
-      3.  is derived from packet treatment (e.g., Autonomous System (AS)
-          number), and
+\begin{displayquote}
 
-      4.  is used to define a Flow
+    Flow Record is a tuple describing particular Flow containing values of:
 
-      is termed a Flow Key.
-}
+    \begin{enumerate}
+    	\item all Flow Keys used to specify the Flow,
+    	\item other properties of the Flow derived from:
+    	\begin{enumerate}
+    		\item data contained in the packets of the Flow,
+    		\item the packet treatment of the Flow at the Observation Point.
+    	\end{enumerate}
 
-\itodo{
-   * Flow Record
+    \end{enumerate}
 
-      A Flow Record contains information about a specific Flow that was
-      observed at an Observation Point.  A Flow Record contains measured
-      properties of the Flow (e.g., the total number of bytes for all
-      the Flow's packets) and usually characteristic properties of the
-      Flow (e.g., source IP address).
-}
+\end{displayquote}
+
+To make the definitions above more clear, we now give an example of concrete properties that might be contained in a flow record. Table~\ref{tab:flow-properties} shows examples of flow record properties that can be derived from packet data and packet treatment. The properties can be aggregated when the derived value differs between individual packets of the flow or where counters such as number of packets are involved. Summary function is usually applied to number of bytes of of each packet, TCP flags are aggregated using logical OR function, flow start timestamp is derived using minimum function on each packet timestamp. The non-aggregated properties may be used as flow keys.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{r|l|l|}
+	                                           & \textbf{Aggregated properties}  & \textbf{Non-aggregated properties}  \\ \hline
+	\multirow{3}{*}{\textbf{Packet data}}      & Number of bytes                 & Source IP address                   \\ 
+	                                           & TCP flags                       & Destination port                    \\ 
+	                                           & Time to Live                    & Transport protocol                  \\ \hline
+	\multirow{2}{*}{\textbf{Packet treatment}} & Number of packets               & Input interface number              \\ 
+	                                           & Flow start timestamp            & Next-Hop IP address                 \\ \hline
+	\end{tabular}
+	\caption{Examples of Flow Properties}
+	\label{tab:flow-properties}
+\end{table}
+
+
 
 \itodo{Provide formal definitions of flow, flow key, and flow record}
 
@@ -236,6 +253,7 @@ Put generic stuff here and keep application related information there}
 - - Technologies: PF\_RING, PF\_RING ZC, Linux NAPI, FPGA (DPDK, PF\_RING, DNA/Libzero)\\
 - Explain that we do not perform sampling and filtering (filtering only in NIC for specific purposes or on exporter for testing, etc).\\
 - Flow metering (caches, ...), biflows\\
+- Flow expiration/termination
 - Flow export
 }
 
