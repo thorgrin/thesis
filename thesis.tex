@@ -155,6 +155,8 @@ TODO: discuss privacy issues (where?)
 \appendix %% Start the appendices.
 % List of authored publications
 
+% Redefine fullcite to print all names, not just maxcitenames
+\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
 \include{chapters/10-publication-list}
 
 \end{document}

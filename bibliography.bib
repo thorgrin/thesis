@@ -2,6 +2,45 @@
 % Encoding: UTF8
 
 
+@TechReport{Alcock-2012-libprotoident,
+  Title                    = {{Libprotoident: Traffic Classification Using Lightweight Packet Inspection}},
+  Author                   = {Alcock, Shane and Nelson, Richard},
+  Institution              = {WAND Network Research Group},
+  Year                     = {2012},
+
+  Abstract                 = {At present, accurate traffic classification usually requires the use of deep packet inspection to analyse packet payload. This requires significant CPU and memory resources and are invasive of network user privacy. In this paper, we propose an alternative traffic classification approach that is lightweight and
+ only examines the first four bytes of packet payload observed in each direction. We have implemented as an open-source library called libprotoident, which we evaluate by comparing its performance against existing traffic classifiers that use deep packet inspection. Our results show that our approach offers comparable (if not better) accuracy than tools that have access to full packet payload, yet requires less processing resources and is more acceptable, from a privacy standpoint, to network operators and users.},
+  HowPublished             = {Online article},
+  Keywords                 = {libprotoident},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.28},
+  Url                      = {http://www.wand.net.nz/~salcock/lpi/lpi.pdf},
+  Urldate                  = {2017-04-28}
+}
+
+@InProceedings{Brauckhoff-2006-Impact,
+  Title                    = {{Impact of Packet Sampling on Anomaly Detection Metrics}},
+  Author                   = {Brauckhoff, Daniela and Tellenbach, Bernhard and Wagner, Arno and May, Martin and Lakhina, Anukool},
+  Booktitle                = {Proceedings of the 6th ACM SIGCOMM Conference on Internet Measurement},
+  Year                     = {2006},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {159--164},
+  Publisher                = {ACM},
+  Series                   = {IMC '06},
+
+  Abstract                 = {Packet sampling methods such as Cisco's NetFlow are widely employed by large networks to reduce the amount of traffic data measured. A key problem with packet sampling is that it is inherently a lossy process, discarding (potentially useful) information. In this paper, we empirically evaluate the impact of sampling on anomaly detection metrics. Starting with unsampled flow records collected during the Blaster worm outbreak, we reconstruct the underlying packet trace and simulate packet sampling at increasing rates. We then use our knowledge of the Blaster anomaly to build a baseline of normal traffic (without Blaster), against which we can measure the anomaly size at various sampling rates. This approach allows us to evaluate the impact of packet sampling on anomaly detection without being restricted to (or biased by) a particular anomaly detection method.We find that packet sampling does not disturb the anomaly size when measured in volume metrics such as the number of bytes and number of packets, but grossly biases the number of flows. However, we find that recently proposed entropy-based summarizations of packet and flow counts are affected less by sampling, and expose the Blaster worm outbreak even at higher sampling rates. Our findings suggest that entropy summarizations are more resilient to sampling than volume metrics. Thus, while not perfect, sampling still preserves sufficient distributional structure, which when harnessed by tools like entropy, can expose hard-to-detect scanning anomalies.},
+  Acmid                    = {1177101},
+  Doi                      = {10.1145/1177080.1177101},
+  ISBN                     = {1-59593-561-4},
+  Keywords                 = {anomaly detection, network traffic analysis, sampling},
+  Location                 = {Rio de Janeriro, Brazil},
+  Numpages                 = {6},
+  Owner                    = {velan},
+  Timestamp                = {2016.03.03},
+  Url                      = {http://doi.acm.org/10.1145/1177080.1177101}
+}
+
 @Article{Brownlee-2011-Flow,
   Title                    = {{Flow-Based Measurement: IPFIX Development and Deployment}},
   Author                   = {Brownlee, Nevil},
@@ -16,6 +55,23 @@
   Doi                      = {10.1587/transcom.E94.B.2190},
   Owner                    = {velan},
   Timestamp                = {2017.04.27}
+}
+
+@Article{Bujlow-2015-classification,
+  Title                    = {{Independent Comparison of Popular DPI Tools for Traffic Classification}},
+  Author                   = {Bujlow, Tomasz and Carela-Espanol, Valentín and Barlet-Ros, Pere},
+  Journal                  = {Computer Networks},
+  Year                     = {2015},
+  Number                   = {0},
+  Pages                    = {75 - 89},
+  Volume                   = {76},
+
+  Abstract                 = {Deep Packet Inspection (DPI) is the state-of-the-art technology for traffic classification. According to the conventional wisdom, DPI is the most accurate classification technique. Consequently, most popular products, either commercial or open-source, rely on some sort of DPI for traffic classification. However, the actual performance of DPI is still unclear to the research community, since the lack of public datasets prevent the comparison and reproducibility of their results. This paper presents a comprehensive comparison of 6 well-known DPI tools, which are commonly used in the traffic classification literature. Our study includes 2 commercial products (PACE and NBAR) and 4 open-source tools (OpenDPI, L7-filter, nDPI, and Libprotoident). We studied their performance in various scenarios (including packet and flow truncation) and at different classification levels (application protocol, application and web service). We carefully built a labeled dataset with more than 750 K flows, which contains traffic from popular applications. We used the Volunteer-Based System (VBS), developed at Aalborg University, to guarantee the correct labeling of the dataset. We released this dataset, including full packet payloads, to the research community. We believe this dataset could become a common benchmark for the comparison and validation of network traffic classifiers. Our results present PACE, a commercial tool, as the most accurate solution. Surprisingly, we find that some open-source tools, such as nDPI and Libprotoident, also achieve very high accuracy.},
+  Doi                      = {http://dx.doi.org/10.1016/j.comnet.2014.11.001},
+  Keywords                 = {Deep packet inspection, DPI, traffic classification},
+  Owner                    = {velan},
+  Timestamp                = {2014.12.02},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128614003909}
 }
 
 @InProceedings{Cejka-2015-Using,
@@ -91,6 +147,28 @@
   Keywords                 = {Internet;asynchronous transfer mode;performance evaluation;telecommunication services;telecommunication traffic;transport protocols;ATM fabric;IP traffic;Internet model;Internet traffic flow profiling;TCP connections;aggregate flow profile;application information;destination network;destination network flows;end-point definitions;host quadruple;host-pair;measurements;multiple service levels;networking;parameter space;parameterizable methodology;port quadruple;resource reservation;route caching;traffic flow granularities;usage based accounting;Aggregates;Fabrics;Helium;IP networks;Local area networks;Optimization methods;Telecommunication traffic;Token networks;Traffic control;Web and internet services},
   Owner                    = {velan},
   Timestamp                = {2017.04.28}
+}
+
+@InCollection{Garcia-Dorado-2013-High,
+  Title                    = {{High-Performance Network Traffic Processing Systems Using Commodity Hardware}},
+  Author                   = {García-Dorado, José Luis and Mata, Felipe and Ramos, Javier and Santiago del Río, Pedro M. and Moreno, Victor and Aracil, Javier},
+  Booktitle                = {Data Traffic Monitoring and Analysis},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2013},
+  Editor                   = {Biersack, Ernst and Callegari, Christian and Matijasevic, Maja},
+  Pages                    = {3-27},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {7754},
+
+  Abstract                 = {The Internet has opened new avenues for information accessing and sharing in a variety of media formats. Such popularity has resulted in an increase of the amount of resources consumed in backbone links, whose capacities have witnessed numerous upgrades to cope with the ever-increasing demand for bandwidth. Consequently, network traffic processing at today’s data transmission rates is a very demanding task, which has been traditionally accomplished by means of specialized hardware tailored to specific tasks. However, such approaches lack either of flexibility or extensibility—or both. As an alternative, the research community has pointed to the utilization of commodity hardware, which may provide flexible and extensible cost-aware solutions, ergo entailing large reductions of the operational and capital expenditure investments. In this chapter, we provide a survey-like introduction to high-performance network traffic processing using commodity hardware. We present the required background to understand the different solutions proposed in the literature to achieve high-speed lossless packet capture, which are reviewed and compared.},
+  Doi                      = {10.1007/978-3-642-36784-7_1},
+  ISBN                     = {978-3-642-36783-0},
+  Keywords                 = {commodity hardware; packet capture engine; high-performance networking; network traffic monitoring},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {This recent work provides overview of different commodity based packet capture solutions. The paper describes techniques used by various researches to achieve 10 G packet rates in detail. Authors explain features of current NICs, NUMA architecture, OS network stack as well as approaches to utilize these concepts and overcome performance bottlenecks.},
+  Timestamp                = {2014.09.04},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-36784-7_1}
 }
 
 @Article{Hofstede-2014-Flow,
@@ -175,6 +253,71 @@
   Timestamp                = {2017.04.27}
 }
 
+@Article{Kekely-2016-Software,
+  Title                    = {{Software Defined Monitoring of Application Protocols}},
+  Author                   = {Kekely, Lukas and Kucera, Jan and Pus, Viktor and Korenek, Jan and Vasilakos, Athanasios V.},
+  Journal                  = {IEEE Trans. Comput.},
+  Year                     = {2016},
+
+  Month                    = feb,
+  Number                   = {2},
+  Pages                    = {615--626},
+  Volume                   = {65},
+
+  Acmid                    = {2914001},
+  Address                  = {Washington, DC, USA},
+  Doi                      = {10.1109/TC.2015.2423668},
+  ISSN                     = {0018-9340},
+  Issue_date               = {February 2016},
+  Numpages                 = {12},
+  Owner                    = {velan},
+  Publisher                = {IEEE Computer Society},
+  Timestamp                = {2017.04.28},
+  Url                      = {http://dx.doi.org/10.1109/TC.2015.2423668}
+}
+
+@Article{Molina-2006-Design,
+  Title                    = {{Design Principles and Algorithms for Effective High-speed IP Flow Monitoring}},
+  Author                   = {Molina, Maurizio. and Chiosi, Agostino. and D'Antonio, Salvatore and Ventre, Giorgio},
+  Journal                  = {Comput. Commun.},
+  Year                     = {2006},
+
+  Month                    = jun,
+  Number                   = {10},
+  Pages                    = {1653--1664},
+  Volume                   = {29},
+
+  Acmid                    = {1647081},
+  Address                  = {Amsterdam, The Netherlands, The Netherlands},
+  Doi                      = {10.1016/j.comcom.2005.07.024},
+  ISSN                     = {0140-3664},
+  Issue_date               = {June, 2006},
+  Keywords                 = {IP flow monitoring, Passive traffic measurements},
+  Numpages                 = {12},
+  Owner                    = {velan},
+  Publisher                = {Elsevier Science Publishers B. V.},
+  Timestamp                = {2017.04.28},
+  Url                      = {http://dx.doi.org/10.1016/j.comcom.2005.07.024}
+}
+
+@InProceedings{Nassopulos-2014-Flow,
+  Title                    = {{Flow Management at Multi-Gbps: Tradeoffs and Lessons Learned}},
+  Author                   = {Nassopulos, Georges and Rossi, Dario and Gringoli, Francesco and Nava, Lorenzo and Dusi, Maurizio and Santiago del Rio, Pedro Maria},
+  Booktitle                = {Traffic Monitoring and Analysis: 6th International Workshop, TMA 2014, London, UK, April 14, 2014. Proceedings},
+  Year                     = {2014},
+
+  Address                  = {Berlin, Heidelberg},
+  Editor                   = {Dainotti, Alberto and Mahanti, Anirban and Uhlig, Steve},
+  Pages                    = {1--14},
+  Publisher                = {Springer Berlin Heidelberg},
+
+  Doi                      = {10.1007/978-3-642-54999-1_1},
+  ISBN                     = {978-3-642-54999-1},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.28},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-54999-1_1}
+}
+
 @Online{ONF-2012-OpenFlow,
   Title                    = {{OpenFlow Switch Specification}},
   Author                   = {{Open Networking Foundation}},
@@ -197,6 +340,36 @@
 
   Owner                    = {velan},
   Timestamp                = {2017.04.27}
+}
+
+@InProceedings{Rodriguez-2013-Empirical,
+  Title                    = {{Empirical Analysis of Traffic to Establish a Profiled Flow Termination Timeout}},
+  Author                   = {Rodriguez, Juan Moliná and Español, Valentín Carela and Ros, Pere Barlet and Hoffmann, Ralf and Degner, Klaus},
+  Booktitle                = {2013 9th International Wireless Communications and Mobile Computing Conference (IWCMC)},
+  Year                     = {2013},
+  Month                    = {July},
+  Pages                    = {1156-1161},
+
+  Doi                      = {10.1109/IWCMC.2013.6583720},
+  ISSN                     = {2376-6492},
+  Keywords                 = {Internet;mobile radio;pattern classification;radio links;telecommunication traffic;DPI tool;ISP;Internet;computation cost;edge link;heterogeneous applications behaviour;memory reduction;mobile operator;online traffic classification accuracy;profiled flow termination timeout;Accuracy;Engines;Internet;Memory management;Postal services;Protocols;Standards;Traffic classification;classifier optimization;profiled termination timeout},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.28}
+}
+
+@InProceedings{Sadre-2012-Effects,
+  Title                    = {{The Effects of DDoS Attacks on Flow Monitoring Applications}},
+  Author                   = {Sadre, Ramin and Sperotto, Anna and Pras, Aiko},
+  Booktitle                = {2012 IEEE Network Operations and Management Symposium},
+  Year                     = {2012},
+  Month                    = {April},
+  Pages                    = {269-277},
+
+  Doi                      = {10.1109/NOMS.2012.6211908},
+  ISSN                     = {1542-1201},
+  Keywords                 = {IP networks;computer network management;computer network security;DDoS attack effect;IP network monitoring;dimension flow-based monitoring systems;distributed denial-of-service attacks;flow data;network management;Analytical models;Computer crime;Educational institutions;IP networks;Intrusion detection;Monitoring;Probes},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.28}
 }
 
 @Article{Singh-2017-Survey,
@@ -272,6 +445,54 @@
   Keywords                 = {IP networks;protocols;Cisco NetFlow version 9;IP flow information export;IP networks;IPFIX;network management;network monitoring;protocol;Data models;Delay;Layout;Monitoring;Reliability;Transport protocols},
   Owner                    = {velan},
   Timestamp                = {2017.04.27}
+}
+
+@Article{Velan-2015-Survey,
+  Title                    = {{A Survey of Methods for Encrypted Traffic Classification and Analysis}},
+  Author                   = {Velan, Petr and Čermák, Milan and Čeleda, Pavel and Drašar, Martin},
+  Journal                  = {International Journal of Network Management},
+  Year                     = {2015},
+  Number                   = {5},
+  Pages                    = {355--374},
+  Volume                   = {25},
+
+  Abstract                 = {With the widespread use of encrypted data transport, network traffic encryption is becoming a standard nowadays. This presents a challenge for traffic measurement, especially for analysis and anomaly detection methods, which are dependent on the type of network traffic. In this paper, we survey existing approaches for classification and analysis of encrypted traffic. First, we describe the most widespread encryption protocols used throughout the Internet. We show that the initiation of an encrypted connection and the protocol structure give away much information for encrypted traffic classification and analysis. Then, we survey payload and feature-based classification methods for encrypted traffic and categorize them using an established taxonomy. The advantage of some of described classification methods is the ability to recognize the encrypted application protocol in addition to the encryption protocol. Finally, we make a comprehensive comparison of the surveyed feature-based classification methods and present their weaknesses and strengths.},
+  Doi                      = {10.1002/nem.1901},
+  Keywords                 = {encrypted traffic, monitoring, network, traffic classification, traffic analysis, machine learning, encryption protocols},
+  Owner                    = {velan},
+  Timestamp                = {2016.01.18},
+  Url                      = {http://dx.doi.org/10.1002/nem.1901}
+}
+
+@InProceedings{Velan-2015-High,
+  Title                    = {{High-Density Network Flow Monitoring}},
+  Author                   = {Velan, Petr and Puš, Viktor},
+  Booktitle                = {2015 IFIP/IEEE International Symposium on Integrated Network Management (IM)},
+  Year                     = {2015},
+  Month                    = {May},
+  Pages                    = {996-1001},
+
+  Abstract                 = {Monitoring of high-speed networks is becoming a resource intensive task. There are dedicated flow monitoring probes built with commodity hardware support up to 10G links, but multiple 10G or even 100 G optical networks are being used for transport networks and a data center connectivity. Running and maintaining many separate probes is uneconomical and time-consuming. Therefore, we explore the possibility to facilitate network interface cards (NICs) with multiple 10G interfaces to build probes which can replace many existing boxes, leading to reduced management and operational costs. The monitoring performance is critical for such a high-density solution. We use two custom-built, FPGA-based NICs, each with eight 10G interfaces to test current CPU limits and to propose improvements for the near future commodity NICs.},
+  Doi                      = {10.1109/INM.2015.7140424},
+  ISSN                     = {1573-0077},
+  Keywords                 = {computer centres;cost reduction;field programmable gate arrays;network interfaces;optical fibre networks;FPGA-based NIC;data center connectivity;high-density network flow monitoring;management cost reduction;network interface cards;operational cost reduction;optical networks;resource intensive task;transport networks;Hardware;Instruction sets;Monitoring;Probes;Random access memory;Throughput},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.27}
+}
+
+@InProceedings{Wang-2011-Memory,
+  Title                    = {{Memory-Efficient Hypercube Flow Table for Packet Processing on Multi-Cores}},
+  Author                   = {Wang, Dawei and Xue, Yibo and Dong, Yingfei},
+  Booktitle                = {2011 IEEE Global Telecommunications Conference - GLOBECOM 2011},
+  Year                     = {2011},
+  Month                    = {Dec},
+  Pages                    = {1-6},
+
+  Doi                      = {10.1109/GLOCOM.2011.6134338},
+  ISSN                     = {1930-529X},
+  Keywords                 = {file organisation;hypercube networks;multiprocessing systems;HFT;Intel Xeon E5504 processor;flow-based traffic processing;memory-efficient hypercube flow table;multicore system;multidimension hash table;packet processing;parallel processing;traffic classification;Delay;Hypercubes;IEEE Communications Society;IP networks;Multicore processing;Parallel processing;Servers},
+  Owner                    = {velan},
+  Timestamp                = {2017.04.28}
 }
 
 @InProceedings{Yu-2013-FlowSense,
