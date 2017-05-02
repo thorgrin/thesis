@@ -142,43 +142,42 @@ Although this definition is a part of the IPFIX internet standard, there are sev
 
 In order to provide the most complete definition of flow, we must address all the above mentioned issues. The most direct solution is to start with the NetFlow v9 definition, allow non-IP packets and be more clear about deriving data from previous packets of the same flow which is used for correct handling of the packet fragmentation. Therefore, the definition used in this thesis is as follows:
 
-\begin{displayquote}
+\begin{definition}\label{def:flow}
 
-    A Flow is defined as a set of packets passing an Observation Point
+    A \emph{flow} is defined as a set of packets passing an \emph{observation point}
     in the network during a certain time interval. All packets that belong
-    to a particular Flow have a set of common properties derived from
-    the data contained in the packet, previous packets of the same flow,
-    and from the packet treatment at the Observation Point.
-   
-\end{displayquote}
+    to a particular \emph{flow} have a set of common properties derived from
+    the data contained in the packet, previous packets of the same \emph{flow},
+    and from the packet treatment at the \emph{observation point}.
 
-There are two more terms that are connected to low and that need to be defined: \emph{Flow Keys} and \emph{Flow Records}. The IPFIX definition of Flow Key needs to be adapted to our definition of Flow. We can conveniently shorten the definition to the following:
+\end{definition}
 
-\begin{displayquote}
+There are two more terms connected to flow that need to be defined: \emph{flow keys} and \emph{flow records}. The IPFIX definition of Flow Key needs to be adapted to our definition of flow. We can conveniently shorten the definition to the following:
 
-    Each of the common properties that is used to specify a flow is called a Flow Key.
+\begin{definition}\label{def:flow-key}
 
-\end{displayquote}
+    Each of the common properties that is used to specify a~\emph{flow} is called a~\emph{flow key}.
 
-A Flow Record is basically a tuple containing flow keys and other properties measured for the flow. The following definition reflects that:
+\end{definition}
 
-\begin{displayquote}
+A flow record is basically a tuple containing flow keys and other properties measured for the flow. The following definition reflects that:
 
-    Flow Record is a tuple describing particular Flow containing values of:
+\begin{definition}\label{def:flow-record}
+
+    A~\emph{flow record} is a tuple describing particular \emph{flow} containing values of:
 
     \begin{enumerate}
-    	\item all Flow Keys used to specify the Flow,
-    	\item other properties of the Flow derived from:
+    	\item all \emph{flow keys} used to specify the \emph{flow},
+    	\item other properties of the \emph{flow} derived from:
     	\begin{enumerate}
-    		\item data contained in the packets of the Flow,
-    		\item the packet treatment of the Flow at the Observation Point.
+    		\item data contained in the packets of the \emph{flow},
+    		\item the packet treatment of the \emph{flow} at the \emph{observation point}.
     	\end{enumerate}
-
     \end{enumerate}
 
-\end{displayquote}
+\end{definition}
 
-To make the definitions above more clear, we now give an example of concrete properties that might be contained in a flow record. Table~\ref{tab:flow-properties} shows examples of flow record properties that can be derived from packet data and packet treatment. The properties can be aggregated when the derived value differs between individual packets of the flow or where counters such as number of packets are involved. Summary function is usually applied to number of bytes of of each packet, TCP flags are aggregated using logical OR function, flow start timestamp is derived using minimum function on each packet timestamp. The non-aggregated properties may be used as flow keys.
+To make the definitions above more clear, we now give an example of concrete properties that might be contained in a flow record. Table~\ref{tab:flow.properties} shows examples of flow record properties that can be derived from packet data and packet treatment. The properties can be aggregated when the derived value differs between individual packets of the flow or where counters such as number of packets are involved. Summary function is usually applied to number of bytes of of each packet, TCP flags are aggregated using logical OR function, flow start timestamp is derived using minimum function on each packet timestamp. The non-aggregated properties may be used as flow keys.
 
 \begin{table}[ht!]
 	\centering
@@ -191,7 +190,7 @@ To make the definitions above more clear, we now give an example of concrete pro
 	                                           & Flow start timestamp            & Next-Hop IP address                 \\ \hline
 	\end{tabular}
 	\caption{Examples of Flow Properties}
-	\label{tab:flow-properties}
+	\label{tab:flow.properties}
 \end{table}
 
 

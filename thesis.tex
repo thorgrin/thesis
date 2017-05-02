@@ -108,6 +108,20 @@ TODO: discuss privacy issues (where?)
 \endgroup
 \makeatother
 
+% Definitions style using amsthm package
+\newtheoremstyle{defnstyle} % name
+    {0em}                        % Space above
+    {0em}                        % Space below
+    {\itshape}                   % Body font
+    {}                           % Indent amount
+    {\bfseries}                  % Theorem head font
+    {\newline}                   % Punctuation after theorem head
+    {.5em}                       % Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
+
+\theoremstyle{defnstyle}
+\newtheorem{defn}{Definition}[chapter]
+
 % \usepackage{graphicx}
 % \usepackage{a4wide}
 % \usepackage{tabularx}
@@ -129,6 +143,10 @@ TODO: discuss privacy issues (where?)
 % Quotes in italices with centered reference (package csquotes)
 \renewcommand{\mkbegdispquote}[2]{\itshape}
 \renewcommand{\mkenddispquote}[2]{\par\centering #1#2}
+
+% Environment for definitions using csquotes for centering
+\newenvironment{definition}{\begin{displayquote}\vspace{-1em}\begin{defn}}
+{\end{defn}\end{displayquote}}
 
 % Make multiple authors be printed as first et al. (package biblatex)
 \ExecuteBibliographyOptions{maxcitenames=2}
