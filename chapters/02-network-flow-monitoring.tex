@@ -152,7 +152,7 @@ In order to provide the most complete definition of flow, we must address all th
 
 \end{definition}
 
-There are two more terms connected to flow that need to be defined: \emph{flow keys} and \emph{flow records}. The IPFIX definition of Flow Key needs to be adapted to our definition of flow. We can conveniently shorten the definition to the following:
+There are two more terms connected to flow that need to be defined: \emph{flow keys} and \emph{flow records}. The IPFIX definition of the Flow Key needs to be adapted to our definition of flow. We can conveniently shorten the definition to the following:
 
 \begin{definition}\label{def:flow-key}
 
@@ -181,13 +181,14 @@ To make the definitions above more clear, we now give an example of concrete pro
 
 \begin{table}[ht!]
 	\centering
-	\begin{tabular}{r|l|l|}
-	                                           & \textbf{Aggregated properties}  & \textbf{Non-aggregated properties}  \\ \hline
+	\begin{tabular}{lll}
+	\toprule
+	                                           & \textbf{Aggregated properties}  & \textbf{Non-aggregated properties}  \\ \midrule
 	\multirow{3}{*}{\textbf{Packet data}}      & Number of bytes                 & Source IP address                   \\ 
 	                                           & TCP flags                       & Destination port                    \\ 
-	                                           & Time to Live                    & Transport protocol                  \\ \hline
+	                                           & Time to Live                    & Transport protocol                  \\ \midrule
 	\multirow{2}{*}{\textbf{Packet treatment}} & Number of packets               & Input interface number              \\ 
-	                                           & Flow start timestamp            & Next-Hop IP address                 \\ \hline
+	                                           & Flow start timestamp            & Next-Hop IP address                 \\ \bottomrule
 	\end{tabular}
 	\caption{Examples of Flow Properties}
 	\label{tab:flow.properties}
@@ -196,8 +197,49 @@ To make the definitions above more clear, we now give an example of concrete pro
 
 
 \itodo{Provide formal definitions of flow, flow key, and flow record}
+\iimprove{Add intro to formal definition}
+
+\iimprove{determine which sets and sequences are finite and which are infinite}
+
+Let $P$ be a set of packets observed at an \emph{observation point}. Let $T$ be a set of packet treatment information. We define a set of extended packets
+\begin{equation*}
+	Q = P\times T
+\end{equation*}
+so that $q \in Q$ denotes a packet together with its packet treatment information. Let 
+\begin{align*}
+	\mathcal{P} = (p_i) i \in \mathcal{N}, p_i \in P\\
+	\mathcal{Q} = (q_i) i \in \mathcal{N}, q_i \in Q
+\end{align*}
+denote sequence of packets and extended packets respectively.
+
+Let us now define a \emph{flow selection function} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
+\begin{equation}
+ 	\varphi: \mathcal{Q}^*\times Q \to \{true,false\}
+\end{equation}
+
+A flow $\mathcal{F}$ is a subsequence of packets defined by a sequence of extended packets $\mathcal{Q}$ and a flow selection function $\varphi$. We require that each extended packet $q \in \mathcal{Q}$ should belong to at most one flow. Therefore, we define the flow by induction as follows:
+\begin{enumerate}
+	\item Denote $\mathcal{Q}_0 = \mathcal{Q}$\improve{rewrite as algorithm}
+	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_0$
+	\item Matching packets form the flow $F_1$
+	\item Remove matched extended packets from $\mathcal{Q}_0$, denote the new sequence $\mathcal{Q}_1$
+	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_1$
+	\item \ldots
+\end{enumerate}
+
+The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing flows in real world.
+
+\begin{equation}
+\mathcal{F}_t(i) = P_{t_i}, where ...
+\end{equation}
+
+
 
 \section{Flow Monitoring Architecture}
+
+
+
+\ref{sec:flow-monitoring-process}
 
 \itodo{
 - High level overview of the components, terminology\\
@@ -240,7 +282,7 @@ Collector             Collector
 }
 
 
-\section{Flow Exporter}
+\section{Flow Monitoring Process}\label{sec:flow-monitoring-process}
 
 \iinfo{Part is already written in next chapter under Creating Application Flow\\
 Put generic stuff here and keep application related information there}
@@ -256,7 +298,13 @@ Put generic stuff here and keep application related information there}
 - Flow export
 }
 
-\section{Flow Export}
+\subsection{Packet Observation}
+
+\subsection{Packet Parsing}
+
+\subsection{Flow Aggregation}
+
+\subsection{Flow Export}
 
 \iinfo{Same section in chapter 3 (app flow monitoring), keep it consistent}
 
