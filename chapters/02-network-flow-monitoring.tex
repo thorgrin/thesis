@@ -144,7 +144,7 @@ In order to provide the most complete definition of flow, we must address all th
 
 \begin{definition}\label{def:flow}
 
-    A \emph{flow} is defined as a set of packets passing an \emph{observation point}
+    A \emph{flow} is defined as a sequence of packets passing an \emph{observation point}
     in the network during a certain time interval. All packets that belong
     to a particular \emph{flow} have a set of common properties derived from
     the data contained in the packet, previous packets of the same \emph{flow},
@@ -207,33 +207,55 @@ Let $P$ be a set of packets observed at an \emph{observation point}. Let $T$ be 
 \end{equation*}
 so that $q \in Q$ denotes a packet together with its packet treatment information. Let 
 \begin{align*}
-	\mathcal{P} = (p_i) i \in \mathcal{N}, p_i \in P\\
-	\mathcal{Q} = (q_i) i \in \mathcal{N}, q_i \in Q
+	\mathcal{P} = (p_i) i \in \mathbb{N}, p_i \in P\\
+	\mathcal{Q} = (q_i) i \in \mathbb{N}, q_i \in Q
 \end{align*}
-denote sequence of packets and extended packets respectively.
+denote sequence of packets and extended packets respectively. Note that $\forall i \in \mathbb{N}: proj_1(q_i) = p_i$ which means that the extended packet $q_i$ contains the packet $p_i$.
 
 Let us now define a \emph{flow selection function} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
 \begin{equation}
  	\varphi: \mathcal{Q}^*\times Q \to \{true,false\}
 \end{equation}
 
-A flow $\mathcal{F}$ is a subsequence of packets defined by a sequence of extended packets $\mathcal{Q}$ and a flow selection function $\varphi$. We require that each extended packet $q \in \mathcal{Q}$ should belong to at most one flow. Therefore, we define the flow by induction as follows:
-\begin{enumerate}
-	\item Denote $\mathcal{Q}_0 = \mathcal{Q}$\improve{rewrite as algorithm}
-	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_0$
-	\item Matching packets form the flow $F_1$
-	\item Remove matched extended packets from $\mathcal{Q}_0$, denote the new sequence $\mathcal{Q}_1$
-	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_1$
-	\item \ldots
+A flow $\mathcal{F}$ is a subsequence of packets defined by a sequence of extended packets $\mathcal{Q}$ and a flow selection function $\varphi$. We require that each extended packet $q \in \mathcal{Q}$ should belong to at most one flow. Therefore, we define a sequence of flows by induction as follows:
+\begin{enumerate}[noitemsep]
+	\item Denote $\mathcal{Q}_1 = \mathcal{Q}$\improve{rewrite as algorithm}
+	\item Set counter $i = 1$
+	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_i$
+	\item Matching packets form the flow $\mathcal{F}_i$
+	\item Remove matched extended packets from $\mathcal{Q}_i$, denote the new sequence $\mathcal{Q}_{i+1}$
+	\item Increment counter $i = i + 1$
+	\item Go to step 3.
 \end{enumerate}
 
-The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing flows in real world.
+To be able to denote the whole process, we need to define an auxiliary function $\varphi$ that returns corresponding sequence of extended packets for a sequence of packets. Let
+\begin{equation*}
+\varrho(\mathcal{P}) = (q_i) i\in \{j | p_j \in \mathcal{P}\}
+\end{equation*}
+
+Let us now define a sequence of packets from which $k^{th}$ flow is constructed:
+\begin{equation*}
+\mathcal{P}_k = \mathcal{P}_{k-1} \setminus \mathcal{F}_{k-1}	
+\end{equation*}
+
+The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing flows in real world. We define the flow $\mathcal{F}_k$ as:
 
 \begin{equation}
-\mathcal{F}_t(i) = P_{t_i}, where ...
+\mathcal{F}_k = (p_{k_i}) i \in \mathbb{N}, \mbox{ where } p_{k_i} \in \mathcal{P}_k
 \end{equation}
+where its $k_i^{th}$ packet is defined as:
 
-
+\begin{align}
+\begin{split}
+\mathcal{F}_k(i) &= p_{k_i}, \mbox{ where } \\
+k_i &= \left\{
+	\begin{array}{ll}
+		\mbox{min } \left\{ j \in \mathbb{N} | \varphi(q_j) = true, q_j \in \varrho(\mathcal{P}_k) \right\} & \mbox{for } i = 1 \\
+		\mbox{min } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(q_{k_1}, q_{k_2}, \ldots, q_{i-1}, q_j) = true \right\} & \mbox{for } i > 1 
+	\end{array}
+\right.
+\end{split}
+\end{align}
 
 \section{Flow Monitoring Architecture}
 
