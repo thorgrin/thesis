@@ -194,8 +194,6 @@ To make the definitions above more clear, we now give an example of concrete pro
 	\label{tab:flow.properties}
 \end{table}
 
-
-
 \itodo{Provide formal definitions of flow, flow key, and flow record}
 \iimprove{Add intro to formal definition}
 
@@ -203,59 +201,86 @@ To make the definitions above more clear, we now give an example of concrete pro
 
 Let $P$ be a set of packets observed at an \emph{observation point}. Let $T$ be a set of packet treatment information. We define a set of extended packets
 \begin{equation*}
-	Q = P\times T
+	\widehat{\mathcal{P}} = P\times T
 \end{equation*}
-so that $q \in Q$ denotes a packet together with its packet treatment information. Let 
+so that $\widehat{p} \in \widehat{\mathcal{P}}$ denotes a packet together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of observed packets:
+\begin{equation*}
+	\mathbb{S} = \{1, \ldots, n\} \lor \mathbb{N}, \mbox{ where } n \in \mathbb{N}
+\end{equation*}
+where $n$ is the number of observed packets when the number is finite.
+
+Let us denote sequence of packets and extended packets respectively:
 \begin{align*}
-	\mathcal{P} = (p_i) i \in \mathbb{N}, p_i \in P\\
-	\mathcal{Q} = (q_i) i \in \mathbb{N}, q_i \in Q
+	\mathcal{P} = (p_i)_{i \in \mathbb{S}}, p_i \in P\\
+	\widehat{\mathcal{P}} = (\widehat{p}_i)_{i \in \mathbb{S},} \widehat{p}_i \in \widehat{P}
 \end{align*}
-denote sequence of packets and extended packets respectively. Note that $\forall i \in \mathbb{N}: proj_1(q_i) = p_i$ which means that the extended packet $q_i$ contains the packet $p_i$.
+Both sequences are of size $\mathbb{S}$ and we further require that each extended packet $\widehat{p}_i$ contains the packet $p_i$, which corresponds with definition of $\widehat{\mathcal{P}}$.
+\begin{equation*}
+	\forall \widehat{p}_i \in \widehat{\mathcal{P}}: proj(\widehat{p}_i) = p_i
+\end{equation*}
+
 
 Let us now define a \emph{flow selection function} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
 \begin{equation}
- 	\varphi: \mathcal{Q}^*\times Q \to \{true,false\}
+ 	\varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
 \end{equation}
 
-A flow $\mathcal{F}$ is a subsequence of packets defined by a sequence of extended packets $\mathcal{Q}$ and a flow selection function $\varphi$. We require that each extended packet $q \in \mathcal{Q}$ should belong to at most one flow. Therefore, we define a sequence of flows by induction as follows:
+An extended flow $\widehat{\mathcal{F}}$ is a subsequence of extended packets defined by a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow selection function $\varphi$. We require that each extended packet $\widehat{p} \in \widehat{mathcal{P}}$ belongs to at most one extended flow. Therefore, we construct a sequence of extended flows by induction as follows:
 \begin{enumerate}[noitemsep]
-	\item Denote $\mathcal{Q}_1 = \mathcal{Q}$\improve{rewrite as algorithm}
+	\item Denote $\widehat{\mathcal{P}}_1 = \widehat{\mathcal{P}}$\improve{rewrite as algorithm}
 	\item Set counter $i = 1$
-	\item Apply flow selection function $\varphi$ to extended packets in $\mathcal{Q}_i$
-	\item Matching packets form the flow $\mathcal{F}_i$
-	\item Remove matched extended packets from $\mathcal{Q}_i$, denote the new sequence $\mathcal{Q}_{i+1}$
+	\item Apply flow selection function $\varphi$ to extended packets in $\widehat{\mathcal{P}}_i$
+	\item Matching extended packets form the extended flow $\widehat{\mathcal{F}}_i$
+	\item Remove matched extended packets from $\widehat{\mathcal{P}}_i$, denote the new sequence $\widehat{\mathcal{P}}_{i+1}$
 	\item Increment counter $i = i + 1$
-	\item Go to step 3.
+	\item If $\widehat{\mathcal{F}}_i$ is not empty, go to step 3. Otherwise terminate.
 \end{enumerate}
 
-To be able to denote the whole process, we need to define an auxiliary function $\varphi$ that returns corresponding sequence of extended packets for a sequence of packets. Let
+Let us now define a sequence of extended packets from which $k^{th}$ extended flow is constructed:
 \begin{equation*}
-\varrho(\mathcal{P}) = (q_i) i\in \{j | p_j \in \mathcal{P}\}
+\widehat{\mathcal{P}}_k = \widehat{\mathcal{P}}_{k-1} \setminus \widehat{\mathcal{F}}_{k-1}
 \end{equation*}
+We denote $\mathbb{S}_k$ the set of indexes in $\widehat{\mathcal{P}}_k$.
 
-Let us now define a sequence of packets from which $k^{th}$ flow is constructed:
-\begin{equation*}
-\mathcal{P}_k = \mathcal{P}_{k-1} \setminus \mathcal{F}_{k-1}	
-\end{equation*}
-
-The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing flows in real world. We define the flow $\mathcal{F}_k$ as:
-
+The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ as a subsequence of $\widehat{\mathcal{P}}_{k_i}$:
 \begin{equation}
-\mathcal{F}_k = (p_{k_i}) i \in \mathbb{N}, \mbox{ where } p_{k_i} \in \mathcal{P}_k
+\widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
 \end{equation}
-where its $k_i^{th}$ packet is defined as:
-
+Let $\widehat{\mathcal{F}}_k(i)$ be defined inductively for $i$:
 \begin{align}
 \begin{split}
-\mathcal{F}_k(i) &= p_{k_i}, \mbox{ where } \\
-k_i &= \left\{
-	\begin{array}{ll}
-		\mbox{min } \left\{ j \in \mathbb{N} | \varphi(q_j) = true, q_j \in \varrho(\mathcal{P}_k) \right\} & \mbox{for } i = 1 \\
-		\mbox{min } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(q_{k_1}, q_{k_2}, \ldots, q_{i-1}, q_j) = true \right\} & \mbox{for } i > 1 
+\bullet\quad i &= 1: 
+	\begin{array}{l}
+		\mbox{ if } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
+		\mbox{ else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
+	\end{array}\\
+\bullet\quad i &> 1: 
+	\begin{array}{l}
+		\mbox{ if } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k = (\widehat{p}_{k_j})_{j=1}^{i-i} \\
+		\mbox{ else } \widehat{\mathcal{F}}_k(i) = \widehat{p}_{k_i}, \mbox{ where } k_i = \mbox{ min }\left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
 	\end{array}
-\right.
 \end{split}
 \end{align}
+
+% The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ inductively as a subsequence of $\widehat{\mathcal{P}}_{k_i}$:
+% \begin{equation}
+% \widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
+% \end{equation}
+% where its $k_i^{th}$ packet is defined inductively as:
+% \begin{align}
+% \begin{split}
+% \widehat{\mathcal{F}}_k(i) &= \widehat{p}_{k_i}, \mbox{ where } \\
+% k_i &= \left\{
+% 	\begin{array}{ll}
+% 		\mbox{min } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \varrho(\widehat{\mathcal{P}}_k) \right\} & \mbox{for } i = 1 \\
+% 		\mbox{min } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} & \mbox{for } i > 1 
+% 	\end{array}
+% \right.
+% \end{split}
+% \end{align}
+
+Note that for for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ is the largest number for which $F_k(n)$ is defined. If a flow is infinite than its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
+
 
 \section{Flow Monitoring Architecture}
 

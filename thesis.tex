@@ -9,12 +9,20 @@
            %% hide the List of Figures.
   nolot,     %% Prints the List of Tables. Replace with `nolot` to
            %% hide the List of Tables.
+  nopalatino, %% Disable palatino globally, enable later using packages
+              %% for normal text, not mathmode
   %% More options are listed in the user guide at
   %% <http://mirrors.ctan.org/macros/latex/contrib/fithesis/guide/mu/fi.pdf>.
 ]{fithesis3}
 
 %% The following section sets up the locales used in the thesis.
 \usepackage[resetfonts]{cmap} %% cmap makes the PDF searchable and copyable
+
+% Following packages are enabled by fithesis palatino option
+\usepackage{lmodern}
+% \usepackage{mathpazo} % Palatino font for mathematics, breaks nice \mathbb
+\usepackage{tgpagella} % Palatino font for normal text
+
 \usepackage[T1]{fontenc}
 \usepackage[
   main=english, %% By using `czech` or `slovak` as the main locale
@@ -152,6 +160,8 @@ TODO: discuss privacy issues (where?)
 
 % Make multiple authors be printed as first et al. (package biblatex)
 \ExecuteBibliographyOptions{maxcitenames=2}
+
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
 
 \begin{document}
 
