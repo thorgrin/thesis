@@ -225,7 +225,7 @@ Let us now define a \emph{flow selection function} $\varphi$ which takes a seque
  	\varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
 \end{equation}
 
-An extended flow $\widehat{\mathcal{F}}$ is a subsequence of extended packets defined by a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow selection function $\varphi$. We require that each extended packet $\widehat{p} \in \widehat{mathcal{P}}$ belongs to at most one extended flow. Therefore, we construct a sequence of extended flows by induction as follows:
+An extended flow $\widehat{\mathcal{F}}$ is a subsequence of extended packets defined by a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow selection function $\varphi$. We require that each extended packet $\widehat{p} \in \widehat{\mathcal{P}}$ belongs to at most one extended flow. Therefore, we construct a sequence of extended flows by induction as follows:
 \begin{enumerate}[noitemsep]
 	\item Denote $\widehat{\mathcal{P}}_1 = \widehat{\mathcal{P}}$\improve{rewrite as algorithm}
 	\item Set counter $i = 1$
@@ -246,18 +246,20 @@ The following flow definition reflects the inductive nature of flow creation and
 \begin{equation}
 \widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
 \end{equation}
-Let $\widehat{\mathcal{F}}_k(i)$ be defined inductively for $i$:
+where $\widehat{\mathcal{F}}_k(i)$ is defined inductively over $i$ as:
 \begin{align}
 \begin{split}
-\bullet\quad i &= 1: 
-	\begin{array}{l}
-		\mbox{ if } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
-		\mbox{ else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
+\bullet\quad &i = 1: \\
+	&\begin{array}{l}
+		\mbox{if } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
+		\mbox{else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
 	\end{array}\\
-\bullet\quad i &> 1: 
-	\begin{array}{l}
-		\mbox{ if } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k = (\widehat{p}_{k_j})_{j=1}^{i-i} \\
-		\mbox{ else } \widehat{\mathcal{F}}_k(i) = \widehat{p}_{k_i}, \mbox{ where } k_i = \mbox{ min }\left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
+\bullet\quad &i > 1: \\
+	&\begin{array}{l}
+		\mbox{if } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \\
+		\qquad \widehat{\mathcal{F}}_k = (\widehat{p}_{k_j})_{j=1}^{i-1} \\
+		\mbox{else } \widehat{\mathcal{F}}_k(i) = \widehat{p}_{k_i}, \mbox{ where } \\
+		\qquad k_i = \mbox{ min }\left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
 	\end{array}
 \end{split}
 \end{align}
@@ -279,7 +281,7 @@ Let $\widehat{\mathcal{F}}_k(i)$ be defined inductively for $i$:
 % \end{split}
 % \end{align}
 
-Note that for for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ is the largest number for which $F_k(n)$ is defined. If a flow is infinite than its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
+Note that for for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ is the largest number for which $F_k(n)$ is defined. $\mathbb{S} = \emptyset$ for empty extended flows. If a flow is infinite then its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
 
 
 \section{Flow Monitoring Architecture}
