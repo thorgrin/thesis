@@ -229,7 +229,7 @@ An extended flow $\widehat{\mathcal{F}}$ is a subsequence of extended packets de
 \begin{enumerate}[noitemsep]
 	\item Denote $\widehat{\mathcal{P}}_1 = \widehat{\mathcal{P}}$\improve{rewrite as algorithm}
 	\item Set counter $i = 1$
-	\item Apply flow selection function $\varphi$ to extended packets in $\widehat{\mathcal{P}}_i$
+	\item Apply flow selection function $\varphi$ to extended packets in $\widehat{\mathcal{P}}_i$ (see below)
 	\item Matching extended packets form the extended flow $\widehat{\mathcal{F}}_i$
 	\item Remove matched extended packets from $\widehat{\mathcal{P}}_i$, denote the new sequence $\widehat{\mathcal{P}}_{i+1}$
 	\item Increment counter $i = i + 1$
@@ -240,9 +240,13 @@ Let us now define a sequence of extended packets from which $k^{th}$ extended fl
 \begin{equation*}
 \widehat{\mathcal{P}}_k = \widehat{\mathcal{P}}_{k-1} \setminus \widehat{\mathcal{F}}_{k-1}
 \end{equation*}
-We denote $\mathbb{S}_k$ the set of indexes in $\widehat{\mathcal{P}}_k$.
+We denote $\mathbb{S}_k$ the set of indexes in $\widehat{\mathcal{P}}_k$.\improve{do we need sequential indexes?}
 
-The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ as a subsequence of $\widehat{\mathcal{P}}_{k_i}$:
+\itodo{
+Protože pak bys nemusel říkat, že do toku přidáš packet s indexem wtf, kde wtf je nejmenší číslo z $S\_k$ takové, že... Rovnou bys definoval induktivně tu množinu indexů a tok jako posloupnost jdoucí přes tuto indexovou množinu, což vypadá hezky...
+}
+
+The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ as a subsequence of $\widehat{\mathcal{P}}_k$:
 \begin{equation}
 \widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
 \end{equation}
@@ -251,18 +255,18 @@ where $\widehat{\mathcal{F}}_k(i)$ is defined inductively over $i$ as:
 \begin{split}
 \bullet\quad &i = 1: \\
 	&\begin{array}{l}
-		\mbox{if } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
-		\mbox{else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
+		\mbox{if } \left\{ j \in \mathbb{S}_k \mid \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
+		\mbox{else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{S}_k \mid \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
 	\end{array}\\
 \bullet\quad &i > 1: \\
 	&\begin{array}{l}
-		\mbox{if } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \\
+		\mbox{if } \left\{ j \in \mathbb{S}_k \mid j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \\
 		\qquad \widehat{\mathcal{F}}_k = (\widehat{p}_{k_j})_{j=1}^{i-1} \\
 		\mbox{else } \widehat{\mathcal{F}}_k(i) = \widehat{p}_{k_i}, \mbox{ where } \\
-		\qquad k_i = \mbox{ min }\left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
+		\qquad k_i = \mbox{ min }\left\{ j \in \mathbb{S}_k \mid j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
 	\end{array}
 \end{split}
-jes\end{align}
+\end{align}
 
 % The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ inductively as a subsequence of $\widehat{\mathcal{P}}_{k_i}$:
 % \begin{equation}
@@ -281,7 +285,7 @@ jes\end{align}
 % \end{split}
 % \end{align}
 
-Note that for for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ is the largest number for which $F_k(n)$ is defined. $\mathbb{S} = \emptyset$ for empty extended flows. If a flow is infinite then its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
+Note that for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ \change{bullshit, we need different set} is the largest number for which $F_k(n)$ is defined. $\mathbb{S} = \emptyset$ for empty extended flows. If a flow is infinite then its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
 
 To conform with the Definition~\ref{def:flow} we need to define a flow on plain packets. We do this by constructing the extended flow and reducing each extended packet to a simple packet. The flow $\mathcal{F}$ is defined as:
 \begin{equation}
