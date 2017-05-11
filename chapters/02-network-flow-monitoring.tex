@@ -197,29 +197,35 @@ To make the definitions above more clear, we now give an example of concrete pro
 \itodo{Provide formal definitions of flow, flow key, and flow record}
 \iimprove{Add intro to formal definition}
 
-\iimprove{determine which sets and sequences are finite and which are infinite}
+\iimprove{fix definition environment spacing}
 
-Let $P$ be a set of packets observed at an \emph{observation point}. Let $T$ be a set of packet treatment information. We define a set of extended packets
+\begin{defnn}
+Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of extended packets
 \begin{equation*}
-	\widehat{\mathcal{P}} = P\times T
+	\widehat{\mathcal{P}} = P\times T,
 \end{equation*}
-so that $\widehat{p} \in \widehat{\mathcal{P}}$ denotes a packet together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of observed packets:
+so that $\widehat{p} \in \widehat{\mathcal{P}}$ denotes a packet $p$ together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of packets observed at an \emph{observation point}:
 \begin{equation*}
 	\mathbb{S} = \{1, \ldots, n\} \lor \mathbb{N},
 \end{equation*}
 where $n \in \mathbb{N}$ is the number of observed packets when the number is finite.
 
-Let us denote sequence of packets and extended packets respectively:
+We denote sequence of packets and extended packets observed at an \emph{observation point} respectively:
 \begin{align*}
-	\mathcal{P} = (p_i)_{i \in \mathbb{S}}, p_i \in P\\
-	\widehat{\mathcal{P}} = (\widehat{p}_i)_{i \in \mathbb{S},} \widehat{p}_i \in \widehat{P}
+	\mathcal{P} &= (p_i)_{i \in \mathbb{S}},\, p_i \in P,\\
+	\widehat{\mathcal{P}} &= (\widehat{p}_i)_{i \in \mathbb{S}},\, \widehat{p}_i \in \widehat{P}.
 \end{align*}
+\end{defnn}
 Both sequences are of size $|\mathbb{S}|$. 
 
 Let us now define a \emph{flow selection function} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
-\begin{equation}
+\begin{defn}
+Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\widehat{P}$ be a set of extended packets. We say that a function of type
+\begin{equation*}
  	\varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
-\end{equation}
+\end{equation*}
+is a \emph{flow selection function}.
+\end{defn}
 
 Before we give a formal definition of a flow, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a flow selection function $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as follows:
 \begin{enumerate}[noitemsep]
@@ -230,105 +236,54 @@ Before we give a formal definition of a flow, we provide the following intuition
 	\item The flow $\mathcal{F}$ is a sequence of packets with indexes in $\mathbb{I}$
 \end{enumerate}
 
-Let us define set $\mathbb{I}$ of indexes from $\mathbb{S}$ selected using function $\varphi$ as follows:
-\begin{align}\label{eq:flow-indexes}
-\begin{split}
-\mathbb{I} &= \lim_{i \to \infty} J_i \mbox{, where } J_i \mbox{ is defined inductively over }i \mbox{ as:} \\
+We now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using flow selection function $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
+\begin{defn}\label{def:formal-flow}
+Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{N}$ be (possibly finite) corresponding sequences of packets and extended packets respectively, $\varphi$ a flow selection function.
+
+We define a \emph{flow index set} $\mathbb{I} = \mathbb{I}\left((\widehat{p}_i)_{i \in S}, \varphi\right)$ as 
+\begin{align*}
+\mathbb{I} &= \lim_{i \to \infty} J_i \mbox{, where } J_i \mbox{ is defined inductively over }i \in \mathbb{N} \mbox{ as:} \notag\\
 \bullet\quad &i = 1: 
-	J_i = \left\{min\left\{ \alpha \in \mathbb{S} \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\} \\
+	J_i = \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\}, \\
 \bullet\quad &i > 1: \\
 	&\begin{array}{l}
-		J_i = \emptyset \mbox{ iff } J_1 = \emptyset \\
-		J_i = J_{i-1} \cup \left\{min\left\{ \alpha \in \mathbb{S} \mid \alpha > max(J_{i-1}), \varphi((\widehat{p}_n)_{n\in J_{i-1}}, \widehat{p}_{\alpha}) = true \right\}\right\}
+		J_i = J_{i-1} \cup \left\{\min\left\{ \alpha \in S \mid \alpha > \sup(J_{i-1}), \varphi((\widehat{p}_n)_{n\in J_{i-1}}, \widehat{p}_{\alpha}) = true \right\}\right\}.
 	\end{array}
-\end{split}
-\end{align}
-Since we need the $min$ function to be defined for empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
+\end{align*}
+Finally, we define flow $\mathcal{F} = \mathcal{F}\left((p_i)_{i \in S}, \mathbb{I}\right)$ as:
 \begin{equation*}
-	\left\{min\ \emptyset \right\} = \emptyset
+	\mathcal{F} = (p_i)_{i \in \mathbb{I}}, p_i \in \mathcal{P}.
 \end{equation*}
 
-% (03:40:35 PM) Elleshar: Tak ono to v té definici docela je... já vybírám flow z posloupnosti (p_i)_{i_{\in S}}
-% (03:40:53 PM) Elleshar: (p_i)_{i \in S}}
-% (03:41:42 PM) Elleshar: Můžeš říct, že máš packety (p_i)_{i \in N} a teď pro libovolnou (třeba i konečnou) podmnožinu S \subseteq N definuješ flow F vzhledem k S a \varphi
+\end{defn}
 
-Now we define flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow}. Let  using the set of indexes $\mathbb{I}$ as:
-\begin{equation}\label{eq:flow}
-	\mathcal{F} = (p_i)_{i \in \mathbb{I}}, p_i \in \mathcal{P}
-\end{equation}
+Since we need the $min$ function to be defined for empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
+\begin{equation*}
+	\left\{\min\ \emptyset \right\} = \emptyset
+\end{equation*}
 
-Our definition of flow~\eqref{eq:flow} creates single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow definition function $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as follows:
+The Definition~\ref{def:formal-flow} of flow creates single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow definition function $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as follows:
 \begin{enumerate}[noitemsep]
-	\item Denote $\mathbb{S}_1 = \mathbb{S}$\improve{rewrite as an algorithm}
+	\item Denote $S_1 = \mathbb{S}$\improve{rewrite as an algorithm}
 	\item Set counter $i = 1$
-	\item Apply flow selection function $\varphi$ to extended packets with indexes in $\mathbb{S}_i$
+	\item Apply flow selection function $\varphi$ to extended packets with indexes in $S_i$
 	\item Denote indexes of matching extended packets $\mathbb{I}_i$
 	\item Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
-	\item Remove indexes in $\mathbb{I}_i$ from $\mathbb{S}_i$, denote the new sequence $\mathbb{S}_{i+1}$
+	\item Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $\S_{i+1}$
 	\item Increment counter $i = i + 1$
 	\item If $\mathcal{F}_i$ is not empty, go to step 3. Otherwise terminate.
 \end{enumerate}
 
-Let us now provide a more formal definition of the sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$. Let
-\begin{equation}
-	\mathcal{F}_i = (p_k)_{k \in \mathbb{I}_i}, p_k \in \mathcal{P}
-\end{equation}
-where $\mathbb{I}_{i}$ is constructed on $\mathbb{S}_{i-1}$ as shown in \eqref{eq:flow-indexes} and where\\
+Let us now provide a more formal definition of a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$.
+\begin{defn}
+Let $\mathcal{P}, \widehat{\mathcal{P}}$ be sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}. We define the sequence $(\mathcal{F}_i)_{i \in \mathbb{N}}$ of flows inductively:
 \begin{align*}
-\begin{split}
-	\mathbb{S}_1 &= \mathbb{S} \\
-	\mathbb{S}_i &= \mathbb{S}_{i-1} \setminus \mathbb{I}_{i-1}
-\end{split}
+	\mathcal{F}_i &= \mathcal{F}_i\left((p_j)_{j\in S_i}, \mathbb{I}_i\right) \mbox{, where} \\
+	S_1 &= \mathbb{S}, \\
+	S_i &= S_{i-1} \setminus \mathbb{I}_{i-1}, \\
+	\mathbb{I}_{i} &= \mathbb{I}_i\left((\widehat{p}_j)_{j \in S_i}, \varphi\right).
 \end{align*}
-
-
-% ---------------------------
-
-% The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ as a subsequence of $\widehat{\mathcal{P}}_k$:
-% \begin{equation}
-% \widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
-% \end{equation}
-% where $\widehat{\mathcal{F}}_k(i)$ is defined inductively over $i$ as:
-% \begin{align}
-% \begin{split}
-% \bullet\quad &i = 1: \\
-% 	&\begin{array}{l}
-% 		\mbox{if } \left\{ j \in \mathbb{S}_k \mid \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\} = \emptyset \mbox{ then } \widehat{\mathcal{F}}_k \mbox{ is empty} \\
-% 		\mbox{else } \widehat{\mathcal{F}}_k(1) = \widehat{p}_{k_1}, \mbox{ where } k_1 = \mbox{ min }\left\{ j \in \mathbb{S}_k \mid \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \widehat{\mathcal{P}}_k \right\}
-% 	\end{array}\\
-% \bullet\quad &i > 1: \\
-% 	&\begin{array}{l}
-% 		\mbox{if } \left\{ j \in \mathbb{S}_k \mid j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} = \emptyset \mbox{ then } \\
-% 		\qquad \widehat{\mathcal{F}}_k = (\widehat{p}_{k_j})_{j=1}^{i-1} \\
-% 		\mbox{else } \widehat{\mathcal{F}}_k(i) = \widehat{p}_{k_i}, \mbox{ where } \\
-% 		\qquad k_i = \mbox{ min }\left\{ j \in \mathbb{S}_k \mid j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\}
-% 	\end{array}
-% \end{split}
-% \end{align}
-
-% The following flow definition reflects the inductive nature of flow creation and also provides a guide for constructing the flows. We define the extended flow $\mathcal{F}_k$ inductively as a subsequence of $\widehat{\mathcal{P}}_{k_i}$:
-% \begin{equation}
-% \widehat{\mathcal{F}}_k = (\widehat{p}_{k_i})_{i \in \mathbb{S}_k}, \mbox{ where } \widehat{p}_{k_i} \in \widehat{\mathcal{P}}_k
-% \end{equation}
-% where its $k_i^{th}$ packet is defined inductively as:
-% \begin{align}
-% \begin{split}
-% \widehat{\mathcal{F}}_k(i) &= \widehat{p}_{k_i}, \mbox{ where } \\
-% k_i &= \left\{
-% 	\begin{array}{ll}
-% 		\mbox{min } \left\{ j \in \mathbb{N} | \varphi(\widehat{p}_j) = true, \widehat{p}_j \in \varrho(\widehat{\mathcal{P}}_k) \right\} & \mbox{for } i = 1 \\
-% 		\mbox{min } \left\{ j \in \mathbb{N} | j > k_{i-1} \land \varphi(\widehat{p}_{k_1}, \widehat{p}_{k_2}, \ldots, \widehat{p}_{i-1}, \widehat{p}_j) = true \right\} & \mbox{for } i > 1 
-% 	\end{array}
-% \right.
-% \end{split}
-% \end{align}
-
-% Note that for finite extended flows it holds that $\mathbb{S}_k = \{1, \ldots, n\}$ where $n \in \mathbb{N}$ \change{bullshit, we need different set} is the largest number for which $F_k(n)$ is defined. $\mathbb{S} = \emptyset$ for empty extended flows. If a flow is infinite then its size is $\infty$ and $\mathbb{S}_k = \mathbb{N}$.
-% 
-% To conform with the Definition~\ref{def:flow} we need to define a flow on plain packets. We do this by constructing the extended flow and reducing each extended packet to a simple packet. The flow $\mathcal{F}$ is defined as:
-% \begin{equation}
-% 	\mathcal{F} = proj(\widehat{\mathcal{F}}) = (proj(\widehat{p}_i))_{i \in \mathcal{S}}
-% \end{equation}
+\end{defn}
 
 \section{Flow Monitoring Architecture}
 
