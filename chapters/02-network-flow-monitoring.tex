@@ -194,10 +194,7 @@ To make the definitions above more clear, we now give an example of concrete pro
 	\label{tab:flow.properties}
 \end{table}
 
-\itodo{Provide formal definitions of flow, flow key, and flow record}
-\iimprove{Add intro to formal definition}
-
-\iimprove{fix definition environment spacing}
+The Definition~\ref{def:flow} states what the flow is. However, although we tried to be as explicit as possible, the definition is informal and therefore subject to different interpretations. For this reason we now provide a formal definition of flow, which not only refines the informal definition, but also provides a guide to construction of the flows.
 
 \begin{defnn}
 Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of extended packets
@@ -227,14 +224,27 @@ Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\wide
 is a \emph{flow selection function}.
 \end{defn}
 
-Before we give a formal definition of a flow, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a flow selection function $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as follows:
-\begin{enumerate}[noitemsep]
-	\item Denote $\mathbb{I}$ the set of indexes of packets that belong to the flow $\mathcal{F}$\improve{rewrite as an algorithm}
-	\item Start with $\mathbb{I} = \emptyset$
-	\item Find the index $k$ of the first extended packet $\widehat{p}_k$ for which the flow selection function $\varphi((\widehat{p}_n)_{n\in J_{i-1}}, \widehat{p}_{\alpha})$ returns true and add $k$ to $\mathbb{I}$
-	\item Repeat step 3 until no such $k$ exists
-	\item The flow $\mathcal{F}$ is a sequence of packets with indexes in $\mathbb{I}$
-\end{enumerate}
+Before we give a formal definition of a flow, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a flow selection function $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as described in Algorithm~\ref{alg:flow-construction}.
+% \begin{enumerate}[noitemsep]
+% 	\item Denote $\mathbb{I}$ the set of indexes of packets that belong to the flow $\mathcal{F}$\improve{rewrite as an algorithm}
+% 	\item Start with $\mathbb{I} = \emptyset$
+% 	\item Find the index $k$ of the first extended packet $\widehat{p}_k$ for which the flow selection function $\varphi((\widehat{p}_n)_{n\in J_{i-1}}, \widehat{p}_{\alpha})$ returns true and add $k$ to $\mathbb{I}$
+% 	\item Repeat step 3 until no such $k$ exists
+% 	\item The flow $\mathcal{F}$ is a sequence of packets with indexes in $\mathbb{I}$
+% \end{enumerate}
+\begin{algorithm}
+    \caption{Construction of flow}
+    \label{alg:flow-construction}
+    \begin{algorithmic}[1]
+        \STATE Denote $\mathbb{I}$ the set of indexes of packets that belong to the flow $\mathcal{F}$
+        \STATE Start with $\mathbb{I} = \emptyset$
+        \REPEAT 
+			\STATE Find the index $k$ of the first extended packet $\widehat{p}_k$ for which the flow selection function $\varphi((\widehat{p}_n)_{n\in J_{i-1}}, \widehat{p}_{\alpha}) = true$
+			\STATE Add $k$ to $\mathbb{I}$
+        \UNTIL{No such $k$ exists}
+        \STATE The flow $\mathcal{F}$ is a sequence of packets with indexes from $\mathbb{I}$
+    \end{algorithmic}
+\end{algorithm}
 
 We now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using flow selection function $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
 \begin{defn}\label{def:formal-flow}
@@ -262,17 +272,33 @@ Since we need the $min$ function to be defined for empty set (the cases where no
 	\left\{\min\ \emptyset \right\} = \emptyset
 \end{equation*}
 
-The Definition~\ref{def:formal-flow} of flow creates single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow definition function $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as follows:
-\begin{enumerate}[noitemsep]
-	\item Denote $S_1 = \mathbb{S}$\improve{rewrite as an algorithm}
-	\item Set counter $i = 1$
-	\item Apply flow selection function $\varphi$ to extended packets with indexes in $S_i$
-	\item Denote indexes of matching extended packets $\mathbb{I}_i$
-	\item Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
-	\item Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $\S_{i+1}$
-	\item Increment counter $i = i + 1$
-	\item If $\mathcal{F}_i$ is not empty, go to step 3. Otherwise terminate.
-\end{enumerate}
+The Definition~\ref{def:formal-flow} of flow creates single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a flow definition function $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as described in Algorithm~\ref{alg:flow-sequence-construction}.
+% \begin{enumerate}[noitemsep]
+% 	\item Denote $S_1 = \mathbb{S}$\improve{rewrite as an algorithm}
+% 	\item Set counter $i = 1$
+% 	\item Apply flow selection function $\varphi$ to extended packets with indexes in $S_i$
+% 	\item Denote indexes of matching extended packets $\mathbb{I}_i$
+% 	\item Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
+% 	\item Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $\S_{i+1}$
+% 	\item Increment counter $i = i + 1$
+% 	\item If $\mathcal{F}_i$ is not empty, go to step 3. Otherwise terminate.
+% \end{enumerate}
+\begin{algorithm}
+    \caption{Construction of a sequence of flows}
+    \label{alg:flow-sequence-construction}
+    \begin{algorithmic}[1]
+        \STATE Denote $S_1 = \mathbb{S}$
+        \STATE Set counter $i = 1$
+        \REPEAT
+			\STATE Apply flow selection function $\varphi$ to extended packets with indexes in $S_i$
+			\STATE Denote indexes of matching extended packets $\mathbb{I}_i$
+			\STATE Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
+			\STATE Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $\S_{i+1}$
+			\STATE Increment counter $i = i + 1$
+        \UNTIL{$\mathcal{F}_i$ is empty}
+    \end{algorithmic}
+\end{algorithm}
+
 
 Let us now provide a more formal definition of a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$.
 \begin{defn}
@@ -284,6 +310,8 @@ Let $\mathcal{P}, \widehat{\mathcal{P}}$ be sequences of packets and extended pa
 	\mathbb{I}_{i} &= \mathbb{I}_i\left((\widehat{p}_j)_{j \in S_i}, \varphi\right).
 \end{align*}
 \end{defn}
+
+
 
 \section{Flow Monitoring Architecture}
 

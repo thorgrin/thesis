@@ -78,7 +78,7 @@ TODO: discuss privacy issues (where?)
 \usepackage{makeidx}      %% The `makeidx` package contains
 \makeindex                %% helper commands for index typesetting.
 %% These additional packages are used within the document:
-\usepackage{paralist} %% Compact list environments
+% \usepackage{paralist} %% Compact list environments
 \usepackage{amsmath}  %% Mathematics
 \usepackage{amsthm}
 \usepackage{amsfonts}
@@ -118,8 +118,8 @@ TODO: discuss privacy issues (where?)
 
 % Definitions style using amsthm package
 \newtheoremstyle{defnstyle} % name
-    {0em}                        % Space above
-    {0em}                        % Space below
+    {1em}                        % Space above
+    {1em}                        % Space below
     {\itshape}                   % Body font
     {}                           % Indent amount
     {\bfseries}                  % Theorem head font
@@ -144,9 +144,11 @@ TODO: discuss privacy issues (where?)
 % \usepackage[table]{xcolor}
 % \usepackage{subfig}
 % \usepackage[ruled, lined, linesnumbered,norelsize]{algorithm2e}
-\usepackage{multirow}
-\usepackage{booktabs}
+\usepackage{multirow} % Complex tables
+\usepackage{booktabs} % \toprule, \midrule, \bottomrule
 \usepackage{enumitem} % Allows to use [noitemsep] in itemize and enumerate enviroment definitions
+\usepackage[boxed, chapter]{algorithm}
+\usepackage{algorithmic}
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
@@ -156,7 +158,7 @@ TODO: discuss privacy issues (where?)
 \renewcommand{\mkenddispquote}[2]{\par\centering #1#2}
 
 % Environment for definitions using csquotes for centering
-\newenvironment{definition}{\begin{displayquote}\vspace{-1em}\begin{defn}}
+\newenvironment{definition}{\begin{displayquote}\vspace{-2em}\begin{defn}}
 {\end{defn}\end{displayquote}}
 
 % Make multiple authors be printed as first et al. (package biblatex)
