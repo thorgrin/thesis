@@ -194,7 +194,7 @@ To make the definitions above more clear, we now give an example of concrete pro
 
 The Definition~\ref{def:flow} states what the flow is. However, although we tried to be as explicit as possible, the definition is informal and therefore subject to different interpretations. For this reason we now provide a formal definition of flow, which not only refines the informal definition, but also provides a guide to construction of the flows.
 
-\begin{defnn}
+\begin{defn}
 Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of extended packets
 \begin{equation*}
 	\widehat{\mathcal{P}} = P\times T,
@@ -210,7 +210,7 @@ We denote sequence of packets and extended packets observed at an \emph{observat
 	\mathcal{P} &= (p_i)_{i \in \mathbb{S}},\, p_i \in P,\\
 	\widehat{\mathcal{P}} &= (\widehat{p}_i)_{i \in \mathbb{S}},\, \widehat{p}_i \in \widehat{P}.
 \end{align*}
-\end{defnn}
+\end{defn}
 Both sequences are of size $|\mathbb{S}|$. 
 
 Let us now define a \emph{flow selection function} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
@@ -240,7 +240,7 @@ Before we give a formal definition of a flow, we provide the following intuition
 
 We now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using \emph{flow selection function} $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
 \begin{defn}\label{def:formal-flow}
-Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{N}$ be (possibly finite) corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
+Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{N}$ be (possibly finite) mutually corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
 
 We define a \emph{flow index set} $\mathbb{I} = \mathbb{I}\left((\widehat{p}_i)_{i \in S},\, \varphi\right)$ as 
 \begin{align*}
@@ -253,16 +253,6 @@ J_i &= \left\{
 	\end{array}\right.
 \end{align*}
 
-\begin{align*}
-\mathbb{I} &= \lim_{i \to \infty} J_i \text{, where } J_i \text{ is defined inductively over }i \in \mathbb{N} \text{ as:} \notag\\
-\bullet\quad &i = 1: 
-	J_i = \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\}, \\
-\bullet\quad &i > 1: \\
-	&\begin{array}{l}
-		J_i = J_{i-1} \cup \left\{\min\left\{ \alpha \in S \mid \alpha > \sup(J_{i-1}),\, \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true \right\}\right\}.
-	\end{array}
-\end{align*}
-
 Finally, we define flow $\mathcal{F} = \mathcal{F}\left((p_i)_{i \in S},\, \mathbb{I}\right)$ as:
 \begin{equation*}
 	\mathcal{F} = (p_i)_{i \in \mathbb{I}},\, p_i \in \mathcal{P}.
@@ -270,7 +260,7 @@ Finally, we define flow $\mathcal{F} = \mathcal{F}\left((p_i)_{i \in S},\, \math
 
 \end{defn}
 
-Since we need the $min$ function to be defined for empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
+Since we need the $\min$ function to be defined for empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
 \begin{equation*}
 	\left\{\min\ \emptyset \right\} = \emptyset
 \end{equation*}
