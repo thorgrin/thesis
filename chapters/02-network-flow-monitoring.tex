@@ -66,7 +66,7 @@ The IPFIX WG did more than just design the IPFIX protocol. In the 29 RFCs submit
 	\item Bidirectional flow export~\cite{rfc5103}
 	\item Architecture for IP flow information export~\cite{rfc5470}
 	\item Reducing redundancy in flow~\cite{rfc5473}
-	\item Definitions of Managed Objects (MIB) for IPFIX~cite{rfc5815, rfc6615}
+	\item Definitions of Managed Objects (MIB) for IPFIX~\cite{rfc5815, rfc6615, rfc8038}
 	\item IP flow mediation framework~\cite{rfc5982, rfc6183}
 	\item IP flow anonymization~\cite{rfc6235}
 	\item IPFIX configuration data model~\cite{rfc6728}
@@ -197,7 +197,7 @@ The Definition~\ref{def:flow} states what the flow is. However, although we trie
 \begin{defn}
 Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of extended packets
 \begin{equation*}
-	\widehat{\mathcal{P}} = P\times T,
+	\widehat{P} = P\times T,
 \end{equation*}
 so that $\widehat{p} \in \widehat{\mathcal{P}}$ denotes a packet $p$ together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of packets observed at an \emph{observation point}:
 \begin{equation*}
@@ -230,10 +230,9 @@ Before we give a formal definition of a flow, we provide the following intuition
     \begin{algorithmic}[1]
         \STATE Denote $\mathbb{I}$ the set of indexes of packets that belong to the flow $\mathcal{F}$
         \STATE Start with $\mathbb{I} = \emptyset$
-        \REPEAT 
-			\STATE Find the index $k$ of the first extended packet $\widehat{p}_k$ for which the \emph{flow selection function} $\varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true$
+        \WHILE{An index $k$ of the first extended packet $\widehat{p}_k$ for which $\varphi((\widehat{p}_n)_{n\in \mathbb{I}},\, \widehat{p}_{\alpha}) = true$ exists}
 			\STATE Add $k$ to $\mathbb{I}$
-        \UNTIL{No such $k$ exists}
+        \ENDWHILE
         \STATE The flow $\mathcal{F}$ is a sequence of packets with indexes from $\mathbb{I}$
     \end{algorithmic}
 \end{algorithm}
@@ -296,31 +295,123 @@ Let $\mathcal{P}, \widehat{\mathcal{P}}$ be sequences of packets and extended pa
 
 The Definition~\ref{def:formal-flow-sequence} provides a guide to constructing a sequence of flow records. The procedure can be easily modified to run in real time so that each newly observed extended packet can be added to the appropriate flow. Since we know that every packet is a part of only a single flow, we apply the \emph{flow selection function} $\varphi$ to each existing flow (enriched by packet treatment information) and the new extended packet and add the packet to the first flow that matches. If none of the existing flow matches, we apply the function $\varphi$ to this packet only and start a new flow if necessary. 
 
-We can see that the flow creation process significantly depends upon the implementation of the \emph{flow selection function}. We will discuss the common implementations in the Subsection~\ref{subsec:flow-aggregation}.
+We can see that the flow creation process significantly depends upon the implementation of the \emph{flow selection function}. We will discuss the common implementations in the Subsection~\ref{subsec:flow-creation}.
 
 \section{Flow Monitoring Architecture}
 
+Deployment of flow monitoring on a network requires several steps: Capturing packets at one or more observation points, assigning packets to flows, creating and exporting flow records for the flows, and finally collecting, storing, and processing of the exported flow records. 
+The Figure~\ref{fig:flow-monitoring-deployment} shows a high level overview of the whole process. Flow monitoring process encompasses packet capture, flow creation, and creation and export of flow records. Flow data processing comprises of flow record collection, storage, and further processing. Note that the flow records can be processes directly without storing. This approach is called \emph{stream processing}. It is also possible to manipulate the flow records in transition between the export and collection. The IPFIX working group specified a framework called IP Flow Information Export Mediation~\cite{rfc6183} which describes this process. However, description of this process is outside the scope of this thesis.
 
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics{figures/flow-monitoring-deployment}
+  \end{center}
+  \caption{High Level Flow Monitoring Schema}
+  \label{fig:flow-monitoring-deployment}
+\end{figure}
 
-\ref{sec:flow-monitoring-process}
-
-\itodo{
-- High level overview of the components, terminology\\
-- Monitoring configurations (SPAN - no direction information)\\
-- IPFIX as IP Flow Information eXport standard (describes architecture as well)
-}
+This rest of section explains basic terminology and components of the flow monitoring architecture and describes the most commonly deployed flow monitoring architectures.
 
 \subsection{Terminology}
+
+The IPFIX working group published several documents where the architecture for IP Flow Information Export is described~\cite{rfc5470, rfc6183}. However, the terminology used in these documents is not commonly used by the flow monitoring community and some of the terms have different meaning depending on a context. We start by presenting the IPFIX reference model as described in RFC5470~\cite{rfc5470}, which can also be used to describe generic flow monitoring architecture. Then we identify the terms that are often used with different meaning and explain how these terms are used throughout this thesis.
+
+We provide the IPFIX terminology definitions from RFC 7011~\cite{rfc7011} here for the convenience of the reader:
+
+\begin{displaycquote}{rfc7011}[Specification of the IP Flow Information Export (IPFIX) Protocol for the Exchange of Flow Information]
+
+	\begin{description}[style=nextline]
+		\item[Observation Point]
+      An Observation Point is a location in the network where packets
+      can be observed.  Examples include a line to which a probe is
+      attached; a shared medium, such as an Ethernet-based LAN; a single
+      port of a router; or a set of interfaces (physical or logical) of
+      a router.
+
+      Note that every Observation Point is associated with an
+      Observation Domain (defined below) and that one Observation Point
+      may be a superset of several other Observation Points.  For
+      example, one Observation Point can be an entire line card.  That
+      would be the superset of the individual Observation Points at the
+      line card's interfaces.
+      
+		\item[Observation Domain]
+      An Observation Domain is the largest set of Observation Points for
+      which Flow information can be aggregated by a Metering Process.
+      For example, a router line card may be an Observation Domain if it
+      is composed of several interfaces, each of which is an Observation
+      Point.  In the IPFIX Message it generates, the Observation Domain
+      includes its Observation Domain ID, which is unique per Exporting
+      Process.  That way, the Collecting Process can identify the
+      specific Observation Domain from the Exporter that sends the IPFIX
+      Messages.  Every Observation Point is associated with an
+      Observation Domain.  It is RECOMMENDED that Observation Domain IDs
+      also be unique per IPFIX Device.
+
+		\item[Packet Treatment]
+      "Packet Treatment" refers to action(s) performed on a packet by a
+      forwarding device or other middlebox, including forwarding,
+      dropping, delaying for traffic-shaping purposes, etc.
+
+		\item[Metering Process] 
+
+      The Metering Process generates Flow Records.  Inputs to the
+      process are packet headers, characteristics, and Packet Treatment
+      observed at one or more Observation Points.
+
+      The Metering Process consists of a set of functions that includes
+      packet header capturing, timestamping, sampling, classifying, and
+      maintaining Flow Records.
+
+      The maintenance of Flow Records may include creating new records,
+      updating existing ones, computing Flow statistics, deriving
+      further Flow properties, detecting Flow expiration, passing Flow
+      Records to the Exporting Process, and deleting Flow Records.
+      
+		\item[Exporting Process]
+      The Exporting Process sends IPFIX Messages to one or more
+      Collecting Processes.  The Flow Records in the Messages are
+      generated by one or more Metering Processes.
+
+		\item[Exporter]
+      A device that hosts one or more Exporting Processes is termed an
+      Exporter.
+
+		\item[IPFIX Device]
+      An IPFIX Device hosts at least one Exporting Process.  It may host
+      further Exporting Processes as well as arbitrary numbers of
+      Observation Points and Metering Processes.
+
+		\item[Collecting Process]
+      A Collecting Process receives IPFIX Messages from one or more
+      Exporting Processes.  The Collecting Process might process or
+      store Flow Records received within these Messages, but such
+      actions are out of scope for this document.
+
+		\item[Collector]
+      A device that hosts one or more Collecting Processes is termed a
+      Collector.
+    \end{description}
+
+\end{displaycquote}
+
+The Figure~\ref{fig:ipfix-reference-model} shows various scenarios of flow monitoring architecture as defined by IPFIX working group. 
+\begin{itemize}
+	\item Modularity of ipfix device/exporter
+	\item Modularity of data processing (at collector vs elsewhere). Describe how we send data to stream for flow.
+\end{itemize}
+
+
+\itodo{prekreslit Figure 1 z rfc5470}
+
 
 \itodo{
 IPFIX vs thesis\\
 - Flow exporter, probe, flow meter vs IPFIX terminology (metering process, sampling, filtering, exporting process)\\
+- IPFIX as IP Flow Information eXport standard (describes architecture as well)
 - Here or in/after architecture?
 }
 
-\itodo{
-Rfc5470, v rfc 7011 je i celej ipfix protokol, ten zustava a neni ted dulezity (asi)\\
-}
 
 {\small
 \begin{verbatim}
@@ -329,18 +420,20 @@ Observation Domain    Logical collection of Obsrv Points
 Packet Treatment      Packet processing on switch/router
 Metering Process      Exporter
 Exporting Process     Exporter (sw/hw)
-Exporter              -
+Exporter              Probe
 IPFIX Device          Probe, Switch, etc
 Collecting Process    Collector
 Collector             Collector
 \end{verbatim}
 }
 
-\subsection{Monitoring Configuration Examples}
+\subsection{Monitoring Configuration}
 
 \itodo{
+- High level overview of the components\\
 - Dedicated probe: SPAN, TAP\\
 - Switch/Router device\\
+- Monitoring configurations (SPAN - no direction information)\\
 - Where to measure: inside network, network border, combination (pitfalls), NAT devices (lemo - postprocessing/mediator)
 }
 
@@ -351,6 +444,7 @@ Collector             Collector
 Put generic stuff here and keep application related information there}
 
 \itodo{
+- Descriptions and schemas already in RFC 5470, take a look
 - Packet observation\\
 - - Probe location (wired, wireless, virtual)\\
 - - Port mirroring vs in-line (tap)\\
@@ -361,11 +455,11 @@ Put generic stuff here and keep application related information there}
 - Flow export
 }
 
-\subsection{Packet Observation}
+\subsection{Packet Capture}
 
-\subsection{Packet Parsing}
+\subsection{Packet Parsing}% TODO processing?
 
-\subsection{Flow Aggregation}\label{subsec:flow-aggregation}
+\subsection{Flow Creation}\label{subsec:flow-creation}
 
 \subsection{Flow Export}
 
@@ -380,6 +474,10 @@ Put generic stuff here and keep application related information there}
 }
 
 \section{Flow Data Processing}
+
+\subsection{Flow Collection}
+\subsection{Flow Storage}
+\subsection{Flow Processing}
 
 \itodo{
 - Flow collectors (https://github.com/VerizonDigital/vflow)\\
