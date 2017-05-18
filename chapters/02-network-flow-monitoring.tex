@@ -395,42 +395,51 @@ We provide the IPFIX terminology definitions from RFC 7011~\cite{rfc7011} here f
 
 \end{displaycquote}
 
-The Figure~\ref{fig:ipfix-reference-model} shows various scenarios of flow monitoring architecture as defined by IPFIX working group. 
-\begin{itemize}
-	\item Modularity of ipfix device/exporter
-	\item Modularity of data processing (at collector vs elsewhere). Describe how we send data to stream for flow.
-\end{itemize}
+
+The Figure~\ref{fig:ipfix_reference_model} shows various scenarios of flow monitoring architecture as defined by IPFIX working group. IPFIX exporters and IPFIX devices are part of the flow monitoring process, collectors and application represent flow data processing, as described in the Figure~\ref{fig:flow-monitoring-deployment}. The IPFIX Reference Model allows to differentiate between devices that only export flow records and devices that receive data from an observation point and perform the metering process themselves. This can be useful for describing for example development setups where flow records are replayed or generated without the necessity for monitoring of live network traffic. Collectors comprise of collecting processes and data processing applications. The reference model shows that it is possible to collect flow records from multiple sources on a single collector and that the applications can run on directly on the collector or that they can be distributed to other machines. For example, collecting process might convert the flow records in IPFIX format to JSON and feed a big data processing framework that runs on a cluster of machines.
+
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{figures/ipfix-reference-model}
+  \end{center}
+  \caption{IPFIX Reference Model~\cite{rfc5470}}
+  \label{fig:ipfix_reference_model}
+\end{figure}
+
+Although the IPFIX Reference Model describes the flow monitoring architecture in detail, it is not used by the flow monitoring community unanimously. Most of the terms used in the IPFIX standard are simplified and their true meaning often depends on the context. Table~\ref{tab:flow_monitoring_terminology} provides the common terms often used instead of the IPFIX terminology. We usually talk about a monitored link or a set of monitored links (e.g. both directions of a network connection when optical fibres are used) instead of an observation point or an observation domain. By an exporter or a flow exporter is usually meant the software that performs flow monitoring (both metering and exporting process). If a device generates flows without observing and processing the packets first (i.e. Exporter in IPFIX terminology) we call it a flow source or a probe. The IPFIX Device is usually called by more specific name, such as switch, router, or, in case of a dedicated device possibly with specialized hardware and software equipment, a probe. However, term flow source can also be used for any device that generates flow records. Finally, both the software for collecting flow records and device where such a software runs is commonly called a collector, or a flow collector. We will be using the common terminology throughout this thesis.
+
+\begin{table}[t!]
+	\centering
+	\begin{tabular}{ll}
+	\toprule
+		\textbf{IPFIX Terminology}  & \textbf{Common Terminology}                 \\ \midrule
+		Observation Point   &  Monitored Link                                     \\
+		Observation Domain  &  Set of Monitored Links                             \\
+		Packet Treatment    &  Packet Treatment                                   \\
+		Metering Process    &  (Flow) Exporter [software]                         \\
+		Exporting Process   &  (Flow) Exporter [software]                         \\
+		Exporter            &  Flow Source, (Flow) Probe                          \\
+		IPFIX Device        &  Flow Source, (Flow) Probe, Switch, Router, \ldots  \\
+		Collecting Process  &  (Flow) Collector [software]                        \\
+		Collector           &  (Flow) Collector [device]                          \\ \bottomrule
+	\end{tabular}
+	\caption{Flow Monitoring Architecture Terminology}
+	\label{tab:flow_monitoring_terminology}
+\end{table}
 
 
-\itodo{prekreslit Figure 1 z rfc5470}
+\subsection{Flow Monitoring Deployment}
+
+The deployment of flow monitoring requires careful planning so that it does not disturb the existing network infrastructure. There are several decision that must be made such as choosing a proper flow source, collector and their location relative to the monitored network.
+
+The selection of the flow source depends upon many variables, such as cost, required quality of exported data, or the type of the monitored link. Two types of flow source are generally available. First are the active networking devices that are already present in the network and provide flow monitoring functionality as well. Switches, routers and firewalls belong to this category. When such a device is present at a convenient point in the network, it must only be properly configured for flow export and no adjustments to the network are needed. The disadvantage of these devices is that flow monitoring is not their primary function and may not be performed correctly under great load (i.e. under an attack). Also the range of supported options and protocols is usually much lower than that of dedicated probes. The reason for deploying dedicated probe is usually the need for some functionality or guarantees that cannot be met by the networking devices. It also allows to separate network configuration and maintenance from network monitoring, which can be useful if they are handled by different divisions of an organization.
+
+Dedicate flow probe data source (SPAN, TAP)
+
+Monitoring location (edge, inside, outside, NAT)
 
 
 \itodo{
-IPFIX vs thesis\\
-- Flow exporter, probe, flow meter vs IPFIX terminology (metering process, sampling, filtering, exporting process)\\
-- IPFIX as IP Flow Information eXport standard (describes architecture as well)
-- Here or in/after architecture?
-}
-
-
-{\small
-\begin{verbatim}
-Observation Point     Logical collection of packet sources??? TODO
-Observation Domain    Logical collection of Obsrv Points
-Packet Treatment      Packet processing on switch/router
-Metering Process      Exporter
-Exporting Process     Exporter (sw/hw)
-Exporter              Probe
-IPFIX Device          Probe, Switch, etc
-Collecting Process    Collector
-Collector             Collector
-\end{verbatim}
-}
-
-\subsection{Monitoring Configuration}
-
-\itodo{
-- High level overview of the components\\
 - Dedicated probe: SPAN, TAP\\
 - Switch/Router device\\
 - Monitoring configurations (SPAN - no direction information)\\
