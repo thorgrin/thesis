@@ -430,22 +430,84 @@ Although the IPFIX Reference Model describes the flow monitoring architecture in
 
 \subsection{Flow Monitoring Deployment}
 
-The deployment of flow monitoring requires careful planning so that it does not disturb the existing network infrastructure. There are several decision that must be made such as choosing a proper flow source, collector and their location relative to the monitored network.
+The deployment of flow monitoring requires careful planning so that it does not disturb the existing network infrastructure. There are several decision that must be made such as choosing a proper flow source, collector and their location relative to the monitored network. Although it is possible to monitor wireless and virtual networks, we focus on the deployment in wired networks.
 
-The selection of the flow source depends upon many variables, such as cost, required quality of exported data, or the type of the monitored link. Two types of flow source are generally available. First are the active networking devices that are already present in the network and provide flow monitoring functionality as well. Switches, routers and firewalls belong to this category. When such a device is present at a convenient point in the network, it must only be properly configured for flow export and no adjustments to the network are needed. The disadvantage of these devices is that flow monitoring is not their primary function and may not be performed correctly under great load (i.e. under an attack). Also the range of supported options and protocols is usually much lower than that of dedicated probes. The reason for deploying dedicated probe is usually the need for some functionality or guarantees that cannot be met by the networking devices. It also allows to separate network configuration and maintenance from network monitoring, which can be useful if they are handled by different divisions of an organization.
+The selection of the flow source depends upon many variables, such as cost, required quality of exported data, or the type of the monitored link. Two types of flow source are generally available. First are the active networking devices that are already present in the network and provide flow monitoring functionality as well. Switches, routers and firewalls belong to this category. When such a device is present at a convenient point in the network, it must only be properly configured for flow export and no adjustments to the network are needed. The disadvantage of these devices is that flow monitoring is not their primary function and may not be performed correctly under great load (i.e. under an attack). Also the range of supported options and protocols is usually much lower than that of dedicated probes. The reason for deploying a dedicated probe is usually the need for some extra functionality or guarantees that cannot be met by the networking devices. It also allows to separate network configuration and maintenance from network monitoring, which can be useful if they are handled by different divisions of an organization.
 
-Dedicate flow probe data source (SPAN, TAP)
+The active networking devices observe packets as a part of their function, dedicated probes, however, need to be provided with access to data. There are two ways for probes to observe the data: in \emph{in-line} mode or \emph{mirrored} mode. 
+\begin{description}
+	\item[In-line mode] -- A device in in-line mode is connected directly to the monitored link and has to actively pass the packets in order for the link to function. This is the mode of operation of active network devices such as switches and routers. The advantage is that no other device is necessary to mirror the traffic, however, if the probe fails the operation of the network is disrupted. Moreover, it could introduce significant latency and jitter to the network connection.
+	\item[Mirrored mode] -- In the mirrored mode, a copy of network traffic is created and delivered to the probe using dedicated link. The copy can be created either by dedicated TAP (Test Access Point) or an active networking device with the use of a SPAN (Switch Port Analyzer) port.
+	\begin{description}
+		\item[TAP] is a passive splitting mechanism which require in-line installation. However, due to the simplicity of the device (optical TAPs use mirrors and require no power source) and integrated fail-safes (bypass TAPs), the risk of negatively affecting the network is very low. 
+		\item[SPAN] is a special port provided by active networking device that provides a copy of traffic passing through the device for analysis and monitoring purposes.
+	\end{description}
+	Table~\ref{tab:tap_vs_span} shows differences, advantages, and disadvantages of TAP and SPAN solutions.
+\end{description}
+Since flow monitoring is a passive form of monitoring in its nature, it is a good practice to mirror the live traffic and provide only a copy of the data to the probe so that the network cannot be affected by the monitoring process. Selection of the mirroring technology needs to be considered for each deployment based on specific requirements and limitations, such as utilization of the measured network and impact of packet drop on the performed analysis.
 
-Monitoring location (edge, inside, outside, NAT)
-
+\begin{table}[t!]
+	\centering
+	\begin{tabularx}{\textwidth}{XX}
+	\toprule
+		\multicolumn{1}{c}{\textbf{TAP}}  & \multicolumn{1}{c}{\textbf{SPAN}} \\ \midrule[1pt]
+		
+		\multicolumn{2}{c}{Differences} \\ \midrule
+		\begin{compactitem}
+			\item RX \& TX signal delivered on separate ports
+			\item Captures everything on the wire, including MAC and media errors
+			\item Complete capture for 100\,\% saturated network
+		\end{compactitem}
+		&
+		\begin{compactitem}
+			\item RX \& TX copied into in one TX signal
+			\item Hardware and media errors are dropped
+			\item Possible packet drop due to SPAN link capacity limit
+		\end{compactitem}
+		\\ \midrule
+		
+		\multicolumn{2}{c}{Advantages} \\ \midrule
+		\begin{compactitem}
+			\item Monitoring device receives identical data, including errors
+			\item Keeps link directions separate
+		\end{compactitem}
+		& 
+		\begin{compactitem}
+			\item Low cost 
+			\item No changes to network topology
+			\item Aggregation of multiple links
+		\end{compactitem}
+		\\ \midrule
+		
+		\multicolumn{2}{c}{Disadvantages} \\ \midrule
+		\begin{compactitem}
+			\item Analysis device may need dual-port capture interface
+			\item Additional costs for TAP
+			\item Necessity to install additional device
+		\end{compactitem}
+		& 
+		\begin{compactitem}
+			\item Packet drop on fully utilized full-duplex links
+			\item SPAN port data has lower priority than port-to-port data
+			\item Some analyses require observation of physical layer errors
+			\item Loss of information about link
+			\item Increased switch CPU utilization
+			\item Can change a timing of frames
+		\end{compactitem}
+		\\ \bottomrule
+	\end{tabularx}
+	\caption{Differences Between TAP and SPAN Mirroring Options}
+	\label{tab:tap_vs_span}
+\end{table}
 
 \itodo{
-- Dedicated probe: SPAN, TAP\\
-- Switch/Router device\\
-- Monitoring configurations (SPAN - no direction information)\\
+- picture of deployment with switch and TAP
 - Where to measure: inside network, network border, combination (pitfalls), NAT devices (lemo - postprocessing/mediator)
 }
 
+
+Monitoring location (edge, inside, outside, NAT)
+The location of active networking devices is given by the function they perform. However, 
 
 \section{Flow Monitoring Process}\label{sec:flow-monitoring-process}
 

@@ -133,7 +133,7 @@ TODO: discuss privacy issues (where?)
 
 % \usepackage{graphicx}
 % \usepackage{a4wide}
-% \usepackage{tabularx}
+\usepackage{tabularx}
 % \usepackage{amssymb}
 % \usepackage[hyphens]{url}
 % \usepackage[titletoc]{appendix}
@@ -149,6 +149,10 @@ TODO: discuss privacy issues (where?)
 \usepackage{enumitem} % Allows to use [noitemsep] in itemize and enumerate enviroment definitions
 \usepackage[boxed, chapter]{algorithm}
 \usepackage{algorithmic}
+
+% Define our own compactitem list
+\newlist{compactitem}{itemize}{3} % 3 is max-depth
+\setlist[compactitem]{label=\textbullet,leftmargin=*,nosep,after=\vspace*{-\baselineskip}}
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
