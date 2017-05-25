@@ -300,14 +300,14 @@ We can see that the flow creation process significantly depends upon the impleme
 \section{Flow Monitoring Architecture}
 
 Deployment of flow monitoring on a network requires several steps: Capturing packets at one or more observation points, assigning packets to flows, creating and exporting flow records for the flows, and finally collecting, storing, and processing of the exported flow records. 
-The Figure~\ref{fig:flow-monitoring-deployment} shows a high level overview of the whole process. Flow monitoring process encompasses packet capture, flow creation, and creation and export of flow records. Flow data processing comprises of flow record collection, storage, and further processing. Note that the flow records can be processes directly without storing. This approach is called \emph{stream processing}. It is also possible to manipulate the flow records in transition between the export and collection. The IPFIX working group specified a framework called IP Flow Information Export Mediation~\cite{rfc6183} which describes this process. However, description of this process is outside the scope of this thesis.
+The Figure~\ref{fig:flow-monitoring-process} shows a high level overview of the whole process. Flow monitoring process encompasses packet capture, flow creation, and creation and export of flow records. Flow data processing comprises of flow record collection, storage, and further processing. Note that the flow records can be processes directly without storing. This approach is called \emph{stream processing}. It is also possible to manipulate the flow records in transition between the export and collection. The IPFIX working group specified a framework called IP Flow Information Export Mediation~\cite{rfc6183} which describes this process. However, description of this process is outside the scope of this thesis.
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics{figures/flow-monitoring-deployment}
+    \includegraphics{figures/flow-monitoring-process}
   \end{center}
   \caption{High Level Flow Monitoring Schema}
-  \label{fig:flow-monitoring-deployment}
+  \label{fig:flow-monitoring-process}
 \end{figure}
 
 This rest of section explains basic terminology and components of the flow monitoring architecture and describes the most commonly deployed flow monitoring architectures.
@@ -396,7 +396,7 @@ We provide the IPFIX terminology definitions from RFC 7011~\cite{rfc7011} here f
 \end{displaycquote}
 
 
-The Figure~\ref{fig:ipfix_reference_model} shows various scenarios of flow monitoring architecture as defined by IPFIX working group. IPFIX exporters and IPFIX devices are part of the flow monitoring process, collectors and application represent flow data processing, as described in the Figure~\ref{fig:flow-monitoring-deployment}. The IPFIX Reference Model allows to differentiate between devices that only export flow records and devices that receive data from an observation point and perform the metering process themselves. This can be useful for describing for example development setups where flow records are replayed or generated without the necessity for monitoring of live network traffic. Collectors comprise of collecting processes and data processing applications. The reference model shows that it is possible to collect flow records from multiple sources on a single collector and that the applications can run on directly on the collector or that they can be distributed to other machines. For example, collecting process might convert the flow records in IPFIX format to JSON and feed a big data processing framework that runs on a cluster of machines.
+The Figure~\ref{fig:ipfix_reference_model} shows various scenarios of flow monitoring architecture as defined by IPFIX working group. IPFIX exporters and IPFIX devices are part of the flow monitoring process, collectors and application represent flow data processing, as described in the Figure~\ref{fig:flow-monitoring-process}. The IPFIX Reference Model allows to differentiate between devices that only export flow records and devices that receive data from an observation point and perform the metering process themselves. This can be useful for describing for example development setups where flow records are replayed or generated without the necessity for monitoring of live network traffic. Collectors comprise of collecting processes and data processing applications. The reference model shows that it is possible to collect flow records from multiple sources on a single collector and that the applications can run on directly on the collector or that they can be distributed to other machines. For example, collecting process might convert the flow records in IPFIX format to JSON and feed a big data processing framework that runs on a cluster of machines.
 
 \begin{figure}[t!]
   \begin{center}
@@ -432,19 +432,17 @@ Although the IPFIX Reference Model describes the flow monitoring architecture in
 
 The deployment of flow monitoring requires careful planning so that it does not disturb the existing network infrastructure. There are several decision that must be made such as choosing a proper flow source, collector and their location relative to the monitored network. Although it is possible to monitor wireless and virtual networks, we focus on the deployment in wired networks.
 
-The selection of the flow source depends upon many variables, such as cost, required quality of exported data, or the type of the monitored link. Two types of flow source are generally available. First are the active networking devices that are already present in the network and provide flow monitoring functionality as well. Switches, routers and firewalls belong to this category. When such a device is present at a convenient point in the network, it must only be properly configured for flow export and no adjustments to the network are needed. The disadvantage of these devices is that flow monitoring is not their primary function and may not be performed correctly under great load (i.e. under an attack). Also the range of supported options and protocols is usually much lower than that of dedicated probes. The reason for deploying a dedicated probe is usually the need for some extra functionality or guarantees that cannot be met by the networking devices. It also allows to separate network configuration and maintenance from network monitoring, which can be useful if they are handled by different divisions of an organization.
+The selection of the flow source depends upon many variables, such as cost, required quality of exported data, or the type of the monitored link. Two types of flow source are generally available. First are the active networking devices that are already present in the network and provide flow monitoring functionality as well. Switches, routers and firewalls belong to this category. When such a device is present at a convenient point in the network, it must only be properly configured for flow export and no adjustments to the network are needed. Moreover, internal information such as IP addresses behind NAT (Network Address Translation), which would be difficult to access otherwise, can be added to exported flow records. The disadvantage of these devices is that flow monitoring is not their primary function and may not be performed correctly under great load (i.e. under an attack). Also the range of supported options and protocols is usually much lower than that of dedicated probes. The reason for deploying a dedicated probe is usually the need for some extra functionality or guarantees that cannot be met by the networking devices. It also allows to separate network configuration and maintenance from network monitoring, which can be useful if they are handled by different divisions of an organization.
 
-The active networking devices observe packets as a part of their function, dedicated probes, however, need to be provided with access to data. There are two ways for probes to observe the data: in \emph{in-line} mode or \emph{mirrored} mode. 
+The active networking devices observe packets as a part of their function, dedicated probes, however, need to be provided with access to data. There are two ways for probes to observe the data: in \emph{in-line} mode or \emph{mirrored} mode.
 \begin{description}
 	\item[In-line mode] -- A device in in-line mode is connected directly to the monitored link and has to actively pass the packets in order for the link to function. This is the mode of operation of active network devices such as switches and routers. The advantage is that no other device is necessary to mirror the traffic, however, if the probe fails the operation of the network is disrupted. Moreover, it could introduce significant latency and jitter to the network connection.
-	\item[Mirrored mode] -- In the mirrored mode, a copy of network traffic is created and delivered to the probe using dedicated link. The copy can be created either by dedicated TAP (Test Access Point) or an active networking device with the use of a SPAN (Switch Port Analyzer) port.
+	\item[Mirrored mode] -- In the mirrored mode, a copy of network traffic is created and delivered to the probe using dedicated link. The copy can be created either by dedicated TAP (Test Access Point) or an active networking device with the use of a SPAN (Switch Port Analyzer) port. Table~\ref{tab:tap_vs_span} shows differences, advantages, and disadvantages of TAP and SPAN solutions.
 	\begin{description}
 		\item[TAP] is a passive splitting mechanism which require in-line installation. However, due to the simplicity of the device (optical TAPs use mirrors and require no power source) and integrated fail-safes (bypass TAPs), the risk of negatively affecting the network is very low. 
 		\item[SPAN] is a special port provided by active networking device that provides a copy of traffic passing through the device for analysis and monitoring purposes.
 	\end{description}
-	Table~\ref{tab:tap_vs_span} shows differences, advantages, and disadvantages of TAP and SPAN solutions.
 \end{description}
-Since flow monitoring is a passive form of monitoring in its nature, it is a good practice to mirror the live traffic and provide only a copy of the data to the probe so that the network cannot be affected by the monitoring process. Selection of the mirroring technology needs to be considered for each deployment based on specific requirements and limitations, such as utilization of the measured network and impact of packet drop on the performed analysis.
 
 \begin{table}[t!]
 	\centering
@@ -500,37 +498,51 @@ Since flow monitoring is a passive form of monitoring in its nature, it is a goo
 	\label{tab:tap_vs_span}
 \end{table}
 
-\itodo{
-- picture of deployment with switch and TAP
-- Where to measure: inside network, network border, combination (pitfalls), NAT devices (lemo - postprocessing/mediator)
-}
+Since flow monitoring is a passive form of monitoring in its nature, it is a good practice to mirror the live traffic and provide only a copy of the data to the probe so that the network cannot be affected by the monitoring process. Selection of the mirroring technology needs to be considered for each deployment based on specific requirements and limitations, such as utilization of the measured network and impact of packet drop on the performed analysis. The Figure~\ref{fig:flow_monitoring_deployment} shows the most common deployment of flow monitoring at the edge of the network using both presented options: flow export directly from the router and dedicated probe with data provided either by TAP or by router SPAN port.
 
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics[]{figures/flow-monitoring-deployment}
+  \end{center}
+  \caption{Flow Monitoring Deployment Schema}
+  \label{fig:flow_monitoring_deployment}
+\end{figure}
 
-Monitoring location (edge, inside, outside, NAT)
-The location of active networking devices is given by the function they perform. However, 
+Location of the flow source in the network is very important. When the monitored network is connected to the outside at multiple points, it is necessary not only to monitor each of the points, but also to be sure that the routing policies are reasonable so that packets of each flow traverse only one of these points. The flow source would have to have access to all links and monitor them as a single source otherwise, which is not easily achieved especially when the connection points are geologically distributed. It is a good practice to keep the information about which flow source exported which flow records on the collector so that possible configuration problems are easier to detect.
+
+When monitoring a large network such as a network of an university campus, multiple flow sources can be utilized to gain more detailed information about traffic of individual faculties. Special care needs to be taken when a packet traverses multiple observation points. Counting the same traffic multiple times can have a negative impact on subsequent data analysis.
+
+Deployment of NAT impedes network visibility. Some routers that perform the address translation are able to export both original and translated addresses in the flow records. However, observation points of dedicated flow probes are located either before or after the network device which performs the translation. Although some effort has been dedicated to detection of NAT from data provided in flow records~\cite{Abt-2013-Passive, Krmicek-2009-Netflow}, if does not solve the problem of finding the correct source of the communication behind the NAT. The correct approach would be to either place a second probe to a location where the internal addresses are still visible or to export the information about translation to the collector and pair it with existing flow records.
+
 
 \section{Flow Monitoring Process}\label{sec:flow-monitoring-process}
+
+From now on, we talk only about dedicated probes equipped with a flow exporter software. Only generic description is provided here, performance related details are left for Chapter~\ref{chap:flow-monitoring-performance}.
 
 \iinfo{Part is already written in next chapter under Creating Application Flow\\
 Put generic stuff here and keep application related information there}
 
 \itodo{
-- Descriptions and schemas already in RFC 5470, take a look
-- Packet observation\\
-- - Probe location (wired, wireless, virtual)\\
-- - Port mirroring vs in-line (tap)\\
+- Descriptions and schemas already in RFC 5470, take a look \\
+- Packet capture - from line to software \\
 - - Technologies: PF\_RING, PF\_RING ZC, Linux NAPI, FPGA (DPDK, PF\_RING, DNA/Libzero)\\
+- - Timestamping \\
+- - Packet sampling (too much data) \\
 - Explain that we do not perform sampling and filtering (filtering only in NIC for specific purposes or on exporter for testing, etc).\\
 - Flow metering (caches, ...), biflows\\
-- Flow expiration/termination
-- Flow export
+- Flow expiration/termination \\
+- Flow export \\
+- - Flow sampling (to much flow records for collector) \\
+- Flow exporter software and hardware - hodí se sem? Potřebuji v této práci takový seznam?
 }
 
 \subsection{Packet Capture}
 
-\subsection{Packet Parsing}% TODO processing?
+\subsection{Packet Processing}
 
 \subsection{Flow Creation}\label{subsec:flow-creation}
+
+\itodo{Discuss implementation of the flow selection function}
 
 \subsection{Flow Export}
 
