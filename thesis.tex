@@ -86,6 +86,13 @@ TODO: discuss privacy issues (where?)
 \usepackage{url}      %% Hyperlinks
 % \usepackage{markdown} %% Lightweight Markup
 
+% override the default iso-numeric bibtex style by loading the package ourselves
+\usepackage[backend=biber,
+%         style=,
+        sorting=none,
+        autolang=other,
+        sortlocale=auto]{biblatex}
+
 % TO-DO notes
 \usepackage{xargs}
 \usepackage[dvipsnames]{xcolor}
@@ -150,10 +157,12 @@ TODO: discuss privacy issues (where?)
 \usepackage{enumitem} % Allows to use [noitemsep] in itemize and enumerate enviroment definitions
 \usepackage[boxed, chapter]{algorithm}
 \usepackage{algorithmic}
+\usepackage{rotating}
 
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
 \setlist[compactitem]{label=\textbullet,leftmargin=*,nosep,after=\vspace*{-\baselineskip}}
+
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
@@ -167,7 +176,7 @@ TODO: discuss privacy issues (where?)
 {\end{defn}\end{displayquote}}
 
 % Make multiple authors be printed as first et al. (package biblatex)
-\ExecuteBibliographyOptions{maxcitenames=2}
+\ExecuteBibliographyOptions{maxnames=999, maxcitenames=2}
 
 \DeclareSymbolFontAlphabet{\mathbb}{AMSb}
 

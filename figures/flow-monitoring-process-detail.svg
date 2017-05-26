@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="212.25937mm"
+   height="117.51487mm"
+   viewBox="0 0 212.25937 117.51487"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r"
+   sodipodi:docname="flow-monitoring-process-detail.svg">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6498"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6496"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6186"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6184"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6002"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6000"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5816"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path5814"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5650"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path5648"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5476"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path5474"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5322"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5320"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4904"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4752"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4750"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker12430"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path12428"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker12031"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12029"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11571"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11569"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11471"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11469"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11377"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11375"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11289"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11287"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11207"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11205"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11131"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11129"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11061"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path11059"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9457"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9455"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9447"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9445"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9437"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9435"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9427"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9425"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9417"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9415"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9407"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9405"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9397"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9395"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9387"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9385"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker8860"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8858"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <linearGradient
+       id="linearGradient6077"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6075" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker12430-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path12428-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="520.73554"
+     inkscape:cy="216.06722"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1145"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4485"
+       originx="18.520833"
+       originy="-223.79763" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(18.520834,44.312494)">
+    <rect
+       style="fill:#000000;fill-opacity:0.15686275;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4615"
+       width="186.53125"
+       height="13.040178"
+       x="6.6145835"
+       y="6.1473212" />
+    <g
+       id="g6114"
+       transform="translate(-47.625,-29.009672)">
+      <rect
+         y="37.708332"
+         x="71.4375"
+         height="7.9375"
+         width="37.041664"
+         id="rect6109"
+         style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4497"
+         y="42.540504"
+         x="72.915749"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="42.540504"
+           x="72.915749"
+           id="tspan4495"
+           sodipodi:role="line">NIC memory buffer</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-18.551878"
+       y="16.744467"
+       id="text4529"><tspan
+         sodipodi:role="line"
+         id="tspan4527"
+         x="-18.551878"
+         y="16.744467"
+         style="stroke-width:0.26458332">Software</tspan><tspan
+         sodipodi:role="line"
+         x="-18.551878"
+         y="21.595161"
+         style="stroke-width:0.26458332"
+         id="tspan6105">processing</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-18.551878"
+       y="34.004173"
+       id="text4533"><tspan
+         sodipodi:role="line"
+         id="tspan4531"
+         x="-18.551878"
+         y="34.004173"
+         style="stroke-width:0.26458332">Hardware</tspan><tspan
+         sodipodi:role="line"
+         x="-18.551878"
+         y="38.854866"
+         style="stroke-width:0.26458332"
+         id="tspan6107">processing</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-7.5485168"
+       y="50.750153"
+       id="text4596"><tspan
+         sodipodi:role="line"
+         id="tspan4594"
+         x="-7.5485168"
+         y="50.750153"
+         style="font-size:2.82222223px;stroke-width:0.26458332">Frames</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.536398"
+       y="72.104179"
+       id="text4600"><tspan
+         sodipodi:role="line"
+         id="tspan4598"
+         x="28.536398"
+         y="72.104179"
+         style="stroke-width:0.26458332">Packet capture</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.11666654, 0.52916663, 0.26458332, 0.52916663;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -18.520833,27.125003 H 193.14583"
+       id="path4606"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="8.0886908"
+       y="13.706845"
+       id="text6118"><tspan
+         sodipodi:role="line"
+         id="tspan6116"
+         x="8.0886908"
+         y="13.706845"
+         style="stroke-width:0.26458332">RAM</tspan></text>
+    <g
+       id="g6125"
+       transform="translate(-2.6458333,-21.166663)">
+      <text
+         id="text4501"
+         y="35.113297"
+         x="77.453232"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="35.113297"
+           x="77.453232"
+           id="tspan4499"
+           sodipodi:role="line">Packet buffer</tspan></text>
+      <rect
+         y="29.77083"
+         x="74.083336"
+         height="7.9375"
+         width="29.104166"
+         id="rect6120"
+         style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g6132"
+       transform="translate(7.9375153,-18.520831)">
+      <text
+         id="text4505"
+         y="32.463585"
+         x="103.71645"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.463585"
+           x="103.71645"
+           id="tspan4503"
+           sodipodi:role="line">Packet metadata</tspan></text>
+      <rect
+         y="27.124998"
+         x="100.54166"
+         height="7.9375"
+         width="34.395832"
+         id="rect6127"
+         style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g6139"
+       transform="translate(15.875005,-21.166663)">
+      <text
+         id="text4509"
+         y="35.109417"
+         x="147.93549"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="35.109417"
+           x="147.93549"
+           id="tspan4507"
+           sodipodi:role="line">Flow cache</tspan></text>
+      <rect
+         y="29.77083"
+         x="145.52083"
+         height="7.9375"
+         width="23.8125"
+         id="rect6134"
+         style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g6146"
+       transform="translate(10.583335,-18.520839)">
+      <text
+         id="text4489"
+         y="-1.9322469"
+         x="14.462815"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan4491"
+           style="stroke-width:0.26458332"
+           y="-1.9322469"
+           x="14.462815"
+           sodipodi:role="line">NIC driver</tspan></text>
+      <rect
+         y="-7.270833"
+         x="13.229166"
+         height="7.9375"
+         width="21.166666"
+         id="rect6141"
+         style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g6270"
+       transform="translate(-5.086263e-6,-18.520839)">
+      <text
+         id="text4513"
+         y="-12.789286"
+         x="84.666656"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="-12.789286"
+           x="84.666656"
+           id="tspan4511"
+           sodipodi:role="line">Flow Exporter</tspan></text>
+      <g
+         transform="translate(0,-5.2916671)"
+         id="g6153">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="86.612206"
+           y="0.20329355"
+           id="text4517"><tspan
+             sodipodi:role="line"
+             id="tspan4515"
+             x="86.612206"
+             y="0.20329355"
+             style="stroke-width:0.26458332">Packet processing</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect6148"
+           width="34.395832"
+           height="7.9375"
+           x="84.666664"
+           y="-4.6249995" />
+      </g>
+      <g
+         transform="translate(5.086263e-6,-2.6458337)"
+         id="g6160">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="128.53397"
+           y="-1.9322469"
+           id="text4521"><tspan
+             sodipodi:role="line"
+             id="tspan4519"
+             x="128.53397"
+             y="-1.9322469"
+             style="stroke-width:0.26458332">Flow creation</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect6155"
+           width="26.458332"
+           height="7.9375"
+           x="127"
+           y="-7.270833" />
+      </g>
+      <g
+         transform="translate(1.0172526e-5,2.6458333)"
+         id="g6167">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="164.28091"
+           y="-7.7303262"
+           id="text4525"><tspan
+             sodipodi:role="line"
+             id="tspan4523"
+             x="164.28091"
+             y="-7.7303262"
+             style="stroke-width:0.26458332">Flow export</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:0.24705882;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect6162"
+           width="26.458332"
+           height="7.9375"
+           x="161.39583"
+           y="-12.5625" />
+      </g>
+      <rect
+         y="-17.854166"
+         x="82.020836"
+         height="18.520834"
+         width="111.125"
+         id="rect6169"
+         style="fill:#000000;fill-opacity:0.15686275;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g6282"
+       transform="translate(0,10.583334)">
+      <text
+         id="text4537"
+         y="37.708332"
+         x="15.875"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           id="tspan4552"
+           style="stroke-width:0.26458332"
+           y="37.708332"
+           x="15.875"
+           sodipodi:role="line">Monitoring NIC</tspan></text>
+      <text
+         id="text4545"
+         y="45.692749"
+         x="17.646118"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="45.692749"
+           x="17.646118"
+           id="tspan4543"
+           sodipodi:role="line">CRC checks</tspan></text>
+      <rect
+         y="32.416664"
+         x="13.229166"
+         height="18.520834"
+         width="34.395832"
+         id="rect6272"
+         style="fill:none;fill-opacity:0.15686275;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         y="40.354164"
+         x="15.875"
+         height="7.9375"
+         width="23.8125"
+         id="rect6274"
+         style="fill:none;fill-opacity:0.15686275;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker11471)"
+       d="M 29.104167,41.677088 41.010417,20.510421"
+       id="path6284"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker9457)"
+       d="M -18.520834,52.260423 H 11.90625"
+       id="path6670"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.79374993, 0.79374993;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 64.822915,-44.312494 V 25.802087"
+       id="path6838"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="39.420231"
+       y="-41.052227"
+       id="text6842"><tspan
+         sodipodi:role="line"
+         id="tspan6840"
+         x="39.420231"
+         y="-41.052227"
+         style="stroke-width:0.26458332">Kernel space</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="67.682297"
+       y="-41.052227"
+       id="text6846"><tspan
+         sodipodi:role="line"
+         id="tspan6844"
+         x="67.682297"
+         y="-41.052227"
+         style="stroke-width:0.26458332">User space</tspan></text>
+    <g
+       id="g7719"
+       transform="matrix(0.83370596,0.57824365,-0.57824365,0.83370596,18.100625,-39.169095)"
+       style="stroke-width:0.98560137">
+      <text
+         id="text4562"
+         y="3.712997"
+         x="40.817062"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26077369"
+         xml:space="preserve"><tspan
+           style="font-size:2.82222223px;stroke-width:0.26077369"
+           y="3.712997"
+           x="40.817062"
+           id="tspan4560"
+           sodipodi:role="line">Packet data</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path7644"
+         d="M 32.466029,4.6354166 H 68.791666"
+         style="fill:none;stroke:#000000;stroke-width:0.26077369px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker11289)" />
+    </g>
+    <g
+       id="g8846"
+       transform="rotate(52.161508,157.17818,4.7467612)">
+      <text
+         id="text4588"
+         y="-1.4357864"
+         x="137.08499"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:2.82222223px;stroke-width:0.26458332"
+           y="-1.4357864"
+           x="137.08499"
+           id="tspan4586"
+           sodipodi:role="line">Create/update</tspan><tspan
+           id="tspan8798"
+           style="font-size:2.82222223px;stroke-width:0.26458332"
+           y="2.0919914"
+           x="137.08499"
+           sodipodi:role="line">flow records</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path8726"
+         d="m 134.6729,-0.65625 h 26.30665"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8860)" />
+    </g>
+    <g
+       id="g9057"
+       transform="rotate(-64.910485,172.99806,3.0366782)">
+      <text
+         id="text4592"
+         y="-2.9548657"
+         x="170.53813"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:2.82222223px;stroke-width:0.26458332"
+           y="-2.9548657"
+           x="170.53813"
+           id="tspan4590"
+           sodipodi:role="line">Flow records</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path8850"
+         d="m 168.99649,-1.9791668 h 23.25963"
+         style="fill:none;stroke:#000000;stroke-width:0.26458329px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker11571)" />
+    </g>
+    <g
+       id="g11686"
+       transform="translate(-21.166673,-5.5562504)">
+      <rect
+         y="29.770838"
+         x="46.302086"
+         height="5.2916665"
+         width="26.458332"
+         id="rect11681"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:0.79374994, 0.79374994;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4558"
+         y="33.790386"
+         x="47.598724"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:3.88055563px;stroke:none;stroke-width:0.26458332"
+           y="33.790386"
+           x="47.598724"
+           id="tspan4556"
+           sodipodi:role="line">DMA transfer</tspan></text>
+    </g>
+    <g
+       id="g12001">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6748"
+         d="M 34.395832,4.6354166 V -16.531246"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker11377)" />
+      <text
+         transform="rotate(-90)"
+         id="text11990"
+         y="33.52697"
+         x="-2.8134947"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="33.52697"
+           x="-2.8134947"
+           id="tspan11988"
+           sodipodi:role="line">Packet data</tspan></text>
+    </g>
+    <g
+       id="g12168"
+       transform="rotate(-61.395955,82.282167,-6.4462622)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="75.827698"
+         y="-2.9226637"
+         id="text11990-8"><tspan
+           sodipodi:role="line"
+           id="tspan11988-3"
+           x="75.827698"
+           y="-2.9226637"
+           style="stroke-width:0.26458332">Packet data</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path12021"
+         d="M 72.09588,-1.9791638 H 95.650443"
+         style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker12031)" />
+    </g>
+    <g
+       id="g12573"
+       transform="rotate(55.42231,110.1838,1.9895891)">
+      <text
+         id="text12418"
+         y="-2.9825773"
+         x="91.495171"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="-2.9825773"
+           x="91.495171"
+           id="tspan12416"
+           sodipodi:role="line">Packet metadata</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path12420"
+         d="M 89.958331,-1.9791638 H 116.13285"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker12430)" />
+    </g>
+    <g
+       id="g12573-6"
+       transform="rotate(-57.540314,112.28376,-26.379091)">
+      <text
+         id="text12418-0"
+         y="-2.9844685"
+         x="91.392868"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="-2.9844685"
+           x="91.392868"
+           id="tspan12416-2"
+           sodipodi:role="line">Packet metadata</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path12420-8"
+         d="M 91.047004,-1.9791638 H 116.13285"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker12430-5)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-22.24547"
+       y="45.070999"
+       id="text5023"
+       transform="rotate(-60)"><tspan
+         sodipodi:role="line"
+         id="tspan5021"
+         x="-22.24547"
+         y="45.070999"
+         style="stroke-width:0.26458332">Packet data</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:url(#marker4752)"
+       d="M 2.6458311,66.812513 H 79.374995"
+       id="path4742"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker5476);marker-end:url(#marker5322)"
+       d="M 82.020829,66.812513 H 121.70833"
+       id="path5312"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker5816);marker-end:url(#marker5650)"
+       d="m 124.35416,66.812513 h 31.75"
+       id="path5640"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker6002);marker-end:url(#marker6186)"
+       d="m 158.74999,66.812513 h 31.75"
+       id="path5992"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="86.612206"
+       y="72.104179"
+       id="text6370"><tspan
+         sodipodi:role="line"
+         id="tspan6368"
+         x="86.612206"
+         y="72.104179"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Packet processing</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="128.53395"
+       y="72.104179"
+       id="text6374"><tspan
+         sodipodi:role="line"
+         id="tspan6372"
+         x="128.53395"
+         y="72.104179"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Flow creation</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="164.28091"
+       y="72.104179"
+       id="text6378"><tspan
+         sodipodi:role="line"
+         id="tspan6376"
+         x="164.28091"
+         y="72.104179"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Flow export</tspan></text>
+    <g
+       id="g6716"
+       transform="rotate(50.29691,195.92396,-4.6873669)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6686"
+         d="M 175.94791,0.66668004 H 198.4375"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6498)" />
+      <text
+         id="text6690"
+         y="-0.1009644"
+         x="178.59375"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="-0.1009644"
+           x="178.59375"
+           id="tspan6688"
+           sodipodi:role="line">Exported</tspan><tspan
+           id="tspan6692"
+           style="stroke-width:0.26458332"
+           y="3.4268134"
+           x="178.59375"
+           sodipodi:role="line">flow records</tspan></text>
+    </g>
+  </g>
+</svg>

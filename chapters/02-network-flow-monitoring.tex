@@ -437,7 +437,7 @@ The selection of the flow source depends upon many variables, such as cost, requ
 The active networking devices observe packets as a part of their function, dedicated probes, however, need to be provided with access to data. There are two ways for probes to observe the data: in \emph{in-line} mode or \emph{mirrored} mode.
 \begin{description}
 	\item[In-line mode] -- A device in in-line mode is connected directly to the monitored link and has to actively pass the packets in order for the link to function. This is the mode of operation of active network devices such as switches and routers. The advantage is that no other device is necessary to mirror the traffic, however, if the probe fails the operation of the network is disrupted. Moreover, it could introduce significant latency and jitter to the network connection.
-	\item[Mirrored mode] -- In the mirrored mode, a copy of network traffic is created and delivered to the probe using dedicated link. The copy can be created either by dedicated TAP (Test Access Point) or an active networking device with the use of a SPAN (Switch Port Analyzer) port. Table~\ref{tab:tap_vs_span} shows differences, advantages, and disadvantages of TAP and SPAN solutions.
+	\item[Mirrored mode] -- In the mirrored mode, a copy of network traffic is created and delivered to the probe using dedicated link. The copy can be created either by dedicated TAP (Test Access Point) or an active networking device with the use of a SPAN (Switch Port Analyzer) port. Table~\ref{tab:tap_vs_span} shows differences, advantages, and disadvantages of TAP and SPAN solutions. An analysis of traffic trace artefacts caused by port mirroring was performed by~\citeauthor{Zhang-2007-Traffic} in~\cite{Zhang-2007-Traffic}.
 	\begin{description}
 		\item[TAP] is a passive splitting mechanism which require in-line installation. However, due to the simplicity of the device (optical TAPs use mirrors and require no power source) and integrated fail-safes (bypass TAPs), the risk of negatively affecting the network is very low. 
 		\item[SPAN] is a special port provided by active networking device that provides a copy of traffic passing through the device for analysis and monitoring purposes.
@@ -517,7 +517,19 @@ Deployment of NAT impedes network visibility. Some routers that perform the addr
 
 \section{Flow Monitoring Process}\label{sec:flow-monitoring-process}
 
+This section aims to describe the process of converting raw packets and corresponding packet treatment information to flow records. 
+
 From now on, we talk only about dedicated probes equipped with a flow exporter software. Only generic description is provided here, performance related details are left for Chapter~\ref{chap:flow-monitoring-performance}.
+
+Figure~\ref{fig:flow_monitoring_process_detail}
+
+\begin{sidewaysfigure}[ht!]
+  \begin{center}
+    \includegraphics[width=\textheight]{figures/flow-monitoring-process-detail}
+  \end{center}
+  \caption{Detailed Overview of the Flow Monitoring Process in a Dedicated Probe}
+  \label{fig:flow_monitoring_process_detail}
+\end{sidewaysfigure}
 
 \iinfo{Part is already written in next chapter under Creating Application Flow\\
 Put generic stuff here and keep application related information there}
