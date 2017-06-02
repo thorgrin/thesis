@@ -30,7 +30,7 @@ The application flow monitoring is a complex process. Packets need to be receive
 
 \subsection{Packet Reception}
 
-The packet reception ensures that data from the network are made available for processing in the software. Standard network interface cards (NIC) can be used, as well as specialized hardware accelerated cards. Either the NIC, its driver, or the data processing application must assign a timestamp to each packet. More information about packet capture can be found for example in the work of \citeauthor{Garcia-Dorado-2013-High}~\cite{Garcia-Dorado-2013-High}. The packet reception is unchanged for application flow monitoring unless the NIC processes the application layer. This scenario is discussed later in Hardware Accelerated Techniques section.
+The packet reception is unchanged for application flow monitoring unless the NIC processes the application layer. This scenario is discussed later in Hardware Accelerated Techniques section.
 
 
 \subsection{Packet Parsing}
@@ -43,31 +43,13 @@ With increasing deployment of encryption for all kinds of communication, the tas
 
 \subsection{Flow Aggregation}
 
-After each packet is parsed, the extracted information is stored in a flow record. Flow records for the same connection are aggregated in a flow cache. A connection is usually identified by several key features such as IP addresses, transport protocol, and ports. Each flow record has two timestamps: flow start timestamp is the time that the first packet of the flow was observed, end timestamp is the timestamp of the last packet. 
-
-There are several reasons why a flow record can exit the flow cache. When no new packets belonging to the flow arrive for a time interval called inactive timeout, or when the flow has been in the cache for a time interval called active timeout, the flow is expired and removed from the flow cache. The active timeout is usually much longer than the inactive one. For example, Cisco IOS flow cache has the default of 30 minutes for the active timeout and 15 seconds for the inactive one\footnote{\url{http://www.cisco.com/c/en/us/td/docs/ios/fnetflow/command/reference/fnf\_book/fnf\_01.html}}. Another reason for flow expiration that is used in practice is when TCP protocol packet with RST or FIN flag is encountered. Flow expiration setting can significantly influence not only the  number of generated flow records, as shown by the authors of~\cite{Rodriguez-2013-Empirical}, but also further flow processing and various flow-based detection methods.
-
 Application protocol measurement may require flow record to be expired early. For example, when HTTP protocol supports pipelining, multiple requests and responses can be carried out over a single connection. When it is desirable to keep track of each request/response pair, existing flow record might be exported when a new request is encountered on the same connection. Therefore, application flow monitoring  also affects the number of generated flow records, which needs to be taken into consideration during further processing of the flow records.
 
 \iimprove{TODO: keeping application data from expired flow records (long HTTP video streaming)}
 
 Another impact of the application flow monitoring on the flow aggregation is the increased size of flow records. The information extracted from application protocols can be quite large in comparison to network and transport layers lengths. While the typical IPv4 header length is 20 bytes, typical TCP header length is 32 bytes, the HTTP URL can easily be several hundred bytes long. Therefore, the length of flow records of application flow monitoring is several times larger than without the application layer. There are two main negative impacts of such large flow records. Firstly, the flow cache might require much more RAM than standard flow monitoring flow cache. Secondly, even if the cache fits into RAM, it degrades the performance of the memory accesses because data locality is decreased and a CPU experiences more cache misses. For these reasons, it must be carefully considered which information is placed in each flow record and how it is encoded.
 
-Little attention has been given to the measurement of traffic with fragmented packets. Although packet fragmentation poses a problem for standard flow measurement as well, the application measurement is especially affected. Let us consider what happens when an IPv4 packet is fragmented (the problem is very similar for IPv6). Figure~\ref{fig:fragmented-flow} illustrates this scenario. When the packet $K$ is fragmented, its payload is distributed between several different packets $(K\#1, K\#2, \ldots, K\#N_K)$. Only the first packet $(K\#1)$ contains the transport header, others only carry a flag identifying the fragment and offset of the data in the original packet. When a flow record is created for the first part of the fragmented packet, it contains IP addresses, transport layer information (protocol and ports), and the first part of application payload. However, subsequent parts contain only information about IP addresses and consecutive parts of the application payload. The transport level information was already sent in the first fragment. Therefore, flow records created from the subsequent fragments are not aggregated with the first fragment and application parsers are seeing only incomplete payloads. Moreover, flow records created from subsequent fragments from different connections between the same hosts are aggregated together. To resolve this problem, some kind of packet reassembly must happen in the flow cache. One possible solution that has been successfully deployed in practice is to create temporary flow records for fragmented packets based on fragmentation identifiers instead of transport layer information. Therefore, each fragmented packet has its own temporary flow record. These flow records have shorter timeouts, so when all fragments are received, the temporary flow record can be reinserted into the flow cache with proper transport layer information, which is now available since it was present in the first fragment.
-
-\begin{figure}[t!]
-  \begin{center}
-    \includegraphics[width=\textwidth]{figures/fragmented-flow}
-  \end{center}
-  \caption{Flow measurement of a fragmented connection.}
-  \label{fig:fragmented-flow}
-\end{figure}
-
 \subsection{Flow Export}
-
-\iinfo{Same section in chapter 2, keep it consistent}
-
-After the flow record is expired from the flow cache, it is encoded in suitable protocol and sent to a flow collector for further processing. The most widely used protocol for flow records is CISCO NetFlow, which is being replaced by IETF defined IPFIX protocol nowadays. Only the IPFIX protocol is flexible enough to support application flow monitoring. Although CISCO has added some application elements to the NetFlow protocol as well, no third party application elements are supported.
 
 Several issues might be encountered with flow export when application flow monitoring is applied. First, due to the larger amount of exported data, the link to a flow collector might be congested. We have experienced this issue when application flow records from a 10G link were exported simultaneously to several collectors over old 100\,Mb/s management interface. The solution is either to simply upgrade to 1\,Gb/s management interface or, better, to reduce the number of targets of the export and distribute the flows as necessary through replicating proxy in the location of the collectors. The latter solution saves network bandwidth used for monitoring purposes and should be preferred if possible.
 

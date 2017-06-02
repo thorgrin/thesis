@@ -14,8 +14,8 @@
    viewBox="0 0 370.32149 166.50202"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="fragmentation.svg">
+   inkscape:version="0.92.1 r"
+   sodipodi:docname="fragmented-flow.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="93.600467"
-     inkscape:cy="48.847642"
+     inkscape:cx="77.406758"
+     inkscape:cy="84.387556"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -36,9 +36,9 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1155"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="1145"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,43 +65,45 @@
      transform="translate(-97.5,-300.04385)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeXGyrePagella, Normal';font-stretch:normal;font-variant:normal;font-size:12.00000095px;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
        x="170"
        y="312.36221"
-       id="text4142"
-       sodipodi:linespacing="125%"><tspan
+       id="text4142"><tspan
          sodipodi:role="line"
          id="tspan4144"
          x="170"
-         y="312.36221" /></text>
+         y="312.36221"
+         style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"> </tspan></text>
     <g
        id="g4551"
-       transform="translate(18,0)">
+       transform="translate(18,0)"
+       style="">
       <text
-         sodipodi:linespacing="125%"
          id="text4146"
          y="355.21936"
-         x="107.23886"
-         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="110.56089"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="355.21936"
-           x="107.23886"
+           x="110.56089"
            id="tspan4148"
-           sodipodi:role="line">Packet 1#1</tspan></text>
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet 1#1</tspan></text>
       <g
          transform="translate(17.857143,9.6428572)"
-         id="g4178">
+         id="g4178"
+         style="">
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="96.339722"
-           y="311.78116"
-           id="text4138"
-           sodipodi:linespacing="125%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="98.703751"
+           y="311.59821"
+           id="text4138"><tspan
              sodipodi:role="line"
              id="tspan4140"
-             x="96.339722"
-             y="311.78116">Packet 1</tspan></text>
+             x="98.703751"
+             y="311.59821"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet 1</tspan></text>
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4152"
@@ -111,7 +113,8 @@
            y="292.36221" />
       </g>
       <g
-         id="g4183">
+         id="g4183"
+         style="">
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4154"
@@ -121,48 +124,48 @@
            y="362.36221" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="83.571426"
-           y="382.36221"
-           id="text4156"
-           sodipodi:linespacing="125%"><tspan
+           y="381.49622"
+           id="text4156"><tspan
              sodipodi:role="line"
              id="tspan4158"
              x="83.571426"
-             y="382.36221">L2</tspan></text>
+             y="381.49622"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L2</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="103.57143"
-           y="382.36221"
-           id="text4160"
-           sodipodi:linespacing="125%"><tspan
+           y="381.39423"
+           id="text4160"><tspan
              sodipodi:role="line"
              id="tspan4162"
              x="103.57143"
-             y="382.36221">L3</tspan></text>
+             y="381.39423"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L3</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="123.57143"
-           y="382.32559"
-           id="text4164"
-           sodipodi:linespacing="125%"><tspan
+           y="381.50821"
+           id="text4164"><tspan
              sodipodi:role="line"
              id="tspan4166"
              x="123.57143"
-             y="382.32559">L4</tspan></text>
+             y="381.50821"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L4</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="145.71429"
-           y="382.32559"
-           id="text4168"
-           sodipodi:linespacing="125%"><tspan
+           y="380.0202"
+           id="text4168"><tspan
              sodipodi:role="line"
              id="tspan4170"
              x="145.71429"
-             y="382.32559">Payload</tspan></text>
+             y="380.0202"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Payload</tspan></text>
         <path
            style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 100,362.3622 0,30"
@@ -180,21 +183,22 @@
            inkscape:connector-curvature="0" />
       </g>
       <text
-         sodipodi:linespacing="125%"
          id="text4146-9"
          y="428.23962"
-         x="107.23886"
-         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="107.72328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="428.23962"
-           x="107.23886"
+           x="107.72328"
            id="tspan4148-3"
-           sodipodi:role="line">Packet 1#N<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet 1#N<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:sub;text-anchor:start"
    id="tspan4484">1</tspan></tspan></text>
       <g
          transform="translate(0,14.020305)"
-         id="g4293">
+         id="g4293"
+         style="">
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4154-7"
@@ -204,37 +208,37 @@
            y="421.36221" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-weight:normal;line-height:0%;font-family:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeXGyrePagella, Normal';font-stretch:normal;font-variant:normal;font-size:12.00000095px;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
            x="83.571426"
            y="441.36221"
-           id="text4156-1"
-           sodipodi:linespacing="125%"><tspan
+           id="text4156-1"><tspan
              sodipodi:role="line"
              id="tspan4158-0"
              x="83.571426"
-             y="441.36221">L2</tspan></text>
+             y="441.36221"
+             style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">L2</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="103.57143"
-           y="441.36221"
-           id="text4160-7"
-           sodipodi:linespacing="125%"><tspan
+           y="441.26022"
+           id="text4160-7"><tspan
              sodipodi:role="line"
              id="tspan4162-9"
              x="103.57143"
-             y="441.36221">L3</tspan></text>
+             y="441.26022"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L3</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="134.72446"
-           y="441.32559"
-           id="text4168-7"
-           sodipodi:linespacing="125%"><tspan
+           y="439.8862"
+           id="text4168-7"><tspan
              sodipodi:role="line"
              id="tspan4170-9"
              x="134.72446"
-             y="441.32559">Payload</tspan></text>
+             y="439.8862"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Payload</tspan></text>
         <path
            style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 100,421.36219 0,30"
@@ -250,35 +254,37 @@
          inkscape:connector-curvature="0"
          id="path4304"
          d="m 140,400.3622 0,16.41371"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000003;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000002999999982;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <g
-       id="g4586">
+       id="g4586"
+       style="">
       <text
-         sodipodi:linespacing="125%"
          id="text4146-3"
          y="355.21936"
-         x="272.23886"
-         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="275.72327"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="355.21936"
-           x="272.23886"
+           x="275.72327"
            id="tspan4148-4"
-           sodipodi:role="line">Packet N#1</tspan></text>
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet N#1</tspan></text>
       <g
          transform="translate(182.85714,9.64286)"
-         id="g4178-9">
+         id="g4178-9"
+         style="">
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="96.339722"
-           y="311.78116"
-           id="text4138-2"
-           sodipodi:linespacing="125%"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="96.333748"
+           y="311.59821"
+           id="text4138-2"><tspan
              sodipodi:role="line"
              id="tspan4140-5"
-             x="96.339722"
-             y="311.78116">Packet N</tspan></text>
+             x="96.333748"
+             y="311.59821"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet N</tspan></text>
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4152-0"
@@ -289,7 +295,8 @@
       </g>
       <g
          id="g4183-7"
-         transform="translate(165,0)">
+         transform="translate(165,0)"
+         style="">
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4154-8"
@@ -299,48 +306,48 @@
            y="362.36221" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="83.571426"
-           y="382.36221"
-           id="text4156-5"
-           sodipodi:linespacing="125%"><tspan
+           y="381.49622"
+           id="text4156-5"><tspan
              sodipodi:role="line"
              id="tspan4158-1"
              x="83.571426"
-             y="382.36221">L2</tspan></text>
+             y="381.49622"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L2</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="103.57143"
-           y="382.36221"
-           id="text4160-4"
-           sodipodi:linespacing="125%"><tspan
+           y="381.39423"
+           id="text4160-4"><tspan
              sodipodi:role="line"
              id="tspan4162-6"
              x="103.57143"
-             y="382.36221">L3</tspan></text>
+             y="381.39423"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L3</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="123.57143"
-           y="382.32559"
-           id="text4164-2"
-           sodipodi:linespacing="125%"><tspan
+           y="381.50821"
+           id="text4164-2"><tspan
              sodipodi:role="line"
              id="tspan4166-0"
              x="123.57143"
-             y="382.32559">L4</tspan></text>
+             y="381.50821"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L4</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="145.71429"
-           y="382.32559"
-           id="text4168-1"
-           sodipodi:linespacing="125%"><tspan
+           y="380.0202"
+           id="text4168-1"><tspan
              sodipodi:role="line"
              id="tspan4170-4"
              x="145.71429"
-             y="382.32559">Payload</tspan></text>
+             y="380.0202"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Payload</tspan></text>
         <path
            style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 100,362.3622 0,30"
@@ -358,21 +365,22 @@
            inkscape:connector-curvature="0" />
       </g>
       <text
-         sodipodi:linespacing="125%"
          id="text4146-9-9"
          y="428.23962"
-         x="272.23886"
-         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="268.3728"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="428.23962"
-           x="272.23886"
+           x="268.3728"
            id="tspan4148-3-8"
-           sodipodi:role="line">Packet N#N<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Packet N#N<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:sub;text-anchor:start"
    id="tspan4620">N</tspan></tspan></text>
       <g
          id="g4293-7"
-         transform="translate(165,14.020305)">
+         transform="translate(165,14.020305)"
+         style="">
         <rect
            style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4154-7-6"
@@ -382,37 +390,37 @@
            y="421.36221" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="83.571426"
-           y="441.36221"
-           id="text4156-1-7"
-           sodipodi:linespacing="125%"><tspan
+           y="440.49619"
+           id="text4156-1-7"><tspan
              sodipodi:role="line"
              id="tspan4158-0-3"
              x="83.571426"
-             y="441.36221">L2</tspan></text>
+             y="440.49619"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L2</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="103.57143"
-           y="441.36221"
-           id="text4160-7-2"
-           sodipodi:linespacing="125%"><tspan
+           y="440.3942"
+           id="text4160-7-2"><tspan
              sodipodi:role="line"
              id="tspan4162-9-4"
              x="103.57143"
-             y="441.36221">L3</tspan></text>
+             y="440.3942"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">L3</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="134.72446"
-           y="441.32559"
-           id="text4168-7-2"
-           sodipodi:linespacing="125%"><tspan
+           y="439.0202"
+           id="text4168-7-2"><tspan
              sodipodi:role="line"
              id="tspan4170-9-4"
              x="134.72446"
-             y="441.32559">Payload</tspan></text>
+             y="439.0202"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Payload</tspan></text>
         <path
            style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 100,421.36219 0,30"
@@ -428,16 +436,17 @@
          inkscape:connector-curvature="0"
          id="path4304-7"
          d="m 305,400.3622 0,16.41371"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000003;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000002999999982;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <path
        inkscape:connector-curvature="0"
        id="path4304-7-6"
        d="m 222.12379,320.00921 14.46669,0.0486"
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000001;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000002, 4.00000000999999994;stroke-dashoffset:0;stroke-opacity:1" />
     <g
        id="g5079"
-       transform="matrix(0,-0.75576003,1,0,-122.91036,537.9084)">
+       transform="matrix(0,-0.75576003,1,0,-122.91036,537.9084)"
+       style="">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -453,7 +462,8 @@
     </g>
     <g
        transform="matrix(0,-0.35710515,0.81190285,0,-27.47698,366.43628)"
-       id="g5089">
+       id="g5089"
+       style="">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.85716236px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 95,497.3622 c 0,20 45,0 45,20"
@@ -469,7 +479,8 @@
     </g>
     <g
        transform="matrix(0,-0.55037641,1,0,-122.91036,444.25343)"
-       id="g5095">
+       id="g5095"
+       style="">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.34793854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 95,497.3622 c 0,20 45,0 45,20"
@@ -485,44 +496,46 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="403.33176"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:0%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="402.92892"
        y="320.91724"
-       id="text5101"
-       sodipodi:linespacing="125%"><tspan
+       id="text5101"><tspan
          sodipodi:role="line"
          id="tspan5103"
-         x="403.33176"
-         y="320.91724">Connection</tspan></text>
+         x="402.92892"
+         y="320.91724"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Connection</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeXGyrePagella, Normal';font-stretch:normal;font-variant:normal;font-size:12.00000095px;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
        x="402.92892"
        y="362.62589"
-       id="text5105"
-       sodipodi:linespacing="125%"><tspan
+       id="text5105"><tspan
          sodipodi:role="line"
          id="tspan5107"
          x="402.92892"
-         y="362.62589">Flow #1</tspan><tspan
+         y="362.62589"
+         style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">Flow #1</tspan><tspan
          sodipodi:role="line"
          x="402.92892"
          y="378.25089"
-         id="tspan5115">(with L4)</tspan></text>
+         id="tspan5115"
+         style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">(with L4)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeXGyrePagella, Normal';font-stretch:normal;font-variant:normal;font-size:12.00000095px;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
        x="402.92892"
        y="427.5282"
-       id="text5109"
-       sodipodi:linespacing="125%"><tspan
+       id="text5109"><tspan
          sodipodi:role="line"
          id="tspan5111"
          x="402.92892"
-         y="427.5282">Flow #2</tspan><tspan
+         y="427.5282"
+         style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">Flow #2</tspan><tspan
          sodipodi:role="line"
          x="402.92892"
          y="443.1532"
-         id="tspan5113">(without L4)</tspan></text>
+         id="tspan5113"
+         style="font-size:12.00000095px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">(without L4)</tspan></text>
   </g>
 </svg>

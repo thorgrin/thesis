@@ -5,10 +5,20 @@
 \itodo{TODO: Howto measure flow monitoring performance - skoro samostatná kapitola}
 \itodo{TODO: biflow}
 \itodo{TODO: Include more details}
-\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc.}
+\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc. \cite{Nassopulos-2014-Flow}}
 \itodo{TODO: Put in papers from IM2015}
 \itodo{TODO: Title is Flow Monitoring Performance, split to application and classic}
 \itodo{Speedup by ommiting SSL/TLS processing for most application plugins}
+
+\itodo{What happens when processing is too slow? Which packets are dropped?}
+\itodo{Survey of flow caches in hardware, unsuitable for application monitoring}
+\itodo{Single packet flows can be handled separately, described by Rick and other papers}
+\itodo{Measurement interference on 10x10G, need to drop on DMA, not input}
+\itodo{
+- Packet capture - from line to software \\
+- - Technologies: PF\_RING, PF\_RING ZC, Linux NAPI, FPGA (DPDK, PF\_RING, DNA/Libzero)\\
+- - Timestamping: More information about packet capture can be found for example in the work of \citeauthor{Garcia-Dorado-2013-High}~\cite{Garcia-Dorado-2013-High}.\\
+}
 
 \section{Accelerating Application Flow Monitoring}
 
