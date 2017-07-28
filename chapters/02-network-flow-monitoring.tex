@@ -617,18 +617,6 @@ The flow monitoring implementation based on flow caches of networking devices ke
 
 \subsection{Flow Export}
 
-\iinfo{Same section in chapter 3 (app flow monitoring), keep it consistent}
-
-\itodo{
-- Flow export \\
-- - Flow sampling (to much flow records for collector) \\
-- Start with IPFIX, show that there are other options\\
-- Transport protocols\\
-- IPFIX protocol, json, ...\\
-- TCP, UDP, SCTP pros and cons (TCP can easily block too much, message must be dropped somewhere)\\
-- Message lengths, MTU, packet fragmentation
-}
-
 The flow export manages the process of delivering flow records to flow collectors. The process consists of several parts as shown in the Figure~\ref{fig:flow-export}. The flow sampling and filtering process is very similar to packet sampling and filtering described in the Subsection~\ref{subsec:packet-processing}. The main motivation for flow filtering is that each collector might want to process only a subset of data, e.g. from a particular subnet. The flow sampling is performed when the performance of the collector is not sufficient to process all flow records. The main difference between packet sampling and flow sampling is that the flow sampling always discards whole flow record while the packet sampling can discard some packets of the flow, therefore affecting the created flow record. 
 
 \begin{figure}[ht!]
