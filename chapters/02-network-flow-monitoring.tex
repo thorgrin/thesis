@@ -7,7 +7,7 @@ The article of \citeauthor{Hofstede-2014-Flow}~\cite{Hofstede-2014-Flow} extensi
 
 This section describes history and current state of network flow monitoring. We discuss related standards, introduce terminology used throughout this thesis and provide formal definition of a flow. 
 
-\subsection{History of Flow Monitoring}
+\subsection{History of Flow Monitoring}\label{subsec:history-of-flow-monitoring}
 
 The first mention of flow export can be found in RFC 1272~\cite{rfc1272} published in 1991 by IETF Internet Accounting (IA) Working Group (WG). The goal of the document was to provide background information on Internet accounting. The authors describe methods of metering and reporting network utilization. The RFC defines a metering process as follows:
 
@@ -19,7 +19,7 @@ The goal at the time was to provide a framework for traffic accounting, however,
 
 In 1995, \citeauthor{Claffy-1995-Parameterizable} showed a methodology for internet traffic flow profiling based on packet aggregation~\cite{Claffy-1995-Parameterizable}, which started a revival of flow monitoring efforts. The Realtime Traffic Flow  Measurement (RTFM) Working Group was created in 1996 and it had three main objectives. First was to consider current issues relating to traffic measurement, such as security, privacy, policies and requirements on new network protocols. Second was to produce an improved Traffic Flow Model that should provide a wider range of measurable quantities (e.g. IPv6), simpler way to specify flows of interest, better access control  to measured flow data, strong focus on data reduction capabilities and efficient hardware implementation. The third objective was to develop RTFM Architecture and Meter Management Information Base (MIB) as a standards track IETF documents. The effort resulted in 1999 by publishing several RFCs describing new traffic flow measurement framework with an increased flexibility and even a bi-directional flow support~\cite{rfc2722}. Since these documents fulfilled the objectives of the RTFM WG, the group was concluded in 2000. However, no flow export standard was developed as the vendors showed no interest in this area.
 
-Meanwhile, Cisco realized that similar kind of flow information is already stored in a flow cache of their packet switching devices. The purpose of this cache is to speed up packet switching by making a forwarding decision only for the first packet of each flow. Unlike the RTFM flow measurement framework, the primary purpose of flow cache is not accounting nor monitoring, therefore the configuration of measurement process using a flow cache in a switch is severely limited. Despite the limitations, once Cisco introduced its own flow export technology called \index{NetFlow}, it achieved widespread adoption. The main reason for the extensive adoption was the fact that it was readily available in most Cisco devices with little effort. The NetFlow was patented in 1996 and the first version that became available to general public around 2002 was NetFlow v5~\cite{CiscoSystems-2007-NetFlow}, albeit Cisco newer released any official specification. The NetFlow v5 format simply specified a single set of fields that should be exported from each flow record. Figure~\ref{fig:nf5-fields} shows all fields that were supported by NetFlow v5. Note the lack of support for IPv6 protocol.
+Meanwhile, Cisco realized that similar kind of flow information is already stored in a flow cache of their packet switching devices. The purpose of this cache is to speed up packet switching by making a forwarding decision only for the first packet of each flow. Unlike the RTFM flow measurement framework, the primary purpose of flow cache is not accounting nor monitoring, therefore the configuration of measurement process using a flow cache in a switch is severely limited. Despite the limitations, once Cisco introduced its own flow export technology called \Index{NetFlow}, it achieved widespread adoption. The main reason for the extensive adoption was the fact that it was readily available in most Cisco devices with little effort. The NetFlow was patented in 1996 and the first version that became available to general public around 2002 was NetFlow v5~\cite{CiscoSystems-2007-NetFlow}, albeit Cisco newer released any official specification. The NetFlow v5 format simply specified a single set of fields that should be exported from each flow record. Figure~\ref{fig:nf5-fields} shows all fields that were supported by NetFlow v5. Note the lack of support for IPv6 protocol.
 
 \begin{figure}[t!]
   \begin{center}
@@ -49,7 +49,7 @@ The NetFlow version 5 was soon obsoleted by NetFlow version 9 which remedied som
 
 Other vendors created their own versions of flow exporting protocols, although they retained some level of compatibility with NetFlow. There are JFlow by Juniper, CFlow by Alcatel-Lucent, RFlow by Ericsson, and other protocols. When the potential of flow monitoring for security purposes became realized~\cite{CiscoSystems-2005-Cisco} in 2005, more effort was devoted to extend flow records with information not directly associated with switching. Cisco presented Flexible NetFlow technology~\cite{CiscoSystems-2008-Cisco} in 2006 which allows to dynamically define and export new types of information, such as parts of payloads or traffic identification.
 
-In 2001, it was clear that exporting flow information from switching devices is going to be supported by vendors. However, no standard flow export protocol existed at the time and NetFlow v5 was not yet released to general public. For that reason the IETF started \index{IP Flow Information Export} (\index{IPFIX}) WG~\cite{IETF--IP}. The original charter~\cite{IESG-2001-IP} defined six specific goals for the WG: 
+In 2001, it was clear that exporting flow information from switching devices is going to be supported by vendors. However, no standard flow export protocol existed at the time and NetFlow v5 was not yet released to general public. For that reason the IETF started \Index{IP Flow Information Export} (\Index{IPFIX}) WG~\cite{IETF--IP}. The original charter~\cite{IESG-2001-IP} defined six specific goals for the WG: 
 
 \begin{itemize}
 	\item Define \emph{``standard IP flow''}.
@@ -76,7 +76,7 @@ The IPFIX protocol specification is described by \emph{``Specification of the IP
 
 \subsection{Related Technologies}
 
-Flow monitoring is not the only network monitoring system used to gain information about network behavior. There are other technologies that can be used to monitor network traffic and that can be sometimes confused with flow monitoring. We describe \index{sFlow}~\cite{Phaal-2004-sFlow}, \index{IETF Packet Sampling}, \index{OpenFlow} and \index{Deep Packet Inspection} in the following text.
+Flow monitoring is not the only network monitoring system used to gain information about network behavior. There are other technologies that can be used to monitor network traffic and that can be sometimes confused with flow monitoring. We describe \Index{sFlow}~\cite{Phaal-2004-sFlow}, \Index{IETF Packet Sampling}, \Index{OpenFlow} and Deep Packet Inspection\index{deep packet inspection} in the following text.
 
 sFlow is an industry standard that is supported by number of vendors in their packet switching devices. Its initial specification was published as an Informational RFC~\cite{rfc3176} in 2001, which was the time when packet switching/routing devices with sFlow support became available. The most crucial difference from flow monitoring is that the sFlow does not actually aggregate a stream of packet into a flow record. Instead, it uses sampling to select individual packets and then exports information available about and from these packets. sFlow allows to export data from packet headers, chunks of data from packets and even parse application payloads. It also maintains interface counters and allows their regular export, which is a feature completely unrelated to flow monitoring. sFlow version 5 is the latest version and was published in ~\citeyear{Phaal-2004-sFlow}~\cite{Phaal-2004-sFlow}.
 
@@ -143,7 +143,7 @@ In order to provide the most complete definition of flow, we must address all th
 
 \begin{definition}\label{def:flow}
 
-    A \emph{\index{flow}} is defined as a sequence of packets passing an \emph{observation point}
+    A \emph{\Index{flow}} is defined as a sequence of packets passing an \emph{observation point}
     in the network during a certain time interval. All packets that belong
     to a particular \emph{flow} have a set of common properties derived from
     the data contained in the packet, previous packets of the same \emph{flow},
@@ -155,7 +155,7 @@ There are two more terms connected to flow that need to be defined: \emph{flow k
 
 \begin{definition}\label{def:flow-key}
 
-    Each of the common properties that is used to specify a~\emph{flow} is called a~\emph{\index{flow key}}.
+    Each of the common properties that is used to specify a~\emph{flow} is called a~\emph{\Index{flow key}}.
 
 \end{definition}
 
@@ -163,7 +163,7 @@ A flow record is basically a tuple containing flow keys and other properties mea
 
 \begin{definition}\label{def:flow-record}
 
-    A~\emph{\index{flow record}} is a tuple describing particular \emph{flow} containing values of:
+    A~\emph{\Index{flow record}} is a tuple describing particular \emph{flow} containing values of:
 
     \begin{enumerate}
     	\item all \emph{flow keys} used to specify the \emph{flow},
@@ -196,7 +196,7 @@ To make the definitions above more clear, we now give an example of concrete pro
 The Definition~\ref{def:flow} states what the flow is. However, although we tried to be as explicit as possible, the definition is informal and therefore subject to different interpretations. For this reason we now provide a formal definition of flow, which not only refines the informal definition, but also provides a guide to construction of the flows.
 
 \begin{defn}
-Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of \index{extended packets}
+Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of \Index{extended packets}
 \begin{equation*}
 	\widehat{P} = P\times T,
 \end{equation*}
@@ -214,7 +214,7 @@ We denote sequence of packets and extended packets observed at an \emph{observat
 \end{defn}
 Both sequences are of size $|\mathbb{S}|$. 
 
-Let us now define a \emph{\index{flow selection function}} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
+Let us now define a \emph{\Index{flow selection function}} $\varphi$ which takes a sequence of extended packets and a new extended packet and decides whether they form a flow. We will use this function to determine whether a newly observed packet belongs to an existing flow.
 \begin{defn}\label{def:flow-selection-function}
 Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\widehat{P}$ be a set of extended packets. We say that a function of type
 \begin{equation*}
@@ -223,7 +223,7 @@ Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\wide
 is a \emph{flow selection function}.
 \end{defn}
 
-Before we give a \index{formal definition of a flow}, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a \emph{flow selection function} $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as described in Algorithm~\ref{alg:flow-construction}.
+Before we give a formal definition of a flow\index{flow!formal definition of}, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a \emph{flow selection function} $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as described in Algorithm~\ref{alg:flow-construction}.
 
 \begin{algorithm}
     \caption{Construction of a flow}
@@ -407,7 +407,7 @@ The Figure~\ref{fig:ipfix_reference_model} shows various scenarios of flow monit
   \label{fig:ipfix_reference_model}
 \end{figure}
 
-Although the IPFIX Reference Model describes the flow monitoring architecture in detail, it is not used by the flow monitoring community unanimously. Most of the terms used in the IPFIX standard are simplified and their true meaning often depends on the context. Table~\ref{tab:flow_monitoring_terminology} provides the common terms often used instead of the IPFIX terminology. Examples of use of the \index{common terminology} can be found for example in~\cite{Hofstede-2014-Flow, Cejka-2015-Using, Brownlee-2011-Flow, Krmicek-2009-Netflow, Lee-2007-End, Lee-2007-IPv6, Molina-2006-Design}. We usually talk about a monitored link and a set of monitored links (e.g. both directions of a network connection when optical fibres are used) instead of an observation point or an observation domain. By an exporter or a flow exporter is usually meant the software that performs flow monitoring (both metering and exporting process). If a device generates flows without observing and processing the packets first (i.e. Exporter in IPFIX terminology) we call it a flow source or a probe. The IPFIX Device is usually called by more specific name, such as switch, router, or, in case of a dedicated device possibly with specialized hardware and software equipment, a probe. However, term flow source can also be used for any device that generates flow records. Finally, both the software for collecting flow records and device where such a software runs is commonly called a collector, or a flow collector. We will be using the common terminology throughout this thesis.
+Although the IPFIX Reference Model describes the flow monitoring architecture in detail, it is not used by the flow monitoring community unanimously. Most of the terms used in the IPFIX standard are simplified and their true meaning often depends on the context. Table~\ref{tab:flow_monitoring_terminology} provides the common terms often used instead of the IPFIX terminology. Examples of use of the \Index{common terminology} can be found for example in~\cite{Hofstede-2014-Flow, Cejka-2015-Using, Brownlee-2011-Flow, Krmicek-2009-Netflow, Lee-2007-End, Lee-2007-IPv6, Molina-2006-Design}. We usually talk about a monitored link and a set of monitored links (e.g. both directions of a network connection when optical fibres are used) instead of an observation point or an observation domain. By an exporter or a flow exporter is usually meant the software that performs flow monitoring (both metering and exporting process). If a device generates flows without observing and processing the packets first (i.e. Exporter in IPFIX terminology) we call it a flow source or a probe. The IPFIX Device is usually called by more specific name, such as switch, router, or, in case of a dedicated device possibly with specialized hardware and software equipment, a probe. However, term flow source can also be used for any device that generates flow records. Finally, both the software for collecting flow records and device where such a software runs is commonly called a collector, or a flow collector. We will be using the common terminology throughout this thesis.
 
 \begin{table}[t!]
 	\centering
@@ -532,28 +532,21 @@ The Figure~\ref{fig:flow_monitoring_process_detail} shows a common flow monitori
 
 \subsection{Packet Capture}
 
-The \index{packet capture} ensures that data from the network are made available for processing in the software. Standard Network Interface Cards (NICs) can be used, as well as specialized hardware accelerated cards. The schema shows a standard NIC performing a CRC check on received packets. The NIC has to be put in a special monitoring mode in order to receive packets with different destination MAC addresses. These packets are passed to the NIC driver, usually through Direct Memory Access (DMA). The driver either passes the received packets to the operating system or provides it's own application interface for accessing the packets from user space. The performance of the different approaches differ significantly and we will discuss it in Chapter~\ref{chap:flow-monitoring-performance} in detail.
+The \Index{packet capture} ensures that data from the network are made available for processing in the software. Standard Network Interface Cards (NICs) can be used, as well as specialized hardware accelerated cards. The schema shows a standard NIC performing a CRC check on received packets. The NIC has to be put in a special monitoring mode in order to receive packets with different destination MAC addresses. These packets are passed to the NIC driver, usually through Direct Memory Access (DMA). The driver either passes the received packets to the operating system or provides it's own application interface for accessing the packets from user space. The performance of the different approaches differ significantly and we will discuss it in Chapter~\ref{chap:flow-monitoring-performance} in detail.
 
 Each packet needs to be assigned a (preferably unique) timestamp that marks the point in time at which the packet was received. This process is called packet timestamping. The timestamp can be assigned by the NIC, NIC's driver (or OS), or the software application processing the packet. The support for NIC timestamping is provided by some of the hardware accelerated NICs. As the timestamping in software can be potentially computationally intensive, we will also discuss it in Chapter~\ref{chap:flow-monitoring-performance}.
 
 The packet treatment information is provided together with the packets by the NIC's driver. Usually the interface of NIC on which the packet was captured and the timestamp of the capture is available at least. Networking devices can provide more information such as egress interface, next hop, or autonomous system number of the destination. This information is not directly available when dedicated probes are used, but can be added externally if necessary.
 
-\subsection{Packet Processing}
+\subsection{Packet Processing}\label{subsec:packet-processing}
 
-The task of the \index{packet processing} is to extract values of chosen properties of individual packets and corresponding packet treatment information. Attributes such as IP addresses, transport protocol, and ports are used as \emph{flow keys}. The set of used flow keys depend on the applied flow selection function which is used to decide to which flow the packet belongs to. Other attributes of the packets such as TCP flags or number of bytes, are extracted as well for further analysis. We call the extracted properties \emph{\index{packet metadata}} or \emph{\index{partial flow records}}. The packet metadata are passed to flow creation part of the flow processing where it is used to create new or update existing flow records.
+The task of the \Index{packet processing} is to extract values of chosen properties of individual packets and corresponding packet treatment information. Attributes such as IP addresses, transport protocol, and ports are used as \emph{flow keys}. The set of used flow keys depend on the applied flow selection function which is used to decide to which flow the packet belongs to. Other attributes of the packets such as TCP flags or number of bytes, are extracted as well for further analysis. We call the extracted properties \emph{\Index{packet metadata}} or \emph{\Index{partial flow records}}. The packet metadata are passed to flow creation part of the flow processing where it is used to create new or update existing flow records.
 
 Secondary task of packet processing is packet sampling and packet filtering, as mentioned in~\cite{rfc5470}. Packet sampling is usually done to reduce the amount of processed data in order to compensate for lack of performance. There are several sampling techniques that can be used as described in~\cite{rfc5476}. Packet sampling is performed before extracting the metadata. Packet filtering can be performed after the metadata is extracted and is based on the extracted values. It is common to monitor only specific network or a section of network, therefore the filtering rules are usually based on extracted IP addresses. Both packet sampling and packet filtering can be implemented in hardware accelerated NICs as well.
 
 \subsection{Flow Creation}\label{subsec:flow-creation}
 
-\itodo{
-- Discuss implementation of the flow selection function\\
-- Flow metering (caches, ...), biflows\\
-- Flow expiration/termination \\
-- mention that database of all flow records and termination/expiration is mentioned in rfc5470
-}
-
-The extracted packet metadata are aggregated to create flow records. The definition of the flow selection function requires all preceding extended packets of the same flow to determine whether a new packet belongs to particular flow. Since it is not viable to keep all packets of a flow in memory, only selected information is stored in real world implementations. All active flows have a flow record with all necessary information stored in a \emph{\index{flow cache}}. When a new packet arrives, the flow selection function is called for each stored flow record and the metadata of the new packet to determine, to which flow the new packet belongs. If a matching flow record is found, it is updated using the packet metadata (e.g. packet and byte counters are incremented, flow end timestamp is updated). If such a record does not exist, the packet is a considered a first packet of a new flow and a corresponding flow record is created in the flow cache. Algorithm~\ref{alg:flow-record-construction} illustrates the flow creation process. Note that the flow selection function is denoted $\phi$ as we refer to a concrete implementation here instead of the formal definition.
+The extracted packet metadata are aggregated to create flow records. The definition of the flow selection function requires all preceding extended packets of the same flow to determine whether a new packet belongs to particular flow. Since it is not viable to keep all packets of a flow in memory, only selected information is stored in real world implementations. All active flows have a flow record with all necessary information stored in a \emph{\Index{flow cache}}. When a new packet arrives, the flow selection function is called for each stored flow record and the metadata of the new packet to determine, to which flow the new packet belongs. If a matching flow record is found, it is updated using the packet metadata (e.g. packet and byte counters are incremented, flow end timestamp is updated). If such a record does not exist, the packet is a considered a first packet of a new flow and a corresponding flow record is created in the flow cache. Algorithm~\ref{alg:flow-record-construction} illustrates the flow creation process. Note that the flow selection function is denoted $\phi$ as we refer to a concrete implementation here instead of the formal definition.
 
 \begin{algorithm}
 	\caption{Construction of flow records}
@@ -579,21 +572,48 @@ The extracted packet metadata are aggregated to create flow records. The definit
     \end{algorithmic}
 \end{algorithm}
 
-To test the extracted packet metadata with each flow record has linear time complexity with respect to to the size of the flow cache. Common optimization is to compute a hash for each flow record such that it can also be computed for the extracted metadata. The flow cache is then either indexed by using the computed hash~\cite{Molina-2006-Design} or directly implemented as a hash table~\cite{Estan-2004-Building} so that the input and lookup operations have constant time complexity. Collisions can be solved by number of common techniques or by prematurely exporting the older colliding flow record. This optimization is so widely used that its use is often implicit, but it is important to keep in mind that the new packet is still effectively tested against each active flow. Other implementations of flow caches can be found in literature, such as a hypercube flow table by~\citeauthor{Wang-2011-Memory}~\cite{Wang-2011-Memory}.
+To test the extracted packet metadata against each flow record has linear time complexity with respect to to the size of the flow cache. Common optimization is to compute a hash for each flow record such that it can also be computed for the extracted metadata. The flow cache is then either indexed by using the computed hash~\cite{Molina-2006-Design} or directly implemented as a hash table~\cite{Estan-2004-Building} so that the input and lookup operations have constant time complexity. Collisions can be solved by number of common techniques or by prematurely exporting the older colliding flow record. This optimization is so widely used that its use is often implicit, but it is important to keep in mind that the new packet is still effectively tested against each active flow. Other implementations of flow caches can be found in literature, such as a hypercube flow table by~\citeauthor{Wang-2011-Memory}~\cite{Wang-2011-Memory}.
 
+There are several reasons why a flow record can exit the flow cache\index{flow!record expiration}{}:
+\begin{description}
+	\item[Inactive timeout\index{timeout!inactive}] occurs when no new packets belonging to the flow arrive for a time interval called \emph{inactive timeout}. This timeout is used to end inactive connections and has a significant influence on flow cache memory requirements. When set too low the inactive timeout can erroneously split idle connections where keep-alive packet are sent in longer interval than the inactive timeout. The inactive timeout is sometimes called \emph{idle timeout}\index{timeout!idle} as well.
+	\item[Active timeout\index{timeout!active}] occurs when the flow is longer than a time interval called \emph{active timeout}. The reason for active timeout is to keep exported flow information fresh. For example some SSH connections may be active for months when left open in an UNIX/Linux screen utility and without the active timeout the information about the connection would be too late for any practical purpose, such as monitoring the amount of traffic for a given time period. The active timeout is usually much longer than the inactive one. For example, Cisco IOS flow cache has the default of 30 minutes for the active timeout and 15 seconds for the inactive one~\cite{CiscoSystems-2013-Cisco}.
+	\item[Natural expiration] naturally. This is often implemented for TCP connections where packets with RST or FIN flag indicate the end of connection.
+	\item[Resource constraints] such as lack of memory can cause flow records to be exported from the flow cache to allow new flows to be inserted. Some implementations of flow caches using hash tables have fixed number of flows that can be stored under single hash. Therefore, when a new flow record needs to be created one of the existing flow records is usually expired.
+	\item[Exporter shutdown] usually causes all flow records in the flow cache to be exported so that the information about observed packets is not lost. This cause is not often mentioned in the literature, however, we consider it an important one. The exporter must be restarted each time a configuration is changed unless it supports dynamic reconfiguration, which non of the open-source exporters does. Therefore the exported shutdown can happen surprisingly often.
+\end{description}
 
-There are several reasons why a flow record can exit the flow cache. When no new packets belonging to the flow arrive for a time interval called inactive timeout, or when the flow has been in the cache for a time interval called active timeout, the flow is expired and removed from the flow cache. The active timeout is usually much longer than the inactive one. For example, Cisco IOS flow cache has the default of 30 minutes for the active timeout and 15 seconds for the inactive one\footnote{\url{http://www.cisco.com/c/en/us/td/docs/ios/fnetflow/command/reference/fnf\_book/fnf\_01.html}}. Another reason for flow expiration that is used in practice is when TCP protocol packet with RST or FIN flag is encountered. Flow expiration setting can significantly influence not only the  number of generated flow records, as shown by the authors of~\cite{Rodriguez-2013-Empirical}, but also further flow processing and various flow-based detection methods.
+The RFC 5470~\cite{rfc5470} considers both timeouts and resource constraints as causes for a flow record to expire but omits natural close of connection and the possibility of exporter shutdown. Flow record expiration setting can significantly influence not only the  number of generated flow records, as shown by the authors of~\cite{Rodriguez-2013-Empirical}, but also further flow processing and various flow-based detection methods. Implementation of flow record expiration has an impact on the overall flow monitoring performance. Periodically checking the flow cache for expired flows can create latency in packet capture that may result in packet loss. Several approaches to this problem are described in the work of \citeauthor{Molina-2006-Design}~\cite{Molina-2006-Design}.
 
-\itodo{mention that the fragmentation is the most significant reason for working with a whole history of packets in flow definition - flow keys cannot always be derived from the single packet}
-Little attention has been given to the measurement of traffic with fragmented packets. Although packet fragmentation poses a problem for standard flow measurement as well, the application measurement is especially affected. Let us consider what happens when an IPv4 packet is fragmented (the problem is very similar for IPv6). Figure~\ref{fig:fragmented-flow} illustrates this scenario. When the packet $K$ is fragmented, its payload is distributed between several different packets $(K\#1, K\#2, \ldots, K\#N_K)$. Only the first packet $(K\#1)$ contains the transport header, others only carry a flag identifying the fragment and offset of the data in the original packet. When a flow record is created for the first part of the fragmented packet, it contains IP addresses, transport layer information (protocol and ports), and the first part of application payload. However, subsequent parts contain only information about IP addresses and consecutive parts of the application payload. The transport level information was already sent in the first fragment. Therefore, flow records created from the subsequent fragments are not aggregated with the first fragment and application parsers are seeing only incomplete payloads. Moreover, flow records created from subsequent fragments from different connections between the same hosts are aggregated together. To resolve this problem, some kind of packet reassembly must happen in the flow cache. One possible solution that has been successfully deployed in practice is to create temporary flow records for fragmented packets based on fragmentation identifiers instead of transport layer information. Therefore, each fragmented packet has its own temporary flow record. These flow records have shorter timeouts, so when all fragments are received, the temporary flow record can be reinserted into the flow cache with proper transport layer information, which is now available since it was present in the first fragment.
+Little attention has been given to the measurement of traffic with fragmented packets. Although the ratio of fragmented packets is decreasing~\cite{Murray-2012-State}, it is still very important to monitor them since it is quite easy for an attacker to hide an attack from intrusion detection systems by fragmenting the attack packets~\cite{Cheng-2012-Evasion}. The RFC 3917 which describes requirement for IP flow information export states the following about packet fragmentation:
+
+\begin{displaycquote}{rfc3917}[Requirements for IP Flow Information Export (IPFIX)]
+   In case of IP packet fragmentation and depending on the
+   classification scheme, only the zero-offset fragment of a single
+   initial packet might contain sufficient information to classify the
+   packet.  Note that this fragment should be the first one generated by
+   the router imposing the fragmentation [RFC791], but might not be the
+   first one observed by the IPFIX device, due to reordering reasons.
+   The metering process may keep state of IP packet fragmentation in
+   order to map fragments that do not contain sufficient header
+   information correctly to flows.
+\end{displaycquote}
+
+This means that the flow monitoring system implementing the IPFIX standard is not required to handle fragmented packets. Moreover, neither the Netflow v9 nor the IPFIX flow definitions cover the possibility to assign a packet fragment to the correct flow, because they require that the common properties are derived from the single packet and the corresponding packet treatment. This is the main reason that the Definitions~\ref{def:flow} and~\ref{def:formal-flow} allow to derive the common properties from data contained in previous packets of the same flow as well. We assume that the packet arrive in the appropriate order for the purpose of these definitions.
+
+Let us consider what happens when an IPv4 packet is fragmented (the problem is very similar for IPv6). Figure~\ref{fig:fragmented-flow} illustrates this scenario. When the packet $K$ is fragmented, its payload is distributed between several different packets $(K\#1, K\#2, \ldots, K\#M_K)$. Only the first packet $(K\#1)$ contains the transport header, others only carry a flag identifying the fragment and offset of the data in the original packet. When a flow record is created for the first part of the fragmented packet, it contains IP addresses, transport layer information (protocol and ports), and the first part of application payload. However, subsequent parts contain only information about IP addresses and consecutive parts of the application payload. The transport level information was already sent in the first fragment. Therefore, flow records created from the subsequent fragments are not aggregated with the first fragment. Moreover, flow records created from subsequent fragments from different connections between the same hosts are aggregated together. To resolve this problem, some kind of packet reassembly must happen either in the flow cache or during packet capture (e.g. packet reassembly at the OS network stack).
+
+A possible solution that has been successfully deployed in practice is to create temporary flow records for fragmented packets where fragmentation identifiers are part of the flow key instead of transport layer information. Therefore, each fragmented packet has its own temporary flow record. By assigning shorter inactive timeout to these flow records the temporary flow record can be reinserted into the flow cache when all fragments are received. This allows to effectively reassemble the original packet with proper transport layer information, which is available since it was present in the first fragment, in the flow cache. The advantage of this solution is that it allows to count number of reassembled packets as well as the number of packet fragments, which can be used in later analyses.
 
 \begin{figure}[ht!]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/fragmented-flow}
+    \includegraphics{figures/fragmented-flow}
   \end{center}
   \caption{Flow measurement of a fragmented connection.}
   \label{fig:fragmented-flow}
 \end{figure}
+
+The flow monitoring implementation based on flow caches of networking devices kept a separate flow for each direction of a network connection. The reason was that each direction usually had different at least  ingress and egress interfaces. However, for network monitoring and analysis purposes, it is often useful to be able to access flow records for both communication directions at the same time. For this reason the bidirectional flow export was proposed in 2005 and resulted in publication of RFC 5103~\cite{rfc5103} in 2008. The document proposes to aggregate flow records for both forward and reverse directions to a single flow record. Bidirectional flow is called \emph{\index{biflow}} and unidirectional flow is called \emph{\index{uniflow}}. The flow keys that are associated with a direction (e.g. source IP address) are called \emph{directional flow keys}. When the biflow record is created, some information must be stored for both directions (e.g. number of bytes and packets) and some information is common to both directions (e.g. flow keys). When biflows are used, the corresponding flow records stored in the flow cache become biflow records as well. Note that creation of biflows is permitted by the definitions NetFlow v9 and IPFIX as well as the Definition~\ref{def:flow}. Although we work mostly with the uniflow in the context of this thesis, most of the concepts applie to the biflow as well. We will mention explicitly when there are important differences between uniflow and biflow.
 
 \subsection{Flow Export}
 
@@ -609,7 +629,21 @@ Little attention has been given to the measurement of traffic with fragmented pa
 - Message lengths, MTU, packet fragmentation
 }
 
-After the flow record is expired from the flow cache, it is encoded in suitable protocol and sent to a flow collector for further processing. The most widely used protocol for flow records is CISCO NetFlow, which is being replaced by IETF defined IPFIX protocol nowadays. Only the IPFIX protocol is flexible enough to support application flow monitoring. Although CISCO has added some application elements to the NetFlow protocol as well, no third party application elements are supported.
+The flow export manages the process of delivering flow records to flow collectors. The process consists of several parts as shown in the Figure~\ref{fig:flow-export}. The flow sampling and filtering process is very similar to packet sampling and filtering described in the Subsection~\ref{subsec:packet-processing}. The main motivation for flow filtering is that each collector might want to process only a subset of data, e.g. from a particular subnet. The flow sampling is performed when the performance of the collector is not sufficient to process all flow records. The main difference between packet sampling and flow sampling is that the flow sampling always discards whole flow record while the packet sampling can discard some packets of the flow, therefore affecting the created flow record. 
+
+\begin{figure}[ht!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/flow-export}
+  \end{center}
+  \caption{Flow export schema.}
+  \label{fig:flow-export}
+\end{figure}
+
+The flow export protocols such as NetFlow or IPFIX describe how to serialize a flow record and how to use different transport protocols such as UDP, TCP and SCTP to transfer the encoded data to the collector. The NetFlow~v5 and v9 protocols are still widely used although the IPFIX protocol is achieving wide deployment since it offers more features and supports proprietary information elements as well as variable length information elements. Different flow export protocols developed by other vendors can be used as well, as described in Subsection~\ref{subsec:history-of-flow-monitoring}.
+
+The UDP transport protocol is used very often to carry flow records since it was the only one supported by NetFlow. IPFIX specifies the use of TCP and SCTP for flow export as well as the use of UDP. Although the SCTP is mandatory for IPFIX implementations, its real-world usage is hindered by lack of support in software and hardware. When a reliable transport is necessary, TCP is the most often used protocol. For more information about IPFIX transport protocols see RFC 7011~\cite{rfc7011}. A comprehensive comparison of IPFIX transport protocols is also provided in~\cite{Hofstede-2014-Flow}.
+
+Flow records can be exported in many formats over different transport protocols. With the increasing popularity of big data tools such as Kafka, Elasticsearch, Apache Spark, and Hadoop, the need for an universal and widely supported format is more crucial then ever before. As most of the big data tools support JSON, flow records are often transported and stored in the JSON format. The main advantage of JSON is that the data are stored in key-value format without the need to specify templates for the data beforehand. The obvious disadvantage is the increase in the message size due to the need to provide a key for every value in every flow record. It is not unusual for the JSON encoded messages to be more than 7 times larger than in the IPFIX format.
 
 \section{Flow Data Processing}
 
@@ -630,5 +664,6 @@ After the flow record is expired from the flow cache, it is encoded in suitable 
 - What can go wrong with flow measurement (new encapsulation protocols, data loss)\\
 - Performance (link congestion, collector congestion, exporter congestion - TCP)\\
 - Misconfiguration (fw, ports, packet sizes, missing and/or incompatible IE definitions)\\
-- Put packet fragmentation here?
+- Exporter shutdown - lots of flows\\
+- Message lengths, MTU, packet fragmentation
 }

@@ -163,6 +163,8 @@ TODO: discuss privacy issues (where?)
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
 \setlist[compactitem]{label=\textbullet,leftmargin=*,nosep,after=\vspace*{-\baselineskip}}
 
+% Define indexmacro that does repeat the keyword
+\newcommand\Index[1]{#1\index{#1}}
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
