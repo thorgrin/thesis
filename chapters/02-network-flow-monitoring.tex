@@ -629,22 +629,72 @@ The flow export manages the process of delivering flow records to flow collector
 
 The flow export protocols such as NetFlow or IPFIX describe how to serialize a flow record and how to use different transport protocols such as UDP, TCP and SCTP to transfer the encoded data to the collector. The NetFlow~v5 and v9 protocols are still widely used although the IPFIX protocol is achieving wide deployment since it offers more features and supports proprietary information elements as well as variable length information elements. Different flow export protocols developed by other vendors can be used as well, as described in Subsection~\ref{subsec:history-of-flow-monitoring}.
 
-The UDP transport protocol is used very often to carry flow records since it was the only one supported by NetFlow. IPFIX specifies the use of TCP and SCTP for flow export as well as the use of UDP. Although the SCTP is mandatory for IPFIX implementations, its real-world usage is hindered by lack of support in software and hardware. When a reliable transport is necessary, TCP is the most often used protocol. For more information about IPFIX transport protocols see RFC 7011~\cite{rfc7011}. A comprehensive comparison of IPFIX transport protocols is also provided in~\cite{Hofstede-2014-Flow}.
+The UDP transport protocol is used very often to carry flow records since it was the only one supported by NetFlow. IPFIX specifies the use of TCP and SCTP protocols for flow export as well as the use of the UDP protocol. Although SCTP is mandatory for IPFIX implementations, its real-world usage is hindered by lack of support in software and hardware. When a reliable transport is necessary, TCP is the most often used protocol. For more information about IPFIX transport protocols see RFC 7011~\cite{rfc7011}. A comprehensive comparison of IPFIX transport protocols is also provided in~\cite{Hofstede-2014-Flow}.
 
 Flow records can be exported in many formats over different transport protocols. With the increasing popularity of big data tools such as Kafka, Elasticsearch, Apache Spark, and Hadoop, the need for an universal and widely supported format is more crucial then ever before. As most of the big data tools support JSON, flow records are often transported and stored in the JSON format. The main advantage of JSON is that the data are stored in key-value format without the need to specify templates for the data beforehand. The obvious disadvantage is the increase in the message size due to the need to provide a key for every value in every flow record. It is not unusual for the JSON encoded messages to be more than 7 times larger than in the IPFIX format.
 
+An important part of flow export is ensuring security of the exported flow records. The records must reach only the authorized destination without being observed by any third party. Therefore, authorization, confidentiality and, preferably, also integrity should be provided. The same applies to flow collectors during the collecting process. More information about flow transmission security is provided in Subsection~\ref{subsec:flow-collection}.
+
 \section{Flow Data Processing}
 
-\subsection{Flow Collection}
-\subsection{Flow Storage}
-\subsection{Flow Processing}
+The aim of this section is to outline the processing of flow data after they are exported to a flow collector. Firstly, we describe the flow collection process in Subsection~\ref{subsec:flow-collection}. The reception of flow data is not a difficult task itself, but requires several important choices to be made, such as what flow export protocols will be supported and how to handle unknown information elements. Secondly, the flow data are often stored for future needs. The choice of a flow data storage format is very important since the data is written once, read many times and fast searches are required. This process is described in Subsection~\ref{subsec:flow-storage}. Lastly, the flow records are processed and analysed, either by reading the previously stored data or in real time as they arrive from a flow exporter. The flow record processing and analysis is discussed in Subsection~\ref{subsec:flow-processing}.
 
-\itodo{
-- Flow collectors (https://github.com/VerizonDigital/vflow)\\
-- Flow data storage (data formats)\\
-- Flow data analysis (query, stream vs static)
+\itodo{zvazit obrazek: flow reception, autentizace, format checking, parsovani zpravy, storage, processing (realtime i ze storage), generovani eventu, notifikace... ukrast neco ze stream for flow?}
 
-}
+\subsection{Flow Collection}\label{subsec:flow-collection}
+
+Flow collection is a process of receiving flow records from an exporter performed by a flow collector. The collector and the exporter must choose an appropriate combination of transport protocol and flow export protocol before the data transmission starts, there is no protocol for flow export parameters negotiation. Although the collector can receive data using a multiple combinations of protocols at the same time, such feature is not usually implemented due to added complexity.
+
+After the collector validates that a received message is in the expected format, it attempts to parse individual flow records. This process may vary for each flow export protocol, however, the collector always needs to derive correct data types of information elements in order to be able to work with them. The common practice with NetFlow information elements was to hardcode their definitions and extend the code every time it was necessary to add a new element. The extensibility of the IPFIX protocol information elements through the use of Private Enterprise Numbers advocates more dynamic approach to information element handling, although a subset of IPFIX information elements are sometimes hardcoded as well. Since the collectors cannot know all possible information elements that can be sent by exporters, it is necessary to correctly handle new and unknown elements. Although they are usually discarded, it is also possible to process them when their data types can be derived from the information provided by the flow export protocol.
+
+When using NetFlow and IPFIX protocols in combination with the UDP transport protocol it is necessary to properly manage templates messages containing the definitions of flow record formats. The templates can change during the collection process, e.g. after exporter restart, and it can easily result in incorrectly decoded messages. The IPFIX protocol specification~\cite{rfc7011} describes how the template messages should be handled and what to do in case of missing templates. Both NetFlow and IPFIX protocols keep track of lost messages by assigning a sequence number to each message. NetFlow~v5 increase the sequence number for each transmitted flow record, which allows to keep track of the number of lost flow records. This behaviour was changed in NetFlow~v9 so that the sequence number is increased for each transmitted NetFlow~v9 packet. It is more difficult to keep track of the number of lost flow records in NetFlow v9, but easy to see how many packets were lost, which can help with determining the cause of the packet loss. The IPFIX protocol increments the sequence number per flow record, just like NetFlow~v5. However, when a template is missing, it is not possible to determine the exact number of flow records in a packet, therefore the collector cannot be sure whether flow records were lost during the transmission or not. This is one of several reasons to use IPFIX over a reliable channel.
+
+An important and often neglected aspect of flow collection is security. The collector needs to authenticate the source of the data to avoid processing of malicious flow records or malformed messages intended to attack the collector itself. There are several ways to authenticate the source of the data. IP addresses can be used to authenticate the flow exporter and the collector itself or a firewall can be set to allow data from authorized IP addresses. However, this does not prevent attackers with the ability to spoof IP addresses when UDP transport protocol is used. Moreover, the Man-in-the-middle (MITM) attack cannot be prevented without an appropriate use of cryptography. Proper authentication, usually using certificates, is needed to mitigate the MITM attack. The IPFIX protocol requires that TLS version 1.1 is implemented for TCP and DTLS 1.0 for STCP and UDP procols. Moreover, it requires mutual authentication when using TLS or DTLS so that the exporter does not send sensitive data to an unknown target. Table~\ref{tab:flow.protocols.security} shows how IP spoofing and MITM attack are mitigated by use of TLS and DTLS protocols. The advantage of TLS and DTLS protocols is that they provide not only authentication, but also integrity and confidentiality. Since an IP address is often considered to be a sensitive information, ensuring confidentiality of flow records during transmission should be considered a necessity.
+
+\begin{table}[t!]
+	\centering
+	\begin{tabular}{lll}
+	\toprule
+			& \textbf{IP Spoofing}	& \textbf{Man-in-the-Middle}  \\ \midrule
+	UDP		& yes			& yes \\ 
+	TCP		& no			& yes \\ 
+	SCTP		& no			& yes \\
+	DTLS/UDP	& no			& no  \\
+	TLS/TCP		& no			& no  \\ 
+	DTLS/SCTP	& no			& no  \\ \bottomrule
+	\end{tabular}
+	\caption{Applicability of IP spoofing and MITM attack to transport protocols}
+	\label{tab:flow.protocols.security}
+\end{table}
+
+Although the IPFIX protocol requires implementation of TLS and DTLS protocols, not every flow exporter and collector supports it. There are two often used solutions for ensuring security of flow record transmission. The first is to build secure channel between exporters and collectors using external tools, such as virtual private networks or stunnel~\cite{Trojnar-2015-Stunnel}. The second solution used in networks that are fully under control of the administrator is to place the exporter and collector in a dedicated network (using private IP addresses) so that they can be accessed only from allowed and trusted address range.
+
+
+\subsection{Flow Storage}\label{subsec:flow-storage}
+
+There are many uses for flow data~\cite{Li-2013-Review}. At first the data were being used for traffic accounting and flow records are often kept by telecommunications companies to comply with laws requiring them to store communication records nowadays. Companies and even individuals also keep flow records of their own traffic so that they can investigate breaches and other security issues ex-post. To store the flow data records for a long period of time, the selected data storage format must be space efficient. Another important aspect of flow data storage is its query performance. The requirements for the query performance differ depending on a particular use case. When overall statistics are requires, all flow records need to be accessed. In case of a security breach investigation, filters for particular IP addresses and ports are likely to be used so that it is beneficial for the data storage to have some kind of index built on the data.
+
+There are several types of data storage that are used for flow data. Firstly, the data can be stored in a flat file without indexes. This approach is utilized by popular flow data manipulation frameworks SiLK~\cite{Shimeall-2014-Using} and NFDUMP~\cite{Haag-2014-NFDUMP}. The main advantage is that the format is very simple and the data is efficiently encoded. Moreover, both file formats support compression which allows for more disk space to be saved. Flat files also take advantage of the fact that flow data is never updated so the records can be tightly packed.
+
+A second popular approach is to store flow data in a relational database. In case of NetFlow~v5, a single table serves to store all flow records. However, when multiple templates are used for the flow records, such as in NetFlow~v9 and IPFIX protocols, the number of tables grows and the relational model becomes complicated. Since relational databases are designed to support much more features than needed for flow data (e.g. updates or complex joins) and often lack support for network data types such as IP and MAC addresses, their performance and disk space requirements are often worse than that of flat files, as shown by \citeauthor{Hofstede-2010-Network} in~\cite{Hofstede-2010-Network}.
+
+The last approach is to use a NoSQL database to store flow data. Although NoSQL databases do not offer as many features as relational databases, they are meant to be able to handle huge amounts of data. A category of NoSQL databases are columnar databases. Instead of storing each flow record as a single database record, it stores each element of the record in a separate file. The benefit of this approach is that, for example, when a query for a certain IP address is evaluated, only files with IP addresses need to be searched. Other requested elements are read from their own files as necessary after the address is found. This approach reduces the amount of data that needs to be read from the disk, however, it causes more random accesses than when using flat files. More information about comparing flat file approach with a NoSQL columnar database is provided in Chapter~\ref{sec:next-generation-flow}. Document oriented databases are also a class of NoSQL databases and their popularity has been increasing lately. Although the performance of most document oriented databases is not sufficient to handle flow data from large networks, they are used for their flexibility that allows for building prototype analytics applications very quickly. The advantage of document oriented databases is that the different structure of flow records is of no concern to the database as it considers each entry to be a generic document. Elasticsearch~\cite{Gormley-2015-Elasticsearch} is a good example of a such a database.
+
+The list of used approaches is by no means complete. There are many Big Data analytics frameworks, that are being used for flow data storage and analytics, such as Hadoop~\cite{Lee-2012-Toward}. Although it is possible to use almost any data storage for flow data, it is difficult to select the best one, since the criteria differ for each use case. It is for that reason, that companies use different flow data storage or develop their own solution in their products.
+
+
+\subsection{Flow Processing}\label{subsec:flow-processing}
+
+Large amount of information about network traffic and communicating parties can be acquired by a flow record analysis. Many intrusion detection systems use flow records as their primary source of data, especially since deep packet inspection is being made difficult due to the increasing ratio of encrypted traffic. The flow data analysis can be performed either using the stored data or in real time.
+
+When the flow record analysis is performed on stored data, the processing is usually done in batches. The flow collector usually partitions the data according the time of arrival so that once a partition is finished, it can be processed in a single batch. Five minute long time windows are often used as this is the default time interval employed by the popular flow processing tool NfSen~\cite{Haag-2011-NfSen}. The advantage of this approach is that the processing can easily be repeated on the same data, which allows the user to fine-tune the queries and analyse the data on demand. The processing can also be postponed when the system is under heavy load. The disadvantage of batch processing with fixed time intervals is that it introduces delays to data analysis, which can be inconvenient when a rapid action is required based on the results.
+
+When the delay introduced by the batch processing impedes time-critical applications, stream processing is used instead. In stream processing, the flow records are passed to the processing immediately as they are received. A good overview of the stream-based flow processing is provided by \citeauthor{Jirsik-2017-Toward} in~\cite{Jirsik-2017-Toward}. There is a number of stream processing systems that are used for big data processing. \citeauthor{Cermak-2016-Performance} performed flow data analysis using three most used distributed stream processing systems in~\cite{Cermak-2016-Performance}, and compared their performance. The results show that the distributed stream processing systems are able to scale to accommodate large workloads such as processing of data from very large networks.
+
+what is the result of processing: statistics, attack detection, anomaly detection.
+
+Modern machine learning techniques are often utilized to derive information about the nature of the traffic
+
 
 \section{Common Issues}
 
@@ -653,5 +703,6 @@ Flow records can be exported in many formats over different transport protocols.
 - Performance (link congestion, collector congestion, exporter congestion - TCP)\\
 - Misconfiguration (fw, ports, packet sizes, missing and/or incompatible IE definitions)\\
 - Exporter shutdown - lots of flows\\
-- Message lengths, MTU, packet fragmentation
+- Message lengths, MTU, packet fragmentation \\
+- IPFIX: unknown number of missing messages due to an unknown template
 }
