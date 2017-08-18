@@ -148,9 +148,10 @@ TODO: discuss privacy issues (where?)
 % \usepackage{color}
 % \usepackage{textcomp}
 % \usepackage[hidelinks]{hyperref}
-% \usepackage{pifont}
+\usepackage{pifont}
 % \usepackage[table]{xcolor}
 % \usepackage{subfig}
+% \floatsetup[figure]{style=plain,subcapbesideposition=center}
 % \usepackage[ruled, lined, linesnumbered,norelsize]{algorithm2e}
 \usepackage{multirow} % Complex tables
 \usepackage{booktabs} % \toprule, \midrule, \bottomrule
@@ -158,6 +159,9 @@ TODO: discuss privacy issues (where?)
 \usepackage[boxed, chapter]{algorithm}
 \usepackage{algorithmic}
 \usepackage{rotating}
+\usepackage{varwidth} % Rotated table with caption
+\usepackage{tabu}
+\usepackage{bigstrut}
 
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
@@ -165,6 +169,10 @@ TODO: discuss privacy issues (where?)
 
 % Define indexmacro that does repeat the keyword
 \newcommand\Index[1]{#1\index{#1}}
+
+% Checkmark deffinition
+\newcommand{\cmark}{\raisebox{-1pt}{\ding{51}}}%
+\newcommand{\xmark}{}%
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
