@@ -24,6 +24,50 @@
   Url                      = {http://dx.doi.org/10.1007/978-3-642-38998-6_18}
 }
 
+@Article{skype-hunter,
+  Title                    = {{Skype-Hunter: A real-time system for the detection and classification of Skype traffic}},
+  Author                   = {Adami, D. and Callegar, C. and Giordano, S. and Pagano, M. and Pepe, T.},
+  Journal                  = {International Journal of Communication Systems},
+  Year                     = {2011},
+
+  Month                    = {February},
+  Number                   = {3},
+  Pages                    = {386--403},
+  Volume                   = {25},
+
+  Abstract                 = {In the previous years, Skype has gained more and more popularity, since it is seen as the best VoIP software with good quality of sound, ease of use and one that works everywhere and with every OS. Because of its great diffusion, both the operators and the users are, for different reasons, interested in
+detecting Skype traffic.
+In this paper we propose a real-time algorithm (named Skype-Hunter) to detect and classify Skype traffic. In more detail, this novel method, by means of both signature-based and statistical procedures, is able to correctly reveal and classify the signaling traffic as well as the data traffic (calls and file transfers). To assess the effectiveness of the algorithm, experimental tests have been performed with several traffic data sets, collected in different network scenarios. Our system outperforms the ‘classical’ statistical traffic classifiers as well as the state-of-the-art ad hoc Skype classifier.},
+  Doi                      = {10.1002/dac.1247},
+  Keywords                 = {Skype, detection, traffic description},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {http://onlinelibrary.wiley.com/doi/10.1002/dac.1247/pdf}
+}
+
+@InProceedings{Akhawe-2013-Heres,
+  Title                    = {{Here's My Cert, So Trust Me, Maybe?: Understanding TLS Errors on the Web}},
+  Author                   = {Akhawe, D. and Amann, B. and Vallentin, M. and Sommer, R.},
+  Booktitle                = {Proceedings of the 22Nd International Conference on World Wide Web},
+  Year                     = {2013},
+
+  Address                  = {Republic and Canton of Geneva, Switzerland},
+  Pages                    = {59--70},
+  Publisher                = {International World Wide Web Conferences Steering Committee},
+  Series                   = {WWW '13},
+
+  Abstract                 = {When browsers report TLS errors, they cannot distinguish between attacks and harmless server misconfigurations; hence they leave it to the user to decide whether continuing is safe. However, actual attacks remain rare. As a result, users quickly become used to "false positives" that deplete their attention span, making it unlikely that they will pay sufficient scrutiny when a real attack comes along. Consequently, browser vendors should aim to minimize the number of low-risk warnings they report. To guide that process, we perform a large-scale measurement study of common TLS warnings. Using a set of passive network monitors located at different sites, we identify the prevalence of warnings for a total population of about 300,000 users over a nine-month period. We identify low-risk scenarios that consume a large chunk of the user attention budget and make concrete recommendations to browser vendors that will help maintain user attention in high-risk situations. We study the impact on end users with a data set much larger in scale than the data sets used in previous TLS measurement studies. A key novelty of our approach involves the use of internal browser code instead of generic TLS libraries for analysis, providing more accurate and representative results.},
+  Acmid                    = {2488395},
+  ISBN                     = {978-1-4503-2035-1},
+  Keywords                 = {tls, warnings},
+  Location                 = {Rio de Janeiro, Brazil},
+  Numpages                 = {12},
+  Owner                    = {velan},
+  Review                   = {Authors study TLS errors reported by common browsers. They passively monitor certificates of servers contacted by users and evaluate errors encountered during validation. Unlike other works, they use the same TLS library as browsers, which gives different validation results than OpenSSL. Authors provide recommendation for browser authors to reduce number of TLS related error messages.},
+  Timestamp                = {2014.06.18},
+  Url                      = {http://dl.acm.org/citation.cfm?id=2488388.2488395}
+}
+
 @TechReport{Alcock-2012-libprotoident,
   Title                    = {{Libprotoident: Traffic Classification Using Lightweight Packet Inspection}},
   Author                   = {Alcock, Shane and Nelson, Richard},
@@ -38,6 +82,297 @@
   Timestamp                = {2017.04.28},
   Url                      = {http://www.wand.net.nz/~salcock/lpi/lpi.pdf},
   Urldate                  = {2017-04-28}
+}
+
+@Misc{Alcock-2012-libprotoident,
+  Title                    = {{Libprotoident: Traffic Classification Using Lightweight Packet Inspection}},
+
+  Author                   = {Alcock, S. and Nelson, R.},
+  HowPublished             = {Online article},
+  Note                     = {Accessed: 2014-11-26},
+  Year                     = {2012},
+
+  Abstract                 = {At present, accurate traffic classification usually requires the use of deep packet inspection to analyse packet payload. This requires significant CPU and memory resources and are invasive of network user privacy. In this paper, we propose an alternative traffic classification approach that is lightweight and
+ only examines the first four bytes of packet payload observed in each direction. We have implemented as an open-source library called libprotoident, which we evaluate by comparing its performance against existing traffic classifiers that use deep packet inspection. Our results show that our approach offers comparable (if not better) accuracy than tools that have access to full packet payload, yet requires less processing resources and is more acceptable, from a privacy standpoint, to network operators and users.},
+  Keywords                 = {libprotoident},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://www.wand.net.nz/~salcock/lpi/lpi.pdf}
+}
+
+@Book{Alpaydin-2010-Introduction,
+  Title                    = {{Introduction to Machine Learning}},
+  Author                   = {Alpaydin, E.},
+  Publisher                = {The MIT Press},
+  Year                     = {2010},
+  Edition                  = {2nd},
+
+  Abstract                 = {The goal of machine learning is to program computers to use example data or past experience to solve a given problem. Many successful applications of machine learning exist already, including systems that analyze past sales data to predict customer behavior, optimize robot behavior so that a task can be completed using minimum resources, and extract knowledge from bioinformatics data. Introduction to Machine Learning is a comprehensive textbook on the subject, covering a broad array of topics not usually included in introductory machine learning texts. In order to present a unified treatment of machine learning problems and solutions, it discusses many methods from different fields, including statistics, pattern recognition, neural networks, artificial intelligence, signal processing, control, and data mining. All learning algorithms are explained so that the student can easily move from the equations in the book to a computer program. The text covers such topics as supervised learning, Bayesian decision theory, parametric methods, multivariate methods, multilayer perceptrons, local models, hidden Markov models, assessing and comparing classification algorithms, and reinforcement learning. New to the second edition are chapters on kernel machines, graphical models, and Bayesian estimation; expanded coverage of statistical tests in a chapter on design and analysis of machine learning experiments; case studies available on the Web (with downloadable results for instructors); and many additional exercises. All chapters have been revised and updated. Introduction to Machine Learning can be used by advanced undergraduates and graduate students who have completed courses in computer programming, probability, calculus, and linear algebra. It will also be of interest to engineers in the field who are concerned with the application of machine learning methods. Adaptive Computation and Machine Learning series},
+  ISBN                     = {026201243X, 9780262012430},
+  Owner                    = {velan},
+  Review                   = {The book contains description of the most common machine learning algorithms, such as RIPPER, Naive Bayesian, C4.5, clustering, Hidden Markov Models and boosting. Index can be found at http://mitpress.mit.edu/sites/default/files/titles/content/9780262012430_ind_0001.pdf},
+  Timestamp                = {2014.10.17}
+}
+
+@InProceedings{Alshammari-2009-Classifying,
+  Title                    = {{Classifying SSH Encrypted Traffic with Minimum Packet Header Features Using Genetic Programming}},
+  Author                   = {Alshammari, R. and Lichodzijewski, P.I. and Heywood, M. and Zincir-Heywood, A.N.},
+  Booktitle                = {Proceedings of the 11th Annual Conference Companion on Genetic and Evolutionary Computation Conference: Late Breaking Papers},
+  Year                     = {2009},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {2539--2546},
+  Publisher                = {ACM},
+  Series                   = {GECCO '09},
+
+  Abstract                 = {The classification of Encrypted Traffic, namely Secure Shell (SSH), on the fly from network TCP traffic represents a particularly challenging application domain for machine learning. Solutions should ideally be both simple - therefore efficient to deploy - and accurate. Recent advances to teambased Genetic Programming provide the opportunity to decompose the original problem into a subset of classifiers with non-overlapping behaviors, in effect providing further insight into the problem domain and increasing the throughput of solutions. Thus, in this work we have investigated the identification of SSH encrypted traffic based on packet header features without using IP addresses, port numbers and payload data. Evaluation of C4.5 and AdaBoost - representing current best practice - against the Symbiotic Bid-based (SBB) paradigm of team-based Genetic Programming (GP) under data sets common and independent from the training condition indicates that SBB based GP solutions are capable of providing simpler solutions without sacrificing accuracy.},
+  Acmid                    = {1570358},
+  Doi                      = {10.1145/1570256.1570358},
+  ISBN                     = {978-1-60558-505-5},
+  Keywords                 = {active learning, defense applications, encrypted traffic classification, genetic programming, packet, problem decomposition, security, supervised learning, teaming},
+  Location                 = {Montreal, Qu\&\#233;bec, Canada},
+  Numpages                 = {8},
+  Owner                    = {velan},
+  Review                   = {Comparison of AdaBoost and C4.5. Packet header features were selected using genetic programming. Authors used DARPA and custom data sets. SSH is the reference protocol that was identified in the data.},
+  Timestamp                = {2014.10.17},
+  Url                      = {http://doi.acm.org/10.1145/1570256.1570358}
+}
+
+@Article{Alshammari-2011-Can,
+  Title                    = {{Can encrypted traffic be identified without port numbers, IP addresses and payload inspection?}},
+  Author                   = {Alshammari, R. and Zincir-Heywood, A.N.},
+  Journal                  = {Computer Networks },
+  Year                     = {2011},
+  Number                   = {6},
+  Pages                    = {1326 - 1350},
+  Volume                   = {55},
+
+  Abstract                 = {Identifying encrypted application traffic represents an important issue for many network tasks including quality of service, firewall enforcement and security. Solutions should ideally be both simple – therefore efficient to deploy – and accurate. This paper presents a machine learning based approach employing simple packet header feature sets and statistical flow feature sets without using the \{IP\} addresses, source/destination ports and payload information to unveil encrypted application tunnels in network traffic. We demonstrate the effectiveness of our approach as a forensic analysis tool on two encrypted applications, Secure \{SHell\} (SSH) and Skype, using traces captured from entirely different networks. Results indicate that it is possible to identify encrypted traffic tunnels with high accuracy without inspecting payload, \{IP\} addresses and port numbers. Moreover, it is also possible to identify which services run in encrypted tunnels.},
+  Doi                      = {http://dx.doi.org/10.1016/j.comnet.2010.12.002},
+  ISSN                     = {1389-1286},
+  Keywords                 = {Encrypted traffic identification},
+  Owner                    = {velan},
+  Review                   = {Authors present a machine learning based approach to unveil encrypted application tunnels in network traffic. They show how to identify services running in such encrypted tunnels. Three machine learning algorithms are tested: AdaBoost, C4.5 and Genetic Programming. Authors use AMP, MAWI DARPA99 and Italy and custom created traffic traces for training and testing the classifiers. PacketSharper is used to classify the custom traces. Authors work with packet header attributes and flow features separately. They also show that the combination of both allow to improve the detection rate of encrypted traffic. They also discovered that the Genetic Programming approach achieved the best results.},
+  Timestamp                = {2014.10.17},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128610003695}
+}
+
+@InProceedings{Alshammari-2010-Investigation,
+  Title                    = {{An Investigation on the Identification of VoIP traffic: Case study on Gtalk and Skype}},
+  Author                   = {Alshammari, R. and Zincir-Heywood, A.N.},
+  Booktitle                = {Network and Service Management (CNSM), 2010 International Conference on},
+  Year                     = {2010},
+  Month                    = {Oct},
+  Pages                    = {310-313},
+
+  Abstract                 = {The classification of encrypted traffic on the fly from network traces represents a particularly challenging application domain. Recent advances in machine learning provide the opportunity to decompose the original problem into a subset of classifiers with non-overlapping behaviors, in effect providing further insight into the problem domain. Thus, the objective of this work is to classify VoIP encrypted traffic, where Gtalk and Skype applications are taken as good representatives. To this end, three different machine learning based approaches, namely, C4.5, AdaBoost and Genetic Programming (GP), are evaluated under data sets common and independent from the training condition. In this case, flow based features are employed without using the IP addresses, source/destination ports and payload information. Results indicate that C4.5 based machine learning approach has the best performance.},
+  Doi                      = {10.1109/CNSM.2010.5691210},
+  Keywords                 = {Internet telephony;genetic algorithms;learning (artificial intelligence);telecommunication traffic;AdaBoost;C4.5;Gtalk;IP address;Skype;VoIP encrypted traffic;genetic programming;machine learning;source/destination port;Cryptography;Feature extraction;Internet;Machine learning;Machine learning algorithms;Protocols;Training data},
+  Location                 = {Niagara Falls, Canada},
+  Owner                    = {velan},
+  Review                   = {Authors use supervised machine learning methods: AdaBoost, C4.5 and Genetic Programming to destinguish between Skype, Gtalk and other traffic. Both Skype and Gtalk use encryption, therefore the methods must distinguish between several types of encrypted traffic. The data set contains other VoIP data, both encrypted and unencrypted. Moreover, it contains traces of other applications such as FTP, SSH, HTTP, and mail. Ground truth was established using commercial classification tool using DPI. Ground truth for manually generated traces is easily gained. 22 flow features are used by the classifiers. Experiments showed that the C4.5 classifier achieves the best detection rate with small false positive rate.},
+  Timestamp                = {2015.03.23}
+}
+
+@InProceedings{Alshammari-2009-Machine,
+  Title                    = {{Machine learning based encrypted traffic classification: Identifying SSH and Skype}},
+  Author                   = {Alshammari, R. and Zincir-Heywood, A.N.},
+  Booktitle                = {Computational Intelligence for Security and Defense Applications, 2009. CISDA 2009. IEEE Symposium on},
+  Year                     = {2009},
+  Month                    = {July},
+  Pages                    = {1-8},
+
+  Abstract                 = {The objective of this work is to assess the robustness of machine learning based traffic classification for classifying encrypted traffic where SSH and Skype are taken as good representatives of encrypted traffic. Here what we mean by robustness is that the classifiers are trained on data from one network but tested on data from an entirely different network. To this end, five learning algorithms - adaboost, support vector machine, NaiÂ¿e Bayesian, RIPPER and C4.5 - are evaluated using flow based features, where IP addresses, source/destination ports and payload information are not employed. Results indicate the C4.5 based approach performs much better than other algorithms on the identification of both SSH and Skype traffic on totally different networks.},
+  Doi                      = {10.1109/CISDA.2009.5356534},
+  Keywords                 = {cryptography;learning (artificial intelligence);support vector machines;telecommunication traffic;C4.5 based approach;NaiÂ¿e Bayesian;RIPPER;Skype;adaboost;encrypted traffic classification;flow based features;machine learning;secure shell;support vector machine;traffic classification;Bayesian methods;Cryptography;Financial management;Machine learning;Payloads;Robustness;Support vector machine classification;Support vector machines;Telecommunication traffic;Traffic control},
+  Location                 = {Ottawa, Canada},
+  Owner                    = {velan},
+  Review                   = {Authors compare five different machine learning algorithms for traffic classification: AdaBoost, Support Vector Machine, Naive Batesian, RIPPER, C4.5. Skype and SSH protocols are classified without the use of packet payloads, IP addresses of ports. The robustnest of the methods is tested by teaching each method on one network and running on another nework, with different properties. Authors use two public traces (no payload), DARPA99 trace (with payload, SSH identified by handshake) and one trace measured at their university campus (labeled using PacketShaper, which uses L7 filter). Authors sampled the data sets to lower the amount of processed data, training data set is chosen from the campus trace.
+
+The paper contains very good related work chapter and description of classification algorithms with references.},
+  Timestamp                = {2014.10.03}
+}
+
+@InCollection{Alshammari-2009-Preliminary,
+  Title                    = {{A Preliminary Performance Comparison of Two Feature Sets for Encrypted Traffic Classification}},
+  Author                   = {Alshammari, R. and Zincir-Heywood, A.N.},
+  Booktitle                = {Proceedings of the International Workshop on Computational Intelligence in Security for Information Systems CISIS’08},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2009},
+  Pages                    = {203-210},
+  Series                   = {Advances in Soft Computing},
+  Volume                   = {53},
+
+  Abstract                 = {The objective of this work is the comparison of two types of feature sets for the classification of encrypted traffic such as SSH. To this end, two learning algorithms – RIPPER and C4.5 – are employed using packet header and flow-based features. Traffic classification is performed without using features such as IP addresses, source/destination ports and payload information. Results indicate that the feature set based on packet header information is comparable with flow based feature set in terms of a high detection rate and a low false positive rate.},
+  Doi                      = {10.1007/978-3-540-88181-0_26},
+  ISBN                     = {978-3-540-88180-3},
+  Keywords                 = {Encrypted Traffic Classification; Packet; Flow; and Security},
+  Language                 = {English},
+  Location                 = {Genoa, Italy},
+  Owner                    = {velan},
+  Review                   = {Two types of feature sets are compared: packet header based and flow based. The SSH traffic is used as an etalon for the comparison. The packet header feature set contains information from packet headers with the exception of IP addresses and transport protocol ports. It also contains packet inter-arrival time. Flow feature set is calculated from one or more packets for each flow. RIPPER and C4.5 classification algorithms are used to compare selected feature sets. The C4.5 classifier showed better results in detection rate and false positive rate. The results provided by both feature sets seems to be comparable. Authors claim that SSH traffic detection is possible even without packet payload and that it requires less processing power.},
+  Timestamp                = {2014.10.06},
+  Url                      = {http://dx.doi.org/10.1007/978-3-540-88181-0_26}
+}
+
+@InProceedings{Alshammari-2007-flow,
+  Title                    = {{A Flow Based Approach for SSH Traffic Detection}},
+  Author                   = {Alshammari, R. and Zincir-Heywood, A.N.},
+  Booktitle                = {Systems, Man and Cybernetics, 2007. ISIC. IEEE International Conference on},
+  Year                     = {2007},
+  Month                    = {Oct},
+  Pages                    = {296-301},
+
+  Abstract                 = {The basic objective of this work is to assess the utility of two supervised learning algorithms AdaBoost and RIPPER for classifying SSH traffic from log files without using features such as payload, IP addresses and source/destination ports. Pre-processing is applied to the traffic data to express as traffic flows. Results of 10-fold cross validation for each learning algorithm indicate that a detection rate of 99\% and a false positive rate of 0.7\% can be achieved using RIPPER. Moreover, promising preliminary results were obtained when RIPPER was employed to identify which service was running over SSH. Thus, it is possible to detect SSH traffic with high accuracy without using features such as payload, IP addresses and source/destination ports, where this represents a particularly useful characteristic when requiring generic, scalable solutions.},
+  Doi                      = {10.1109/ICSMC.2007.4414006},
+  Keywords                 = {IP networks;learning (artificial intelligence);telecommunication network management;telecommunication security;telecommunication traffic;AdaBoost;IP address;RIPPER;SSH traffic detection;payload;source/destination ports;supervised learning algorithms;traffic data;traffic flows;Application software;Computer science;Cryptography;Engineering management;Financial management;Inspection;Payloads;Supervised learning;Telecommunication traffic;Traffic control},
+  Location                 = {Montreal, Quebec, Canada},
+  Owner                    = {velan},
+  Review                   = {AdaBoost and RIPPER classification algorithms were compared on traces of SSH traffic. No payload, IP addresses nor ports were used for the classification. First the authors concentrate on automatic recognition of SSH traffic. Then they develop automatic recognition of different services and applications running over SSH. NLARN and MAWI public data sets are used for the first phase (GT is gained from port numbers), private data set is used for the second phase, since authors need to establish a ground truth. NetMate is used to extract features from the traffic. Authors show that RIPPER provides better detection rate and lower false positive rate on their data sets for both SSH detection and application classification.},
+  Timestamp                = {2014.10.17}
+}
+
+@InProceedings{Amoli-2013-real,
+  Title                    = {{A Real Time Unsupervised NIDS for Detecting Unknown and Encrypted Network Attacks in High Speed Network}},
+  Author                   = {Amoli, P.V. and Hamalainen, T.},
+  Booktitle                = {Measurements and Networking Proceedings (M N), 2013 IEEE International Workshop on},
+  Year                     = {2013},
+  Month                    = {Oct},
+  Pages                    = {149-154},
+
+  Abstract                 = {Previously, Network Intrusion Detection Systems (NIDS) detected intrusions by comparing the behaviour of the network to the pre-defined rules or pre-observed network traffic, which was expensive in terms of both cost and time. Unsupervised machine learning techniques have overcome these issues and can detect unknown and complex attacks within normal or encrypted communication without any prior knowledge. NIDS monitors bytes, packets and network flow to detect intrusions. It is nearly impossible to monitor the payload of all packets in a high-speed network. On the other hand, the content of packets does not have sufficient information to detect a complex attack. Since the rate of attacks within encrypted communication is increasing and the content of encrypted packets is not accessible to NIDS, it has been suggested to monitor network flows. As most network intrusions spread within the network very quickly, in this paper we will propose a new real-time unsupervised NIDS for detecting new and complex attacks within normal and encrypted communications. To achieve having a real-time NIDS, the proposed model should capture live network traffic from different sensors and analyse specific metrics such as number of bytes, packets, network flows, and the time explicitly and implicitly, of packets and network flows, in the different resolutions. The NIDS will flag the time slot as an anomaly if any of those metrics passes the threshold, and it will send the time slot to the first engine. The first engine clusters different layers and dimensions of the network's behaviour and correlates the outliers to purge the intrusions from normal traffic. Detecting network attacks, which produce a huge amount of network traffic (e.g. DOS, DDOS, scanning) was the aim of proposing the first engine. Analysing statistics of network flows increases the feasibility of detecting intrusions within encrypted communications. The aim of proposing the second engine is to conduct a deeper analysis a- d correlate the traffic and behaviour of Bots (current attackers) during DDOS attacks to find the Bot-Master.},
+  Doi                      = {10.1109/IWMN.2013.6663794},
+  Keywords                 = {cryptography;telecommunication traffic;unsupervised learning;Bot-Master;DBScan algorithm;DOS;denial of service;encrypted communication;encrypted network traffic;high speed network;live network traffic;network flow monitoring;network intrusion detection systems;real time unsupervised NIDS;time slot;unsupervised machine learning;Clustering algorithms;Cryptography;Engines;IP networks;Monitoring;Real-time systems;Telecommunication traffic;Clustering;Encrypted Network Traffic;NIDS;Network Flows;Unsupervised Intelligent Engine},
+  Location                 = {Naples, Italy},
+  Owner                    = {velan},
+  Review                   = {In the introduction, authors describe possible approaches to detecting attacks in encrypted traffic. They propose a real-time unsupervised NIDS for detection attacks in ecrypted communication. First engine of the NIDS detects DoS, DDoS, etc. The second engine analyse the attack to identify a botnet master behind the attacks. To detect anomalies in the first engine, authors use multi-clustering algorithms. Encrypted traffic is not explicitly identified, but the attacks are detected in it.},
+  Timestamp                = {2014.08.06}
+}
+
+@InProceedings{Arndt-2011-Comparison,
+  Title                    = {{A Comparison of Three Machine Learning Techniques for Encrypted Network Traffic Analysis}},
+  Author                   = {Arndt, D.J. and Zincir-Heywood, A.N.},
+  Booktitle                = {Computational Intelligence for Security and Defense Applications (CISDA), 2011 IEEE Symposium on},
+  Year                     = {2011},
+  Month                    = {April},
+  Pages                    = {107-114},
+
+  Abstract                 = {This work evaluates three methods for encrypted traffic analysis without using the IP addresses, port number, and payload information. To this end, binary identification of SSH vs non-SSH traffic is used as a case study since the plain text initiation of the SSH protocol allows us to obtain data sets with a reliable ground truth. The methods are subject to several tests using different export options, feature sets, and training and test traffic traces for a total of 128 different configurations. Of particular interest are test cases which that use a test set from a different network than that which the model was trained on, i.e. robustness of the trained models. Results show that the multi-objective genetic algorithm (MOGA) based trained model is able to achieve the best performance among the three methods when each approach is tested on traffic traces that are captured on the same network as the training network trace. On the other hand, C4.5 achieved the best results among the three methods when tested on traffic traces which are captured on totally different networks than the training trace. Furthermore, it is shown that continuous sampling of the training data is no better than random sampling, but the training data is very important for how well the classifiers will perform on traffic traces captured from different networks. Moreover, the C4.5 based approach provides the fastest and the most human readable model, whereas the MOGA reduces the complexity of the k-means clustering algorithm tremendously.},
+  Doi                      = {10.1109/CISDA.2011.5945941},
+  Keywords                 = {IP networks;cryptography;genetic algorithms;learning (artificial intelligence);pattern clustering;protocols;telecommunication traffic;C4.5-based approach;IP addresses;MOGA-based trained model;SSH protocol;binary identification;encrypted network traffic analysis;feature sets;k-mean clustering;machine learning techniques;multiobjective genetic algorithm;nonSSH traffic;payload information;port number;random sampling;traffic traces;Clustering algorithms;Equations;Mathematical model;Payloads;Protocols;Robustness;Training},
+  Location                 = {Paris, France},
+  Owner                    = {velan},
+  Review                   = {Authors compare C4.5, k-means and multi-objective genetic algorithm (MOGA). All methods are evaluated on multiple data sets when identifying SSH traffic. Full flows are used, times to train the methods and evaluate testing data are compared. C4.5 provides the best robustness and MOGA has very low false positive rate when used on the same data set as it was trained on. C4.5 is recommended for forensic analysis by law enforcement.},
+  Timestamp                = {2014.08.25}
+}
+
+@Misc{mse-specification,
+  Title                    = {{Message Stream Encryption.} \textit{Vuze Wiki}},
+
+  Author                   = {{Azureus Software Inc.}},
+  HowPublished             = {Web page},
+  Month                    = {May},
+  Note                     = {Accessed: 2014-10-31},
+  Year                     = {2014},
+
+  Keywords                 = {Message Stream Encryption, MSE, specification},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {http://wiki.vuze.com/w/Message_Stream_Encryption}
+}
+
+@InProceedings{Bacquet-2011-Genetic,
+  Title                    = {{Genetic Optimization and Hierarchical Clustering Applied to Encrypted Traffic Identification}},
+  Author                   = {Bacquet, C. and Zincir-Heywood, A.N. and Heywood, M.I.},
+  Booktitle                = {Computational Intelligence in Cyber Security (CICS), 2011 IEEE Symposium on},
+  Year                     = {2011},
+  Month                    = {April},
+  Pages                    = {194-201},
+
+  Abstract                 = {An important part of network management requires the accurate identification and classification of network traffic for decisions regarding bandwidth management, quality of service, and security. This work explores the use of a Multi-Objective Genetic Algorithm (MOGA) for both, feature selection and cluster count optimization, for an unsupervised machine learning technique, K-Means, applied to encrypted traffic identification. Specifically, a hierarchical K-Means algorithm is employed, comparing its performance to the MOGA with a non-hierarchical (flat) K-Means algorithm. The latter has already been benchmarked against common unsupervised techniques found in the literature, where results have favored the proposed MOGA. The purpose of this paper is to explore the gains, if any, obtained by increasing cluster purity in the proposed model by means of a second layer of clusters. In this work, SSH is chosen as an example of an encrypted application. However, nothing prevents the proposed model to work with other types of encrypted traffic, such as SSL or Skype. Results show that with the hierarchical MOGA, significant gains are observed in terms of the classification performance of the system.},
+  Doi                      = {10.1109/CICYBS.2011.5949391},
+  Keywords                 = {genetic algorithms;pattern clustering;quality of service;telecommunication computing;telecommunication network management;telecommunication traffic;unsupervised learning;QoS;SSL;Skype;bandwidth management;cluster count optimization;encrypted traffic identification;feature selection;hierarchical clustering;k-means algorithm;multiobjective genetic algorithm;network management;network traffic;quality of service;unsupervised machine learning;Accuracy;Clustering algorithms;Cryptography;Genetic algorithms;Machine learning;Optimization;Payloads},
+  Location                 = {Paris, France},
+  Owner                    = {velan},
+  Review                   = {Authors use Multi-Objective Genetic Algorithm for feature selection as well as for improving K-means method. Authors add a second layer of clusters and study the improvements. SSH was chosen as an example of encrypted traffic, only the categories SSH and non-SSH are used. Authors use private data set with truncated payload and was labeled by commercial tools. Authors consider the ground truth 100\% accurate, although they do not justify this accuracy when the payload is removed. Training data contained SSH, MSN, HTTP, FTP, and DNS. The data set was randomly sampled. Test data set contained more protocols, such as IMAP, SNMP, LDAP, POP3. 38 flow features were available to MOGA algorithm, number of used flow features by the best individuals is not known.},
+  Timestamp                = {2015.03.13}
+}
+
+@InCollection{Bacquet-2009-Investigation,
+  Title                    = {{An Investigation of Multi-objective Genetic Algorithms for Encrypted Traffic Identification}},
+  Author                   = {Bacquet, C. and Zincir-Heywood, A.N. and Heywood, M.I.},
+  Booktitle                = {Computational Intelligence in Security for Information Systems},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2009},
+  Pages                    = {93-100},
+  Series                   = {Advances in Intelligent and Soft Computing},
+  Volume                   = {63},
+
+  Abstract                 = {The increasing use of encrypted traffic combined with non-standard port associations makes the task of traffic identification increasingly difficult. This work adopts a multi-objective clustering approach to the problem in which a Genetic Algorithm performs both feature selection and cluster count optimization under a flow based representation. Solutions do not use port numbers, IP address or payload. Performance of the resulting model provides 90\% detection 0.8\% false positive rates with 13 clusters supported by 14 of the original 38 features.},
+  Doi                      = {10.1007/978-3-642-04091-7_12},
+  ISBN                     = {978-3-642-04090-0},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {SSH is chosen as an example of encrypted traffic for this work. Multi-Objective Genetic Algorithm is used to determine the best flow feature subspace and clustering of traffic types. Based on previous works authors argue that the feature selection and number of clusters highly affect the overall accuracy. Authors selected four features and in 25 runs of the MOGA tried to find the best Pareto non-dominated solution. They managed to obtain a solution with 92\% detection rate and only 0.8\% false positive rate.},
+  Timestamp                = {2014.10.06},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-04091-7_12}
+}
+
+@Misc{hippie,
+  Title                    = {{HiPPIE}},
+
+  Author                   = {Ballard, J.},
+  HowPublished             = {Web page},
+  Month                    = {April},
+  Note                     = {Accessed: 2014-11-26},
+  Year                     = {2013},
+
+  Keywords                 = {hippie, traffic classification},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://sourceforge.net/projects/hippie/}
+}
+
+@InCollection{BarYanai-2010-Realtime,
+  Title                    = {{Realtime Classification for Encrypted Traffic}},
+  Author                   = {Bar-Yanai, R. and Langberg, M. and Peleg, D. and Roditty, L.},
+  Booktitle                = {Experimental Algorithms},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2010},
+  Pages                    = {373-385},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {6049},
+
+  Abstract                 = {Classifying network flows by their application type is the backbone of many crucial network monitoring and controlling tasks, including billing, quality of service, security and trend analyzers. The classical “port-based” and “payload-based” approaches to traffic classification have several shortcomings. These limitations have motivated the study of classification techniques that build on the foundations of learning theory and statistics. The current paper presents a new statistical classifier that allows real time classification of encrypted data. Our method is based on a hybrid combination of the k-means and k-nearest neighbor (or k-NN) geometrical classifiers. The proposed classifier is both fast and accurate, as implied by our feasibility tests, which included implementing and intergrading statistical classification into a realtime embedded environment. The experimental results indicate that our classifier is extremely robust to encryption.},
+  Doi                      = {10.1007/978-3-642-13193-6_32},
+  ISBN                     = {978-3-642-13192-9},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {Authors use combination of k-means and k-nearest neighbor classifiers to classify network flows. They claim the method to be fast, accurate and robust to encryption, asymmetric routing and packet ordering. The BitTorrent traffic is hard to identify since the community put a lot of effort into detection avoidance. First few packets of encrypted communication are often padded to avoid detection using only first packets. Authors stress that their method is applicable in realtime ienvironment and tested it on an ISP link. First 100 packets are used for the classification. The application protocols classified are HTTP, SMTP, POP3, Skype, eDonkey, BitTorrent, Encrypted Bittorrent, RTP, ICQ.},
+  Timestamp                = {2014.10.06},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-13193-6_32}
+}
+
+@InProceedings{Bernaille-2007-Early,
+  Title                    = {{Early Recognition of Encrypted Applications}},
+  Author                   = {Bernaille, L. and Teixeira, R.},
+  Booktitle                = {Proceedings of the 8th International Conference on Passive and Active Network Measurement},
+  Year                     = {2007},
+
+  Address                  = {Berlin, Heidelberg},
+  Pages                    = {165--175},
+  Publisher                = {Springer-Verlag},
+  Series                   = {PAM'07},
+
+  Abstract                 = {Most tools to recognize the application associated with network connections use well-known signatures as basis for their classification. This approach is very effective in enterprise and campus networks to pinpoint forbidden applications (peer to peer, for instance) or security threats. However, it is easy to use encryption to evade these mechanisms. In particular, Secure Sockets Layer (SSL) libraries such as OpenSSL are widely available and can easily be used to encrypt any type of traffic. In this paper, we propose a method to detect applications in SSL encrypted connections. Our method uses only the size of the first few packets of an SSL connection to recognize the application, which enables an early classification. We test our method on packet traces collected on two campus networks and on manually-encrypted traces. Our results show that we are able to recognize the application in an SSL connection with more than 85\% accuracy.},
+  Acmid                    = {1762911},
+  ISBN                     = {978-3-540-71616-7},
+  Location                 = {Louvain-la-Neuve, Belgium},
+  Numpages                 = {11},
+  Owner                    = {velan},
+  Review                   = {Authors 1) detect and describe encrypted traffic (SSL) in a campus network and 2) use clustering method to detect SSL and identify the underlying application. The detection of encrypted traffic in 1) is done using first 4 bytes of payload to read SSL version and packet length. Authors use traffic traces from live networks and manually generated packet trace to verify their approach. The traffic classification uses clustering algorithm (Gaussian Mixture Model). First they use sizes and directions of first P packets to determine whether the flow is SSL. Using first three packets and 35 clusters gives good results. The method then searches for first data packet in the connection and uses the same clustering on data packet sizes to detect underlying application. However, the packet sizes are modified to allow for encryption overhead. Using combination of clustering and port numbers to differentiate applications in clusters provides better results that clustering alone.},
+  Timestamp                = {2014.09.26},
+  Url                      = {http://dl.acm.org/citation.cfm?id=1762888.1762911}
 }
 
 @InProceedings{Brauckhoff-2006-Impact,
@@ -94,6 +429,77 @@
   Owner                    = {velan},
   Timestamp                = {2014.12.02},
   Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128614003909}
+}
+
+@Article{Bujlow-2015-classification,
+  Title                    = {{Independent comparison of popular DPI tools for traffic classification}},
+  Author                   = {Bujlow, T. and Carela-Español, V. and Barlet-Ros, P.},
+  Journal                  = {Computer Networks},
+  Year                     = {2015},
+  Number                   = {0},
+  Pages                    = {75 - 89},
+  Volume                   = {76},
+
+  Abstract                 = {Deep Packet Inspection (DPI) is the state-of-the-art technology for traffic classification. According to the conventional wisdom, DPI is the most accurate classification technique. Consequently, most popular products, either commercial or open-source, rely on some sort of DPI for traffic classification. However, the actual performance of DPI is still unclear to the research community, since the lack of public datasets prevent the comparison and reproducibility of their results. This paper presents a comprehensive comparison of 6 well-known DPI tools, which are commonly used in the traffic classification literature. Our study includes 2 commercial products (PACE and NBAR) and 4 open-source tools (OpenDPI, L7-filter, nDPI, and Libprotoident). We studied their performance in various scenarios (including packet and flow truncation) and at different classification levels (application protocol, application and web service). We carefully built a labeled dataset with more than 750 K flows, which contains traffic from popular applications. We used the Volunteer-Based System (VBS), developed at Aalborg University, to guarantee the correct labeling of the dataset. We released this dataset, including full packet payloads, to the research community. We believe this dataset could become a common benchmark for the comparison and validation of network traffic classifiers. Our results present PACE, a commercial tool, as the most accurate solution. Surprisingly, we find that some open-source tools, such as nDPI and Libprotoident, also achieve very high accuracy.},
+  Doi                      = {http://dx.doi.org/10.1016/j.comnet.2014.11.001},
+  Keywords                 = {Deep packet inspection, DPI, traffic classification},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.02},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128614003909}
+}
+
+@Misc{CAIDA-2013-Cyber,
+  Title                    = {{Cyber-security Research Ethics Dialog \& Strategy Workshop}},
+
+  Author                   = {{CAIDA}},
+  Month                    = may,
+  Note                     = {Accessed: 2014-12-03},
+  Year                     = {2013},
+
+  Owner                    = {velan},
+  Timestamp                = {2014.12.03},
+  Url                      = {http://www.caida.org/workshops/creds/1305/}
+}
+
+@Article{Callado-2009-Survey,
+  Title                    = {{A Survey on Internet Traffic Identification}},
+  Author                   = {Callado, A. and Kamienski, C. and Szabo, G. and Gero, B. and Kelner, J. and Fernandes, S. and Sadok, D.},
+  Journal                  = {Communications Surveys \& Tutorials, IEEE},
+  Year                     = {2009},
+
+  Month                    = {Aug},
+  Number                   = {3},
+  Pages                    = {37-52},
+  Volume                   = {11},
+
+  Abstract                 = {The area of Internet traffic measurement has advanced enormously over the last couple of years. This was mostly due to the increase in network access speeds, due to the appearance of bandwidth-hungry applications, due to the ISPs' increased interest in precise user traffic profile information and also a response to the enormous growth in the number of connected users. These changes greatly affected the work of Internet service providers and network administrators, which have to deal with increasing resource demands and abrupt traffic changes brought by new applications. This survey explains the main techniques and problems known in the field of IP traffic analysis and focuses on application detection. First, it separates traffic analysis into packet-based and flow-based categories and details the advantages and problems for each approach. Second, this work cites the techniques for traffic analysis accessible in the literature, along with the analysis performed by the authors. Relevant techniques include signature-matching, sampling and inference. Third, this work shows the trends in application classification analysis and presents important and recent references in the subject. Lastly, this survey draws the readers' interest to open research topics in the area of traffic analysis and application detection and makes some final remarks.},
+  Doi                      = {10.1109/SURV.2009.090304},
+  ISSN                     = {1553-877X},
+  Keywords                 = {Internet;telecommunication traffic;ISP;Internet service provider;Internet traffic identification;bandwidth-hungry applications;flow-based traffic analysis;packet-based traffic analysis;Area measurement;Availability;IP networks;Loss measurement;Peer to peer computing;Performance analysis;Sampling methods;Telecommunication traffic;Video sharing;Web and internet services;Measurement, Application Identification, Traffic Analysis, Classification},
+  Owner                    = {velan},
+  Timestamp                = {2014.10.24}
+}
+
+@InCollection{Cao-2014-Survey,
+  Title                    = {{A Survey on Encrypted Traffic Classification}},
+  Author                   = {Cao, Z. and Xiong, G. and Zhao, Y. and Li, Z. and Guo, L.},
+  Booktitle                = {Applications and Techniques in Information Security},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2014},
+  Editor                   = {Batten, Lynn and Li, Gang and Niu, Wenjia and Warren, Matthew},
+  Pages                    = {73-81},
+  Series                   = {Communications in Computer and Information Science},
+  Volume                   = {490},
+
+  Abstract                 = {With the widespread use of encryption techniques in network applications, encrypted network traffic has recently become a great challenge for network management. Studies on encrypted traffic classification not only help to improve the network service quality, but also assist in enhancing network security. In this paper, we first introduce the basic information of encrypted traffic classification, emphasizing the influences of encryption on current classification methodology. Then, we summarize the challenges and recent advances in encrypted traffic classification research. Finally, the paper is ended with some conclusions.},
+  Doi                      = {10.1007/978-3-662-45670-5_8},
+  ISBN                     = {978-3-662-45669-9},
+  Keywords                 = {traffic classification; encrypted traffic; statistical classification; fine-grained; behavior based},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {The survey provides brief introduction into encrypted traffic classification and points out main challenges in the field. Authors differentiate advances in acurate classification, multi-phased fine-grained classification and behavior based fine-grained classification. Brief section is dedicated to countermeasures of statistical traffic analysis. Authors conclude that use of multiple player classification framework may be a way to achieve fine-grained classification.},
+  Timestamp                = {2015.03.11},
+  Url                      = {http://dx.doi.org/10.1007/978-3-662-45670-5_8}
 }
 
 @InProceedings{Cejka-2015-Using,
@@ -171,6 +577,20 @@
   Timestamp                = {2017.06.22}
 }
 
+@Misc{nbar,
+  Title                    = {{Network Based Application Recognition (NBAR)}},
+
+  Author                   = {{Cisco Systems, Inc.}},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-25},
+  Year                     = {2014},
+
+  Keywords                 = {nbar, cisco},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://www.cisco.com/c/en/us/products/ios-nx-os-software/network-based-application-recognition-nbar}
+}
+
 @Online{CiscoSystems-2013-Cisco,
   Title                    = {{Cisco IOS Flexible NetFlow Command Reference}},
   Author                   = {{Cisco Systems, Inc., San Jose, CA and USA}},
@@ -241,6 +661,126 @@
   Timestamp                = {2017.04.28}
 }
 
+@Misc{l7-filter,
+  Title                    = {{l7-filter}},
+
+  Author                   = {ClearFoundation},
+  HowPublished             = {Web page},
+  Month                    = {October},
+  Note                     = {Accessed: 2014-11-26},
+  Year                     = {2013},
+
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://l7-filter.clearfoundation.com/}
+}
+
+@Misc{Codenomicon-2014-Heartbleed,
+  Title                    = {{Heartbleed}},
+
+  Author                   = {{Codenomicon}},
+  Month                    = apr,
+  Note                     = {Accessed: 2014-11-25},
+  Year                     = {2014},
+
+  Owner                    = {velan},
+  Timestamp                = {2014.11.25},
+  Url                      = {http://heartbleed.com/}
+}
+
+@Article{Dainotti-2012-Issues,
+  Title                    = {{Issues and Future Directions in Traffic Classification}},
+  Author                   = {Dainotti, A and Pescape, A and Claffy, K.C.},
+  Journal                  = {Network, IEEE},
+  Year                     = {2012},
+
+  Month                    = {January},
+  Number                   = {1},
+  Pages                    = {35-40},
+  Volume                   = {26},
+
+  Abstract                 = {Traffic classification technology has increased in relevance this decade, as it is now used in the definition and implementation of mechanisms for service differentiation, network design and engineering, security, accounting, advertising, and research. Over the past 10 years the research community and the networking industry have investigated, proposed and developed several classification approaches. While traffic classification techniques are improving in accuracy and efficiency, the continued proliferation of different Internet application behaviors, in addition to growing incentives to disguise some applications to avoid filtering or blocking, are among the reasons that traffic classification remains one of many open problems in Internet research. In this article we review recent achievements and discuss future directions in traffic classification, along with their trade-offs in applicability, reliability, and privacy. We outline the persistently unsolved challenges in the field over the last decade, and suggest several strategies for tackling these challenges to promote progress in the science of Internet traffic classification.},
+  Doi                      = {10.1109/MNET.2012.6135854},
+  ISSN                     = {0890-8044},
+  Keywords                 = {Internet;computer network security;pattern classification;telecommunication network reliability;telecommunication traffic;Internet;network design;privacy;reliability;security;service differentiation;traffic classification;Classification algorithms;Feature extraction;Internet;Machine learning;Payloads;Telecommunication traffic},
+  Owner                    = {velan},
+  Review                   = {The article describes in general current state of the traffic classification research and shows areas that need further efforts. The authors also provide list of available implementations for traffic classification. They state that there is a strong need for more standardised evaluation of different techniques and approaches. Computational complexity of the algorithms and therefore further scalability is often of an issue.},
+  Timestamp                = {2014.08.22}
+}
+
+@Article{DeMontigny-Leboeuf-2005-Flow,
+  Title                    = {{Flow attributes for use in traffic characterization}},
+  Author                   = {De Montigny-Leboeuf, A.},
+  Journal                  = {Communications Research Centre Canada, Tech. Rep},
+  Year                     = {2005},
+
+  Abstract                 = {Attackers disguise their activities in order to evade detection and circumvent network security measures. The work presented in this document builds upon earlier work on traffic profiling to reveal the nature of a flow based on its behaviour. An important step, which is the focus of the document, consists of identifying relevant and discriminative flow attributes for use in traffic characterization. We have developed a number of indicators that portray essential communication dynamics, based solely on information that can be gathered from monitoring packet headers. The indicators are lightweight and the characteristics measured can be interpreted from domain knowledge. A tool is under development at the Communications Research Centre Canada to demonstrate the relevance of the flow attributes in characterizing network traffic. In particular, the tool includes the capability to describe the traffic and recognize a number of ubiquitous protocols. Several of the protocols we experimented with are in essence very similar, but were found to be distinguishable with the indicators presented herein. Preliminary assessment shows us that the derived tool is useful as is, and may lead with further research to a number of applications.},
+  Owner                    = {velan},
+  Review                   = {Authors provide list of flow features that can be used for traffic classification. They also suggest methods to recognize applications such as SSH and HTTPS.},
+  Timestamp                = {2014.10.17}
+}
+
+@InProceedings{Deri-2014-ndpi,
+  Title                    = {{nDPI: Open-source high-speed deep packet inspection}},
+  Author                   = {Deri, L. and Martinelli, M. and Bujlow, T. and Cardigliano, A.},
+  Booktitle                = {Wireless Communications and Mobile Computing Conference (IWCMC), 2014 International},
+  Year                     = {2014},
+  Month                    = {August},
+  Pages                    = {617-622},
+
+  Abstract                 = {Network traffic analysis was traditionally limited to packet header, because the transport protocol and application ports were usually sufficient to identify the application protocol. With the advent of port-independent, peer-to-peer, and encrypted protocols, the task of identifying application protocols became increasingly challenging, thus creating a motivation for creating tools and libraries for network protocol classification. This paper covers the design and implementation of nDPI, an open-source library for protocol classification using both packet header and payload. nDPI was extensively validated in various monitoring projects ranging from Linux kernel protocol classification, to analysis of 10 Gbit traffic, reporting both high protocol detection accuracy and efficiency.},
+  Doi                      = {10.1109/IWCMC.2014.6906427},
+  Keywords                 = {ndpi},
+  Location                 = {Nicosia, Cyprus},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01}
+}
+
+@Article{Du-2013-Design,
+  Title                    = {{Design of a Method for Encrypted P2P Traffic Identification Using K-means Algorithm}},
+  Author                   = {Du, Y. and Zhang, R.},
+  Journal                  = {Telecommunication Systems},
+  Year                     = {2013},
+  Number                   = {1},
+  Pages                    = {163-168},
+  Volume                   = {53},
+
+  Abstract                 = {Peer-to-Peer (P2P) plays an important role in the domain of Internet application, such as file sharing and instance communication. However, for the characteristic of bandwidth-intensive, P2P traffic identification is especially important in network management, which has been a hot topic in recent years. Based on the review of shortages of current existed technologies, a k-means algorithm based method was brought forward to identify the P2P traffic. For the reason that K-Means is one of the quickest and simplest clustering methods, it was selected as the core algorithm. In addition, the process of flow-information extraction and the descriptions of selected traffic attribute were also introduced in detail. Since the BT file-sharing traffic mainly runs over TCP, we only extract the flow-information of TCP connections. Finally, the experiments on 3 common used P2P applications, which are BitTorrent, BitSpirit and eMule, demonstrated the validity and efficiency of the method.},
+  Doi                      = {10.1007/s11235-013-9690-5},
+  ISSN                     = {1018-4864},
+  Keywords                 = {K-means; P2P; Traffic Identification; Flow-information extraction},
+  Language                 = {English},
+  Owner                    = {velan},
+  Publisher                = {Springer US},
+  Review                   = {The authors manually analyze and extract distinct features of P2P traffic for k-means based classification algorithm. Paper-specific data set was created for feature extraction. Authors claim that the detection is accurate at the beginning of the connections thus allowing administrators to take actions. However, the described method seems to be using flows with 90s timeouts. The paper uses term Deep Flow Inspection for flow-based behavioral analysis.},
+  Timestamp                = {2014.07.09},
+  Url                      = {http://dx.doi.org/10.1007/s11235-013-9690-5}
+}
+
+@InProceedings{Durumeric-2013-Analysis,
+  Title                    = {{Analysis of the HTTPS Certificate Ecosystem}},
+  Author                   = {Durumeric, Z. and Kasten, J. and Bailey, M. and Halderman, J.A.},
+  Booktitle                = {Proceedings of the 2013 Conference on Internet Measurement Conference},
+  Year                     = {2013},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {291--304},
+  Publisher                = {ACM},
+  Series                   = {IMC '13},
+
+  Abstract                 = {We report the results of a large-scale measurement study of the HTTPS certificate ecosystem---the public-key infrastructure that underlies nearly all secure web communications. Using data collected by performing 110 Internet-wide scans over 14 months, we gain detailed and temporally fine-grained visibility into this otherwise opaque area of security-critical infrastructure. We investigate the trust relationships among root authorities, intermediate authorities, and the leaf certificates used by web servers, ultimately identifying and classifying more than 1,800 entities that are able to issue certificates vouching for the identity of any website. We uncover practices that may put the security of the ecosystem at risk, and we identify frequent configuration problems that lead to user-facing errors and potential vulnerabilities. We conclude with lessons and recommendations to ensure the long-term health and security of the certificate ecosystem.},
+  Acmid                    = {2504755},
+  Doi                      = {10.1145/2504730.2504755},
+  ISBN                     = {978-1-4503-1953-9},
+  Keywords                 = {HTTPS, SSL, TLS, certificates, internet-wide scanning, measurement, public-key infrastructure, security, x.509},
+  Location                 = {Barcelona, Spain},
+  Numpages                 = {14},
+  Owner                    = {velan},
+  Review                   = {Authors use periodical active probing of IPv4 address space to find machines willing to complete TLS handshake on port 443. The gather massive amount of certificates and provide very detailed analysis of used CAs, intermediate certificates and quality of issued certificates. The data sets should be publicly available.},
+  Timestamp                = {2014.06.16},
+  Url                      = {http://doi.acm.org/10.1145/2504730.2504755}
+}
+
 @Article{Estan-2004-Building,
   Title                    = {{Building a Better NetFlow}},
   Author                   = {Estan, Cristian and Keys, Ken and Moore, David and Varghese, George},
@@ -265,6 +805,58 @@
   Url                      = {http://doi.acm.org/10.1145/1030194.1015495}
 }
 
+@Article{Finsterbusch-2014-Survey,
+  Title                    = {{A Survey of Payload-Based Traffic Classification Approaches}},
+  Author                   = {Finsterbusch, M. and Richter, C. and Rocha, E. and Muller, J.-A. and Hanssgen, K.},
+  Journal                  = {Communications Surveys \& Tutorials, IEEE},
+  Year                     = {2014},
+
+  Month                    = {May},
+  Number                   = {2},
+  Pages                    = {1135-1156},
+  Volume                   = {16},
+
+  Abstract                 = {Internet traffic classification has been the subject of intensive study since the birth of the Internet itself. Indeed, the evolution of approaches for traffic classification can be associated with the evolution of the Internet itself and with the adoption of new services and the emergence of novel applications and communication paradigms. Throughout the years many approaches have been proposed for addressing technical issues imposed by such novel services. Deep-Packet Inspection (DPI) has been a very important research topic within the traffic classification field and its concept consists of the analysis of the contents of the captured packets in order to accurately and timely discriminate the traffic generated by different Internet protocols. DPI was devised as a means to address several issues associated with port-based and statistical-based classification approaches in order to achieve an accurate and timely traffic classification. Many research works proposed different DPI schemes while many open-source modules have also become available for deployment. Surveys become then valuable tools for performing an overall analysis, study and comparison between the several proposed methods. In this paper we present a survey in which a complete and thorough analysis of the most important open-source DPI modules is performed. Such analysis comprises an evaluation of the classification accuracy, through a common set of traffic traces with ground truth, and of the computational requirements. In this manner, this survey presents a technical assessment of DPI modules and the analysis of the obtained evaluation results enable the proposal of general guidelines for the design and implementation of more adequate DPI modules.},
+  Doi                      = {10.1109/SURV.2013.100613.00161},
+  ISSN                     = {1553-877X},
+  Keywords                 = {Internet;pattern classification;telecommunication traffic;DPI schemes;Internet protocols;Internet traffic classification;deep-packet inspection;open-source DPI modules;payload-based traffic classification approach;port-based classification approach;statistical-based classification approach;Accuracy;Algorithm design and analysis;Internet;Machine learning algorithms;Ports (Computers);Protocols;Vectors;Internet traffic identification;Open source software;Performance evaluation},
+  Owner                    = {velan},
+  Review                   = {Authors perform an extensive survey of packet-based traffic classification approaches. In total, they recognize four categories of traffic classification: port-based approach, statistical approach, pattern-matching and protocol decoding. Related work section describes all categories, although authors work with packet-based classification in the rest of the paper. Authors also differentiate encrypted traffic by the used encryption into following types: encryption after handshake, encryption of the payload, encryption of parts of the header and the whole payload, encryption of the whole flow.
+
+The core of the paper is an evaluation and discussion of existing open-source DPI classifiers. The discussion involves ground truth, flows vs. packets, processing of TCP flows, encrypted traffic and design of traffic classifiers in general.},
+  Timestamp                = {2014.10.23}
+}
+
+@TechReport{SP-800-77,
+  Title                    = {{SP 800-77. Guide to IPsec VPNs}},
+  Author                   = {Frankel, S.E. and Kent, K. and Lewkowski, R. and Orebaugh, A.D. and Ritchey, R.W. and Sharma, S.R.},
+  Institution              = {National Institute of Standards \& Technology},
+  Year                     = {2005},
+
+  Address                  = {Gaithersburg, MD, United States},
+
+  Keywords                 = {IPSec; VPN; Authentication Header; Encapsulating Security Payload; Internet Key Exchange},
+  Owner                    = {Milan},
+  Review                   = {Very good introduction to the topic with sufficient description of all important thinks. because the paper age, the informations about IKE are outdated (now is used IKEv2 with significant changes).},
+  Timestamp                = {2014.10.07},
+  Url                      = {http://csrc.nist.gov/publications/nistpubs/800-77/sp800-77.pdf}
+}
+
+@Misc{sftp-draft,
+  Title                    = {{SSH File Transfer Protocol draft-ietf-secsh-filexfer-13.txt}},
+
+  Author                   = {Galbraith, J. and Saarenmaa, O.},
+  HowPublished             = {Internet-Draft},
+  Month                    = {July},
+  Year                     = {2006},
+
+  Abstract                 = {The SSH File Transfer Protocol provides secure file transfer functionality over any reliable, bidirectional octect stream. It is the standard file transfer protocol for use with the SSH2 protocol. This document describes the file transfer protocol and its interface to the SSH2 protocol suite.},
+  Keywords                 = {SFTP, SSH, draft},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13}
+}
+
 @InCollection{Garcia-Dorado-2013-High,
   Title                    = {{High-Performance Network Traffic Processing Systems Using Commodity Hardware}},
   Author                   = {García-Dorado, José Luis and Mata, Felipe and Ramos, Javier and Santiago del Río, Pedro M. and Moreno, Victor and Aracil, Javier},
@@ -285,6 +877,32 @@
   Review                   = {This recent work provides overview of different commodity based packet capture solutions. The paper describes techniques used by various researches to achieve 10 G packet rates in detail. Authors explain features of current NICs, NUMA architecture, OS network stack as well as approaches to utilize these concepts and overcome performance bottlenecks.},
   Timestamp                = {2014.09.04},
   Url                      = {http://dx.doi.org/10.1007/978-3-642-36784-7_1}
+}
+
+@Misc{pace,
+  Title                    = {{PACE 2.0}},
+
+  Author                   = {ipoque GmbH},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-25},
+
+  Keywords                 = {PACE},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://www.ipoque.com/en/products/pace}
+}
+
+@Misc{Google-2014-Poodle,
+  Title                    = {{Poodle}},
+
+  Author                   = {{Google}},
+  Month                    = sep,
+  Note                     = {Accessed: 2014-11-25},
+  Year                     = {2014},
+
+  Owner                    = {velan},
+  Timestamp                = {2014.11.25},
+  Url                      = {https://www.openssl.org/~bodo/ssl-poodle.pdf}
 }
 
 @Book{Gormley-2015-Elasticsearch,
@@ -323,6 +941,38 @@
 
   Owner                    = {velan},
   Timestamp                = {2017.08.04}
+}
+
+@Misc{bittorrent-specification,
+  Title                    = {{Index of BitTorrent Enhancement Proposals}},
+
+  Author                   = {Harrison, D.},
+  HowPublished             = {Web page},
+  Month                    = {October},
+  Note                     = {Accessed: 2014-11-27},
+  Year                     = {2014},
+
+  Keywords                 = {bittorrent, specification},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.03},
+  Url                      = {http://www.bittorrent.org/beps/bep_0000.html}
+}
+
+@InCollection{hellmons-2012-sshcure,
+  Title                    = {{SSHCure: A Flow-Based SSH Intrusion Detection System}},
+  Author                   = {Hellemons, L. and Hendriks, L. and Hofstede, R. and Sperotto, A. and Sadre, R. and Pras, A.},
+  Booktitle                = {Dependable Networks and Services},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2012},
+  Pages                    = {86-97},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {7279},
+
+  Abstract                 = {SSH attacks are a main area of concern for network managers, due to the danger associated with a successful compromise. Detecting these attacks, and possibly compromised victims, is therefore a crucial activity. Most existing network intrusion detection systems designed for this purpose rely on the inspection of individual packets and, hence, do not scale to today’s high-speed networks. To overcome this issue, this paper proposes SSHCure, a flow-based intrusion detection system for SSH attacks. It employs an efficient algorithm for the real-time detection of ongoing attacks and allows identification of compromised attack targets. A prototype implementation of the algorithm, including a graphical user interface, is implemented as a plugin for the popular NfSen monitoring tool. Finally, the detection performance of the system is validated with empirical traffic data.},
+  Doi                      = {10.1007/978-3-642-30633-4_11},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-30633-4_11}
 }
 
 @Article{Hofstede-2014-Flow,
@@ -380,6 +1030,30 @@
   Timestamp                = {2015.09.14}
 }
 
+@InProceedings{Holz-2011-SSL,
+  Title                    = {{The SSL Landscape: A Thorough Analysis of the X.509 PKI Using Active and Passive Measurements}},
+  Author                   = {Holz, R. and Braun, L. and Kammenhuber, N. and Carle, G.},
+  Booktitle                = {Proceedings of the 2011 ACM SIGCOMM Conference on Internet Measurement Conference},
+  Year                     = {2011},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {427--444},
+  Publisher                = {ACM},
+  Series                   = {IMC '11},
+
+  Abstract                 = {The SSL and TLS infrastructure used in important protocols like HTTPs and IMAPs is built on an X.509 public-key infrastructure (PKI). X.509 certificates are thus used to authenticate services like online banking, shopping, e-mail, etc. However, it always has been felt that the certification processes of this PKI may lack in stringency, resulting in a deployment where many certificates do not meet the requirements of a secure PKI. This paper presents a comprehensive analysis of X.509 certificates in the wild. To shed more light on the state of the deployed and actually used X.509 PKI, we obtained and evaluated data from many different sources. We conducted HTTPs scans of a large number of popular HTTPs servers over a 1.5-year time span, including scans from nine locations distributed over the globe. To compare certification properties of highly ranked hosts with the global picture, we included a third-party scan of the entire IPv4 space in our analyses. Furthermore, we monitored live SSL/TLS traffic on a 10Gbps uplink of a large research network. This allows us to compare the properties of the deployed PKI with the part of the PKI that is being actively accessed by users. Our analysis reveals that the quality of certification lacks in stringency, due to a number of reasons among which incorrect certification chains or invalid certificate subjects give the most cause for concern. Similar concerns can be raised for the properties of certification chains and many self-signed certificates used in the deployed X.509 PKI. Our findings confirm what has long been believed -- namely that the X.509 PKI we often use in our everyday's lives is in a sorry state.},
+  Acmid                    = {2068856},
+  Doi                      = {10.1145/2068816.2068856},
+  ISBN                     = {978-1-4503-1013-0},
+  Keywords                 = {HTTPS, SSL, TLS, X.509, certificates, public key infrastructure},
+  Location                 = {Berlin, Germany},
+  Numpages                 = {18},
+  Owner                    = {velan},
+  Review                   = {The paper describes one of the most complete SSL/TLS certificate analysis up to 2011. The analysis uses active and passive measurements and combines several different data sets. The focus is on: * Host analyses - Host replies with TLS/SSL - Negotiated ciphers and key lengths * Certificate properties - Certificate occurences - Validity of certification chains - Correct host names in certificate - Unusual host names in the common name - Extended validation - Length of certificate chain - Signature algorithms - Public key properties - Validity period - Intermediate certificates and certification chains - Different certificates between locations - Certificate issuers - Unique serial numbers, - X.509 version},
+  Timestamp                = {2014.06.16},
+  Url                      = {http://doi.acm.org/10.1145/2068816.2068856}
+}
+
 @Article{Hu-2014-Survey,
   Title                    = {{A Survey on Software-Defined Network and OpenFlow: From Concept to Implementation}},
   Author                   = {Hu, Fei and Hao, Qi and Bao, Ke},
@@ -396,6 +1070,25 @@
   Timestamp                = {2017.04.27}
 }
 
+@Article{Huang-2014-tls-forward-secrecy,
+  Title                    = {{An Experimental Study of TLS Forward Secrecy Deployments}},
+  Author                   = {Huang, L. and Adhikarla, S. and Boneh, D. and Jackson, C.},
+  Journal                  = {Internet Computing, IEEE},
+  Year                     = {2014},
+
+  Month                    = {November},
+  Number                   = {6},
+  Pages                    = {43-51},
+  Volume                   = {18},
+
+  Abstract                 = {Many Transport Layer Security (TLS) servers use the ephemeral Diffie-Hellman (DHE) key exchange to support forward secrecy. However, in a survey of 473,802 TLS servers, the authors found that 82.9 percent of the DHE-enabled servers use weak DH parameters, resulting in a false sense of security. They compared the server throughput of various TLS setups, and measured real-world client-side latencies using an advertisement network. Their results indicate that using forward secrecy is no harder, and can even be faster using elliptic curve cryptography (ECC), than no forward secrecy.},
+  Doi                      = {10.1109/MIC.2014.86},
+  Keywords                 = {public key cryptography;DHE key exchange;DHE-enabled servers;ECC;TLS forward secrecy deployments;TLS servers;advertisement network;client-side latencies;elliptic curve cryptography;ephemeral Diffie-Hellman key exchange;server throughput;transport layer security servers;Browsers;Ciphers;Cryptography;DH-HEMTs;Elliptic curve cryptography;Internet;Network security;Servers;Throughput;Transport protocols;TLS;elliptic curve cryptography;forward secrecy},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6870379}
+}
+
 @InProceedings{Husak-2015-Security,
   Title                    = {{Security Monitoring of HTTP Traffic Using Extended Flows}},
   Author                   = {Husák, Martin and Velan, Petr and Vykopal, Jan},
@@ -409,6 +1102,31 @@
   Keywords                 = {computer network security;program compilers;telecommunication traffic;transport protocols;HTTP request parsing;HTTP traffic;brute-force password attack;network flow monitoring;network security monitoring;Crawlers;IP networks;Monitoring;Protocols;Security;Web servers},
   Owner                    = {velan},
   Timestamp                = {2017.04.27}
+}
+
+@Misc{iana-protocol-registries,
+  Title                    = {{Protocol Registries}},
+
+  Author                   = {{IANA - Internet Assigned Numbers Authority}},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-28},
+  Year                     = {2014},
+
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {http://www.iana.org/protocols}
+}
+
+@Misc{IETF-2014-IETF,
+  Title                    = {{IETF 88 Proceedings, Technical Plenary}},
+
+  Author                   = {{IETF}},
+  Note                     = {Accessed: 2014-12-03},
+  Year                     = {2014},
+
+  Owner                    = {velan},
+  Timestamp                = {2014.12.03},
+  Url                      = {http://www.ietf.org/proceedings/88/technical-plenary.html}
 }
 
 @Online{IANA-2017-IP,
@@ -434,6 +1152,22 @@
   Timestamp                = {2017.04.27}
 }
 
+@Book{ISO7948-1,
+  Title                    = {{ISO/IEC 7498-1:1994 Information technology -- Open Systems Interconnection -- Basic Reference Model: The Basic Model}},
+  Author                   = {ISO},
+  Publisher                = {International Organization for Standardization},
+  Year                     = {1994},
+
+  Address                  = {Geneva, Switzerland},
+  Edition                  = {2},
+  Month                    = {November},
+
+  Keywords                 = {ISO/OSI model},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.03},
+  Url                      = {http://www.iso.org/iso/catalogue_detail.htm?csnumber=20269}
+}
+
 @Article{Jirsik-2017-Toward,
   Title                    = {{Toward Stream-Based IP Flow Analysis}},
   Author                   = {Jirsik, Tomas and Cermak, Milan and Tovarnak, Daniel and Celeda, Pavel},
@@ -448,6 +1182,31 @@
   Keywords                 = {Computer security;Data analysis;Delays;IP networks;Monitoring;Real-time systems;Telecommunication traffic},
   Owner                    = {velan},
   Timestamp                = {2017.08.04}
+}
+
+@InProceedings{Karagiannis-2005-BLINC,
+  Title                    = {{BLINC: Multilevel Traffic Classification in the Dark}},
+  Author                   = {Karagiannis, T. and Papagiannaki, K. and Faloutsos, M.},
+  Booktitle                = {Proceedings of the 2005 Conference on Applications, Technologies, Architectures, and Protocols for Computer Communications},
+  Year                     = {2005},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {229--240},
+  Publisher                = {ACM},
+  Series                   = {SIGCOMM '05},
+
+  Abstract                 = {We present a fundamentally different approach to classifying traffic flows according to the applications that generate them. In contrast to previous methods, our approach is based on observing and identifying patterns of host behavior at the transport layer. We analyze these patterns at three levels of increasing detail (i) the social, (ii) the functional and (iii) the application level. This multilevel approach of looking at traffic flow is probably the most important contribution of this paper. Furthermore, our approach has two important features. First, it operates in the dark, having (a) no access to packet payload, (b) no knowledge of port numbers and (c) no additional information other than what current flow collectors provide. These restrictions respect privacy, technological and practical constraints. Second, it can be tuned to balance the accuracy of the classification versus the number of successfully classified traffic flows. We demonstrate the effectiveness of our approach on three real traces. Our results show that we are able to classify 80\%-90\% of the traffic with more than 95\% accuracy.},
+  Acmid                    = {1080119},
+  Doi                      = {10.1145/1080091.1080119},
+  ISBN                     = {1-59593-009-4},
+  Keywords                 = {host behavior, traffic classification, transport layer},
+  Location                 = {Philadelphia, Pennsylvania, USA},
+  Numpages                 = {12},
+  Owner                    = {velan},
+  Review                   = {Authors focus more on Internet hosts than on individual flows. They classify their behavior on social, functional and application levels, without access to packet payloads or headers. Each level is classified independently and cross-level classification is performed afterwards. Particular applications are represented using graphlets, which are representations of applications' behavior. Authors then use heuristics to refine the classification.
+The ground truth for used data sets is established by using payload-based classification.},
+  Timestamp                = {2014.09.29},
+  Url                      = {http://doi.acm.org/10.1145/1080091.1080119}
 }
 
 @Article{Kekely-2016-Software,
@@ -473,6 +1232,125 @@
   Url                      = {http://dx.doi.org/10.1109/TC.2015.2423668}
 }
 
+@Article{Khakpour-2013-Information,
+  Title                    = {{An Information-Theoretical Approach to High-Speed Flow Nature Identification}},
+  Author                   = {Khakpour, A.R. and Liu, A.X.},
+  Journal                  = {Networking, IEEE/ACM Transactions on},
+  Year                     = {2013},
+
+  Month                    = {Aug},
+  Number                   = {4},
+  Pages                    = {1076-1089},
+  Volume                   = {21},
+
+  Abstract                 = {This paper concerns the fundamental problem of identifying the content nature of a flow-namely text, binary, or encrypted-for the first time. We propose Iustitia, a framework for identifying flow nature on the fly. The key observation behind Iustitia is that text flows have the lowest entropy and encrypted flows have the highest entropy, while the entropy of binary flows stands in between. We further extend Iustitia for the finer-grained classification of binary flows so that we can differentiate different types of binary flows (such as image, video, and executables) and even the file formats (such as JPEG and GIF for images, MPEG and AVI for videos) carried by binary flows. The basic idea of Iustitia is to classify flows using machine learning techniques where a feature is the entropy of every certain number of consecutive bytes. Our experimental results show that the classification can be done with high speed and high accuracy. On average, Iustitia can classify flows with 88.27\% of accuracy using a buffer size of 1 K with a classification time of less than 10\% of packet interarrival time for 91.2\% of flows.},
+  Doi                      = {10.1109/TNET.2012.2219591},
+  ISSN                     = {1063-6692},
+  Keywords                 = {cryptography;data compression;entropy;image classification;learning (artificial intelligence);text analysis;video coding;AVI;GIF;Iustitia;JPEG;MPEG;binary flow classification;binary flow entropy;encrypted flows;high-speed flow nature identification;information-theoretical approach;machine learning techniques;packet interarrival time;text flows;Accuracy;Cryptography;Entropy;Payloads;Support vector machines;Training;Vectors;Flow content analysis;flow identification},
+  Owner                    = {velan},
+  Review                   = {Authors propose to use a machine learning method taking entropy of packets for traffic classification. They show that it is possible to classify the flows with 88.27\% accuracy into text, encrypted and binary categories. The used methods are decision tree (CART) and support vector machines. No other features except the entropy is used, but several formulas for entropy computations are combined. Cutoff threshold is used to strip application headers from unknown protocols, which increases the accuracy as the actual payload is taken into account. Furthemore, authors show that it is possible to determine encryption algorithm with higher accuracy than random guessing, which they find surprising.},
+  Timestamp                = {2014.10.17}
+}
+
+@Article{Khalife-2014-multilevel,
+  Title                    = {{A multilevel taxonomy and requirements for an optimal traffic-classification model}},
+  Author                   = {Khalife, J. and Hajjar, A. and Diaz-Verdejo, J.},
+  Journal                  = {International Journal of Network Management},
+  Year                     = {2014},
+  Number                   = {2},
+  Pages                    = {101--120},
+  Volume                   = {24},
+
+  Abstract                 = {Identifying Internet traffic applications is essential for network security and management. The steady emergence of new Internet applications, together with the use of encryption and obfuscation techniques, ensures that traffic classification remains a hot research topic. Much research has been devoted to this topic by the research community in the last decade. However, an optimal traffic classification model has yet to be defined. Many techniques and formats have been described, with the current literature therefore lacking appropriate benchmarks expressed in a consistent terminology. Moreover, existing surveys are outdated and do not include many recent advances in the field. In this article, we present a systematic multilevel taxonomy that covers a broad range of existing and recently proposed methods, together with examples of vendor classification techniques. Our taxonomy assists in defining a consistent terminology. It could be useful in future benchmarking contexts by characterizing and comparing methods at three different levels. From this perspective, we describe key features and provide design hints for future classification models, while emphasizing the main requirements for promoting future research efforts. To motivate researchers and other interested parties, we collect and share data captured from real traffic, using two models to protect data privacy. Copyright © 2014 John Wiley & Sons, Ltd.},
+  Doi                      = {10.1002/nem.1855},
+  ISSN                     = {1099-1190},
+  Owner                    = {velan},
+  Review                   = {Authors provide taxonomy for traffic classification. The basic category groups are classification input (traffic payload, traffic properties and others), classification techniques (payload inspection, graphical, simple statistical, statistical machine learning, others) and classification output (mapping of traffic objects such as flows, packet or hosts to traffic classes, such as traffic clusters, application types, protocols, application software or anomaly). Future directions for optimal traffic classification are discussed and authors also promote code to data approach for comparison of methods. This approach allows researchers to send their code for traffic classification to the research group that can run it on unanonymised data.},
+  Timestamp                = {2014.10.17},
+  Url                      = {http://dx.doi.org/10.1002/nem.1855}
+}
+
+@InProceedings{Kim-2008-Internet,
+  Title                    = {{Internet Traffic Classification Demystified: Myths, Caveats, and the Best Practices}},
+  Author                   = {Kim, H. and Claffy, KC and Fomenkov, M. and Barman, D. and Faloutsos, M. and Lee, K.},
+  Booktitle                = {Proceedings of the 2008 ACM CoNEXT Conference},
+  Year                     = {2008},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {11:1--11:12},
+  Publisher                = {ACM},
+  Series                   = {CoNEXT '08},
+
+  Abstract                 = {Recent research on Internet traffic classification algorithms has yield a flurry of proposed approaches for distinguishing types of traffic, but no systematic comparison of the various algorithms. This fragmented approach to traffic classification research leaves the operational community with no basis for consensus on what approach to use when, and how to interpret results. In this work we critically revisit traffic classification by conducting a thorough evaluation of three classification approaches, based on transport layer ports, host behavior, and flow features. A strength of our work is the broad range of data against which we test the three classification approaches: seven traces with payload collected in Japan, Korea, and the US. The diverse geographic locations, link characteristics and application traffic mix in these data allowed us to evaluate the approaches under a wide variety of conditions. We analyze the advantages and limitations of each approach, evaluate methods to overcome the limitations, and extract insights and recommendations for both the study and practical application of traffic classification. We make our software, classifiers, and data available for researchers interested in validating or extending this work.},
+  Acmid                    = {1544023},
+  Articleno                = {11},
+  Doi                      = {10.1145/1544012.1544023},
+  ISBN                     = {978-1-60558-210-8},
+  Location                 = {Madrid, Spain},
+  Numpages                 = {12},
+  Owner                    = {velan},
+  Review                   = {The paper provides coherent comparison of several traffic classification algorithms based on ports, host behavior and flow features. Authors use seven traffic traces from Japan, Korea and US, which ensures variety od the traces. Performance of CoralReef (port based approach), BLINC (host behavior based) and seven commonly used machine learning algorithms is evaluated. Approaches are analyzed in detail and recommendations are made about the usage of these approaches. Highest accuracy is reported for SVM algorithm. Authors promote single-directional flow features including protocol and port numbers. The host behavior based methods strongly depends on topological location. The created code and data sets were made publicly available. Authors do not classify encrypted traffic to applications, but recognize SSL and SSH traffic as an encryption category in their work.},
+  Timestamp                = {2014.10.17},
+  Url                      = {http://doi.acm.org/10.1145/1544012.1544023}
+}
+
+@InProceedings{Koch-2010-Command,
+  Title                    = {{Command Evaluation in Encrypted Remote Sessions}},
+  Author                   = {Koch, R. and Rodosek, G.D.},
+  Booktitle                = {Proceedings of the 2010 Fourth International Conference on Network and System Security},
+  Year                     = {2010},
+
+  Address                  = {Washington, DC, USA},
+  Pages                    = {299--305},
+  Publisher                = {IEEE Computer Society},
+  Series                   = {NSS '10},
+
+  Abstract                 = {Intrusion Detection Systems (IDS) are integral components for the detection of malicious code and attacks. Detection methods can be differentiated in signature-based and anomaly-based systems. While the former ones search for well-known patterns which are available in a database, the latter ones build a model of the normal behavior of a network and later on attacks can be detected by measuring significant deviation of the network status against the normal behavior described by the model. Often this requires the availability of the payload of the network packets. If encryption protocols like SSL or SSH are used, searching for attack signatures in the payload is not possible any longer and also the usage of behavior based techniques is limited: Statistical methods like flow evaluation can be used for anomaly detection, but application level attacks hidden in the encrypted traffic can be undetectable. At the moment, only a few systems are designed to cope with encrypted network traffic. Even so, none of these systems can be easily deployed in general because of the need for protocol modifications, special infrastructures or because of high false alarm rates which are not acceptable in a production environment. In this paper, we propose a new IDS for encrypted traffic which identifies command sequences in encrypted network traffic and evaluates the attack possibility of them. The encrypted traffic is clustered and possibilities for different commands are calculated. Based on that, command sequences are analysed. The system evaluates probabilities for commands and command sequences and the likeliness for an attack based on the identified sequences without a decryption of the packets. Because of only using statistical data gathered from the network traffic, the system can be deployed in general. The current prototype of the system focuses on the command evaluation.},
+  Acmid                    = {1915155},
+  Doi                      = {10.1109/NSS.2010.62},
+  ISBN                     = {978-0-7695-4159-4},
+  Keywords                 = {IDS, Intrusion Detection, Encryption, SSH, Statistical Analysis, Command Evaluation, Remote Sessions, Network Security},
+  Numpages                 = {7},
+  Owner                    = {velan},
+  Review                   = {Authors propose a system for detection of interactive attacks on SSH. Clusters are created from the traffic based on entered commands and corresponding answers. Commands are distinguished using interarrival times and sizes of the packets. Authors take typical commands and their sequences and try to match them to the clusters using packet sizes and coincidence. The SSH is recognized as traffic on TCP port 22.},
+  Timestamp                = {2014.10.22},
+  Url                      = {http://dx.doi.org/10.1109/NSS.2010.62}
+}
+
+@InProceedings{Korczynski-2014-Markov,
+  Title                    = {{Markov Chain Fingerprinting to Classify Encrypted Traffic}},
+  Author                   = {Korczynski, M. and Duda, A.},
+  Booktitle                = {INFOCOM, 2014 Proceedings IEEE},
+  Year                     = {2014},
+  Month                    = {April},
+  Pages                    = {781-789},
+
+  Abstract                 = {In this paper, we propose stochastic fingerprints for application traffic flows conveyed in Secure Socket Layer/Transport Layer Security (SSL/TLS) sessions. The fingerprints are based on first-order homogeneous Markov chains for which we identify the parameters from observed training application traces. As the fingerprint parameters of chosen applications considerably differ, the method results in a very good accuracy of application discrimination and provides a possibility of detecting abnormal SSL/TLS sessions. Our analysis of the results reveals that obtaining application discrimination mainly comes from incorrect implementation practice, the misuse of the SSL/TLS protocol, various server configurations, and the application nature.},
+  Doi                      = {10.1109/INFOCOM.2014.6848005},
+  Keywords                 = {Internet;Markov processes;computer network security;cryptographic protocols;fingerprint identification;Markov chain fingerprinting;SSL/TLS protocol;SSL/TLS sessions;encrypted traffic classification;fingerprint parameters;secure socket layer/transport layer security;stochastic fingerprints;Ciphers;Markov processes;Protocols;Servers;Twitter},
+  Owner                    = {velan},
+  Review                   = {Autors use Markov chains based stochastic fingerprints for identification of application traffic in SSL/TLS sessions. The method is payload-based and uses statistical information from SSL/TLS headers. Authors test their method on twelve representative applications such as Twitter, Skype and Dropbox. The Markov chain fingerprints are based on distributions of packets in time. This work uses specific properties of each protocols to create appropriate fingerprints. Data sets are real, private and contain only SSL/TLS traffic. The ground truth is obtained by inspecting domain names of the SSL/TLS traffic. Authors discovered that many protocol implementations differ from RFC specification.},
+  Timestamp                = {2015.03.13}
+}
+
+@InProceedings{Korczynski-2012-Classifying,
+  Title                    = {{Classifying Service Flows in the Encrypted Skype Traffic}},
+  Author                   = {Korczynski, M. and Duda, A.},
+  Booktitle                = {Communications (ICC), 2012 IEEE International Conference on},
+  Year                     = {2012},
+  Month                    = {June},
+  Pages                    = {1064-1068},
+
+  Abstract                 = {In this paper, we consider the problem of detecting Skype traffic and classifying Skype service flows such as voice calls, skypeOut, video conferencing, chat, file upload and download. We propose a classification method for Skype encrypted traffic based on the Statistical Protocol IDentification (SPID) that analyzes statistical values of some traffic attributes. We have evaluated our method on a representative dataset to show excellent performance in terms of Precision and Recall.},
+  Doi                      = {10.1109/ICC.2012.6364024},
+  ISSN                     = {1550-3607},
+  Keywords                 = {Internet telephony;cryptography;protocols;statistical analysis;telecommunication traffic;SPID analysis;Skype service flow classification method;Skype traffic detection;Skype traffic encryption;precision-recall term;representative dataset method;skypeOut;statistical protocol identification analysis;video conferencing;voice call;Analysis of variance;Computational modeling;Cryptography;Fingerprint recognition;Peer to peer computing;Protocols},
+  Location                 = {Ottawa, Canada},
+  Owner                    = {velan},
+  Review                   = {Authors designed a method to identify types of communication (voice call, skypeOut, video conference, chat, file upload, file download) in Skype traffic. Authors use Statistical Protocol IDentification (SPID). Flow features are selected using forward selection which evalueates how a given feature improves classification performance. 9 features were selected such as byte frequency. Private, artificial data set with skype traffic was used. Other traffic with SSL, SSH, HTTP, SCP, SFTP, VoIP, BitTorrent ad other services was used to test robustness of the method. The method works very well, although the distinction between voice and video traffic has lower precision and recall.},
+  Timestamp                = {2015.03.13}
+}
+
 @InProceedings{Krmicek-2009-Netflow,
   Title                    = {{Netflow Based System for NAT Detection}},
   Author                   = {Krmicek, Vojtech and Vykopal, Jan and Krejci, Radek},
@@ -493,6 +1371,23 @@
   Owner                    = {velan},
   Timestamp                = {2017.05.25},
   Url                      = {http://doi.acm.org/10.1145/1658997.1659010}
+}
+
+@InProceedings{Kumano-2014-Towards,
+  Title                    = {{Towards real-time processing for application identification of encrypted traffic}},
+  Author                   = {Kumano, Y. and Ata, S. and Nakamura, N. and Nakahira, Y. and Oka, I},
+  Booktitle                = {Computing, Networking and Communications (ICNC), 2014 International Conference on},
+  Year                     = {2014},
+  Month                    = {Feb},
+  Pages                    = {136-140},
+
+  Abstract                 = {Application identification in the middle is one of key challenges for network operators to manage application based traffic and policy controls in the Internet. However, it is becoming harder according to the increase of end-to-end encrypted traffic in which we hardly read application specific information from packets. We previously proposed a method to identify the application of traffic whenever the traffic is encrypted or not. Our method gives a significant accuracy of identification of encrypted traffic as high as the case when traffic is not encrypted, however, it requires an offline processing to obtain statistics of the whole of flows. A real-time identification is important, but the accuracy is a problem due to unstable information of flow statistics. In this paper we therefore propose an approach to improve the accuracy of identification when we identify the encrypted traffic in real-time. We first clarify the sufficient number of packets required for accurate identification, and then the method to infer the statistics to improve the accuracy even when the obtained number of packets is smaller than the one required. Experimental results have shown that the proposed approach achieves the high accuracy almost the same as in offline method.},
+  Doi                      = {10.1109/ICCNC.2014.6785319},
+  Keywords                 = {Internet;computer network security;cryptography;identification;telecommunication traffic;Internet;application based traffic;application specific information;encrypted traffic identification;end-to-end encrypted traffic;flow statistics;offline processing;policy controls;real-time processing;Accuracy;Degradation;Encryption;Monitoring;Real-time systems;Training data},
+  Location                 = {Honolulu, Hawaii, USA},
+  Owner                    = {velan},
+  Review                   = {Authors modify previous method of application identification in encrypted traffic, which uses whole flows for the identification. They evaluate an impact of using fixed number of packets for the evaluation and suggest to remove or modify features that decrease the accuracy of the identification. The method uses machine learning and support vector machines in particular. The paper is written in very bad english and the experiments are often inconclusive. The important result is that the encryption affects some of the features more strongly than others.},
+  Timestamp                = {2014.08.22}
 }
 
 @InProceedings{Lastovicka-2017-Situational,
@@ -604,6 +1499,77 @@ and Stiller, Burkhard},
   Url                      = {http://dx.doi.org/10.1016/j.jnca.2012.12.020}
 }
 
+@InCollection{Maiolini-2009-Real,
+  Title                    = {{Real Time Identification of SSH Encrypted Application Flows by Using Cluster Analysis Techniques}},
+  Author                   = {Maiolini, G. and Baiocchi, A. and Iacovazzi, A. and Rizzi, A.},
+  Booktitle                = {NETWORKING 2009},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2009},
+  Editor                   = {Fratta, Luigi and Schulzrinne, Henning and Takahashi, Yutaka and Spaniol, Otto},
+  Pages                    = {182-194},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {5550},
+
+  Abstract                 = {The identification of application flows is a critical task in order to manage bandwidth requirements of different kind of services (i.e. VOIP, Video, ERP). As network security functions spread, an increasing amount of traffic is natively encrypted due to privacy issues (e.g. VPN). This makes ineffective current traffic classification systems based on ports and payload inspection, e.g. even powerful Deep Packet Inspection is useless to classify application flow carried inside SSH sessions. We have developed a real time traffic classification method based on cluster analysis to identify SSH flows from statistical behavior of IP traffic parameters, such as length, arrival times and direction of packets. In this paper we describe our approach and relevant obtained results. We achieve detection rate up to 99.5 \% in classifying SSH flows and accuracy up to 99.88 \% for application flows carried within those flows, such as SCP, SFTP and HTTP over SSH.},
+  Doi                      = {10.1007/978-3-642-01399-7_15},
+  ISBN                     = {978-3-642-01398-0},
+  Keywords                 = {Traffic analysis; statistical traffic classification; SSH; cluster analysis; k-means},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {Authors use K-Means clustering to identify SSH traffic and determine underlying protocols (SCP, SFTP, HTTP). Only three packet features are used: direction, bytes and timestamps of each packet. Private data sets are created from artificial traffic. The traffic contains HTTP, FTP, POP3 and SSH protocols, control packets are removed from statistics (TCP handshake, retransmitted packets, ACK only packets). Authors use only first 3-7 packets to achieve a real time identification.},
+  Timestamp                = {2015.03.11},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-01399-7_15}
+}
+
+@Misc{p0f-ssl-fingerprint,
+  Title                    = {{SSL fingerprinting for p0f}},
+
+  Author                   = {Majkowski, M.},
+  HowPublished             = {Web page},
+  Month                    = {June},
+  Note                     = {Accessed: 2014-11-28},
+  Year                     = {2012},
+
+  Keywords                 = {SSL, TLS, fingeprinting},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {https://idea.popcount.org/2012-06-17-ssl-fingerprinting-for-p0f/}
+}
+
+@PhdThesis{tls-thesis,
+  Title                    = {{20 Years of SSL/TLS Research An Analysis of the Internet’s Security Foundation}},
+  Author                   = {Meyer, C.},
+  School                   = {Ruhr-University Bochum},
+  Year                     = {2014},
+  Month                    = {February},
+
+  Abstract                 = {Since its introduction in 1994 the Secure Socket Layer (SSL) protocol (later renamed to Transport Layer Security (TLS)) evolved to the de facto standard for securing the transport layer. SSL/TLS can be used for ensuring data confidentiality, integrity and authenticity during transport. A main feature of the protocol is its flexibility. Modes of operation and security goals can easily be configured through different cipher suites.
+This thesis focuses on the SSL/TLS protocol suites for secure communication over untrusted media (the internet). It explains the protcol in depth (in the – at the time of writing – most common version TLS 1.0), provides a brief summary on its evolution and gives a detailed chronology of attacks and attack categories. New techniques for fingerprinting particular SSL/TLS implementations (stacks), partially down to patch level, are introduced and implemented as a tool for SSL/TLS stack inspection.
+Moreover, new attacks on state of the art implementations are given and a new framework, called T.I.M.E., especially designed for deep protocol inspection and penetration is presented. The attacks undermine the security goal confidentiality. Exploits for the discussed attacks are implemented by using the T.I.M.E framework. The results caused changes (fixes) in the affected implementations and highlight the need for tested, specification compliant and security optimized software.},
+  Keywords                 = {TLS, Transport Layer Security, SSL, Secure Socket Layer, Attacks, Survey},
+  Owner                    = {Milan},
+  Review                   = {Velmi pěkný přeheld o SSL/TLS a všech útocích, které na ně byly za 20 let provedeny.},
+  Timestamp                = {2014.10.17},
+  Url                      = {http://www-brs.ub.ruhr-uni-bochum.de/netahtml/HSS/Diss/MeyerChristopher/diss.pdf}
+}
+
+@InCollection{Miller-2014-https-decrypt,
+  Title                    = {{I Know Why You Went to the Clinic: Risks and Realization of HTTPS Traffic Analysis}},
+  Author                   = {Miller, B. and Huang, L. and Joseph, A.D. and Tygar, J.D.},
+  Booktitle                = {Privacy Enhancing Technologies},
+  Publisher                = {Springer International Publishing},
+  Year                     = {2014},
+  Pages                    = {143-163},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {8555},
+
+  Abstract                 = {Revelations of large scale electronic surveillance and data mining by governments and corporations have fueled increased adoption of HTTPS. We present a traffic analysis attack against over 6000 webpages spanning the HTTPS deployments of 10 widely used, industry-leading websites in areas such as healthcare, finance, legal services and streaming video. Our attack identifies individual pages in the same website with 90\% accuracy, exposing personal details including medical conditions, financial and legal affairs and sexual orientation. We examine evaluation methodology and reveal accuracy variations as large as 17\% caused by assumptions affecting caching and cookies. We present a novel defense reducing attack accuracy to 25\% with a 9\% traffic increase, and demonstrate significantly increased effectiveness of prior defenses in our evaluation context, inclusive of enabled caching, user-specific cookies and pages within the same website.},
+  Doi                      = {10.1007/978-3-319-08506-7_8},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {http://dx.doi.org/10.1007/978-3-319-08506-7_8}
+}
+
 @Article{Molina-2006-Design,
   Title                    = {{Design Principles and Algorithms for Effective High-speed IP Flow Monitoring}},
   Author                   = {Molina, Maurizio. and Chiosi, Agostino. and D'Antonio, Salvatore and Ventre, Giorgio},
@@ -626,6 +1592,18 @@ and Stiller, Burkhard},
   Publisher                = {Elsevier Science Publishers B. V.},
   Timestamp                = {2017.04.28},
   Url                      = {http://dx.doi.org/10.1016/j.comcom.2005.07.024}
+}
+
+@TechReport{Moore-2005-Discriminators,
+  Title                    = {{Discriminators for use in flow-based classification}},
+  Author                   = {Moore, A. and Crogan, M. and Zuev, D.},
+  Institution              = {Queen Mary, University of London},
+  Year                     = {2005},
+
+  Owner                    = {velan},
+  Review                   = {The report describes data sets that were made available by the researches for the purposes of flow-based classification training evaluation. IT contains description of 249 discriminators that can be used by the classificators. It is certainly a good starting point to look for flow features to measure.},
+  Timestamp                = {2014.08.22},
+  Url                      = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.101.7450&rep=rep1&type=pdf}
 }
 
 @InProceedings{Murray-2012-State,
@@ -661,6 +1639,48 @@ and Stiller, Burkhard},
   Url                      = {http://dx.doi.org/10.1007/978-3-642-54999-1_1}
 }
 
+@Article{Nguyen-2008-Survey,
+  Title                    = {{A Survey of Techniques for Internet Traffic Classification Using Machine Learning}},
+  Author                   = {Nguyen, T.T.T. and Armitage, G.},
+  Journal                  = {Communications Surveys \& Tutorials, IEEE},
+  Year                     = {2008},
+
+  Month                    = oct,
+  Number                   = {4},
+  Pages                    = {56--76},
+  Volume                   = {10},
+
+  Abstract                 = {The research community has begun looking for IP traffic classification techniques that do not rely on `well known¿ TCP or UDP port numbers, or interpreting the contents of packet payloads. New work is emerging on the use of statistical traffic characteristics to assist in the identification and classification process. This survey paper looks at emerging research into the application of Machine Learning (ML) techniques to IP traffic classification - an inter-disciplinary blend of IP networking and data mining techniques. We provide context and motivation for the application of ML techniques to IP traffic classification, and review 18 significant works that cover the dominant period from 2004 to early 2007. These works are categorized and reviewed according to their choice of ML strategies and primary contributions to the literature. We also discuss a number of key requirements for the employment of ML-based traffic classifiers in operational IP networks, and qualitatively critique the extent to which the reviewed works meet these requirements. Open issues and challenges in the field are also discussed.},
+  Acmid                    = {2211395},
+  Address                  = {Piscataway, NJ, USA},
+  Doi                      = {10.1109/SURV.2008.080406},
+  ISSN                     = {1553-877X},
+  Issue_date               = {October 2008},
+  Keywords                 = {Flow clustering, Internet Protocol, Machine Learning, Payload inspection, Real Time, Statistical traffic properties, Traffic classification},
+  Numpages                 = {21},
+  Owner                    = {velan},
+  Publisher                = {IEEE Press},
+  Timestamp                = {2014.10.24},
+  Url                      = {http://dx.doi.org/10.1109/SURV.2008.080406}
+}
+
+@InProceedings{Okada-2011-Application,
+  Title                    = {{Application Identification from Encrypted Traffic Based on Characteristic Changes by Encryption}},
+  Author                   = {Okada, Y. and Ata, S. and Nakamura, N. and Nakahira, Y. and Oka, I},
+  Booktitle                = {Communications Quality and Reliability (CQR), 2011 IEEE International Workshop Technical Committee on},
+  Year                     = {2011},
+  Month                    = {May},
+  Pages                    = {1-6},
+
+  Abstract                 = {Application identification is paid much attention by network operators to manage application based traffic control in the Internet. However, encryption is one of the factors to make application identification difficult, because it is so hard to infer the original (unencrypted) packets from encrypted packets. Therefore the accuracy of application identification is getting worse as the increase of encrypted traffic. In this paper, the changes in traffic features due to encryption are analyzed, and two methods are developed that can be used with an existing method for identifying applications from encrypted traffic. Experimental results show that these methods improve identification accuracy up to 28.5\% for encrypted traffic compared to existing methods. Moreover, identification using the best combination of flow features enables high accuracy with less computation due to the elimination of features that do not flow a Gaussian distribution and thus degrade accuracy.},
+  Doi                      = {10.1109/CQR.2011.5996087},
+  Keywords                 = {Gaussian distribution;Internet;computer network security;cryptography;Gaussian distribution;Internet;application identification;network operators;traffic control;traffic encryption;Accuracy;Correlation;Encryption;Monitoring;Servers;Training data},
+  Location                 = {Naples, Florida, USA},
+  Owner                    = {velan},
+  Review                   = {Authors create training data set for PPTP and IPsec encryptions and HTTP, FTP, SSH, SMTP applications. Then they evaluate which of 49 measured flow features are strongly correlated in normal and encrypted traffic. These features are used to infer functions to describe the relation between the features. The encrypted traffic is separated based on strongly distinct features. Using Naive Bayes classifier with inferred flow fetures on encrypted traffic improves accuracy of the method up to 28.5\%. Moreover, the paper shows that it is possible to recognize encrypted traffic based on flow features. However, this is true for encrypted tunnels, authors do not provide any information about per flow encryption (e.g. using TLS).},
+  Timestamp                = {2014.08.25}
+}
+
 @Online{ONF-2012-OpenFlow,
   Title                    = {{OpenFlow Switch Specification}},
   Author                   = {{Open Networking Foundation}},
@@ -674,6 +1694,35 @@ and Stiller, Burkhard},
   Timestamp                = {2017.04.27}
 }
 
+@Misc{nbar-patent,
+  Title                    = {{Intelligent network based application recognition}},
+
+  Author                   = {Ott, M.},
+  Month                    = {November},
+  Note                     = {US Patent 6,961,770},
+  Year                     = {2005},
+
+  Keywords                 = {nbar, cisco},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.01}
+}
+
+@Misc{scp-description,
+  Title                    = {{How the SCP protocol works.} \textit{Jan Pechanec's Weblog.}},
+
+  Author                   = {Pechanec, J.},
+  HowPublished             = {Weblog post},
+  Month                    = {July},
+  Note                     = {Accessed: 2014-10-30},
+  Year                     = {2007},
+
+  Abstract                 = {Have you ever wondered how the scp and rcp commands worked? The first time I did I haven't found any documentation on the subject. There is no RFC, no draft, not even README file describing it. After reading the source code I tried again and realized that old version of rcp.c might be really the only original documentation available. And since I worked on a couple of bugs in our scp(1) some time ago I put a note in my todo list to write something about it, for the next time I'm going to need it.},
+  Keywords                 = {SCP, description},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {https://blogs.oracle.com/janp/entry/how_the_scp_protocol_works}
+}
+
 @Online{Phaal-2004-sFlow,
   Title                    = {{sFlow Version 5}},
   Author                   = {Phaal, Peter},
@@ -683,6 +1732,20 @@ and Stiller, Burkhard},
 
   Owner                    = {velan},
   Timestamp                = {2017.04.27}
+}
+
+@Misc{qualys-ssl-fingerprinting,
+  Title                    = {{HTTP Client Fingerprinting Using SSL Handshake Analysis}},
+
+  Author                   = {{Qualys, Inc.}},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-28},
+  Year                     = {2014},
+
+  Keywords                 = {SSL, TLS, fingerprinting},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {https://www.ssllabs.com/projects/client-fingerprinting/}
 }
 
 @InProceedings{Rodriguez-2013-Empirical,
@@ -713,6 +1776,19 @@ and Stiller, Burkhard},
   Keywords                 = {IP networks;computer network management;computer network security;DDoS attack effect;IP network monitoring;dimension flow-based monitoring systems;distributed denial-of-service attacks;flow data;network management;Analytical models;Computer crime;Educational institutions;IP networks;Intrusion detection;Monitoring;Probes},
   Owner                    = {velan},
   Timestamp                = {2017.04.28}
+}
+
+@Misc{Sandvine-2014-Global,
+  Title                    = {{Global Internet Phenomena Report 1H 2014}},
+
+  Author                   = {{Sandvine, Inc.}},
+  Month                    = may,
+  Note                     = {Accessed: 2014-11-25},
+  Year                     = {2014},
+
+  Owner                    = {velan},
+  Timestamp                = {2014.11.25},
+  Url                      = {https://www.sandvine.com/downloads/general/global-internet-phenomena/2014/1h-2014-global-internet-phenomena-report.pdf}
 }
 
 @Article{Shimeall-2014-Using,
@@ -750,6 +1826,34 @@ and Stiller, Burkhard},
   Url                      = {https://doi.org/10.1007/s10922-016-9393-9}
 }
 
+@Misc{skype-web,
+  Title                    = {Skype},
+
+  Author                   = {{Skype and Microsoft}},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-25},
+  Year                     = {2014},
+
+  Keywords                 = {skype, home page},
+  Owner                    = {Milan},
+  Timestamp                = {2014.12.03},
+  Url                      = {http://www.skype.com/}
+}
+
+@Misc{skype-requirements,
+  Title                    = {{Skype Connect™ Requirements Guide}},
+
+  Author                   = {{Skype Limited}},
+  HowPublished             = {Online},
+  Note                     = {Accessed: 2014-11-01},
+  Year                     = {2011},
+
+  Keywords                 = {Skype, Requirements Guide},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {http://download.skype.com/share/business/guides/skype-connect-requirements-guide.pdf}
+}
+
 @InProceedings{Sommer-2010-Outside,
   Title                    = {{Outside the Closed World: On Using Machine Learning for Network Intrusion Detection}},
   Author                   = {Sommer, Robin and Paxson, Vern},
@@ -763,6 +1867,55 @@ and Stiller, Burkhard},
   Keywords                 = {Computer science;Computer security;Computerized monitoring;Guidelines;Intrusion detection;Laboratories;Machine learning;National security;Privacy;Telecommunication traffic;anomaly detection;intrusion detection;machine learning;network security},
   Owner                    = {velan},
   Timestamp                = {2017.08.09}
+}
+
+@Misc{ssl-certificates-blacklist,
+  Title                    = {{SSL Blacklist}},
+
+  Author                   = {{sslbl.abuse.ch}},
+  HowPublished             = {Web page},
+  Note                     = {Accessed: 2014-11-28},
+  Year                     = {2014},
+
+  Keywords                 = {SSL, blacklist, certificate},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.28},
+  Url                      = {https://sslbl.abuse.ch/}
+}
+
+@Article{ssh-basics,
+  Title                    = {{Protocol Basics: Secure Shell Protocol}},
+  Author                   = {Stallings, W.},
+  Journal                  = {The Internet Protocol Journal},
+  Year                     = {2009},
+
+  Month                    = {December},
+  Number                   = {4},
+  Pages                    = {18--30},
+  Volume                   = {12},
+
+  Keywords                 = {SSH, Cisco journal, Secure Shell Protocol},
+  Owner                    = {Milan},
+  Timestamp                = {2014.11.03},
+  Url                      = {http://www.cisco.com/web/about/ac123/ac147/archived_issues/ipj_12-4/124_ssh.html}
+}
+
+@InProceedings{Sun-2010-Novel,
+  Title                    = {{An Novel Hybrid Method for Effectively Classifying Encrypted Traffic}},
+  Author                   = {Sun, G. and Xue, Y. and Dong, Y. and Wang, D. and Li, C.},
+  Booktitle                = {Global Telecommunications Conference (GLOBECOM 2010), 2010 IEEE},
+  Year                     = {2010},
+  Month                    = {Dec},
+  Pages                    = {1-5},
+
+  Abstract                 = {Classifying encrypted traffic is critical to effective network analysis and management. While traditional payload- based methods are powerless to deal with encrypted traffic, machine learning methods have been proposed to address this issue. However, these methods often bring heavy overhead into the system. In this paper, we propose a hybrid method that combines signature-based methods and statistical analysis methods to address this issue. We first identify SSL/TLS traffic with signature matching methods, and then apply statistical analysis to determine concrete application protocols. Our experimental results show that the proposed method is able to recognize over 99\% of SSL/TLS traffic and achieve 94.52\% in F-score for protocols identification.},
+  Doi                      = {10.1109/GLOCOM.2010.5683649},
+  ISSN                     = {1930-529X},
+  Keywords                 = {cryptography;learning (artificial intelligence);statistical analysis;telecommunication computing;telecommunication network management;telecommunication security;telecommunication traffic;SSL-TLS traffic;encrypted traffic;machine learning;network analysis;network management;payload- based method;signature matching method;signature-based method;statistical analysis;Accuracy;Bayesian methods;Computational modeling;Cryptography;Protocols;Statistical analysis;Training},
+  Location                 = {Miami, Florida, USA},
+  Owner                    = {velan},
+  Review                   = {The paper describes a hybrid method for encrypted traffic classification. SSL/TLS is identified first based on signature matching, then HTTP, TOR and other traffic is distinguished using Naive Bayesian classification method. The paper provides an overview of statistical and packet based classification methods, which could be useful for writing further papers in this area.},
+  Timestamp                = {2014.07.08}
 }
 
 @Online{IESG--Packet,
@@ -925,6 +2078,65 @@ and Stiller, Burkhard},
   Timestamp                = {2017.04.28}
 }
 
+@Article{Wang-2014-Internet,
+  Title                    = {{Internet traffic clustering with side information}},
+  Author                   = {Wang, Y. and Xiang, Y. and Zhang, J. and Zhou, W. and Xie, B.},
+  Journal                  = {Journal of Computer and System Sciences},
+  Year                     = {2014},
+  Note                     = {Special Issue on Dependable and Secure Computing The 9th \{IEEE\} International Conference on Dependable, Autonomic and Secure Computing },
+  Number                   = {5},
+  Pages                    = {1021 - 1036},
+  Volume                   = {80},
+
+  Abstract                 = {Abstract Internet traffic classification is a critical and essential functionality for network management and security systems. Due to the limitations of traditional port-based and payload-based classification approaches, the past several years have seen extensive research on utilizing machine learning techniques to classify Internet traffic based on packet and flow level characteristics. For the purpose of learning from unlabeled traffic data, some classic clustering methods have been applied in previous studies but the reported accuracy results are unsatisfactory. In this paper, we propose a semi-supervised approach for accurate Internet traffic clustering, which is motivated by the observation of widely existing partial equivalence relationships among Internet traffic flows. In particular, we formulate the problem using a Gaussian Mixture Model (GMM) with set-based equivalence constraint and propose a constrained Expectation Maximization (EM) algorithm for clustering. Experiments with real-world packet traces show that the proposed approach can significantly improve the quality of resultant traffic clusters. },
+  Doi                      = {http://dx.doi.org/10.1016/j.jcss.2014.02.008},
+  ISSN                     = {0022-0000},
+  Keywords                 = {Traffic classification},
+  Owner                    = {velan},
+  Review                   = {The paper presents an idea that flows with same protocol, destination IP and destination port are most likely carrying the same application. Authors formulate a constrained clustering problem with the classic Gaussian Mixture Mode and apply a varion of the Expectation Maximization algorithm to fit the model with observed data and constraints. Three real-world data sets are used for evaluation of the proposed method, two from university campus and one from ISP network.},
+  Timestamp                = {2014.10.23},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S0022000014000208}
+}
+
+@InProceedings{Wang-2011-Using,
+  Title                    = {{Using Entropy to Classify Traffic More Deeply}},
+  Author                   = {Wang, Y. and Zhang, Z. and Guo, L. and Li, S.},
+  Booktitle                = {Networking, Architecture and Storage (NAS), 2011 6th IEEE International Conference on},
+  Year                     = {2011},
+  Month                    = {July},
+  Pages                    = {45-52},
+
+  Abstract                 = {The network community always pays its attention to find better methods for traffic classification, which is crucial for Internet Service Providers (ISPs) to provide better QoS for users. Prior works on traffic classification mainly focus their attentions on dividing Internet traffic into different categories based on application layer protocols (such as HTTP, Bit Torrent etc.). Making traffic classification from another point of view, we divide Internet traffic into different content types. Our technology is an attempt to solve the classification problem of network traffic, which contains unknown and proprietary protocols (i.e., no publicly available protocol specification). In this paper, we design a classifier which can distinguish Internet traffic into different content types using machine learning techniques. Features of our classifier are entropy of consecutive bytes and frequencies of characters. Our method is capable of classifying real-world traces into different content types (including Text, Picture, Audio, Video, Compressed, Base 64-encoded image, Base 64-encoded text and Encrypted). The chief features of our classifier are small computing space (about 1K Bytes) and high classification accuracy (about 81\%).},
+  Doi                      = {10.1109/NAS.2011.18},
+  Keywords                 = {Internet;learning (artificial intelligence);protocols;quality of service;telecommunication traffic;64-encoded image;Audio;Bit Torrent;HTTP;ISP;Internet service providers;Internet traffic;Picture;QoS;Text;Video;machine learning techniques;network community;traffic classification;Accuracy;Cryptography;Entropy;Internet;Machine learning;Payloads;Protocols;entropy vector;file content;machine learning;traffic classification},
+  Location                 = {Dalian, Liaoning, China},
+  Owner                    = {velan},
+  Review                   = {Paper proposes to use entropy for traffic classification into eight classes: text, picture, video, audio, encoded text, encoded image, compressed, encrypted. Authors use support vector machine algorithm and compute entropy on words of length 1-6 bytes. In addition, they use frequencies of 4-bit characters to distinguish between encrypted and compressed traffic. The evaluation part is weak, more general dataset should be used. Authors argue that it is important to skip the protocol headers (e.g. image headers) to achieve the best results.},
+  Timestamp                = {2014.06.16}
+}
+
+@Article{Wright-2006-Inferring,
+  Title                    = {{On Inferring Application Protocol Behaviors in Encrypted Network Traffic}},
+  Author                   = {Wright, C.V. and Monrose, F. and Masson, G.M.},
+  Journal                  = {J. Mach. Learn. Res.},
+  Year                     = {2006},
+
+  Month                    = dec,
+  Pages                    = {2745--2769},
+  Volume                   = {7},
+
+  Abstract                 = {Several fundamental security mechanisms for restricting access to network resources rely on the ability of a reference monitor to inspect the contents of traffic as it traverses the network. However, with the increasing popularity of cryptographic protocols, the traditional means of inspecting packet contents to enforce security policies is no longer a viable approach as message contents are concealed by encryption. In this paper, we investigate the extent to which common application protocols can be identified using only the features that remain intact after encryption---namely packet size, timing, and direction. We first present what we believe to be the first exploratory look at protocol identification in encrypted tunnels which carry traffic from many TCP connections simultaneously, using only post-encryption observable features. We then explore the problem of protocol identification in individual encrypted TCP connections, using much less data than in other recent approaches. The results of our evaluation show that our classifiers achieve accuracy greater than 90\% for several protocols in aggregate traffic, and, for most protocols, greater than 80\% when making fine-grained classifications on single connections. Moreover, perhaps most surprisingly, we show that one can even estimate the number of live connections in certain classes of encrypted tunnels to within, on average, better than 20\%.},
+  Acmid                    = {1248647},
+  ISSN                     = {1532-4435},
+  Issue_date               = {12/1/2006},
+  Numpages                 = {25},
+  Owner                    = {velan},
+  Publisher                = {JMLR.org},
+  Review                   = {Authors show what can be achieved with without payloads and TCP headers, using only packet sizes, timing and direction. This simulates multiple flows wrapped in a single encryption tunnel. Real traffic traces are used for the evaluation. The port numbers are used as a ground truth and the authors argue that mislabeled data only decrease the efficiency and therefore the real accuracy would be even higher than the one measured. k-Nearest Neighbour classifier is used for classification when all TCP connections in a set carry the same application protocol. When the TCP connections might carry different application protocols, hiden Markov models are used for classification. Authors also show that it is possible to determine number of flows in encrypted tunnel.},
+  Timestamp                = {2014.09.29},
+  Url                      = {http://dl.acm.org/citation.cfm?id=1248547.1248647}
+}
+
 @InProceedings{Yu-2013-FlowSense,
   Title                    = {{FlowSense: Monitoring Network Utilization with Zero Measurement Cost}},
   Author                   = {Yu, Curtis and Lumezanu, Cristian and Zhang, Yueping and Singh, Vishal and Jiang, Guofei and Madhyastha, Harsha V.},
@@ -962,6 +2174,40 @@ and Stiller, Burkhard},
   Owner                    = {velan},
   Timestamp                = {2015-06-18T13:31:15.000+0200},
   Url                      = {http://dblp.uni-trier.de/db/conf/e2emon/e2emon2007.html#ZhangM07}
+}
+
+@Conference{Zhang-2009-State,
+  Title                    = {{State of the Art in Traffic Classification: A Research Review}},
+  Author                   = {Zhang, M. and John, W. and Claffy, KC and Brownlee, N.},
+  Booktitle                = {PAM '09: 10th International Conference on Passive and Active Measurement, Student Workshop},
+  Year                     = {2009},
+
+  Abstract                 = {The Internet, while emerging as the key component for all sorts of communication, is far from well-understood. The goal of traffic classification is to understand the type of traffic carried on the Internet, which continually evolves in scope and complexity. For security and privacy reasons, many applications have emerged that utilize obfuscation techniques such as random ports, encrypted data transmission, or proprietary communication protocols. Further, applications adapt rapidly in the face of attempts to detect certain types of traffic, creating a challenge for traffic classification schemes. Research papers on Internet traffic classification try to classify whatever traffic samples a researcher can find, with no systematic integration of results. With the exception of machine learning techniques for traffic classification, we know of no complete overview of traffic classification attempts. To fill this gap, we have created a structured taxonomy of traffic classification papers and their datasets. To illustrate its utility, we use the taxonomy to answer the recently most popular question about traffic (“How much is peer-to-peer file sharing?”). Our survey also reveals open issues and challenges in traffic classification.},
+  Keywords                 = {Internet Measurement, Traffic Analysis, Traffic Classification},
+  Location                 = {Seoul, Korea},
+  Owner                    = {velan},
+  Timestamp                = {2014.10.24}
+}
+
+@InCollection{Zhang-2013-Encrypted,
+  Title                    = {{Encrypted Traffic Classification Based on an Improved Clustering Algorithm}},
+  Author                   = {Zhang, M. and Zhang, H. and Zhang, B. and Lu, G.},
+  Booktitle                = {Trustworthy Computing and Services},
+  Publisher                = {Springer Berlin Heidelberg},
+  Year                     = {2013},
+  Pages                    = {124-131},
+  Series                   = {Communications in Computer and Information Science},
+  Volume                   = {320},
+
+  Abstract                 = {Classification analysis of network traffic based on port number or payload is becoming increasingly difficult from security to quality of service measurements, because of using dynamic port numbers, masquerading and various cryptographic techniques to avoid detection. Research tends to analyze flow statistical features with machine learning techniques. Clustering approaches do not require complex training procedure and large memory cost. However, the performance of clustering algorithm like k-Means still have own disadvantages. We propose a novel approach of considering harmonic mean as distance matric, and evaluate it in terms of three metrics on real-world encrypted traffic. The result shows the classification has better performance compared with the previously.},
+  Doi                      = {10.1007/978-3-642-35795-4_16},
+  ISBN                     = {978-3-642-35794-7},
+  Keywords                 = {traffic classification; machine learning; k-means clustering},
+  Language                 = {English},
+  Owner                    = {velan},
+  Review                   = {Authors use K-Means for clustering encrypted traffic based on 10 flow features. The improvement over standard K-Means is through use of harmonic mean to reduce the impact of random initial clustering centers. The paper shows results of measurement on questionable data sets and cannot be taken too seriously. One of the data sets contains following applications: Skype, QQ, MSN, SSL, SSH, the other only differentiates bethenn SSH and no-SSH traffic.},
+  Timestamp                = {2014.08.25},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-35795-4_16}
 }
 
 @comment{jabref-entrytype: Online: req[author;title;url;urldate] opt[month;year]}
