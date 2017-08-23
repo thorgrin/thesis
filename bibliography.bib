@@ -504,6 +504,29 @@ The paper contains very good related work chapter and description of classificat
   Url                      = {http://dx.doi.org/10.1007/978-3-319-20034-7_10}
 }
 
+@InProceedings{Celeda-2013-Large,
+  Title                    = {{Large-Scale Geolocation for NetFlow}},
+  Author                   = {Čeleda, Pavel and Velan, Petr and Rábek, Martin and Hofstede, Rick and Pras, Aiko},
+  Booktitle                = {IFIP/IEEE International Symposium on Integrated Network Management (IM 2013)},
+  Year                     = {2013},
+
+  Address                  = {Ghent, Belgium},
+  Editor                   = {De Turck, Filip and Diao, Yixin and Se on Hong, Choong and Medhi, Deep and Sadre, Ramin},
+  Month                    = {May},
+  Pages                    = {1015-1020},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {Current approaches perform geolocation mostly on-demand and in a small-scale fashion. As soon as geolocation needs to be performed in real-time in high-speed and large-scale networks, these approaches are not scalable anymore. To solve this pro
+blem, we propose two approaches to large-scale geolocation. Firstly, we present an exporter-based approach, which adds geolocation data to flow records in a way that is transparent to any flow collector. Secondly, we present a flow collector-based approach, which adds nativ
+e geolocation to NetFlow data from any flow exporter. After presenting prototypes for both approaches, we demonstrate the applicability of large-scale geolocation by means of use cases.},
+  ISBN                     = {978-1-4673-5229-1},
+  Keywords                 = {geolocation; GeoIP; ISO 3166; NetFlow; NFDUMP; NfSen; security; detection; anomaly},
+  Location                 = {Ghent, Belgium},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6573124}
+}
+
 @InProceedings{Cermak-2016-Performance,
   Title                    = {{A Performance Benchmark for NetFlow Data Analysis on Distributed Stream Processing Systems}},
   Author                   = {Čermák, Milan and Tovarňák, Daniel and Laštovička, Martin and Čeleda, Pavel},
@@ -763,6 +786,31 @@ The paper contains very good related work chapter and description of classificat
   Review                   = {Authors use periodical active probing of IPv4 address space to find machines willing to complete TLS handshake on port 443. The gather massive amount of certificates and provide very detailed analysis of used CAs, intermediate certificates and quality of issued certificates. The data sets should be publicly available.},
   Timestamp                = {2014.06.16},
   Url                      = {http://doi.acm.org/10.1145/2504730.2504755}
+}
+
+@InProceedings{Elich-2013-Investigation,
+  Title                    = {{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}},
+  Author                   = {Elich, Martin and Velan, Petr and Jirsík, Tomáš and Čeleda, Pavel},
+  Booktitle                = {IEEE 38th Conference on Local Computer Networks Workshops (LCN Workshops)},
+  Year                     = {2013},
+
+  Address                  = {Sydney, Australia},
+  Editor                   = {Damla Turgut, Nils Aschenbruck, Jens T\"{o}lle},
+  Month                    = {Oct},
+  Pages                    = {1046-1052},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {The exhaustion of IPv4 address space increases pressure on network operators and content providers to continue the transition to IPv6. The IPv6 transition mechanisms such as Teredo and 6to4 allow IPv4 hosts to connect to IPv6 hosts. On the othe
+r hand, they increase network complexity and render ineffective many methods to observe IP traffic. In this paper, we modified our flow-based measurement system to involve transition mechanisms information to provide full IPv6 visibility. Our traffic analysis focuses on IPv
+6 tunneled traffic and uses data collected over one week in the Czech national research and education network. The results expose various traffic characteristics of native and tunneled IPv6 traffic, among others the TTL and HOP limit distribution, geolocation aspect of the 
+traffic, and list of Teredo servers used in the network. Furthermore, we show how the traffic of IPv6 transition mechanisms has evolved since 2010.},
+  Doi                      = {10.1109/LCNW.2013.6758546},
+  ISBN                     = {978-1-4799-0540-9},
+  Keywords                 = {Teredo; 6to4; IPv6; Transition Mechanisms},
+  Location                 = {Sydney, Australia},
+  Owner                    = {velan},
+  Timestamp                = {2014.08.23},
+  Url                      = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6758546}
 }
 
 @Article{Estan-2004-Building,
@@ -1999,6 +2047,28 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Url                      = {http://www.sciencedirect.com/science/article/pii/S0167404817301165}
 }
 
+@InProceedings{Velan-2014-Next,
+  Title                    = {{Next Generation Application-Aware Flow Monitoring}},
+  Author                   = {Velan, Petr and Čeleda, Pavel},
+  Booktitle                = {Monitoring and Securing Virtualized Networks and Services},
+  Year                     = {2014},
+  Editor                   = {Sperotto, Anna and Doyen, Guillaume and Latré, Steven and Charalambides, Marinos and Stiller, Burkhard},
+  Pages                    = {173-178},
+  Publisher                = {Springer Berlin Heidelberg},
+  Series                   = {Lecture Notes in Computer Science},
+  Volume                   = {8508},
+
+  Abstract                 = {Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides less details about the traffic itself. Application-aware flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. However, the impacts, benefits and disadvantages of application flow monitoring have not been studied in detail yet. The work proposed in this paper attempts to rectify this lack of research. We also propose a next generation flow measurement for application monitoring. The flows will represent events within the application protocol, e.g., web page download, instead of packet stream. Finally, we will investigate the performance of different approaches to application classification and application parsing with a computational complexity in mind.},
+  Doi                      = {10.1007/978-3-662-43862-6_20},
+  ISBN                     = {978-3-662-43861-9},
+  ISSN                     = {0302-9743},
+  Keywords                 = {flow; network measurement; application monitoring; IPFIX},
+  Language                 = {English},
+  Owner                    = {velan},
+  Timestamp                = {2014.08.23},
+  Url                      = {http://dx.doi.org/10.1007/978-3-662-43862-6_20}
+}
+
 @Article{Velan-2015-Survey,
   Title                    = {{A Survey of Methods for Encrypted Traffic Classification and Analysis}},
   Author                   = {Velan, Petr and Čermák, Milan and Čeleda, Pavel and Drašar, Martin},
@@ -2014,6 +2084,28 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Owner                    = {velan},
   Timestamp                = {2016.01.18},
   Url                      = {http://dx.doi.org/10.1002/nem.1901}
+}
+
+@InProceedings{Velan-2013-Design,
+  Title                    = {{Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement}},
+  Author                   = {Velan, Petr and Jirs\'{i}k, Tom\'{a}\v{s} and \v{C}eleda, Pavel},
+  Booktitle                = {Advances in Communication Networking},
+  Year                     = {2013},
+
+  Address                  = {Heidelberg},
+  Editor                   = {Thomas Bauschert},
+  Pages                    = {136-147},
+  Publisher                = {Springer Berlin Heidelberg},
+  Volume                   = {8115},
+
+  Abstract                 = {In this paper we analyze HTTP protocol parsers that provide a web traffic visibility to IP flow. Despite extensive work, flow meters generally fall short of performance goals due to extracting application layer data. Constructing effective protocol parser for in-depth analysis is a challenging and error-prone affair. We designed and evaluated several HTTP protocol parsers representing current state-of-the-art approaches used in today’s flow meters. We show the packet rates achieved by respective parsers, including the throughput decrease (performance implications of application parser) which is of the utmost importance for high-speed deployments. We believe that these results provide researchers and network operators with important insight into application visibility and IP flow.},
+  Doi                      = {10.1007/978-3-642-40552-5_13},
+  ISBN                     = {978-3-642-40551-8},
+  Keywords                 = {HTTP; protocol; parser; traffic; measurement; flow; IPFIX},
+  Location                 = {Heidelberg},
+  Owner                    = {velan},
+  Timestamp                = {2014.04.23},
+  Url                      = {http://dx.doi.org/10.1007/978-3-642-40552-5_13}
 }
 
 @InProceedings{Velan-2015-High,

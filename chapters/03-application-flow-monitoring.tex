@@ -11,6 +11,30 @@
 - \url{http://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/product\_bulletin\_c25-627831.html}
 }
 
+\begin{chapintro}
+
+intro to app flow monitoring.
+application layer can mean more information from tunnelled protocols or even IPv6.
+
+% Martin Husák, Petr Velan, and Jan Vykopal. “Security Monitoring of HTTP Traffic Using Extended Flows”.
+% Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring”
+% Martin Elich, Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis”.
+% Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement”
+% Pavel Čeleda, Petr Velan, Martin Rábek, Rick Hofstede, and Aiko Pras. “Large-Scale Geolocation for NetFlow”
+% TODO papers from AIMS 2017 and TMA 2017
+The papers related to this chapter are~\cite{Husak-2015-Security, Velan-2014-Next, Velan-2013-Design, Elich-2013-Investigation, Celeda-2013-Large}.
+
+The organisation of this chapter is as follows:
+\begin{itemize}
+%   \item Section~\ref{} 
+%   \item Section~\ref{}
+  \item Section~\ref{sec:app-conclusions} concludes the chapter.
+\end{itemize}
+
+\end{chapintro}
+
+\newpage
+
 \section{Creating Application Flow}
 
 \iinfo{Taken from: Application Flow Monitoring Challenges}
@@ -20,7 +44,7 @@
 
 The application flow monitoring is a complex process. Packets need to be received from the network, transported to computer memory (RAM), parsed, aggregated to flow records based on the parsed information, and exported to flow collectors for further processing. The process is depicted in Figure~\ref{fig:flow-exporter-schema}. This section describes the whole flow measurement process, points out where it is affected by the application processing and introduces some of the related challenges.
 
-\begin{figure}[t!]
+\begin{figure}[tb!]
   \begin{center}
     \includegraphics[width=\textwidth]{figures/flow-exporter-schema}
   \end{center}
@@ -63,7 +87,4 @@ Another issue that might be encountered due to large flow record is that single 
 
 % shortening of string values - add some indication of shortening or original length
 
-\section{Conclusions}
-
-\section{Relevant Publications}
-\iunsure{Do it like rick and have it in the intro to each chapter?}
+\section{Conclusions}\label{sec:app-conclusions}
