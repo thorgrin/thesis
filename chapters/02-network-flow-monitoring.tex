@@ -1,9 +1,31 @@
 \chapter{Network Flow Monitoring}
 
-\todo{Do not start with the reference. Rewrite first paragraph, there is much added value here}
+\begin{chapintro}
+
+% jeden odstavec o cem to je, na konci se vymezit k rickovi
+
 The article of \citeauthor{Hofstede-2014-Flow}~\cite{Hofstede-2014-Flow} extensively covers the topic of flow monitoring process and much information provided in this chapter is influenced by it. The reader is encouraged to study the article, the relevant sections are II to VIII with the exception of section VII. However, this chapter explains the flow monitoring process in the context of this thesis, therefore some aspects of the flow monitoring, such as flow export processes, are described in more detail.
 
-\section{Flow Monitoring Basics}
+The organisation of this chapter is as follows:
+
+\begin{itemize}
+  \item Section~\ref{sec:flow-monitoring-basics} introduces flow monitoring and provides overview of its history and related technologies.
+  \item Section~\ref{sec:flow-definition} provides an improved flow definition and based on this definition provides formal description of flow creation process.
+  \item Section~\ref{sec:flow-monitoring-architecture} 
+  \item Section~\ref{sec:flow-monitoring-process} 
+  \item Section~\ref{sec:flow-data-processing} 
+  \item Section~\ref{sec:common-issues} discusses common issues in encountered in flow monitoring operation.
+  \item Section~\ref{sec:nfm-conclusions} concludes the chapter.
+\end{itemize}
+
+\end{chapintro}
+
+% \todo{Do not start with the reference. Rewrite first paragraph, there is much added value here}
+% The article of \citeauthor{Hofstede-2014-Flow}~\cite{Hofstede-2014-Flow} extensively covers the topic of flow monitoring process and much information provided in this chapter is influenced by it. The reader is encouraged to study the article, the relevant sections are II to VIII with the exception of section VII. However, this chapter explains the flow monitoring process in the context of this thesis, therefore some aspects of the flow monitoring, such as flow export processes, are described in more detail.
+
+\newpage
+
+\section{Flow Monitoring Basics}\label{sec:flow-monitoring-basics}
 
 This section describes history and current state of network flow monitoring. We discuss related standards, introduce terminology used throughout this thesis and provide formal definition of a flow. 
 
@@ -23,13 +45,10 @@ Meanwhile, Cisco realized that similar kind of flow information is already store
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/nf5-fields}
+    \includegraphics{figures/nf5-fields}
   \end{center}
-  \caption{NetFlow v5 Fields}
+  \caption{Fields exported by NetFlow v5~\cite{CiscoSystems-2007-NetFlow}.}
   \label{fig:nf5-fields}
-\iimprove{add citation}
-\iimprove{redraw}
-% [nfv5-fields] http://www.cisco.com/c/en/us/td/docs/ios/solutions_docs/netflow/nfwhite.html
 % http://www.cisco.com/c/dam/en/us/td/i/000001-100000/60001-65000/60001-61000/60682.ps/_jcr_content/renditions/60682.jpg
 \end{figure}
 
@@ -39,11 +58,8 @@ The NetFlow version 5 was soon obsoleted by NetFlow version 9 which remedied som
   \begin{center}
     \includegraphics[width=\textwidth]{figures/nf9-protocol}
   \end{center}
-  \caption{NetFlow v9 Structure Example}
+  \caption{NetFlow~v9 protocol structure example~\cite{CiscoSystems-2007-NetFlow}.}
   \label{fig:nf9-protocol}
-\iimprove{add citation}
-\iimprove{redraw}
-% [nfv9-format] http://www.cisco.com/c/en/us/td/docs/ios/solutions_docs/netflow/nfwhite.html
 % http://www.cisco.com/c/dam/en/us/td/i/100001-200000/120001-130000/121001-122000/121979.ps/_jcr_content/renditions/121979.jpg
 \end{figure}
 
@@ -87,7 +103,7 @@ OpenFlow~\cite{ONF-2012-OpenFlow} is an open-source implementation of the Softwa
 Deep Packet Inspection (DPI) is an approach to network data analysis where each packet is dissected up to and including application layer protocol (i.e. packet payload). Although this requires much greater resources than standard flow monitoring, it provides maximum information about network traffic. DPI an approach, rather than specific technology, therefore the means of packet capture and information export depend on the particular deployment. For example, sFlow uses DPI to gain information about application layer from packet payloads and exports this information as part of the sFlow protocol. Despite the DPI being diametrically different to flow monitoring, it is being integrated to flow monitoring process to provide the application visibility. This merge balances the detailed view of DPI to fast and scalable architecture of the flow monitoring. This thesis describes how the DPI is integrated to flow monitoring to create Application Flow Monitoring. Neither sFlow nor OpenFlow are not discussed any further in this work and PSAMP is only mentioned as a packet sampling protocol that can be optionally applied to flow monitoring.
 
 
-\section{Flow Definition}
+\section{Flow Definition}\label{sec:flow-definition}
 
 To be able to accurately describe the flow monitoring process, we need to have a precise definition of what a flow is. The NetFlow v9 description in~\cite{rfc3954} uses the following definition:
 
@@ -298,7 +314,7 @@ The Definition~\ref{def:formal-flow-sequence} provides a guide to constructing a
 
 We can see that the flow creation process significantly depends upon the implementation of the \emph{flow selection function}. We will discuss the common implementations in the Subsection~\ref{subsec:flow-creation}.
 
-\section{Flow Monitoring Architecture}
+\section{Flow Monitoring Architecture}\label{sec:flow-monitoring-architecture}
 
 Deployment of flow monitoring on a network requires several steps: Capturing packets at one or more observation points, assigning packets to flows, creating and exporting flow records for the flows, and finally collecting, storing, and processing of the exported flow records. 
 The Figure~\ref{fig:flow-monitoring-process} shows a high level overview of the whole process. Flow monitoring process encompasses packet capture, flow creation, and creation and export of flow records. Flow data processing comprises of flow record collection, storage, and further processing. Note that the flow records can be processes directly without storing. This approach is called \emph{stream processing}. It is also possible to manipulate the flow records in transition between the export and collection. The IPFIX working group specified a framework called IP Flow Information Export Mediation~\cite{rfc6183} which describes this process. However, description of this process is outside the scope of this thesis.
@@ -635,7 +651,7 @@ Flow records can be exported in many formats over different transport protocols.
 
 An important part of flow export is ensuring security of the exported flow records. The records must reach only the authorized destination without being observed by any third party. Therefore, authorization, confidentiality and, preferably, also integrity should be provided. The same applies to flow collectors during the collecting process. More information about flow transmission security is provided in Subsection~\ref{subsec:flow-collection}.
 
-\section{Flow Data Processing}
+\section{Flow Data Processing}\label{sec:flow-data-processing}
 
 The aim of this section is to outline the processing of flow data after they are exported to a flow collector. Firstly, we describe the flow collection process in Subsection~\ref{subsec:flow-collection}. The reception of flow data is not a difficult task itself, but requires several important choices to be made, such as what flow export protocols will be supported and how to handle unknown information elements. Secondly, the flow data are often stored for future needs. The choice of a flow data storage format is very important since the data is written once, read many times and fast searches are required. This process is described in Subsection~\ref{subsec:flow-storage}. Lastly, the flow records are processed and analysed, either by reading the previously stored data or in real time as they arrive from a flow exporter. The flow record processing and analysis is discussed in Subsection~\ref{subsec:flow-processing}. The whole flow data processing schema is shown in Figure~\ref{fig:flow-processing-details}.
 
@@ -702,7 +718,7 @@ The flow processing can be used to achieve several goals. Firstly, both live and
 Modern machine learning techniques are utilized in flow processing. The most common uses are in traffic classification~\cite{Velan-2015-Survey}, user identification~\cite{Verde-2014-No} and intrusion detection~\cite{Tsai-2009-Intrusion}. Although the research in this area is quite extensive, the authors of~\cite{Sommer-2010-Outside} show that the result are seldom applied in practice and provide several observations explaining the difficulties faced by the implementers. A survey of traffic classification techniques for encrypted traffic is provided in Chapter~\ref{chap:measurement-of-encrypted-traffic}.
 
 
-\section{Common Issues}
+\section{Common Issues}\label{sec:common-issues}
 
 Although flow monitoring is widely used, there are many not widely known aspects that need to be taken into consideration during its deployment. This section describes several issues that can be encountered in any flow monitoring system and that are easily neglected. Most issues concern data loss. Either the data is not correctly observed, parsed, are lost during transmission, or are not interpreted correctly. Firstly, we look at the more obvious and easily detectable issue where no data arrive at all. Then we describe the issues that cause data loss which is not easily detected. Lastly, we discuss issues and misunderstandings that cause the data to be incorrectly measured and interpreted. Let us note here, that a suitable logging facilities of flow exporter and collector together with a reliable log processing mechanism can help to discover many of the described issues.
 
@@ -747,15 +763,27 @@ Flow monitoring performance is discussed in detail in the Chapter~\ref{chap:flow
 
 \subsection{Other Issues}
 
-There are other problems that can be encountered during flow monitoring apart from the performance issues and data loss. These issues cause the data to be incomplete or incorrect. This section describes the most common of these issues.
+There are other problems that can be encountered during flow monitoring apart from the performance issues and data loss. We have already described the problem with counting lost flow records and elements in The Subsection~\ref{subsec:flow-collection}. This section describes the most common of the issues that cause the data to be incomplete or incorrect.
 
 The first issue is encountered at flow exporters that process biflows. To process biflows correctly, the exporter needs to observe both directions of each flow. There are several reasons why it may fail to do so. Only single direction might be connected to the probe or the network configuration might route the packets asymmetrically. Even if both directions can be observed at the observation point, packets might be received, parsed, and processed in several different queues to speed up the monitoring process. In such a case, it is important to use a correct algorithm to select queues for packets, otherwise the packets from opposite directions may end up in different flow caches and the created biflows will be incomplete. The algorithm must be able to work with all packet headers that precede the headers from which the flow keys are derived. 
 
 Both the flow exporter and flow collector must agree on the semantics of the elements of exported flow records. For example, the packet length is usually exported in IPFIX format as a \emph{octetDeltaCount} element. The specification~\cite{IANA-2017-IP} defines it to be the number of octets since the previous report (if any) in incoming packets for this Flow at the Observation Point. The number of octets includes IP header(s) and IP payload. However, some exporters put the total number of octets including the link layer in this field. Moreover, the IPFIX protocol is sometimes used to export information about non-IP flows as well, so that this element is used differently for specification. Whether the exporter and collector adhere to the specification, it is important the they interpret the semantics equally. In this case, it would be proper to setup a different element with different semantics if the total number of octets needs to be reported.
 
+Different exporters can encode flow record elements to integers, strings and byte arrays of different length. For example, the IPFIX protocol supports \emph{Reduced-Size Encoding}~\cite{rfc7011} which allows encoding elements using fewer octets than the number specified by~\cite{IANA-2017-IP}. Although this saves resources such as memory of the flow exporter, network bandwidth, and disk space on collector, it makes it more difficult to process correctly. When the same element is received by the collector using two different data types, it needs to decide which is going to be used for further processing as maintaining both original data types is cumbersome. The collector usually converts the data to the largest possible data type since it cannot know it advance whether it will receive the element encoded differently in the future and reducing the size of an element may lead to information loss.
+
+The encoding of TCP flags in IPFIX protocol is a good example of issues that can be caused by the \emph{Reduced-size Encoding}. NetFlow~v9 defined TCP flags element as one byte and the IPFIX used single byte as well originally. However, the TCP control bits occupy 9 bites in the TCP header~\cite{rfc3540}, therefore a change was proposed in 2013 to change the encoding to two bytes. The discussion resulted in RFC 7125~\cite{rfc7125} in 2014 with IPFIX supporting the export of TCP flags as a two byte value, as shown in Figure~\ref{fig:tcp-flags}. When reduced size encoding is used only the original byte is exported for backwards compatibility. This presents the authors of flow collectors with a difficult issue. If they support TCP flags as a two byte value, they must indicate that the received element was only a single byte long. Storing two byte value and padding with zeroes is not an option since that would set the ECN nonce sum flag to zero although the collector has no knowledge of its original value.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/tcp-flags}
+  \end{center}
+  \caption{TCP control bits export in IPFIX protocol~\cite{rfc7125}.}
+  \label{fig:tcp-flags}
+\end{figure}
 
 
-% incompatible data encoding ???
-% shortening of string values - add some indication of shortening or original length
-%
-% IPFIX: unknown number of missing messages due to an unknown template
+\section{Conclusions}\label{sec:nfm-conclusions}
+
+This chapter has explained flow monitoring, its history, common uses, and discussed related technologies that are sometimes confused with flow monitoring. We have shown, that the currently used definitions of flow do not reflect the reality of real-world flow monitoring deployment and provided and improved definition that amends the deficiencies. We have also created a formal notation for our definition which allows us to avoid misunderstandings created by the use of informal language. It also allows flow related algorithms to be written more precisely and concisely.
+
+The rest of the chapter has discussed details of the flow monitoring process from the packet capture on a probe to the flow processing on a collector. We have also shown the most common issues that can be encountered while deploying and operating a flow monitoring infrastructure. The most critical issues are caused by incorrect implementation and low performance. We investigate the performance of flow monitoring in Chapter~\ref{chap:flow-monitoring-performance}.

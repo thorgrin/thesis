@@ -159,6 +159,9 @@ TODO: discuss privacy issues (where?)
 \usepackage{algorithmic}
 \usepackage{rotating}
 
+% Environment for chapter introductions (use \setlength{\parindent}{15pt} to indent paragraphs)
+\newenvironment{chapintro}{\begin{displayquote}\itshape\leftskip=-5mm\rightskip=-5mm}{\end{displayquote}}
+
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
 \setlist[compactitem]{label=\textbullet,leftmargin=*,nosep,after=\vspace*{-\baselineskip}}
@@ -169,7 +172,7 @@ TODO: discuss privacy issues (where?)
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
 
-% Quotes in italices with centered reference (package csquotes)
+% Quotes in italics with centered reference (package csquotes)
 \renewcommand{\mkbegdispquote}[2]{\itshape}
 \renewcommand{\mkenddispquote}[2]{\par\centering #1#2}
 
