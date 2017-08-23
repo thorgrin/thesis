@@ -146,7 +146,7 @@ TODO: discuss privacy issues (where?)
 % \usepackage[hyphens]{url}
 % \usepackage[titletoc]{appendix}
 % \usepackage{color}
-% \usepackage{textcomp}
+\usepackage{textcomp} % itemize bullet symbol font
 % \usepackage[hidelinks]{hyperref}
 \usepackage{pifont}
 % \usepackage[table]{xcolor}
@@ -164,7 +164,9 @@ TODO: discuss privacy issues (where?)
 \usepackage{bigstrut}
 
 % Environment for chapter introductions (use \setlength{\parindent}{15pt} to indent paragraphs)
-\newenvironment{chapintro}{\begin{displayquote}\itshape\leftskip=-5mm\rightskip=-5mm}{\end{displayquote}}
+\newenvironment{chapintro}
+{\begin{displayquote}\setlist[itemize]{leftmargin=*,after=\vspace*{-\baselineskip}}\itshape\leftskip=-5mm\rightskip=-5mm}
+{\end{displayquote}}
 
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
@@ -191,6 +193,22 @@ TODO: discuss privacy issues (where?)
 % Make multiple authors be printed as first et al. (package biblatex)
 \ExecuteBibliographyOptions{maxnames=999, maxcitenames=2}
 
+% This removes a warning about missing font shape (sl used in \printbibliography)
+\makeatletter
+\input{ts1qpl.fd}
+\makeatother
+\DeclareFontShape{TS1}{qpl}{m}{sl}{<->ssub * qpl/m/it}{}
+
+% This removes a warning about missing font shape (ls used in toc)
+\makeatletter
+\input{t1qpl.fd}
+\makeatother
+\DeclareFontShape{T1}{qpl}{m}{sl}{<->ssub * qpl/m/it}{}
+
+% supress warning about mutliple page groups in included pdfs
+\pdfsuppresswarningpagegroup=1
+
+% We want to use the AMSb symbol for mathbb
 \DeclareSymbolFontAlphabet{\mathbb}{AMSb}
 
 \begin{document}

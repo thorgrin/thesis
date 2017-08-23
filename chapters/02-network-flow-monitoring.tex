@@ -2,21 +2,20 @@
 
 \begin{chapintro}
 
-Flow monitoring is an important part of network accounting and security nowadays. It facilitates large scale intrusion detection and prevention systems, data analysis, capacity planning, data retention, and other operations important for network management. The aim of this chapter is to provide a comprehensive introduction to network flow monitoring. Firstly, the history of flow monitoring is outlined and related technologies are described and compared to flow monitoring. Secondly, the applicability of currently used flow definitions is discussed and an improved definition is proposed, together with a formal notation. The formal notation allows clear description of flow related algorithms and avoids misunderstandings caused by ambiguities of a natural language. To the best of our knowledge, this is the first attempt to formalise the flow creation process that takes into account all input data used in practice. The rest of the chapter presents a flow monitoring architecture in detail. Issues encountered while deploying and operating flow monitoring infrastructure of CESNET National Research and Education Network are discussed at the end of this chapter. 
+Flow monitoring is an important part of network accounting and security nowadays. It facilitates large scale intrusion detection and prevention systems, data analysis, capacity planning, data retention, and other operations important for network management. The aim of this chapter is to provide a comprehensive introduction to network flow monitoring. Firstly, the history of flow monitoring is outlined and related technologies are described and compared to flow monitoring. Secondly, the applicability of currently used flow definitions is discussed and an improved definition is proposed, together with a formal notation. The formal notation allows clear description of flow related algorithms and avoids misunderstandings caused by ambiguities of a natural language. To the best of our knowledge, this is the first attempt to formalise the flow creation process that takes into account all input data used in practice. The rest of the chapter presents the flow monitoring process in detail. Issues encountered while deploying and operating flow monitoring infrastructure of CESNET National Research and Education Network are discussed at the end of this chapter. 
 
 With an exception of the novel flow definition, this chapter covers similar topic as the article of \citeauthor{Hofstede-2014-Flow}~\cite{Hofstede-2014-Flow}. The article served as one of the sources of information about history of flow monitoring and as an inspiration for the structure of this chapter. The reader is encouraged to study the article as an additional source of information. It focuses more on the IPFIX protocol and contains extensive information about the capabilities of existing enterprise and open-source software for flow creation and processing. 
 
 %The main contribution of this chapter is the improved flow definition together with its formal notation and formal description of the flow creation process.
 
 The organisation of this chapter is as follows:
-
 \begin{itemize}
   \item Section~\ref{sec:flow-monitoring-basics} introduces flow monitoring and provides overview of its history and related technologies.
   \item Section~\ref{sec:flow-definition} provides an improved flow definition and based on this definition provides formal description of flow creation process.
-  \item Section~\ref{sec:flow-monitoring-architecture} 
-  \item Section~\ref{sec:flow-monitoring-process} 
-  \item Section~\ref{sec:flow-data-processing} 
-  \item Section~\ref{sec:common-issues} discusses common issues in encountered in flow monitoring operation.
+  \item Section~\ref{sec:flow-monitoring-architecture} explains flow monitoring architecture.
+  \item Section~\ref{sec:flow-monitoring-process} describes the flow monitoring process from packet capture to flow record export.
+  \item Section~\ref{sec:flow-data-processing} describes flow data treatment from flow record reception to storage and further processing.
+  \item Section~\ref{sec:common-issues} discusses common issues encountered in flow monitoring operation.
   \item Section~\ref{sec:nfm-conclusions} concludes the chapter.
 \end{itemize}
 

@@ -1,9 +1,27 @@
 \chapter{Measurement of Encrypted Traffic} \label{chap:measurement-of-encrypted-traffic}
 
-\itodo{Make tables more like the resot of the work}
+\begin{chapintro}
 
-\section{Introduction}
+The application flow monitoring relies heavily upon the ability to observe and process data from application layer. However, users and companies are becoming more privacy conscious and the use of encryption is steadily increasing. This chapter presents an overview of current approaches for the classification and analysis of encrypted traffic. The contribution of our work is four-fold. First, we describe several of the most widely used encryption protocols to show their packet structure and standard behaviour in a network. This information forms the basis of all classification protocols which use either a specific packet structure or a communication pattern to identify the protocol. Second, we investigate what information is provided by these encryption protocols. Most protocols negotiate encryption algorithms in clear-text, these data can be monitored, e.g., to reveal the use of weak ciphers. Third, we describe how the structure of encryption protocols can be used to detect these protocols in a network. Traffic classification algorithms using such information are presented and we describe several open-source tools which implement these algorithms. Fourth, we provide an extensive survey of behaviour-based methods for encrypted traffic classification. We show that surprisingly detailed information can be obtained using these methods. In specific cases, even the content of the encrypted connection can be established.
 
+The article related to this chapter is~\cite{Velan-2015-Survey}.
+
+The organisation of this chapter is as follows:
+\begin{itemize}
+  \item Section~\ref{sec:enc-motivation} provides motivation for this chapter and defines its goals.
+  \item Section~\ref{sec:traffic-description} explains the principles of several widely used encryption protocols.
+  \item Section~\ref{sec:extraction} describes what information can be obtained from encrypted traffic using specific knowledge of the encryption protocols.
+  \item Section~\ref{sec:taxonomy} describes the traffic classification taxonomy used in this chapter.
+  \item Section~\ref{sec:payload-classification} describes traffic classification methods based on the specific knowledge of encryption protocols.
+  \item Section~\ref{sec:detection} surveys papers on the classification of encrypted traffic using statistical and behavioural methods.
+  \item Section~\ref{sec:enc-conclusions} concludes the chapter and provides directions for future research.
+\end{itemize}
+
+\end{chapintro}
+
+\newpage
+
+\section{Motivation and Goals}\label{sec:enc-motivation}
 
 % Motivation
 Network visibility is becoming a necessity in current networks. Security, traffic provisioning, and failure detection are the prime reasons to deploy traffic measurement. Yet, measurement has other uses and new ones are still being discovered. For instance, application performance can be measured using the data from the application layer. Information about certain applications can also be used to detect attacks and intrusions on the application level. In contrast to this, the need for protection of transmitted data and user privacy is rapidly increasing. It is for this reason that, the encryption of transmitted data is increasingly used. The ratio of encrypted traffic has recently been rising steeply as common Internet services become protected~\cite{Sandvine-2014-Global}. This change poses a challenge to currently used methods for traffic measurement, for which the identification and analysis of network traffic becomes more difficult.
@@ -11,18 +29,11 @@ Network visibility is becoming a necessity in current networks. Security, traffi
 Before any further analysis of encrypted network traffic can be done, the traffic needs to be identified. Statistical and behaviour-based application identification methods are less affected by encryption than deep packet inspection methods. Therefore, a lot of attention has been given to these methods, which are also considered to be privacy-conscious. However, information can event be extracted from encrypted connections, mainly from the session's initiation.
 
 % Goal
-The goal of this survey is to provide a comprehensive overview of methods for classifying and analysing encrypted traffic. To the best of our knowledge, this is the first work which comprehensively summarizes available approaches for encrypted traffic classification and analysis. Although there has been a lot of research on traffic classification in the past decade~\cite{Dainotti-2012-Issues, Nguyen-2008-Survey, Zhang-2009-State, Callado-2009-Survey, Finsterbusch-2014-Survey}, most of the existing surveys do not explicitly consider research which targets encrypted traffic. A recent survey by Cao et al.~\cite{Cao-2014-Survey} describes the fundamentals of encrypted traffic classification. It briefly introduces recent advances and challenges in this field. However, the survey covers only a few methods of traffic classification and does not provide any comparison or assessment of these methods. Moreover, while traffic classification is an important part of network monitoring, there are other methods for analysing encrypted traffic which need to be taken into consideration. 
+The goal of this chapter is to provide a comprehensive overview of methods for classifying and analysing encrypted traffic. To the best of our knowledge, this is the first work which comprehensively summarizes available approaches for encrypted traffic classification and analysis. Although there has been a lot of research on traffic classification in the past decade~\cite{Dainotti-2012-Issues, Nguyen-2008-Survey, Zhang-2009-State, Callado-2009-Survey, Finsterbusch-2014-Survey}, most of the existing surveys do not explicitly consider research which targets encrypted traffic. A recent survey by Cao et al.~\cite{Cao-2014-Survey} describes the fundamentals of encrypted traffic classification. It briefly introduces recent advances and challenges in this field. However, the survey covers only a few methods of traffic classification and does not provide any comparison or assessment of these methods. Moreover, while traffic classification is an important part of network monitoring, there are other methods for analysing encrypted traffic which need to be taken into consideration. 
 
 To achieve this goal, we have produced a survey of methods for classifying and analysing encrypted traffic in journals, conference papers, proceedings of specialized workshops and technical reports. We studied works presented in selected computer science journals, mainly the Communications Surveys \& Tutorials, Computer Networks, International Journal of Network Management and Transactions on Network and Service Management. We also surveyed international conferences such as IMC, PAM, CISDA, CNSM, IM and NOMS over the period 2005-2014. Other methods were found in references provided by the surveyed papers and in papers that referenced them.
 
-% Contributions
-The contribution of our work is four-fold. First, we describe several of the most widely used encryption protocols to show their packet structure and standard behaviour in a network. This information forms the basis of all classification protocols which use either a specific packet structure or a communication pattern to identify the protocol. Second, we investigate what information is provided by these encryption protocols. Most protocols negotiate encryption algorithms in clear-text, these data can be monitored, e.g., to reveal the use of weak ciphers.
-Third, we describe how the structure of encryption protocols can be used to detect these protocols in a network. Traffic classification algorithms using such information are presented and we describe several open-source tools which implement these algorithms. Fourth, we provide an extensive survey of behaviour-based methods for encrypted traffic classification. We show that surprisingly detailed information can be obtained using these methods. In specific cases, even the content of the encrypted connection can be established. To describe and categorize the classification methods, we use the taxonomy of Khalife et al.~\cite{Khalife-2014-multilevel}. 
-
-Over the last decade, many statistical and machine learning algorithms have been applied to the problem of traffic classification. However, authors use different methodological data sets to evaluate their methods and the results are therefore not directly comparable. Most of the methods use supervised or semi-supervised machine learning algorithms to classify flows and even determine the application protocol of the flow. Most methods target encryption protocols such as SSH, SSL/TLS and encrypted BitTorrent.
-
-% Paper organization
-This paper is organized into seven sections. Section~\ref{sec:traffic-description} explains the principles of several widely used encryption protocols. Section~\ref{sec:extraction} describes what information can be obtained from encrypted traffic using specific knowledge of the encryption protocols. Section~\ref{sec:taxonomy} describes the traffic classification taxonomy used in this article. Section~\ref{sec:payload-classification} describes traffic classification methods based on the specific knowledge of encryption protocols. Section~\ref{sec:detection} surveys papers on the classification of encrypted traffic using statistical and behavioural methods. Finally, Section~\ref{sec:conclusions} concludes the paper and provides directions for future research.
+Over the last decade, many statistical and machine learning algorithms have been applied to the problem of traffic classification. However, authors use different methodological data sets to evaluate their methods and the results are therefore not directly comparable. Most of the methods use supervised or semi-supervised machine learning algorithms to classify flows and even determine the application protocol of the flow. Most methods target encryption protocols such as SSH, SSL/TLS and encrypted BitTorrent. To describe and categorize the classification methods, we use the taxonomy of Khalife et al.~\cite{Khalife-2014-multilevel}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DESCRIPTION OF ENCRYPTION PROTOCOLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,7 +41,7 @@ This paper is organized into seven sections. Section~\ref{sec:traffic-descriptio
 
 \section{A Description of Encryption Protocols} \label{sec:traffic-description}
 
-This section provides a description of chosen encryption protocols. We selected the most widely used protocols to demonstrate the basic principles and show different approaches for secure data transport. Our choice of encryption protocols was also influenced by protocols which are the most commonly used in research of encrypted traffic classification. We shall describe IPsec, TLS, SSH, BitTorrent and Skype protocols in this section. All these protocols provide confidentiality using encryption and they usually offer authentication of communication peers, data integrity, replay protection and non-repudiation. We shall describe the use of these protocols, their fundamental properties, the structure of encrypted packets, and the type of exchanged data. The information provided in this section will serve as the basis for the next sections of this paper.
+This section provides a description of chosen encryption protocols. We selected the most widely used protocols to demonstrate the basic principles and show different approaches for secure data transport. Our choice of encryption protocols was also influenced by protocols which are the most commonly used in research of encrypted traffic classification. We shall describe IPsec, TLS, SSH, BitTorrent and Skype protocols in this section. All these protocols provide confidentiality using encryption and they usually offer authentication of communication peers, data integrity, replay protection and non-repudiation. We shall describe the use of these protocols, their fundamental properties, the structure of encrypted packets, and the type of exchanged data. The information provided in this section will serve as the basis for rest of this chapter.
 
 Almost all the presented encryption protocols can be divided into two main phases: the initialization of the connection and the transport of encrypted data. The first phase can be further divided to an initial handshake, an authentication and a shared secret establishment. During the first phase, algorithm capabilities are usually exchanged, communication parties are authenticated and secret keys are established. These keys are then used for encrypting transferred data in the second phase. This general protocol scheme is depicted in Figure~\ref{fig:protocols-scheme}, which, with minor modifications, can be applied to almost any protocol providing confidential data transfer.
 
@@ -175,9 +186,9 @@ The first step in analysing network traffic is identifying the type of traffic m
 
 To present the current state of research on encrypted traffic classification in a comprehensive manner, we use a taxonomy of classification methods. We choose the multilevel taxonomy by Khalife et al.~\cite{Khalife-2014-multilevel}, which provides a detailed categorization of traffic classification methods. This taxonomy is uniquely descriptive and allows us to efficiently categorize all our surveyed classification methods. Figure~\ref{fig:taxonomy} shows an overview of the taxonomy levels. On the topmost level, the authors distinguish between classification input, technique and output. The input determines the traffic's characteristics, which are used for classification (e.g., packets or flows). The technique describes the core of the classification method, which may be, among others, payload inspection, a statistical method or a machine learning method. The output then describes how the traffic objects (packets or flows) map to traffic classes (application types or application protocols). The traffic classes are of a different granularity. Some methods allow identification of application protocols (e.g., HTTP), and some are more fine grained to detect, for example, a Google search or a Facebook chat.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=0.92\linewidth]{figures/taxonomy}
+		\includegraphics[width=\textwidth]{figures/taxonomy}
 		\caption{A multilevel taxonomy of traffic classification methods~\cite{Khalife-2014-multilevel}.} \label{fig:taxonomy}
 	\end{center}
 \end{figure}
@@ -186,14 +197,14 @@ To present the current state of research on encrypted traffic classification in 
 	\centering
 	\small
 	\renewcommand{\arraystretch}{1.05}
-	\begin{tabularx}{\textwidth}{|c|l|X|} \hline
-		\multicolumn{3}{ |c| }{\textbf{Classification Input}} \\ \hline \hline
-		\multicolumn{2}{ |c| }{\textit{Traffic Payload}} & use of application data \\ \hline
+	\begin{tabularx}{\textwidth}{c|l|X} \hline
+		\multicolumn{3}{ c }{\textbf{Classification Input}} \\ \hline \hline
+		\multicolumn{2}{ c| }{\textit{Traffic Payload}} & use of application data \\ \hline
 		\multirow{3}{*}{\parbox[c]{3.6cm}{\centering\textit{Traffic Properties}\\ (Measurement Level)}} & Host Community & graph metrics (diameter, connection degree) \\
 		& Host & number of connections, opened ports \\
 		& Flow & flow size, flow duration \\
 		& Packet & packet sizes, inter-arrival times \\ \hline
-		\multicolumn{2}{ |c| }{\textit{Hybrid \& Miscellaneous}} & combination of inputs, external knowledge \\ \hline
+		\multicolumn{2}{ c| }{\textit{Hybrid \& Miscellaneous}} & combination of inputs, external knowledge \\ \hline
 	\end{tabularx}
 	\smallskip
 	\caption{Classification input level.}
@@ -205,9 +216,9 @@ To present the current state of research on encrypted traffic classification in 
 	\small
 	\renewcommand{\arraystretch}{1.05}
 	\newcommand{\classificationsize}{2.7cm}
-	\begin{tabularx}{\textwidth}{|c|l|X|} \hline
-		\multicolumn{3}{ |c| }{\textbf{Classification Technique}} \\ \hline \hline
-		\multicolumn{2}{ |c| }{\textit{Payload Inspection}} & DPI, examination of first N bytes \\ \hline
+	\begin{tabularx}{\textwidth}{c|l|X} \hline
+		\multicolumn{3}{ c }{\textbf{Classification Technique}} \\ \hline \hline
+		\multicolumn{2}{ c| }{\textit{Payload Inspection}} & DPI, examination of first N bytes \\ \hline
 		\multirow{3}{*}{\parbox[c]{\classificationsize}{\centering\textit{Graphical\\ Techniques}}} & Graphlets & relationship between features (ports, addresses) \\
 		& Motifs & patterns of communication \\
 		& Social Networks & graph of communication \\ \hline
@@ -218,7 +229,7 @@ To present the current state of research on encrypted traffic classification in 
 		& Non-Supervised & clustering of unlabeled traffic, \mbox{$k$-nearest} neighbour \\
 		& Semi-Supervised & clustering of mixed traffic, \mbox{$k$-nearest} neighbour  \\
 		& \parbox[c]{3.5cm}{Reinforcement Learning} & - \\ \hline
-		\multicolumn{2}{ |c| }{\textit{Hybrid \& Miscellaneous}} & combination of methods, external knowledge \\ \hline
+		\multicolumn{2}{ c| }{\textit{Hybrid \& Miscellaneous}} & combination of methods, external knowledge \\ \hline
 	\end{tabularx}
 	\smallskip
 	\caption{Classification technique level.}
@@ -229,14 +240,14 @@ To present the current state of research on encrypted traffic classification in 
 	\centering
 	\small
 	\renewcommand{\arraystretch}{1.05}
-	\begin{tabularx}{\textwidth}{|c|X|} \hline
-		\multicolumn{2}{ |c| }{\textbf{Classification Output}} \\ \hline \hline
-		\multicolumn{2}{ |c| }{\textbf{Traffic Objects}} \\ \hline
+	\begin{tabularx}{\textwidth}{c|X} \hline
+		\multicolumn{2}{ c }{\textbf{Classification Output}} \\ \hline \hline
+		\multicolumn{2}{ c }{\textbf{Traffic Objects}} \\ \hline
 		Host Community & host community is assigned a class, e.g., community of HTTP servers \\
 		Host & host is assigned a class \\
 		Flow & flow is assigned a class \\
 		Packets & packet is assigned a class \\ \hline \hline
-		\multicolumn{2}{ |c| }{\textbf{Traffic Classes}} \\ \hline
+		\multicolumn{2}{ c }{\textbf{Traffic Classes}} \\ \hline
 		Traffic Cluster &  bulk or small transactions\\
 		Application Type & game, browsing, chat \\
 		Application Protocol & HTTP, HTTPS, FTP \\
@@ -530,9 +541,9 @@ The surveyed methods show that a lot of effort was put into classifying encrypte
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONCLUSIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Conclusions} \label{sec:conclusions}
+\section{Conclusions} \label{sec:enc-conclusions}
 
-In this paper we presented an overview of current approaches for the classification and analysis of encrypted traffic. First, we selected a number of the most widely used encryption protocols and described their packet structure and standard behaviour in a network. Second, we focused on information which is provided by encryption protocols themselves. We found that the initiation phase often provides information about the protocol version, ciphers used, and the identity of at least one communicating party. Such information can be used to monitor and enforce security policies in an organization. We also discovered that the use of information from the unencrypted parts of an encrypted connection for a network anomaly detection is only briefly investigated by researchers. Information about communicating parties can be leveraged to discern the type of encrypted traffic. For example, the list of supported cipher suites provided by a client when establishing a secure connection can help to identify the client. We believe that the use of unencrypted parts from the initiation of an encrypted connection should be explored in more detail.
+In this chapter we presented an overview of current approaches for the classification and analysis of encrypted traffic. First, we selected a number of the most widely used encryption protocols and described their packet structure and standard behaviour in a network. Second, we focused on information which is provided by encryption protocols themselves. We found that the initiation phase often provides information about the protocol version, ciphers used, and the identity of at least one communicating party. Such information can be used to monitor and enforce security policies in an organization. We also discovered that the use of information from the unencrypted parts of an encrypted connection for a network anomaly detection is only briefly investigated by researchers. Information about communicating parties can be leveraged to discern the type of encrypted traffic. For example, the list of supported cipher suites provided by a client when establishing a secure connection can help to identify the client. We believe that the use of unencrypted parts from the initiation of an encrypted connection should be explored in more detail.
 
 Before starting the analysis of the encrypted network traffic, it is necessary to identify it. Thus, we surveyed approaches to classifying network traffic. These, were, first payload-based methods which use knowledge of a packets' structure and feature-based methods which use characteristics specific to the protocol flow. For the payload-based classification, there are several open-source traffic classifiers which can identify encrypted traffic using pattern matching. The initiation of a communication often has a strictly defined structure, therefore, the patterns can be constructed for specific protocols. The main difference between various classifiers is that some of them require traffic from both directions of the communication to correctly classify the flows.
 
