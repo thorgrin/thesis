@@ -47,6 +47,43 @@
   Url                      = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6758546}
 }
 
+@InProceedings{my-Hendriks-2017-Flow,
+  Title                    = {{Flow-Based Detection of IPv6-specific Network Layer Attacks}},
+  Author                   = {Hendriks, Luuk and Velan, Petr and de O. Schmidt, Ricardo and de Boer, Pieter-Tjerk and Pras, Aiko},
+  Booktitle                = {Security of Networks and Services in an All-Connected World: 11th IFIP WG 6.6 International Conference on Autonomous Infrastructure, Management, and Security, AIMS 2017, Zurich, Switzerland, July 10-13, 2017, Proceedings},
+  Year                     = {2017},
+
+  Address                  = {Cham},
+  Editor                   = {Tuncer, Daphne and Koch, Robert and Badonnel, R{\'e}mi and Stiller, Burkhard},
+  Pages                    = {137--142},
+  Publisher                = {Springer International Publishing},
+
+  Abstract                 = {With a vastly different header format, IPv6 introduces new vulnerabilities not possible in IPv4, potentially requiring new detection algorithms. While many attacks specific to IPv6 have proven to be possible and are described in the literature, no detection solutions for these attacks have been proposed. In this study we identify and characterise IPv6-specific attacks that can be detected using flow monitoring. By constructing flow-based signatures, detection can be performed using available technologies such as NetFlow and IPFIX. To validate our approach, we implemented these signatures in a prototype, monitoring two production networks and injecting attacks into the production traffic.},
+  Doi                      = {10.1007/978-3-319-60774-0_11},
+  ISBN                     = {978-3-319-60774-0},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.08.24},
+  Url                      = {https://doi.org/10.1007/978-3-319-60774-0_11}
+}
+
+@InProceedings{my-Hendriks-2017-Threats,
+  Title                    = {{Threats and Surprises behind IPv6 Extension Headers}},
+  Author                   = {Hendriks, Luuk and Velan, Petr and de O. Schmidt, Ricardo and de Boer, Pieter-Tjerk and Pras, Aiko},
+  Booktitle                = {2017 Network Traffic Measurement and Analysis Conference (TMA)},
+  Year                     = {2017},
+  Month                    = {June},
+  Pages                    = {1--9},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {The concept of Extension Headers, newly introduced with IPv6, is elusive and enables new types of threats in the Internet. Simply dropping all traffic containing any Extension Header — a current practice by operators-seemingly is an effective solution, but at the cost of possibly dropping legitimate traffic as well. To determine whether threats indeed occur, and evaluate the actual nature of the traffic, measurement solutions need to be adapted. By implementing these specific parsing capabilities in flow exporters and performing measurements on two different production networks, we show it is feasible to quantify the metrics directly related to these threats, and thus allow for monitoring and detection. Analysing the traffic that is hidden behind Extension Headers, we find mostly benign traffic that directly affects end-user QoE: simply dropping all traffic containing Extension Headers is thus a bad practice with more consequences than operators might be aware of.},
+  Doi                      = {10.23919/TMA.2017.8002912},
+  Keywords                 = {Internet;Monitoring;Payloads;Probes;Protocols;Security;Standards},
+  Options                  = {skipbib=true},
+  Owner                    = {velan},
+  Timestamp                = {2017.08.24}
+}
+
 @InProceedings{my-Husak-2015-Security,
   Title                    = {{Security Monitoring of HTTP Traffic Using Extended Flows}},
   Author                   = {Husák, Martin and Velan, Petr and Vykopal, Jan},

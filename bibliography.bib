@@ -415,23 +415,6 @@ The paper contains very good related work chapter and description of classificat
   Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128614003909}
 }
 
-@Article{Bujlow-2015-classification,
-  Title                    = {{Independent comparison of popular DPI tools for traffic classification}},
-  Author                   = {Bujlow, T. and Carela-Español, V. and Barlet-Ros, P.},
-  Journal                  = {Computer Networks},
-  Year                     = {2015},
-  Number                   = {0},
-  Pages                    = {75 - 89},
-  Volume                   = {76},
-
-  Abstract                 = {Deep Packet Inspection (DPI) is the state-of-the-art technology for traffic classification. According to the conventional wisdom, DPI is the most accurate classification technique. Consequently, most popular products, either commercial or open-source, rely on some sort of DPI for traffic classification. However, the actual performance of DPI is still unclear to the research community, since the lack of public datasets prevent the comparison and reproducibility of their results. This paper presents a comprehensive comparison of 6 well-known DPI tools, which are commonly used in the traffic classification literature. Our study includes 2 commercial products (PACE and NBAR) and 4 open-source tools (OpenDPI, L7-filter, nDPI, and Libprotoident). We studied their performance in various scenarios (including packet and flow truncation) and at different classification levels (application protocol, application and web service). We carefully built a labeled dataset with more than 750 K flows, which contains traffic from popular applications. We used the Volunteer-Based System (VBS), developed at Aalborg University, to guarantee the correct labeling of the dataset. We released this dataset, including full packet payloads, to the research community. We believe this dataset could become a common benchmark for the comparison and validation of network traffic classifiers. Our results present PACE, a commercial tool, as the most accurate solution. Surprisingly, we find that some open-source tools, such as nDPI and Libprotoident, also achieve very high accuracy.},
-  Doi                      = {http://dx.doi.org/10.1016/j.comnet.2014.11.001},
-  Keywords                 = {Deep packet inspection, DPI, traffic classification},
-  Owner                    = {Milan},
-  Timestamp                = {2014.12.02},
-  Url                      = {http://www.sciencedirect.com/science/article/pii/S1389128614003909}
-}
-
 @Misc{CAIDA-2013-Cyber,
   Title                    = {{Cyber-security Research Ethics Dialog \& Strategy Workshop}},
 
@@ -1005,6 +988,41 @@ The core of the paper is an evaluation and discussion of existing open-source DP
   Owner                    = {Milan},
   Timestamp                = {2014.12.01},
   Url                      = {http://dx.doi.org/10.1007/978-3-642-30633-4_11}
+}
+
+@InProceedings{Hendriks-2017-Flow,
+  Title                    = {{Flow-Based Detection of IPv6-specific Network Layer Attacks}},
+  Author                   = {Hendriks, Luuk and Velan, Petr and de O. Schmidt, Ricardo and de Boer, Pieter-Tjerk and Pras, Aiko},
+  Booktitle                = {Security of Networks and Services in an All-Connected World: 11th IFIP WG 6.6 International Conference on Autonomous Infrastructure, Management, and Security, AIMS 2017, Zurich, Switzerland, July 10-13, 2017, Proceedings},
+  Year                     = {2017},
+
+  Address                  = {Cham},
+  Editor                   = {Tuncer, Daphne and Koch, Robert and Badonnel, R{\'e}mi and Stiller, Burkhard},
+  Pages                    = {137--142},
+  Publisher                = {Springer International Publishing},
+
+  Abstract                 = {With a vastly different header format, IPv6 introduces new vulnerabilities not possible in IPv4, potentially requiring new detection algorithms. While many attacks specific to IPv6 have proven to be possible and are described in the literature, no detection solutions for these attacks have been proposed. In this study we identify and characterise IPv6-specific attacks that can be detected using flow monitoring. By constructing flow-based signatures, detection can be performed using available technologies such as NetFlow and IPFIX. To validate our approach, we implemented these signatures in a prototype, monitoring two production networks and injecting attacks into the production traffic.},
+  Doi                      = {10.1007/978-3-319-60774-0_11},
+  ISBN                     = {978-3-319-60774-0},
+  Owner                    = {velan},
+  Timestamp                = {2017.08.24},
+  Url                      = {https://doi.org/10.1007/978-3-319-60774-0_11}
+}
+
+@InProceedings{Hendriks-2017-Threats,
+  Title                    = {{Threats and Surprises behind IPv6 Extension Headers}},
+  Author                   = {Hendriks, Luuk and Velan, Petr and de O. Schmidt, Ricardo and de Boer, Pieter-Tjerk and Pras, Aiko},
+  Booktitle                = {2017 Network Traffic Measurement and Analysis Conference (TMA)},
+  Year                     = {2017},
+  Month                    = {June},
+  Pages                    = {1--9},
+  Publisher                = {IEEE Xplore Digital Library},
+
+  Abstract                 = {The concept of Extension Headers, newly introduced with IPv6, is elusive and enables new types of threats in the Internet. Simply dropping all traffic containing any Extension Header — a current practice by operators-seemingly is an effective solution, but at the cost of possibly dropping legitimate traffic as well. To determine whether threats indeed occur, and evaluate the actual nature of the traffic, measurement solutions need to be adapted. By implementing these specific parsing capabilities in flow exporters and performing measurements on two different production networks, we show it is feasible to quantify the metrics directly related to these threats, and thus allow for monitoring and detection. Analysing the traffic that is hidden behind Extension Headers, we find mostly benign traffic that directly affects end-user QoE: simply dropping all traffic containing Extension Headers is thus a bad practice with more consequences than operators might be aware of.},
+  Doi                      = {10.23919/TMA.2017.8002912},
+  Keywords                 = {Internet;Monitoring;Payloads;Probes;Protocols;Security;Standards},
+  Owner                    = {velan},
+  Timestamp                = {2017.08.24}
 }
 
 @Article{Hofstede-2014-Flow,

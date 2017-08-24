@@ -14,15 +14,11 @@
 \begin{chapintro}
 
 intro to app flow monitoring.
-application layer can mean more information from tunnelled protocols or even IPv6.
+% use part of introduction from Velan-2014-Next?
 
-% Martin Husák, Petr Velan, and Jan Vykopal. “Security Monitoring of HTTP Traffic Using Extended Flows”.
-% Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring”
-% Martin Elich, Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis”.
+% Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring” - related but cannot be directly included.
 % Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement”
-% Pavel Čeleda, Petr Velan, Martin Rábek, Rick Hofstede, and Aiko Pras. “Large-Scale Geolocation for NetFlow”
-% TODO papers from AIMS 2017 and TMA 2017
-The papers related to this chapter are~\cite{Husak-2015-Security, Velan-2014-Next, Velan-2013-Design, Elich-2013-Investigation, Celeda-2013-Large}.
+The papers related to this chapter are~\cite{Velan-2014-Next, Velan-2013-Design}.
 
 The organisation of this chapter is as follows:
 \begin{itemize}
@@ -34,6 +30,8 @@ The organisation of this chapter is as follows:
 \end{chapintro}
 
 \newpage
+
+\section{Motivation} % TODO use motivation from Velan-2014-Next
 
 \section{Creating Application Flow}
 
@@ -79,12 +77,11 @@ Several issues might be encountered with flow export when application flow monit
 
 Another issue that might be encountered due to large flow record is that single record might be larger than MTU of the management network interface on the flow exporting device. In such a case UDP transport protocol, which is still widely used for flow export, cannot be used without fragmenting IP packets. The fragmentation might cause a performance problem for the flow collector which has to reassemble the packets. It also increases the probability of data loss as single lost fragment invalidates the whole message.
 
-\section{Application Flow Benefits}
-
-\itodo{Papers using application flows}
 
 \section{Common Issues} % what is specific to application protocols, otherwise it should be at the end of previous chapter
 
 % shortening of string values - add some indication of shortening or original length
+
+\section{Design of an HTTP Parser} % put in Velan-2013-Design paper 
 
 \section{Conclusions}\label{sec:app-conclusions}
