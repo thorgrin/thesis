@@ -1,20 +1,9 @@
 \chapter{Application Flow Monitoring}
 
-\itodo{
-- Cisco Application Visibility and Control\\
-- \url{http://www.cisco.com/c/en/us/products/routers/avc-control.html}\\
-- \url{http://www.cisco.com/c/dam/en/us/solutions/collateral/enterprise-networks/unified-wan-services/at\_a\_glance\_c45-649117.pdf}\\
-}
-
-\itodo{
-- Network-Based Application Recognition (NBAR)\\
-- \url{http://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/product\_bulletin\_c25-627831.html}
-}
-
 \begin{chapintro}
 
-intro to app flow monitoring.
-% use part of introduction from Velan-2014-Next?
+Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches nowadays. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides less details about the traffic itself. Application flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. This chapter ... 
+% contributions
 
 % Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring” - related but cannot be directly included.
 % Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “Design and Evaluation of HTTP Protocol Parsers for IPFIX Measurement”
@@ -22,8 +11,8 @@ The papers related to this chapter are~\cite{Velan-2014-Next, Velan-2013-Design}
 
 The organisation of this chapter is as follows:
 \begin{itemize}
-%   \item Section~\ref{} 
-%   \item Section~\ref{}
+  \item Section~\ref{sec:creating-application-flow} 
+  \item Section~\ref{sec:http-parser-design}
   \item Section~\ref{sec:app-conclusions} concludes the chapter.
 \end{itemize}
 
@@ -31,9 +20,75 @@ The organisation of this chapter is as follows:
 
 \newpage
 
-\section{Motivation} % TODO use motivation from Velan-2014-Next
 
-\section{Creating Application Flow}
+\section{Motivation}
+The number of different applications communicating over the Internet is ever increasing and so is the need for application-aware network monitoring. However, building network monitoring systems is always a compromise between accuracy and performance. The more information processed, the more accurate the monitoring system is. Unfortunately, thorough examination of the traffic is computationally expensive~\cite{Gao-2006-Efficient, Lai-2004-Parallel}. Application flow monitoring is a network monitoring approach created to exploit the benefits of deep packet inspection (DPI). Integration of the DPI into flow monitoring allows for information aggregation, which provides better performance than the DPI alone.
+
+Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues and requires special attention. Therefore, we distinguish IP flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
+
+The application flow monitoring usually utilizes two main concepts: application identification (also known as traffic classification) and application visibility. The application identification allows to recognize the application protocol of a particular flow. The type of application is usually added as a single field to the exported flow record. The application visibility provides more information about the information carried by the application protocol itself. Application identification is a prerequisite of the application visibility. However, application identification can be done with use of machine learning techniques even without observing packet payloads.
+
+This chapter describes the differences between IP flow monitoring and application flow monitoring that have to be taken into consideration when the application flow monitoring process is designed and deployed. The most important part of application visibility is the design of application parsers. To illustrate the complexity of the application parser design, we propose and discuss several designs of HTTP protocol parsers at the end of this chapter.
+
+The benefits of application flow monitoring are discussed extensively in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
+
+\section{Related Work}
+
+The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification for encrypted traffic is surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
+
+Although application visibility is provided by a variety of commercial products such as dedicated probes, forwarding devices, and firewalls, it does not seem to be as attractive research topic as application identification. However, significant research effort was invested in automating the creation of application parsers. \citeauthor{Pang-2006-binpac} created a language and accompanying parser called \emph{binpac}~\cite{Pang-2006-binpac} in \citeyear{Pang-2006-binpac}. It allows to generate application parsers from their declarative description. A slightly different approach was taken by \citeauthor{Caballero-2007-Polyglot} in \citeyear{Caballero-2007-Polyglot}. The authors created a tool called \emph{Polygot}~\cite{Caballero-2007-Polyglot} which is used to reverse engineer application protocol headers. Similar work was published at the same time by \citeauthor{Cui-2007-Discoverer} in \cite{Cui-2007-Discoverer}. They presented a tool called \emph{Discoverer} that could automatically reverse engineering the protocol message formats of an application from its network trace. \citeauthor{Davidson-2009-Protocol} introduce a notion of using a higher order attribute grammar in~\cite{Davidson-2009-Protocol}, which allows to describe the structure of application protocols for which the use of context-free grammar is impractical of impossible. Another framework, called \emph{Spicy}~\cite{Sommer-2016-Spicy} was introduced by \citeauthor{Sommer-2016-Spicy}. It consists of format specification language, compiler toolchain and an API for DPI applications which allows for easy integration of the generated parsers to existing tools.
+
+% say that the IFPIX allows addition of new application elements and that the NetFlow was very limiting.
+
+% opensource: nProbe, yafdpi
+% commercial: Cisco (appliance and firewall), FlowMon (https://www.flowmon.com/en/products/flowmon/probe), Lancope (https://www.lancope.com/products/stealthwatch-flowsensor), ntop, some firewalls (barracuda networks (https://www.barracuda.com/products/nextgenfirewall_x/features), dell, aerohive networks, palo alto networks (https://www.paloaltonetworks.com/features/application-visibility))
+
+\itodo{
+- Cisco Application Visibility and Control\\
+- \url{http://www.cisco.com/c/en/us/products/routers/avc-control.html}\\
+}
+
+\itodo{
+- Network-Based Application Recognition (NBAR)\\
+- \url{https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/prod\_case\_study09186a00800ad0ca.html} \\
+- NBAR2 \\
+- \url{https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/product\_bulletin\_c25-627831.html}
+}
+
+\itodo{lucaderi ntop\\
+\url{http://www.ntop.org/nprobe/unveiling-application-visibility-in-ntop-and-nprobe-both-in-netflow-v9-and-ipfix/}}
+
+\itodo{yaf \cite{Inacio-2010-YAF}\\
+\url{https://tools.netsa.cert.org/yaf/yafdpi.html}\\
+\url{https://tools.netsa.cert.org/yaf/applabel.html}}
+
+\section{Application Flow Definition}
+% application flow is a subset of flow as defined in chap 2.
+% application flow definition (in text) 
+% beware of application identification vs application visibility, it must fit the definition
+
+% explain that aplication flow monitoring means that:
+% - primary: information from application layer is added to flow records
+% - secondary:
+%  - application logic (not necessarily in L7) affect the flow creation process, e.g. monitoring of tunnels
+%  - less typical but can also be considered as application flow monitoring: additional information can be added to flow records from external sources (geolocation)
+
+\section{Creating Application Flow}\label{sec:creating-application-flow}
+% 
+% application flow monitoring changes to flow monitoring (sometimes called IP flow monitoring):
+% - packet processing: 
+%   - L7 parsing is sometimes complex -> section with Design of an HTTP Parser
+%   - need to support recursion for tunnel monitoring
+% - flow creation
+%   - more complex flow keys
+%   - split flows after application event (next request in a single connection (HTTP pipelining))
+%   - retain application data for flows split by active timeout
+%   - size of flow records -> large flow caches
+% - flow export
+%   - described in previous chapter - long flows, different semantics for new elements
+%   - when URLs, domain names etc are exported in fixed lenght, the original length should be exported as well
+
+
 
 \iinfo{Taken from: Application Flow Monitoring Challenges}
 
@@ -50,12 +105,13 @@ The application flow monitoring is a complex process. Packets need to be receive
   \label{fig:flow-exporter-schema}
 \end{figure}
 
-\subsection{Packet Reception}
 
 The packet reception is unchanged for application flow monitoring unless the NIC processes the application layer. This scenario is discussed later in Hardware Accelerated Techniques section.
 
 
-\subsection{Packet Parsing}
+\subsection{Packet Processing}
+
+% \cite{Pang-2006-binpac}
 
 The basic task of the packet parsing is to extract connection attributes such as IP addresses, transport protocol, and ports to determine which flow the packet belongs to. Moreover, it obtains additional information of interest, especially from application protocols. The parser must be resilient to malformed packets and unknown protocols while supporting a wide range of existing network and application protocols.
 
@@ -63,7 +119,7 @@ Link, network, and transport headers of IP packets follow a strictly defined str
 
 With increasing deployment of encryption for all kinds of communication, the task of application flow monitoring becomes more difficult. Without access to application payload, the amount of information that can be extracted from the traffic is diminished. However, there are statistical and machine learning methods that are able to recognize specific applications even in encrypted traffic with high accuracy. Moreover, useful information such as a version of encryption protocol, certificates, or supported cipher suites, can be extracted from encrypted traffic. This information can be used to identify malicious encrypted traffic. The possibilities of processing and analysis of encrypted traffic were surveyed by the authors of~\cite{Velan-2015-Survey}.
 
-\subsection{Flow Aggregation}
+\subsection{Flow Creation}
 
 Application protocol measurement may require flow record to be expired early. For example, when HTTP protocol supports pipelining, multiple requests and responses can be carried out over a single connection. When it is desirable to keep track of each request/response pair, existing flow record might be exported when a new request is encountered on the same connection. Therefore, application flow monitoring  also affects the number of generated flow records, which needs to be taken into consideration during further processing of the flow records.
 
@@ -82,6 +138,6 @@ Another issue that might be encountered due to large flow record is that single 
 
 % shortening of string values - add some indication of shortening or original length
 
-\section{Design of an HTTP Parser} % put in Velan-2013-Design paper 
+\section{Design of an HTTP Parser: A Study}\label{sec:http-parser-design} % put in Velan-2013-Design paper 
 
 \section{Conclusions}\label{sec:app-conclusions}
