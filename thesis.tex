@@ -79,12 +79,12 @@ TODO: discuss privacy issues (where?)
 \usepackage{makeidx}      %% The `makeidx` package contains
 \makeindex                %% helper commands for index typesetting.
 %% These additional packages are used within the document:
-% \usepackage{paralist} %% Compact list environments
-\usepackage{amsmath}  %% Mathematics
+% \usepackage{paralist}     %% Compact list environments
+\usepackage{amsmath}      %% Mathematics
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{url}      %% Hyperlinks
-% \usepackage{markdown} %% Lightweight Markup
+\usepackage[hyphens]{url} %% Hyperlinks
+% \usepackage{markdown}     %% Lightweight Markup
 
 % override the default iso-numeric bibtex style by loading the package ourselves
 \usepackage[backend=biber,
@@ -92,6 +92,36 @@ TODO: discuss privacy issues (where?)
         sorting=none,
         autolang=other,
         sortlocale=auto]{biblatex}
+
+% clear unnecessary fields that might be filled in the bib files.
+% \AtEveryBibitem affects only bibliography, \AtEveryCitekey to affect the \fullcite command as well
+% example: \AtEveryCitekey{\ifentrytype{incollection}{\clearfield{doi}}{}}
+
+% Using \DeclareSourcemap is preferred as it prevents the entries from getting into the .bbl file in the first place
+% keep editors only for books
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{ % remove url related field from article, inproceedings and incollection
+      \pertype{article}
+      \pertype{inproceedings}
+      \pertype{incollection}
+      \step[fieldset=url, null]
+      \step[fieldset=urlday, null]
+      \step[fieldset=urlmonth, null]
+      \step[fieldset=urlyear, null]
+      \step[fieldset=urldateera, null]
+    }
+    \map{ % remove doi from inproceedings and incollection
+      \pertype{inproceedings}
+      \pertype{incollection}
+      \step[fieldset=doi, null]
+    }
+    \map{ % remove editors from all types except inbook
+      \pernottype{inbook}
+      \step[fieldset=editor, null]
+    }
+  }
+}
 
 % TO-DO notes
 \usepackage{xargs}
@@ -162,7 +192,6 @@ TODO: discuss privacy issues (where?)
 \usepackage{varwidth} % Rotated table with caption
 \usepackage{tabu}
 \usepackage{bigstrut}
-%\usepackage[hyphens]{url} TODO try this to break long urls
 
 % Environment for chapter introductions (use \setlength{\parindent}{15pt} to indent paragraphs)
 \newenvironment{chapintro}
