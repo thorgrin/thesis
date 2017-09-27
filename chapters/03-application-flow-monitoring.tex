@@ -2,7 +2,7 @@
 
 \begin{chapintro}
 
-Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches nowadays. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides less details about the traffic itself. Application flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. This chapter ... 
+Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches nowadays. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides no details about the traffic content. Application flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. This chapter ... 
 % contributions
 
 % Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring” - related but cannot be directly included.
@@ -24,7 +24,7 @@ The organisation of this chapter is as follows:
 \section{Motivation}
 The number of different applications communicating over the Internet is ever increasing and so is the need for application-aware network monitoring. However, building network monitoring systems is always a compromise between accuracy and performance. The more information processed, the more accurate the monitoring system is. Unfortunately, thorough examination of the traffic is computationally expensive~\cite{Gao-2006-Efficient, Lai-2004-Parallel}. Application flow monitoring is a network monitoring approach created to exploit the benefits of deep packet inspection (DPI). Integration of the DPI into flow monitoring allows for information aggregation, which provides better performance than the DPI alone.
 
-Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues and requires special attention. Therefore, we distinguish IP flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
+Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues which require special attention. Therefore, we distinguish IP flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
 
 The application flow monitoring usually utilizes two main concepts: application identification (also known as traffic classification) and application visibility. The application identification allows to recognize the application protocol of a particular flow. The type of application is usually added as a single field to the exported flow record. The application visibility provides more information about the information carried by the application protocol itself. Application identification is a prerequisite of the application visibility. However, application identification can be done with use of machine learning techniques even without observing packet payloads.
 
@@ -34,33 +34,52 @@ The benefits of application flow monitoring are discussed extensively in the Cha
 
 \section{Related Work}
 
-The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification for encrypted traffic is surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
+The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification for encrypted traffic are surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
 
-Although application visibility is provided by a variety of commercial products such as dedicated probes, forwarding devices, and firewalls, it does not seem to be as attractive research topic as application identification. However, significant research effort was invested in automating the creation of application parsers. \citeauthor{Pang-2006-binpac} created a language and accompanying parser called \emph{binpac}~\cite{Pang-2006-binpac} in \citeyear{Pang-2006-binpac}. It allows to generate application parsers from their declarative description. A slightly different approach was taken by \citeauthor{Caballero-2007-Polyglot} in \citeyear{Caballero-2007-Polyglot}. The authors created a tool called \emph{Polygot}~\cite{Caballero-2007-Polyglot} which is used to reverse engineer application protocol headers. Similar work was published at the same time by \citeauthor{Cui-2007-Discoverer} in \cite{Cui-2007-Discoverer}. They presented a tool called \emph{Discoverer} that could automatically reverse engineering the protocol message formats of an application from its network trace. \citeauthor{Davidson-2009-Protocol} introduce a notion of using a higher order attribute grammar in~\cite{Davidson-2009-Protocol}, which allows to describe the structure of application protocols for which the use of context-free grammar is impractical of impossible. Another framework, called \emph{Spicy}~\cite{Sommer-2016-Spicy} was introduced by \citeauthor{Sommer-2016-Spicy}. It consists of format specification language, compiler toolchain and an API for DPI applications which allows for easy integration of the generated parsers to existing tools.
+\subsection{Application Parsers}
+Although application visibility is provided by a variety of commercial products such as dedicated probes, forwarding devices, and firewalls, it does not seem to be as attractive research topic as application identification. However, significant research effort was invested in automating the creation of application parsers. \citeauthor{Pang-2006-binpac} created a language and accompanying parser called \emph{binpac}~\cite{Pang-2006-binpac} in \citeyear{Pang-2006-binpac}. It allows to generate application parsers from their declarative description. A slightly different approach was taken by \citeauthor{Caballero-2007-Polyglot} in \citeyear{Caballero-2007-Polyglot}. The authors created a tool called \emph{Polygot}~\cite{Caballero-2007-Polyglot} which is used to reverse engineer application protocol headers. Similar work was published at the same time by \citeauthor{Cui-2007-Discoverer} in \cite{Cui-2007-Discoverer}. They presented a tool called \emph{Discoverer} that could automatically reverse engineering the protocol message formats of an application from its network trace. \citeauthor{Davidson-2009-Protocol} introduce a notion of using a higher order attribute grammar in~\cite{Davidson-2009-Protocol}, which allows to describe the structure of application protocols for which the use of context-free grammar is impractical or impossible. Another framework, called \emph{Spicy}~\cite{Sommer-2016-Spicy} was introduced by \citeauthor{Sommer-2016-Spicy}. It consists of format specification language, compiler toolchain and an API for DPI applications which allows for easy integration of the generated parsers to existing tools.
 
-% say that the IFPIX allows addition of new application elements and that the NetFlow was very limiting.
+\subsection{Application Flow Exporters}
+There is a number of open-source tools and commercial products that support an export of flows including application information. Most of them already support the IPFIX protocol for the encoding of application information~\cite{Hofstede-2014-Flow}, however, there are still a few that add custom elements to the NetFlow v9 protocol, which can cause element collisions and compatibility problems. Table~\ref{tab:flow-exporters} shows an overview of the flow exporters discussed in this section.
 
-% opensource: nProbe, yafdpi
-% commercial: Cisco (appliance and firewall), FlowMon (https://www.flowmon.com/en/products/flowmon/probe), Lancope (https://www.lancope.com/products/stealthwatch-flowsensor), ntop, some firewalls (barracuda networks (https://www.barracuda.com/products/nextgenfirewall_x/features), dell, aerohive networks, palo alto networks (https://www.paloaltonetworks.com/features/application-visibility))
+\begin{table}[ht!]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{>{\centering}m{1.5cm}| >{\centering}m{2cm} |c|>{\centering}m{0.8cm}|>{\centering\arraybackslash}m{5.1cm}}
+    \toprule
+    \textbf{Vendor}    & \textbf{Product}                   & \textbf{IPFIX} & \textbf{App. ident.} & \textbf{App. visibility}  \\ \hline
+    CERT NetSA         & YAF                                & \cmark         & \cmark                       & FTP, HTTP, IMAP, RTSP, SIP, SMTP, SSH, DNS, SSL/TLS, IRC, NNTP, POP3, SLP, TFTP, MySQL, DNP3, Modbus and RTP \\ \hline
+    ntop               & nProbe                             & \cmark         & \cmark                       & \\ \hline
+    ntop               & nProbe Pro                         & \cmark         & \cmark                       & HTTP, DHCP, DNS, MySQL, Oracle DB, BGP, IMAP, POP3, SMTP, Radius, Diameter, GTP, S1AP, SSDP, NetBIOS  \\ \hline
+    FlowMon Networks   & Flowmon Probe                      & \cmark         & \cmark                       & HTTP, DNS, DHCP, SMB, E-mail, MSSQL, VoIP SIP and other protocols \\ \hline
+    Cisco              & Application Visibility and Control & \cmark         & \cmark                       & \\ \hline
+    Lancope            & Stealthwatch FlowSensor            & \cmark         & \cmark                       & \\ \hline
+    Palo Alto Networks & Next-Generation Firewall           &                & \cmark                       & \\ \bottomrule
+    \end{tabular}
+    \caption{Flow Exporters Supporting Application Flow Monitoring}
+    \label{tab:flow-exporters}
+\end{table}
 
-\itodo{
-- Cisco Application Visibility and Control\\
-- \url{http://www.cisco.com/c/en/us/products/routers/avc-control.html}\\
-}
+% TODO mention performance: throughput depends on packet size and used application identification and visibility plugins, incomparable
 
-\itodo{
-- Network-Based Application Recognition (NBAR)\\
-- \url{https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/prod\_case\_study09186a00800ad0ca.html} \\
-- NBAR2 \\
-- \url{https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/network-based-application-recognition-nbar/product\_bulletin\_c25-627831.html}
-}
+Two open-source flow exporters pioneer the application flow monitoring: YAF and nProbe. YAF (Yet Another Flowmeter)~\cite{Inacio-2010-YAF} was created as a reference implementation of a flow exporter conforming to the IPFIX standard. YAF supports custom rules for application identification~\cite{CERTNSAGET--yaf}. It can match applications by regular expressions in combination with ports, by signatures or by using dynamically loaded plugins for processing packet payloads. Application visibility~\cite{ESCERTNSAGET--yaf} is supported for flows where application identification succeeded. YAF allows to load plugins that perform the DPI and export the optional information elements using a subTemplateMultiList feature of the IPFIX protocol.Application protocols supported according to the YAF documentation are listed in the Table~\ref{tab:flow-exporters}.
 
-\itodo{lucaderi ntop\\
-\url{http://www.ntop.org/nprobe/unveiling-application-visibility-in-ntop-and-nprobe-both-in-netflow-v9-and-ipfix/}}
+The nProbe~\cite{Deri-2003-nProbe} is a flow probe created by \citeauthor{Deri-2003-nProbe} and published in~\citeyear{Deri-2003-nProbe}. Although the nProbe is both flow exporter and flow collector, we focus only on its features as an exporter. Application identification was added to nProbe in 2011~\cite{ntop-2011-Unveiling}. It is based on the OpenDPI open-source traffic identification library, however, the authors of nProbe improved the library and showed that their version (nDPI) can be used for high-speed traffic identification~\cite{Deri-2014-nDPI}. The nProbe supports custom flow record export format for NetFlow v9 and IPFIX protocols. The user us allowed to configure her own list of templates that is used to transport data to a flow collector. Support for application visibility is provided by the use of optional plugins. However, these plugins are not available for the open-source version of nProbe and can only be used with nProbe Pro version.
 
-\itodo{yaf \cite{Inacio-2010-YAF}\\
-\url{https://tools.netsa.cert.org/yaf/yafdpi.html}\\
-\url{https://tools.netsa.cert.org/yaf/applabel.html}}
+There are several available probes, forwarding devices, and firewalls that support at least limited application flow monitoring. It is often difficult or impossible to gain detailed information about the level of application identification and visibility supported by commercial devices. The information provided in the rest of this section is therefore only an overview of some of the available products from publicly obtainable information.
+
+The nProbe Pro version is a commercial version of nProbe supporting plugins that provide application visibility. Application protocols supported according to the nProbe documentation are listed in the Table~\ref{tab:flow-exporters}.
+
+Another flow monitoring probe is the Flowmon Probe~\cite{FlowmonNetworks--Flowmon} from Flowmon Networks. Support for application identification is provided using the libprotoident~\cite{Alcock-2012-libprotoident} library and application visibility is provided by multiple application processing plugins. The application visibility is independent of application identification, therefore each application processing plugin must have its own application identification algorithm for the supported application protocol. The Flomon Probe exports flow records using IPFIX protocol and the application fields are encoded using the Flowmon Networks Private Enterprise Number (PEN).
+
+Cisco provides support for application identification both in forwarding devices as well as in dedicated probes called NetFlow Generation Appliances. The Cisco Application Visibility and Control (AVC)~\cite{CiscoSystems--Cisco} technology uses Network-Based Application Recognition 2 (NBAR2) Protocol Library~\cite{CiscoSystems--NBAR2} for application identification and NetFlow and IPFIX protocols for flow export. NBAR2 is a deep packet inspection library which uses signatures to classify traffic to categories and subcategories. No application visibility is supported by NBAR2, therefore no details from application protocol headers are exported by the AVC.
+
+The Stealthwatch FlowSensor\cite{Lancope--Stealthwatch} is a flow monitoring probe by Lancope which supports application identification using DPI and behavioural analysis. The flow export using IPFIX protocol is supported as well as older NetFlow protocols.
+
+An example of a firewall with limited application flow monitoring support is the Next-Generation Firewall from Palo Alto Networks~\cite{PAN--Next}. It supports application identification and can export application labels using NetFlow v9 protocol. Although the feature is called visibility and control, which is similar to the Cisco AVC, no application visibility apart from the identification is provided.
+
+All presented flow exporters and flow monitoring devices struggle to achieve high throughput to be able to monitor high-speed networks. However, we avoided direct comparison of declared throughput of the flow probes as it highly depends on the nature of the traffic, supported application protocols and hardware configuration. More information about flow measurement in high-speed networks is provided in the Chapter~\ref{chap:flow-monitoring-performance}
 
 \section{Application Flow Definition}
 % application flow is a subset of flow as defined in chap 2.
