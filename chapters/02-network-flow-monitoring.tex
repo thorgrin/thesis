@@ -178,7 +178,7 @@ There are two more terms connected to flow that need to be defined: \emph{flow k
 
 \end{definition}
 
-A flow record is basically a tuple containing flow keys and other properties measured for the flow. The following definition reflects that:
+A flow record is basically a tuple containing flow keys and other properties measured for the flow. Moreover, we allow inclusion of more information about the flow that is derived from external sources. An example can be a name of a user to which particular IP address belonged at the time of measurement. The following definition reflects that:
 
 \begin{definition}\label{def:flow-record}
 
@@ -189,7 +189,8 @@ A flow record is basically a tuple containing flow keys and other properties mea
     	\item other properties of the \emph{flow} derived from:
     	\begin{enumerate}
     		\item data contained in the packets of the \emph{flow},
-    		\item the packet treatment of the \emph{flow} at the \emph{observation point}.
+    		\item the packet treatment of the \emph{flow} at the \emph{observation point},
+    		\item external source of information.
     	\end{enumerate}
     \end{enumerate}
 

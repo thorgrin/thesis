@@ -2,7 +2,7 @@
 
 \begin{chapintro}
 
-Deep packet inspection (DPI) and IP flow monitoring are frequently used network monitoring approaches nowadays. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive. The IP flow monitoring achieves high performance by processing only packet headers, but provides no details about the traffic content. Application flow monitoring is proposed as an attempt to combine DPI accuracy and IP flow monitoring performance. This chapter ... 
+Deep packet inspection (DPI) and basic flow monitoring are frequently used network monitoring approaches nowadays. Although the DPI provides application visibility, detailed examination of every packet is computationally intensive to be performed on high-speed networks. The basic flow monitoring achieves high performance by processing only packet headers, but provides no details about the traffic content. Application flow monitoring is proposed as an attempt to combine DPI accuracy and basic flow monitoring performance. This chapter ... 
 % contributions
 
 % Petr Velan and Pavel Čeleda. “Next Generation Application-Aware Flow Monitoring” - related but cannot be directly included.
@@ -22,25 +22,25 @@ The organisation of this chapter is as follows:
 
 
 \section{Motivation}
-The number of different applications communicating over the Internet is ever increasing and so is the need for application-aware network monitoring. However, building network monitoring systems is always a compromise between accuracy and performance. The more information processed, the more accurate the monitoring system is. Unfortunately, thorough examination of the traffic is computationally expensive~\cite{Gao-2006-Efficient, Lai-2004-Parallel}. Application flow monitoring is a network monitoring approach created to exploit the benefits of deep packet inspection (DPI). Integration of the DPI into flow monitoring allows for information aggregation, which provides better performance than the DPI alone.
+The number of different applications communicating over the Internet is ever increasing and so is the need for application-aware network monitoring. However, building network monitoring systems is always a compromise between accuracy and performance. The more detailed the information processing, the more accurate the monitoring system is. Unfortunately, thorough examination of the traffic is computationally expensive~\cite{Gao-2006-Efficient, Lai-2004-Parallel}. Application flow monitoring is a network monitoring approach created to exploit the benefits of deep packet inspection (DPI). Integration of the DPI into flow monitoring allows for information aggregation, which provides better performance than the DPI alone.
 
-Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues which require special attention. Therefore, we distinguish IP flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
+Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues which require special attention. Therefore, we distinguish basic flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
 
-The application flow monitoring usually utilizes two main concepts: application identification (also known as traffic classification) and application visibility. The application identification allows to recognize the application protocol of a particular flow. The type of application is usually added as a single field to the exported flow record. The application visibility provides more information about the information carried by the application protocol itself. Application identification is a prerequisite of the application visibility. However, application identification can be done with use of machine learning techniques even without observing packet payloads.
+The application flow monitoring usually utilizes two main concepts: application identification (also known as traffic classification) and application visibility. A complete definition of application flow monitoring is provided in the Section~\ref{sec:app-flow-definition}. The application identification allows to recognize the application protocol of a particular flow. The type of application is usually added as a single field to the exported flow record. The application visibility provides more information about the information carried by the application protocol itself. Application identification is a prerequisite of the application visibility. However, application identification can be performed with use of machine learning techniques even without observing packet payloads.
 
-This chapter describes the differences between IP flow monitoring and application flow monitoring that have to be taken into consideration when the application flow monitoring process is designed and deployed. The most important part of application visibility is the design of application parsers. To illustrate the complexity of the application parser design, we propose and discuss several designs of HTTP protocol parsers at the end of this chapter.
+This chapter describes the differences between basic flow monitoring and application flow monitoring that have to be taken into consideration when the application flow monitoring process is designed and deployed. The most important part of application visibility is the design of application parsers. To illustrate the complexity of the application parser design, we propose and discuss several designs of HTTP protocol parsers at the end of this chapter.
 
 The benefits of application flow monitoring are discussed extensively in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
 
 \section{Related Work}
 
-The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification for encrypted traffic are surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
+The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification in encrypted traffic are surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
 
 \subsection{Application Parsers}
-Although application visibility is provided by a variety of commercial products such as dedicated probes, forwarding devices, and firewalls, it does not seem to be as attractive research topic as application identification. However, significant research effort was invested in automating the creation of application parsers. \citeauthor{Pang-2006-binpac} created a language and accompanying parser called \emph{binpac}~\cite{Pang-2006-binpac} in \citeyear{Pang-2006-binpac}. It allows to generate application parsers from their declarative description. A slightly different approach was taken by \citeauthor{Caballero-2007-Polyglot} in \citeyear{Caballero-2007-Polyglot}. The authors created a tool called \emph{Polygot}~\cite{Caballero-2007-Polyglot} which is used to reverse engineer application protocol headers. Similar work was published at the same time by \citeauthor{Cui-2007-Discoverer} in \cite{Cui-2007-Discoverer}. They presented a tool called \emph{Discoverer} that could automatically reverse engineering the protocol message formats of an application from its network trace. \citeauthor{Davidson-2009-Protocol} introduce a notion of using a higher order attribute grammar in~\cite{Davidson-2009-Protocol}, which allows to describe the structure of application protocols for which the use of context-free grammar is impractical or impossible. Another framework, called \emph{Spicy}~\cite{Sommer-2016-Spicy} was introduced by \citeauthor{Sommer-2016-Spicy}. It consists of format specification language, compiler toolchain and an API for DPI applications which allows for easy integration of the generated parsers to existing tools.
+Although application visibility is provided by a variety of commercial products such as dedicated probes, forwarding devices, and firewalls, it does not seem to be as attractive research topic as application identification where various machine learning and pattern matching algorithms can be applied. However, significant research effort was invested in automating the creation of application parsers. \citeauthor{Pang-2006-binpac} created a language and accompanying parser called \emph{binpac}~\cite{Pang-2006-binpac} in \citeyear{Pang-2006-binpac}. It allows to generate application parsers from their declarative description. A slightly different approach was taken by \citeauthor{Caballero-2007-Polyglot} in \citeyear{Caballero-2007-Polyglot}. The authors created a tool called \emph{Polygot}~\cite{Caballero-2007-Polyglot} which is used to reverse engineer application protocol headers. Similar work was published at the same time by \citeauthor{Cui-2007-Discoverer} in \cite{Cui-2007-Discoverer}. They presented a tool called \emph{Discoverer} that could automatically reverse engineering the protocol message formats of an application from its network trace. \citeauthor{Davidson-2009-Protocol} introduce a notion of using a higher order attribute grammar in~\cite{Davidson-2009-Protocol}, which allows to describe the structure of application protocols for which the use of context-free grammar is impractical or impossible. Another framework, called \emph{Spicy}~\cite{Sommer-2016-Spicy} was introduced by \citeauthor{Sommer-2016-Spicy}. It consists of format specification language, compiler toolchain and an API for DPI applications which allows for easy integration of the generated parsers to existing tools.
 
 \subsection{Application Flow Exporters}
-There is a number of open-source tools and commercial products that support an export of flows including application information. Most of them already support the IPFIX protocol for the encoding of application information~\cite{Hofstede-2014-Flow}, however, there are still a few that add custom elements to the NetFlow v9 protocol, which can cause element collisions and compatibility problems. Table~\ref{tab:flow-exporters} shows an overview of the flow exporters discussed in this section.
+There is a number of open-source tools and commercial products that support an export of flows including application level information. Most of them already support the IPFIX protocol for the encoding of application information~\cite{Hofstede-2014-Flow}, however, there are still a few that add custom elements to the NetFlow v9 protocol, which can cause element collisions and compatibility problems. Table~\ref{tab:flow-exporters} shows an overview of the flow exporters discussed in this section.
 
 \begin{table}[ht!]
     \centering
@@ -61,30 +61,44 @@ There is a number of open-source tools and commercial products that support an e
     \label{tab:flow-exporters}
 \end{table}
 
-% TODO mention performance: throughput depends on packet size and used application identification and visibility plugins, incomparable
+Two open-source flow exporters pioneer the application flow monitoring: YAF and nProbe. YAF (Yet Another Flowmeter)~\cite{Inacio-2010-YAF} was created as a reference implementation of a flow exporter conforming to the IPFIX standard. YAF supports custom rules for application identification~\cite{CERTNSAGET--yaf}. It can match applications by regular expressions in combination with ports, by signatures or by using dynamically loaded plugins for processing packet payloads. Application visibility~\cite{ESCERTNSAGET--yaf} is supported for flows where application identification succeeded. YAF allows to load plugins that perform the DPI and export the optional information elements using a subTemplateMultiList feature of the IPFIX protocol. Application protocols supported according to the YAF documentation are listed in the Table~\ref{tab:flow-exporters}.
 
-Two open-source flow exporters pioneer the application flow monitoring: YAF and nProbe. YAF (Yet Another Flowmeter)~\cite{Inacio-2010-YAF} was created as a reference implementation of a flow exporter conforming to the IPFIX standard. YAF supports custom rules for application identification~\cite{CERTNSAGET--yaf}. It can match applications by regular expressions in combination with ports, by signatures or by using dynamically loaded plugins for processing packet payloads. Application visibility~\cite{ESCERTNSAGET--yaf} is supported for flows where application identification succeeded. YAF allows to load plugins that perform the DPI and export the optional information elements using a subTemplateMultiList feature of the IPFIX protocol.Application protocols supported according to the YAF documentation are listed in the Table~\ref{tab:flow-exporters}.
+The nProbe~\cite{Deri-2003-nProbe} is a flow probe originally created by Luca Deri and published in~\citeyear{Deri-2003-nProbe}. Although the nProbe is both flow exporter and flow collector, we focus only on its features as an exporter. Application identification was added to nProbe in 2011~\cite{ntop-2011-Unveiling}. It is based on the OpenDPI open-source traffic identification library, however, the authors of nProbe improved the library and showed that their version (nDPI) can be used for high-speed traffic identification~\cite{Deri-2014-nDPI}. The nProbe supports custom flow record export format for NetFlow v9 and IPFIX protocols. The user is allowed to configure her own list of templates that is used to transport data to a flow collector. Support for application visibility is provided by the use of optional plugins. However, these plugins are not available for the open-source version of nProbe and can only be used with nProbe Pro version.
 
-The nProbe~\cite{Deri-2003-nProbe} is a flow probe created by \citeauthor{Deri-2003-nProbe} and published in~\citeyear{Deri-2003-nProbe}. Although the nProbe is both flow exporter and flow collector, we focus only on its features as an exporter. Application identification was added to nProbe in 2011~\cite{ntop-2011-Unveiling}. It is based on the OpenDPI open-source traffic identification library, however, the authors of nProbe improved the library and showed that their version (nDPI) can be used for high-speed traffic identification~\cite{Deri-2014-nDPI}. The nProbe supports custom flow record export format for NetFlow v9 and IPFIX protocols. The user us allowed to configure her own list of templates that is used to transport data to a flow collector. Support for application visibility is provided by the use of optional plugins. However, these plugins are not available for the open-source version of nProbe and can only be used with nProbe Pro version.
-
-There are several available probes, forwarding devices, and firewalls that support at least limited application flow monitoring. It is often difficult or impossible to gain detailed information about the level of application identification and visibility supported by commercial devices. The information provided in the rest of this section is therefore only an overview of some of the available products from publicly obtainable information.
+There are several commercially available probes, forwarding devices, and firewalls that support at least limited application flow monitoring. It is often difficult or impossible to gain detailed information about the level of application identification and visibility supported by commercial devices. The information provided in the rest of this section is therefore only an overview of some of the available products from publicly obtainable information.
 
 The nProbe Pro version is a commercial version of nProbe supporting plugins that provide application visibility. Application protocols supported according to the nProbe documentation are listed in the Table~\ref{tab:flow-exporters}.
 
 Another flow monitoring probe is the Flowmon Probe~\cite{FlowmonNetworks--Flowmon} from Flowmon Networks. Support for application identification is provided using the libprotoident~\cite{Alcock-2012-libprotoident} library and application visibility is provided by multiple application processing plugins. The application visibility is independent of application identification, therefore each application processing plugin must have its own application identification algorithm for the supported application protocol. The Flomon Probe exports flow records using IPFIX protocol and the application fields are encoded using the Flowmon Networks Private Enterprise Number (PEN).
 
-Cisco provides support for application identification both in forwarding devices as well as in dedicated probes called NetFlow Generation Appliances. The Cisco Application Visibility and Control (AVC)~\cite{CiscoSystems--Cisco} technology uses Network-Based Application Recognition 2 (NBAR2) Protocol Library~\cite{CiscoSystems--NBAR2} for application identification and NetFlow and IPFIX protocols for flow export. NBAR2 is a deep packet inspection library which uses signatures to classify traffic to categories and subcategories. No application visibility is supported by NBAR2, therefore no details from application protocol headers are exported by the AVC.
+Cisco provides support for application identification using the Cisco Application Visibility and Control (AVC)~\cite{CiscoSystems--Cisco} technology both in forwarding devices as well as in dedicated probes called NetFlow Generation Appliances. The AVC uses Network-Based Application Recognition 2 (NBAR2) Protocol Library~\cite{CiscoSystems--NBAR2} for application identification and NetFlow and IPFIX protocols for flow export. NBAR2 is a deep packet inspection library which uses signatures to classify traffic to categories and subcategories. Although the technology is called application visibility and control, no application visibility is supported by NBAR2, therefore no details from application protocol headers are exported by the AVC. 
 
 The Stealthwatch FlowSensor\cite{Lancope--Stealthwatch} is a flow monitoring probe by Lancope which supports application identification using DPI and behavioural analysis. The flow export using IPFIX protocol is supported as well as older NetFlow protocols.
 
-An example of a firewall with limited application flow monitoring support is the Next-Generation Firewall from Palo Alto Networks~\cite{PAN--Next}. It supports application identification and can export application labels using NetFlow v9 protocol. Although the feature is called visibility and control, which is similar to the Cisco AVC, no application visibility apart from the identification is provided.
+An example of a firewall with limited application flow monitoring support is the Next-Generation Firewall from Palo Alto Networks~\cite{PAN--Next}. It supports application identification and can export application labels using NetFlow v9 protocol. Similarly to the Cisco AVC, no application visibility apart from the identification is provided.
 
 All presented flow exporters and flow monitoring devices struggle to achieve high throughput to be able to monitor high-speed networks. However, we avoided direct comparison of declared throughput of the flow probes as it highly depends on the nature of the traffic, supported application protocols and hardware configuration. More information about flow measurement in high-speed networks is provided in the Chapter~\ref{chap:flow-monitoring-performance}
 
-\section{Application Flow Definition}
-% application flow is a subset of flow as defined in chap 2.
-% application flow definition (in text) 
-% beware of application identification vs application visibility, it must fit the definition
+\section{Application Flow Definition}\label{sec:app-flow-definition}
+
+To describe application flow creation process an application flow definition should be introduced. Before that, we need to clarify what is meant by different flow monitoring types.
+
+\begin{description}
+  \item[Flow monitoring] is defined by Definition~\ref{def:flow}. It is a superset of all following flow monitoring types.
+  \item[Basic flow monitoring] is a flow monitoring that does not utilize application information in any way. It is a complement of the application flow monitoring.
+  \item[Application flow monitoring] is a flow monitoring that utilizes application information. It is a complement of the basic flow monitoring. 
+  \item[IP flow monitoring] is often used for flow monitoring that uses information from IP headers in flow keys. It is often used as a synonym of flow monitoring in the literature and is based on NetFlow v9 and IPFIX flow definitions.
+\end{description}
+
+Figure~\ref{fig:flow-monitoring-types} demonstrates the relations between the described types of flow monitoring. Note that basic flow monitoring and application flow monitoring are complements and IP flow monitoring can be both at the same time.
+
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/flow-monitoring-types}
+  \end{center}
+  \caption{Relations between Different Flow Monitoring Types}
+  \label{fig:flow-monitoring-types}
+\end{figure}
 
 % explain that aplication flow monitoring means that:
 % - primary: information from application layer is added to flow records
@@ -92,45 +106,49 @@ All presented flow exporters and flow monitoring devices struggle to achieve hig
 %  - application logic (not necessarily in L7) affect the flow creation process, e.g. monitoring of tunnels
 %  - less typical but can also be considered as application flow monitoring: additional information can be added to flow records from external sources (geolocation)
 
+We have already stated that application flow monitoring is a flow monitoring that uses application information. Let us now consider how that information can be used for creating flows and flow records. Firstly, the goal is to provide application layer information in the flow records. Therefore the flow record needs to be extended with fields containing information extracted from the application layer of the packets of the flow. Secondly, an application logic can affect the flow creation process. For example, a flow with continuous HTTP connection can be split to multiple flows based on individual observed HTTP requests. Moreover, the application logic that affects flow creation is not be limited to application layer data, although the difference between basic flow monitoring and application flow monitoring is very thin in this case. Consider a scenario where Generic Routing Encapsulation (GRE) is used. As a basic flow, the GRE tunnel would be observed as a single flow. However, the GRE protocol can be considered an application and using the semantics of this application, we can split the single flow to many flows based on the traffic that flows in the GRE tunnel. Thirdly, additional information can be inserted from external sources based on semantics of properties extracted from the packets. For example a geolocation information can be added by the probe based on IP addresses of the communicating parties.
+
+Now that the requirements for the application flow monitoring have been specified, we can formulate the application flow definition as follows:
+
+\begin{definition}\label{def:application-flow}
+
+    An \emph{\Index{application flow}} is a \emph{flow} where either
+    the content of application layer or application logic is used
+    to derive the flow keys.
+
+\end{definition}
+
+The definition specifies what an application flow is. Notice, however, that the definition does not cover all flows that are created by application flow monitoring. The problem is that the definition of application flow cannot specify how the subsequent flow record derived from the application flow will be created. For this reason, we need a definition of application flow record as well:
+
+\begin{definition}\label{def:application-flow-record}
+
+    An~\emph{\Index{application flow record}} is a \emph{flow record} 
+    that contains information derived from either:
+
+    \begin{enumerate}
+        \item data contained in the application layer of the \emph{flow}, or
+        \item external source of information.
+    \end{enumerate}
+        
+\end{definition}
+
+Application flow monitoring is a subset of flow monitoring where application flows or application flow records are used. Notice that application flow record can be created from standard flow record by extracting information from application layer. Conversely, standard flow records can be created from application flows. Therefore, either the use of application flows or application flow records is enough to call the related monitoring process \emph{application flow monitoring}.
+
 \section{Creating Application Flow}\label{sec:creating-application-flow}
-% 
-% application flow monitoring changes to flow monitoring (sometimes called IP flow monitoring):
-% - packet processing: 
-%   - L7 parsing is sometimes complex -> section with Design of an HTTP Parser
-%   - need to support recursion for tunnel monitoring
-% - flow creation
-%   - more complex flow keys
-%   - split flows after application event (next request in a single connection (HTTP pipelining))
-%   - retain application data for flows split by active timeout
-%   - size of flow records -> large flow caches
-% - flow export
-%   - described in previous chapter - long flows, different semantics for new elements
-%   - when URLs, domain names etc are exported in fixed lenght, the original length should be exported as well
 
-
-
-\iinfo{Taken from: Application Flow Monitoring Challenges}
-
-\itodo{TODO: vyporadat se s opakujicimi se hlavickami (HTTP), doplnit definici flow z predchozi kapitoly\\
-- Flow expiration/termination vs app flow splitting}
-
-The application flow monitoring is a complex process. Packets need to be received from the network, transported to computer memory (RAM), parsed, aggregated to flow records based on the parsed information, and exported to flow collectors for further processing. The process is depicted in Figure~\ref{fig:flow-exporter-schema}. This section describes the whole flow measurement process, points out where it is affected by the application processing and introduces some of the related challenges.
-
-\begin{figure}[tb!]
-  \begin{center}
-    \includegraphics[width=\textwidth]{figures/flow-exporter-schema}
-  \end{center}
-  \caption{A Flow Exporter Schema}
-  \label{fig:flow-exporter-schema}
-\end{figure}
-
-
-The packet reception is unchanged for application flow monitoring unless the NIC processes the application layer. This scenario is discussed later in Hardware Accelerated Techniques section.
-
+Application flow monitoring significantly affects the whole flow monitoring process including the data processing on the collector. The most important changes are to the packet processing and flow creation processes on the flow exporter. The packet reception is not affected unless the packets are preprocessed in a hardware accelerated NIC. This section describes important features of application flow monitoring and their impact on the flow monitoring process.
 
 \subsection{Packet Processing}
 
-% \cite{Pang-2006-binpac}
+% the goal is to extract flow keys and anything needed to construct flow records
+% flow properties - aggregated vs non-aggregated. application properties are often only in a single packet of the flow
+
+% application identification: port based, signature based (OpenDPI, nDPI, libprotoident, ... paper o srovnani z WNM?), machine learning
+% most ML techniques cannot be used as we need to decide on the application fast (usually the first data packet contains relevant data)
+
+% application parsing, mentioned in the related work. generic solutions might not be the best ones, see our HTTP parser paper
+
+% - need to support recursion for tunnel monitoring
 
 The basic task of the packet parsing is to extract connection attributes such as IP addresses, transport protocol, and ports to determine which flow the packet belongs to. Moreover, it obtains additional information of interest, especially from application protocols. The parser must be resilient to malformed packets and unknown protocols while supporting a wide range of existing network and application protocols.
 
@@ -140,18 +158,33 @@ With increasing deployment of encryption for all kinds of communication, the tas
 
 \subsection{Flow Creation}
 
+% - flow creation
+%   - more complex flow keys
+%   - split flows after application event (next request in a single connection (HTTP pipelining))
+%   - retain application data for flows split by active timeout
+%   - size of flow records -> large flow caches
+
+\itodo{TODO: vyporadat se s opakujicimi se hlavickami (HTTP),\\
+- Flow expiration/termination vs app flow splitting}
+
 Application protocol measurement may require flow record to be expired early. For example, when HTTP protocol supports pipelining, multiple requests and responses can be carried out over a single connection. When it is desirable to keep track of each request/response pair, existing flow record might be exported when a new request is encountered on the same connection. Therefore, application flow monitoring  also affects the number of generated flow records, which needs to be taken into consideration during further processing of the flow records.
 
 \iimprove{TODO: keeping application data from expired flow records (long HTTP video streaming)}
 
-Another impact of the application flow monitoring on the flow aggregation is the increased size of flow records. The information extracted from application protocols can be quite large in comparison to network and transport layers lengths. While the typical IPv4 header length is 20 bytes, typical TCP header length is 32 bytes, the HTTP URL can easily be several hundred bytes long. Therefore, the length of flow records of application flow monitoring is several times larger than without the application layer. There are two main negative impacts of such large flow records. Firstly, the flow cache might require much more RAM than standard flow monitoring flow cache. Secondly, even if the cache fits into RAM, it degrades the performance of the memory accesses because data locality is decreased and a CPU experiences more cache misses. For these reasons, it must be carefully considered which information is placed in each flow record and how it is encoded.
+Another impact of the application flow monitoring on the flow aggregation is the increased size of flow records. The information extracted from application protocols can be quite large in comparison to network and transport layers lengths. While the typical IPv4 header length is 20 bytes, typical TCP header length is 32 bytes, the HTTP URL can easily be several hundred bytes long. Therefore, the length of flow records of application flow monitoring is several times larger than without the application layer. There are two main negative impacts of such large flow records. Firstly, the flow cache might require much more RAM than IP flow monitoring flow cache. Secondly, even if the cache fits into RAM, it degrades the performance of the memory accesses because data locality is decreased and a CPU experiences more cache misses. For these reasons, it must be carefully considered which information is placed in each flow record and how it is encoded.
 
 \subsection{Flow Export}
+
+% - flow export
+%   - described in previous chapter - long flows, different semantics for new elements
+%   - when URLs, domain names etc are exported in fixed lenght, the original length should be exported as well
+%   - template based export - a fucking lots of templates complicates processing on collector
 
 Several issues might be encountered with flow export when application flow monitoring is applied. First, due to the larger amount of exported data, the link to a flow collector might be congested. We have experienced this issue when application flow records from a 10G link were exported simultaneously to several collectors over old 100\,Mb/s management interface. The solution is either to simply upgrade to 1\,Gb/s management interface or, better, to reduce the number of targets of the export and distribute the flows as necessary through replicating proxy in the location of the collectors. The latter solution saves network bandwidth used for monitoring purposes and should be preferred if possible.
 
 Another issue that might be encountered due to large flow record is that single record might be larger than MTU of the management network interface on the flow exporting device. In such a case UDP transport protocol, which is still widely used for flow export, cannot be used without fragmenting IP packets. The fragmentation might cause a performance problem for the flow collector which has to reassemble the packets. It also increases the probability of data loss as single lost fragment invalidates the whole message.
 
+\subsection{Application Flow on Collectors}
 
 \section{Common Issues} % what is specific to application protocols, otherwise it should be at the end of previous chapter
 
