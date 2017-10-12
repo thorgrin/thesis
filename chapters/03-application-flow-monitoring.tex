@@ -32,7 +32,7 @@ This chapter describes the differences between basic flow monitoring and applica
 
 The benefits of application flow monitoring are discussed extensively in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
 
-\section{Related Work}
+\section{Related Work}\label{sec:app-rel-work}
 
 The use of machine learning techniques for traffic classification has attracted many researchers~\cite{Nguyen-2008-Survey, Dainotti-2012-Issues, Finsterbusch-2014-Survey}. A complete survey of the used techniques and results is out of scope of this work, however, the methods of application identification in encrypted traffic are surveyed in the Chapter~\ref{chap:measurement-of-encrypted-traffic}.
 
@@ -136,25 +136,19 @@ Application flow monitoring is a subset of flow monitoring where application flo
 
 \section{Creating Application Flow}\label{sec:creating-application-flow}
 
-Application flow monitoring significantly affects the whole flow monitoring process including the data processing on the collector. The most important changes are to the packet processing and flow creation processes on the flow exporter. The packet reception is not affected unless the packets are preprocessed in a hardware accelerated NIC. This section describes important features of application flow monitoring and their impact on the flow monitoring process.
+Application flow monitoring significantly affects the whole flow monitoring process including the data processing on the collector. The most important impact is on the packet processing and flow creation processes of the flow exporter. The packet reception is not affected unless the packets are preprocessed in a hardware accelerated NIC. This section describes important features of application flow monitoring and their impact on the flow monitoring process.
 
 \subsection{Packet Processing}
 
-% the goal is to extract flow keys and anything needed to construct flow records
-% flow properties - aggregated vs non-aggregated. application properties are often only in a single packet of the flow
+The primary goal of packet processing is to extract values of chosen properties of individual packets and packet treatment information. Packet processing in basic flow monitoring can be done using simple packet parsers. These packet parsers only need to be able to process packet headers with simple structures and the type of the following header is almost always determined by the content of previous header. However, the type of application in the packet payload cannot usually be recognized from the packet headers. It is not necessary since every client must know where to connect and the server is expected to communicate only with clients using the correct protocol. Therefore, the flow exporters must identify the communicating applications themselves if they are to process the application payloads.
 
-% application identification: port based, signature based (OpenDPI, nDPI, libprotoident, ... paper o srovnani z WNM?), machine learning
-% most ML techniques cannot be used as we need to decide on the application fast (usually the first data packet contains relevant data)
+There three techniques that are used for application identification nowadays. The first and oldest one is based on well-known port numbers assigned and maintained by IANA~\cite{IANA-2017-Service}. Although this method is very simple, fast, and easily implemented, it is not very precise. Since one of the goals of flow monitoring is to provide reliable data for network security, it would be easy for malicious parties to use ephemeral port numbers for their activities to hide their traffic. Moreover, well-known port numbers are often changed legitimately by administrators to improve security. Although this practice is condemned as a case of ``security through obscurity'', it helps to mitigate large number of attacks. The second, more reliable, method of application identification is signature based. The application data of each protocol often carry a specific header which can be recognized by pattern matching. Such headers are usually present in the first packets of the connection so the identification happens early enough for the packet processing to be able to process the relevant application data. There are several application identification libraries and related sets of signatures. The paper by \citeauthor{Bujlow-2015-classification}~\cite{Bujlow-2015-classification} compares the performance of two commercial and four open-source traffic classification tools. Thirdly, machine learning can be used for application identification, as described in Section~\ref{sec:app-rel-work}. However, these methods often require features that are available only after the flow is exported, such as number of packets or timing between individual packets. Since machine learning cannot usually recognize the application after first data packet, which often contains the most important information, it is not used for traffic classification by flow exporters.
 
-% application parsing, mentioned in the related work. generic solutions might not be the best ones, see our HTTP parser paper
+We have already shown examples of aggregated and non-aggregated basic flow properties in the Chapter~\ref{chap:network-flow-monitoring}. Properties extracted from application data are mostly aggregated as they are not present in every packet of the flow. Moreover, they are very often present precisely in single packet of the flow, e.g. the properties found in HTTP header or parameters of TLS connection during the handshake. The aggregation function applied in such cases is \emph{firstOf}, which means that the first value of the property is used. 
 
-% - need to support recursion for tunnel monitoring
+Basic flow records are usually created from the first layers of the packets. The most common example is flow monitoring skipping the \emph{link layer} (e.g. Ethernet), extracting information from the \emph{network layer} (e.g. IPv4 or IPv6) and the \emph{transport layer} (e.g. TCP, UDP, ICMP). However, the protocol encapsulation can be much more complicated. For example, protocols such as IP in IP, Generic Routing Encapsulation (GRE), and PPTP allow to create virtual connections and provide a second layer of headers in each packet. Basic flow monitoring usually creates flows from the first layer it encounters. However, when the flow exporter searches for application layer, it should traverse all underlying layers as well. Moreover, the layer from which the flow records are created must be well defined. It is entirely possible to create flows based on higher layers and therefore split a single basic flow record based on its content. More details on this process are provided in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
 
-The basic task of the packet parsing is to extract connection attributes such as IP addresses, transport protocol, and ports to determine which flow the packet belongs to. Moreover, it obtains additional information of interest, especially from application protocols. The parser must be resilient to malformed packets and unknown protocols while supporting a wide range of existing network and application protocols.
-
-Link, network, and transport headers of IP packets follow a strictly defined structure so that the network devices such as routers can process the packets swiftly. However, application layer protocols often rely on connections being established between compatible endpoints. For this reason, application protocol identification is a difficult task. A lot of attention has been dedicated to research of application identification in network traffic in the past, for example in the work of \citeauthor{Bujlow-2015-classification}~\cite{Bujlow-2015-classification}, however, not every approach is suitable for the flow monitoring scenario.
-
-With increasing deployment of encryption for all kinds of communication, the task of application flow monitoring becomes more difficult. Without access to application payload, the amount of information that can be extracted from the traffic is diminished. However, there are statistical and machine learning methods that are able to recognize specific applications even in encrypted traffic with high accuracy. Moreover, useful information such as a version of encryption protocol, certificates, or supported cipher suites, can be extracted from encrypted traffic. This information can be used to identify malicious encrypted traffic. The possibilities of processing and analysis of encrypted traffic were surveyed by the authors of~\cite{Velan-2015-Survey}.
+The creation of application layer parsers is a complicated process. Although there are several tools designed for this purpose, as show in the Section~\ref{sec:app-rel-work}, it is often more efficient to create a particular parser from scratch. We have built several application parsers by hand and using lexical analysis tools for the HTTP protocol and evaluated their performance in the Section~\ref{sec:http-parser-design}.
 
 \subsection{Flow Creation}
 
@@ -162,7 +156,7 @@ With increasing deployment of encryption for all kinds of communication, the tas
 %   - more complex flow keys
 %   - split flows after application event (next request in a single connection (HTTP pipelining))
 %   - retain application data for flows split by active timeout
-%   - size of flow records -> large flow caches
+%   - size of flow records -> large flow caches (put to issues?)
 
 \itodo{TODO: vyporadat se s opakujicimi se hlavickami (HTTP),\\
 - Flow expiration/termination vs app flow splitting}
