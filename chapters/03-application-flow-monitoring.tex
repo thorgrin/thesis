@@ -11,6 +11,9 @@ The papers related to this chapter are~\cite{Velan-2014-Next, Velan-2013-Design}
 
 The organisation of this chapter is as follows:
 \begin{itemize}
+  \item Section~\ref{sec:app-motivation}
+  \item Section~\ref{sec:app-rel-work}
+  \item Section~\ref{sec:app-flow-definition}
   \item Section~\ref{sec:creating-application-flow} 
   \item Section~\ref{sec:http-parser-design}
   \item Section~\ref{sec:app-conclusions} concludes the chapter.
@@ -21,7 +24,8 @@ The organisation of this chapter is as follows:
 \newpage
 
 
-\section{Motivation}
+\section{Motivation}\label{sec:app-motivation}
+
 The number of different applications communicating over the Internet is ever increasing and so is the need for application-aware network monitoring. However, building network monitoring systems is always a compromise between accuracy and performance. The more detailed the information processing, the more accurate the monitoring system is. Unfortunately, thorough examination of the traffic is computationally expensive~\cite{Gao-2006-Efficient, Lai-2004-Parallel}. Application flow monitoring is a network monitoring approach created to exploit the benefits of deep packet inspection (DPI). Integration of the DPI into flow monitoring allows for information aggregation, which provides better performance than the DPI alone.
 
 Application flow monitoring is a subset of flow monitoring as described in the Chapter~\ref{chap:network-flow-monitoring} and all provided definitions hold for it as well. The reason to treat application flow monitoring as a special case is that processing application layer introduces specific issues which require special attention. Therefore, we distinguish basic flow monitoring (flow keys and values of other properties  are extracted only from link, network, and transport layer headers) and application flow monitoring as two distinct part of flow monitoring.
@@ -146,44 +150,40 @@ There three techniques that are used for application identification nowadays. Th
 
 We have already shown examples of aggregated and non-aggregated basic flow properties in the Chapter~\ref{chap:network-flow-monitoring}. Properties extracted from application data are mostly aggregated as they are not present in every packet of the flow. Moreover, they are very often present precisely in single packet of the flow, e.g. the properties found in HTTP header or parameters of TLS connection during the handshake. The aggregation function applied in such cases is \emph{firstOf}, which means that the first value of the property is used. 
 
-Basic flow records are usually created from the first layers of the packets. The most common example is flow monitoring skipping the \emph{link layer} (e.g. Ethernet), extracting information from the \emph{network layer} (e.g. IPv4 or IPv6) and the \emph{transport layer} (e.g. TCP, UDP, ICMP). However, the protocol encapsulation can be much more complicated. For example, protocols such as IP in IP, Generic Routing Encapsulation (GRE), and PPTP allow to create virtual connections and provide a second layer of headers in each packet. Basic flow monitoring usually creates flows from the first layer it encounters. However, when the flow exporter searches for application layer, it should traverse all underlying layers as well. Moreover, the layer from which the flow records are created must be well defined. It is entirely possible to create flows based on higher layers and therefore split a single basic flow record based on its content. More details on this process are provided in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
+Basic flow records are usually created from the first layers of the packets. The most common example is flow monitoring skipping the \emph{link layer} (e.g. Ethernet), extracting information from the \emph{network layer} (e.g. IPv4 or IPv6) and the \emph{transport layer} (e.g. TCP, UDP, ICMP). However, the protocol encapsulation can be much more complicated. For example, protocols such as IP in IP, Generic Routing Encapsulation (GRE), and PPTP allow to create virtual connections and provide a second layer of headers in each packet. Basic flow monitoring usually creates flows from the first layer it encounters. However, when the flow exporter searches for application layer, it should traverse all underlying layers as well. Moreover, the layer from which the flow records are created must be well defined. It is even possible to create flows based on higher layers and therefore split a single basic flow record based on its content. More details on this process are provided in the Chapter~\ref{chap:traffic-analysis-using-application-flow-monitoring}.
 
 The creation of application layer parsers is a complicated process. Although there are several tools designed for this purpose, as show in the Section~\ref{sec:app-rel-work}, it is often more efficient to create a particular parser from scratch. We have built several application parsers by hand and using lexical analysis tools for the HTTP protocol and evaluated their performance in the Section~\ref{sec:http-parser-design}.
 
 \subsection{Flow Creation}
 
-% - flow creation
-%   - more complex flow keys
-%   - split flows after application event (next request in a single connection (HTTP pipelining))
-%   - retain application data for flows split by active timeout
-%   - size of flow records -> large flow caches (put to issues?)
+\begin{figure}[t!]
+  \begin{center}
+    \includegraphics[]{figures/encapsulation}
+  \end{center}
+  \caption{Traffic Encapsulation Example}
+  \label{fig:encapsulation}
+\end{figure}
 
-\itodo{TODO: vyporadat se s opakujicimi se hlavickami (HTTP),\\
-- Flow expiration/termination vs app flow splitting}
+The flow creation process is affected in two ways. Firstly, properties derived of application values can be part of a flow key. This is the case of encapsulated protocol where the payload contains more IP headers, as shown in the Figure~\ref{fig:encapsulation}. If the addresses of the second IP header are used in flow keys, the basic flow is split into multiple flows, as described in the previous section. Secondly, the flows can be split when a certain application event occurs. The description of the second case follows.
 
-Application protocol measurement may require flow record to be expired early. For example, when HTTP protocol supports pipelining, multiple requests and responses can be carried out over a single connection. When it is desirable to keep track of each request/response pair, existing flow record might be exported when a new request is encountered on the same connection. Therefore, application flow monitoring  also affects the number of generated flow records, which needs to be taken into consideration during further processing of the flow records.
+Application protocol measurement may require flow record to be expired early. For example, when HTTP protocol supports pipelining, multiple requests and responses can be carried out over a single connection. When it is desirable to keep track of each request/response pair, existing flow record might be exported when a new request is encountered on the same connection. This is an example of the situation in which application logic affects the creation of flows, for which reason they become application flows. Note that the application flow monitoring may affect the number of generated flow records, which needs to be taken into consideration during further processing of the flow records.
 
-\iimprove{TODO: keeping application data from expired flow records (long HTTP video streaming)}
+To generalize the previous example, the application flow monitoring affects not only flow keys, but the flow expiration as well. Therefore, we add \emph{application event} to the existing flow expiration reasons (inactive timeout, active timeout, natural expiration, resource constraints, exporter termination). The application event expiration is usually implemented when the single connection is reused for multiple events of the same kind. Another example apart from the HTTP pipelining is FTP file transfer, where multiple files are transferred using a single connection, or SMTP connection where multiple messages are delivered at once.
 
-Another impact of the application flow monitoring on the flow aggregation is the increased size of flow records. The information extracted from application protocols can be quite large in comparison to network and transport layers lengths. While the typical IPv4 header length is 20 bytes, typical TCP header length is 32 bytes, the HTTP URL can easily be several hundred bytes long. Therefore, the length of flow records of application flow monitoring is several times larger than without the application layer. There are two main negative impacts of such large flow records. Firstly, the flow cache might require much more RAM than IP flow monitoring flow cache. Secondly, even if the cache fits into RAM, it degrades the performance of the memory accesses because data locality is decreased and a CPU experiences more cache misses. For these reasons, it must be carefully considered which information is placed in each flow record and how it is encoded.
+The flow record values extracted from application layer are often present only in a single packet (e.g. HTTP header properties). This causes the information to be lost when the flow is long and an active timeout is triggered. The new flow record cannot contain the application information since it is not present any more during its creation. There are two ways to solve this issue. The first is to do nothing during the flow creation and handle the problem during flow data processing. The previous flow records can be looked up and the necessary information can be extracted from them. The advantage of this method is that statistical queries about application layer data are not affected since the application data are always confined to single record in this case. The second option is to copy the relevant application information to the new flow record upon active timeout. The information is then easily accessible during flow data processing, however, it is duplicated and special care needs to be taken when performing statistical queries on the flow data. Either of these options can be taken, but the flow data processing system must be aware of it.
+
+A negative impact of the application flow monitoring on the flow creation process is the increased size of flow records. The information extracted from application protocols can be quite large in comparison to network and transport layers lengths. While the typical IPv4 header length is 20 bytes, typical TCP header length is 32 bytes, the HTTP URL can easily be several hundred bytes long. Therefore, the length of flow records of application flow monitoring is several times larger than without the application layer. There are two main negative impacts of such large flow records. Firstly, the flow cache might require much more RAM than IP flow monitoring flow cache. Secondly, even if the cache fits into RAM, it degrades the performance of the memory accesses because data locality is decreased and a CPU experiences more cache misses. For these reasons, it must be carefully considered which information is placed in each flow record and how it is encoded.
 
 \subsection{Flow Export}
 
-% - flow export
-%   - described in previous chapter - long flows, different semantics for new elements
-%   - when URLs, domain names etc are exported in fixed lenght, the original length should be exported as well
-%   - template based export - a fucking lots of templates complicates processing on collector
+The flow export is affected by application flow monitoring in two ways. Due to the larger flow records the amount of exported data increases. The second is that when a template based protocol such as IPFIX is used, the number of templates increases fast with each new combination of supported protocols.
 
-Several issues might be encountered with flow export when application flow monitoring is applied. First, due to the larger amount of exported data, the link to a flow collector might be congested. We have experienced this issue when application flow records from a 10G link were exported simultaneously to several collectors over old 100\,Mb/s management interface. The solution is either to simply upgrade to 1\,Gb/s management interface or, better, to reduce the number of targets of the export and distribute the flows as necessary through replicating proxy in the location of the collectors. The latter solution saves network bandwidth used for monitoring purposes and should be preferred if possible.
+The most important thing that changes for flow export when flow monitoring is applied is that the flow records might be much longer. This can cause a congestion of the management link. When only a part of the data is necessary for flow processing on the collector, the exported data can be shortened. For example, only hostname and fixed length beginning of the URL can be exported for the HTTP protocol. However, since this leads to decreased quality of the exported data, information about the original data, such as original URL length, should be exported as well. The additional data allow the collector to correctly estimate the amount of missing information and apply necessary algorithm to account for it. Long flow records also have significant impact on flow record fragmentation when UDP protocol is used. Flow records longer than network interface MTU cannot fit to a single packet and must be fragmented, unless the transport protocol, such as TCP,  or flow export protocol handles fragmentation instead. The fragmentation puts additional load on flow collectors and causes increased data loss.
 
-Another issue that might be encountered due to large flow record is that single record might be larger than MTU of the management network interface on the flow exporting device. In such a case UDP transport protocol, which is still widely used for flow export, cannot be used without fragmenting IP packets. The fragmentation might cause a performance problem for the flow collector which has to reassemble the packets. It also increases the probability of data loss as single lost fragment invalidates the whole message.
-
-\subsection{Application Flow on Collectors}
-
-\section{Common Issues} % what is specific to application protocols, otherwise it should be at the end of previous chapter
-
-% shortening of string values - add some indication of shortening or original length
+Exporters using template based protocols, such as IPFIX, need to manage significant number of templates when application flow monitoring is applied. This can cause performance issues since a template lookup needs to be performed for each flow record. Moreover, flow collectors need to process the templates as well. It the data are stored, for example, in a relational database and each template is represented by a table, large number of tables can cause the queries to be slow since an union over many tables would need to be performed. Similar problems arise for other forms of flow storage and processing as well.
 
 \section{Design of an HTTP Parser: A Study}\label{sec:http-parser-design} % put in Velan-2013-Design paper 
+
+
 
 \section{Conclusions}\label{sec:app-conclusions}

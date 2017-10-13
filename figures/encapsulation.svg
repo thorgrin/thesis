@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="127.26501mm"
+   height="63.010201mm"
+   viewBox="0 0 127.26501 63.010201"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="encapsulation.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="179.39892"
+     inkscape:cy="157.07979"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1145"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4504"
+       originx="-9.1279145"
+       originy="-222.91123" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-9.1279132,-11.078558)">
+    <g
+       id="g4722"
+       transform="translate(-1.3229163)">
+      <text
+         id="text4508"
+         y="20.57757"
+         x="14.697122"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="20.57757"
+           x="14.697122"
+           id="tspan4506"
+           sodipodi:role="line">src: 192.168.1.1</tspan></text>
+      <text
+         id="text4512"
+         y="20.57757"
+         x="37.980446"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="20.57757"
+           x="37.980446"
+           id="tspan4510"
+           sodipodi:role="line">src: 10.0.0.1</tspan></text>
+      <text
+         id="text4520"
+         y="24.626232"
+         x="14.500998"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="24.626232"
+           x="14.500998"
+           id="tspan4518"
+           sodipodi:role="line">dst: 192.168.1.2</tspan></text>
+      <text
+         id="text4528"
+         y="24.626232"
+         x="37.784325"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="24.626232"
+           x="37.784325"
+           id="tspan4526"
+           sodipodi:role="line">dst: 10.0.0.2</tspan></text>
+      <rect
+         y="29.77083"
+         x="10.583333"
+         height="3.96875"
+         width="62.177082"
+         id="rect4540"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4544"
+         y="32.75145"
+         x="11.90625"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.75145"
+           x="11.90625"
+           id="tspan4542"
+           sodipodi:role="line">Ethernet</tspan></text>
+      <text
+         id="text4548"
+         y="32.724636"
+         x="27.78125"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.724636"
+           x="27.78125"
+           id="tspan4546"
+           sodipodi:role="line">IPv4</tspan></text>
+      <text
+         id="text4552"
+         y="32.724636"
+         x="38.364582"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.724636"
+           x="38.364582"
+           id="tspan4550"
+           sodipodi:role="line">IPv4</tspan></text>
+      <text
+         id="text4556"
+         y="32.727459"
+         x="47.625"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.727459"
+           x="47.625"
+           id="tspan4554"
+           sodipodi:role="line">TCP</tspan></text>
+      <text
+         id="text4560"
+         y="32.383148"
+         x="56.885414"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.383148"
+           x="56.885414"
+           id="tspan4558"
+           sodipodi:role="line">Application</tspan></text>
+      <rect
+         y="17.864582"
+         x="13.229169"
+         height="7.9375"
+         width="21.166666"
+         id="rect4562"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         y="17.864582"
+         x="37.04166"
+         height="7.9375"
+         width="15.875"
+         id="rect4564"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4566"
+         d="m 25.135416,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4568"
+         d="m 35.71875,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4570"
+         d="m 46.302083,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4572"
+         d="m 55.562499,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4574"
+         d="M 30.427083,29.770834 V 25.802083"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4578"
+         d="M 41.010416,29.770834 V 25.802083"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       transform="translate(63.500007)"
+       id="g4722-5">
+      <text
+         id="text4508-8"
+         y="20.57757"
+         x="14.697122"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="20.57757"
+           x="14.697122"
+           id="tspan4506-5"
+           sodipodi:role="line">src: 192.168.1.1</tspan></text>
+      <text
+         id="text4512-8"
+         y="20.57757"
+         x="37.980446"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="20.57757"
+           x="37.980446"
+           id="tspan4510-7"
+           sodipodi:role="line">src: 10.1.1.3</tspan></text>
+      <text
+         id="text4520-2"
+         y="24.626232"
+         x="14.500998"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="24.626232"
+           x="14.500998"
+           id="tspan4518-8"
+           sodipodi:role="line">dst: 192.168.1.2</tspan></text>
+      <text
+         id="text4528-9"
+         y="24.626232"
+         x="37.784325"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="24.626232"
+           x="37.784325"
+           id="tspan4526-6"
+           sodipodi:role="line">dst: 10.1.1.4</tspan></text>
+      <rect
+         y="29.77083"
+         x="10.583333"
+         height="3.96875"
+         width="62.177082"
+         id="rect4540-9"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4544-1"
+         y="32.75145"
+         x="11.90625"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.75145"
+           x="11.90625"
+           id="tspan4542-1"
+           sodipodi:role="line">Ethernet</tspan></text>
+      <text
+         id="text4548-8"
+         y="32.724636"
+         x="27.78125"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.724636"
+           x="27.78125"
+           id="tspan4546-9"
+           sodipodi:role="line">IPv4</tspan></text>
+      <text
+         id="text4552-4"
+         y="32.724636"
+         x="38.364582"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.724636"
+           x="38.364582"
+           id="tspan4550-7"
+           sodipodi:role="line">IPv4</tspan></text>
+      <text
+         id="text4556-8"
+         y="32.727459"
+         x="47.625"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.727459"
+           x="47.625"
+           id="tspan4554-7"
+           sodipodi:role="line">TCP</tspan></text>
+      <text
+         id="text4560-4"
+         y="32.383148"
+         x="56.885414"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="32.383148"
+           x="56.885414"
+           id="tspan4558-9"
+           sodipodi:role="line">Application</tspan></text>
+      <rect
+         y="17.864582"
+         x="13.229169"
+         height="7.9375"
+         width="21.166666"
+         id="rect4562-9"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         y="17.864582"
+         x="37.04166"
+         height="7.9375"
+         width="15.875"
+         id="rect4564-0"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4566-9"
+         d="m 25.135416,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4568-9"
+         d="m 35.71875,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4570-0"
+         d="m 46.302083,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4572-3"
+         d="m 55.562499,29.770834 v 3.96875"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4574-4"
+         d="M 30.427083,29.770834 V 25.802083"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4578-8"
+         d="M 41.010416,29.770834 V 25.802083"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="9.2469864"
+       y="41.591805"
+       id="text4898"><tspan
+         sodipodi:role="line"
+         id="tspan4896"
+         x="9.2469864"
+         y="41.591805"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Basic flow record</tspan></text>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4904"
+       width="47.625"
+       height="7.9374981"
+       x="9.260417"
+       y="43.529175" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="12.440789"
+       y="46.631783"
+       id="text4910"><tspan
+         sodipodi:role="line"
+         id="tspan4908"
+         x="12.440789"
+         y="46.631783"
+         style="stroke-width:0.26458332">src IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.919407"
+       y="46.676941"
+       id="text4914"><tspan
+         sodipodi:role="line"
+         id="tspan4912"
+         x="29.919407"
+         y="46.676941"
+         style="stroke-width:0.26458332">dst IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="45.674202"
+       y="46.30864"
+       id="text4918"><tspan
+         sodipodi:role="line"
+         id="tspan4916"
+         x="45.674202"
+         y="46.30864"
+         style="stroke-width:0.26458332">packets</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.735572"
+       y="50.391403"
+       id="text4922"><tspan
+         sodipodi:role="line"
+         id="tspan4920"
+         x="10.735572"
+         y="50.391403"
+         style="stroke-width:0.26458332">192.168.1.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.269201"
+       y="50.391403"
+       id="text4926"><tspan
+         sodipodi:role="line"
+         id="tspan4924"
+         x="28.269201"
+         y="50.391403"
+         style="stroke-width:0.26458332">192.168.1.2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="49.641518"
+       y="50.408337"
+       id="text4930"><tspan
+         sodipodi:role="line"
+         id="tspan4928"
+         x="49.641518"
+         y="50.408337"
+         style="stroke-width:0.26458332">2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 26.458333,43.529172 v 7.937501"
+       id="path4932"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 43.65625,43.529173 v 7.9375"
+       id="path4934"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 9.2604169,47.497922 H 56.885417"
+       id="path4936"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="9.2469854"
+       y="59.04356"
+       id="text4898-2"><tspan
+         sodipodi:role="line"
+         id="tspan4896-7"
+         x="9.2469854"
+         y="59.04356"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Application flow records</tspan></text>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4904-9"
+       width="83.343765"
+       height="11.906249"
+       x="9.2604132"
+       y="62.050011" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="12.440787"
+       y="65.152618"
+       id="text4910-0"><tspan
+         sodipodi:role="line"
+         id="tspan4908-6"
+         x="12.440787"
+         y="65.152618"
+         style="stroke-width:0.26458332">src IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.919409"
+       y="65.197777"
+       id="text4914-6"><tspan
+         sodipodi:role="line"
+         id="tspan4912-8"
+         x="29.919409"
+         y="65.197777"
+         style="stroke-width:0.26458332">dst IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="80.652618"
+       y="64.829475"
+       id="text4918-5"><tspan
+         sodipodi:role="line"
+         id="tspan4916-0"
+         x="80.652618"
+         y="64.829475"
+         style="stroke-width:0.26458332">packets</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.735572"
+       y="68.912239"
+       id="text4922-9"><tspan
+         sodipodi:role="line"
+         id="tspan4920-7"
+         x="10.735572"
+         y="68.912239"
+         style="stroke-width:0.26458332">192.168.1.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.269201"
+       y="68.912239"
+       id="text4926-6"><tspan
+         sodipodi:role="line"
+         id="tspan4924-0"
+         x="28.269201"
+         y="68.912239"
+         style="stroke-width:0.26458332">192.168.1.2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 26.458334,62.050007 v 11.90625"
+       id="path4932-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 43.656255,62.050008 v 11.90625"
+       id="path4934-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 9.2604156,66.018758 H 92.604165"
+       id="path4936-4"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="9.0658274"
+       y="13.895842"
+       id="text5006"><tspan
+         sodipodi:role="line"
+         id="tspan5004"
+         x="9.0658274"
+         y="13.895842"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Packet #1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="73.888748"
+       y="13.895842"
+       id="text5010"><tspan
+         sodipodi:role="line"
+         id="tspan5008"
+         x="73.888748"
+         y="13.895842"
+         style="font-size:3.88055563px;stroke-width:0.26458332">Packet #2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 9.2604156,69.987507 H 92.604165"
+       id="path5012"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="46.836624"
+       y="65.152618"
+       id="text4910-0-8"><tspan
+         sodipodi:role="line"
+         id="tspan4908-6-7"
+         x="46.836624"
+         y="65.152618"
+         style="stroke-width:0.26458332">src IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="62.711624"
+       y="65.197777"
+       id="text4914-6-2"><tspan
+         sodipodi:role="line"
+         id="tspan4912-8-4"
+         x="62.711624"
+         y="65.197777"
+         style="stroke-width:0.26458332">dst IPv4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="47.248074"
+       y="68.912239"
+       id="text4922-9-8"><tspan
+         sodipodi:role="line"
+         id="tspan4920-7-1"
+         x="47.248074"
+         y="68.912239"
+         style="stroke-width:0.26458332">10.0.0.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.178085"
+       y="68.912239"
+       id="text4926-6-4"><tspan
+         sodipodi:role="line"
+         id="tspan4924-0-8"
+         x="63.178085"
+         y="68.912239"
+         style="stroke-width:0.26458332">10.0.0.2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60.854165,62.050008 v 11.90625"
+       id="path4932-9-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 78.052085,62.050009 v 11.90625"
+       id="path4934-9-6"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="84.628403"
+       y="68.664589"
+       id="text5058"><tspan
+         sodipodi:role="line"
+         id="tspan5056"
+         x="84.628403"
+         y="68.664589"
+         style="stroke-width:0.26458332">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="83.34375"
+       y="74.750008"
+       id="text5062"><tspan
+         sodipodi:role="line"
+         id="tspan5060"
+         x="83.34375"
+         y="77.151718"
+         style="stroke-width:0.26458332"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.697303"
+       y="72.747353"
+       id="text4922-9-3"><tspan
+         sodipodi:role="line"
+         id="tspan4920-7-6"
+         x="10.697303"
+         y="72.747353"
+         style="stroke-width:0.26458332">192.168.1.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.230934"
+       y="72.747353"
+       id="text4926-6-6"><tspan
+         sodipodi:role="line"
+         id="tspan4924-0-5"
+         x="28.230934"
+         y="72.747353"
+         style="stroke-width:0.26458332">192.168.1.2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="47.185986"
+       y="72.747353"
+       id="text4922-9-8-4"><tspan
+         sodipodi:role="line"
+         id="tspan4920-7-1-7"
+         x="47.185986"
+         y="72.747353"
+         style="stroke-width:0.26458332">10.1.1.3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.17244"
+       y="72.747353"
+       id="text4926-6-4-7"><tspan
+         sodipodi:role="line"
+         id="tspan4924-0-8-2"
+         x="63.17244"
+         y="72.747353"
+         style="stroke-width:0.26458332">10.1.1.4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="84.628403"
+       y="72.499702"
+       id="text5058-5"><tspan
+         sodipodi:role="line"
+         id="tspan5056-6"
+         x="84.628403"
+         y="72.499702"
+         style="stroke-width:0.26458332">1</tspan></text>
+  </g>
+</svg>
