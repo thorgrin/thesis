@@ -16,7 +16,7 @@ The organisation of this chapter is as follows:
   \item Section~\ref{sec:flow-monitoring-process} describes the flow monitoring process from packet capture to flow record export.
   \item Section~\ref{sec:flow-data-processing} describes flow data treatment from flow record reception to storage and further processing.
   \item Section~\ref{sec:common-issues} discusses common issues encountered in flow monitoring operation.
-  \item Section~\ref{sec:nfm-conclusions} concludes the chapter.
+  \item Section~\ref{sec:nfm-summary} summarizes the chapter.
 \end{itemize}
 
 \end{chapintro}
@@ -762,7 +762,7 @@ Although packet drop should be avoided at both flow exporter and flow collector 
 
 A very common cause of packet loss at the collector side is the shutdown or restart of flow exporter. The flow exporter usually expires all flow records in the flow cache so that they are not lost. However, as the flow cache may contain hundreds of thousands of flow records, exporting them all at one at the highest possible rate (the flow exporter needs to shutdown or restart without an unnecessary delay) can overwhelm the flow collector. Therefore, it is best to implement two types of shutdown, emergency and graceful. In the emergency shutdown, the data in the flow cache are simply discarded as they are not considered important. This allows to quickly shutdown and restart the exporter, which is beneficial during testing and for important configuration changes. The graceful shutdown should have a configurable flow record export rate. This allows to adapt the capabilities of the flow collector without overwhelming it and limiting the risk of data loss.
 
-Flow monitoring performance is discussed in detail in the Chapter~\ref{chap:flow-monitoring-performance}.
+Flow monitoring performance is discussed in detail in Chapter~\ref{chap:flow-monitoring-performance}.
 
 
 \subsection{Other Issues}
@@ -786,7 +786,7 @@ The encoding of TCP flags in IPFIX protocol is a good example of issues that can
 \end{figure}
 
 
-\section{Conclusions}\label{sec:nfm-conclusions}
+\section{Summary}\label{sec:nfm-summary}
 
 This chapter has explained flow monitoring, its history, common uses, and discussed related technologies that are sometimes confused with flow monitoring. We have shown, that the currently used definitions of flow do not reflect the reality of real-world flow monitoring deployment and provided and improved definition that amends the deficiencies. We have also created a formal notation for our definition which allows us to avoid misunderstandings created by the use of informal language. It also allows flow related algorithms to be written more precisely and concisely.
 
