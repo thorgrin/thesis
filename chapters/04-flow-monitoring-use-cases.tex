@@ -2,37 +2,55 @@
 
 \begin{chapintro}
 
+There are many usages for application traffic monitoring. The common goal is to extend the set of collected information elements and thus provide a deeper understanding of network traffic. This chapter shows several use cases for application flow monitoring, that were published in a separate papers. The contribution of this chapter is a summary of the contributions of those papers.
+
+As a first example of traffic analysis with the use of application flow monitoring, we show how information from HTTP headers can be used to detect new classes of attacks on the application layer. This is the most common use case for application flow monitoring. 
+
+Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol so that information about multiple chained headers are collected for each flow. An analysis of chained headers is performed and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
+
+Inserting information to the flow records from eternal sources is also considered to be a variant of application flow monitoring. We show an example of adding geolocation information both in the flow exporter and collector. We show that both implementations scale very well and that the geolocation data can be used for advanced traffic analysis.
+
+Since most flow monitoring experiments are performed on live network, it is impossible to exactly replicate the results. We show a method of characterising network traffic so that it is possible to compare multiple network traces and search for similarities. This allows us not only to compare different networks, but to quantify changes in network profile in time.
+
 % Martin Husák, Petr Velan, and Jan Vykopal. “Security Monitoring of HTTP Traffic Using Extended Flows”.
 % Martin Elich, Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis”.
 % Pavel Čeleda, Petr Velan, Martin Rábek, Rick Hofstede, and Aiko Pras. “Large-Scale Geolocation for NetFlow”
 % Luuk Hendriks, Petr Velan, Ricardo de O. Schmidt, Pieter-Tjerk de Boer, and Aiko Pras. “Threats and Surprises Behind IPv6 Extension Headers”.
 % Luuk Hendriks, Petr Velan, Ricardo de O. Schmidt, Pieter-Tjerk de Boer, and Aiko Pras. “Flow-Based Detection of IPv6-specific Network Layer Attacks”
 % Petr Velan, Jana Medková, Tomáš Jirsík, and P. Čeleda. “Network Traffic Characterisation Using Flow-Based Statistics”. - needs proper intro in chapintro, or move to next chapter
-The papers related to this chapter are~\cite{Husak-2015-Security, Elich-2013-Investigation, Celeda-2013-Large, Hendriks-2017-Flow, Hendriks-2017-Threats, Velan-2016-Network}.
+The papers related to this chapter are~\cite{Husak-2015-Security, Hendriks-2017-Flow, Hendriks-2017-Threats, Elich-2013-Investigation, Celeda-2013-Large, Velan-2016-Network}.
 
+% TODO consider adding a background section with challenges and contributions
+% TODO alternatively, change the last section to ``summary and contributions'' and put all contributions there.
+
+% TODO rozepsat na trochu inteligentnejsi popis, muze klidne presahnout na celou dalsi stranku
 The organisation of this chapter is as follows:
 \begin{itemize}
-%   \item Section~\ref{} 
-%   \item Section~\ref{}
-  \item Section~\ref{sec:use-cases-conclusions} concludes the chapter.
+  \item Section~\ref{sec:analysis-http-flows} consists of the research from paper~\cite{Husak-2015-Security}
+  \item Section~\ref{sec:analysis-ipv6-threats} consists of the research from paper~\cite{Hendriks-2017-Flow}
+  \item Section~\ref{sec:analysis-ipv6-attacks} consists of the research from paper~\cite{Hendriks-2017-Threats}
+  \item Section~\ref{sec:analysis-ipv6-transition} consists of the research from paper~\cite{Elich-2013-Investigation}
+  \item Section~\ref{sec:analysis-geolocation} consists of the research from paper~\cite{Celeda-2013-Large}
+  \item Section~\ref{sec:analysis-characterisation} consists of the research from paper~\cite{Velan-2016-Network}
+  \item Section~\ref{sec:use-cases-summary} summarizes the chapter.
 \end{itemize}
 
 \end{chapintro}
 
 \newpage
 
-\section{Security Monitoring of HTTP Traffic Using Extended Flows}
+\section{Security Monitoring of HTTP Traffic Using Extended Flows}\label{sec:analysis-http-flows}
 
-\section{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}
+\section{Threats and Surprises Behind IPv6 Extension Headers}\label{sec:analysis-ipv6-threats}
 
-\section{Threats and Surprises Behind IPv6 Extension Headers}
+\section{Flow-Based Detection of IPv6-specific Network Layer Attacks}\label{sec:analysis-ipv6-attacks}
 
-\section{Flow-Based Detection of IPv6-specific Network Layer Attacks}
+\section{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}\label{sec:analysis-ipv6-transition}
 
-\section{Large-Scale Geolocation for NetFlow}
+\section{Large-Scale Geolocation for NetFlow}\label{sec:analysis-geolocation}
 
-\section{Network Traffic Characterisation Using Flow-Based Statistics}
+\section{Network Traffic Characterisation Using Flow-Based Statistics}\label{sec:analysis-characterisation}
 
 % this needs proper introduction as to why it is interesting and why it should be here at all
 
-\section{Conclusions}\label{sec:use-cases-conclusions}
+\section{Summary}\label{sec:use-cases-summary}
