@@ -2,15 +2,15 @@
 
 \begin{chapintro}
 
-There are many usages for application traffic monitoring. The common goal is to extend the set of collected information elements and thus provide a deeper understanding of network traffic. This chapter shows several use cases for application flow monitoring, that were published in a separate papers. The contribution of this chapter is a summary of the contributions of those papers.
+There are many usages for application traffic monitoring. The common goal is to extend the set of collected information elements and thus provide a deeper understanding of network traffic. This chapter shows several use cases for application flow monitoring, that were published in separate papers. The contribution of this chapter is a summary of the contributions of those papers.
 
 As a first example of traffic analysis with the use of application flow monitoring, we show how information from HTTP headers can be used to detect new classes of attacks on the application layer. This is the most common use case for application flow monitoring. 
 
 Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol so that information about multiple chained headers are collected for each flow. An analysis of chained headers is performed and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
 
-Inserting information to the flow records from eternal sources is also considered to be a variant of application flow monitoring. We show an example of adding geolocation information both in the flow exporter and collector. We show that both implementations scale very well and that the geolocation data can be used for advanced traffic analysis.
+Inserting information to the flow records from external sources is also considered to be a variant of application flow monitoring. We show an example of adding geolocation information both in the flow exporter and collector. We show that both implementations scale very well and that the geolocation data can be used for advanced traffic analysis.
 
-Since most flow monitoring experiments are performed on live network, it is impossible to exactly replicate the results. We show a method of characterising network traffic so that it is possible to compare multiple network traces and search for similarities. This allows us not only to compare different networks, but to quantify changes in network profile in time.
+Since most flow monitoring experiments are performed on a live network, it is impossible to exactly replicate the results. We show a method of characterising network traffic so that it is possible to compare multiple network traces and search for similarities. This allows us not only to compare different networks but to quantify changes in network profile in time.
 
 % Martin Husák, Petr Velan, and Jan Vykopal. “Security Monitoring of HTTP Traffic Using Extended Flows”.
 % Martin Elich, Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis”.
@@ -20,18 +20,14 @@ Since most flow monitoring experiments are performed on live network, it is impo
 % Petr Velan, Jana Medková, Tomáš Jirsík, and P. Čeleda. “Network Traffic Characterisation Using Flow-Based Statistics”. - needs proper intro in chapintro, or move to next chapter
 The papers related to this chapter are~\cite{Husak-2015-Security, Hendriks-2017-Flow, Hendriks-2017-Threats, Elich-2013-Investigation, Celeda-2013-Large, Velan-2016-Network}.
 
-% TODO consider adding a background section with challenges and contributions
-% TODO alternatively, change the last section to ``summary and contributions'' and put all contributions there.
-
-% TODO rozepsat na trochu inteligentnejsi popis, muze klidne presahnout na celou dalsi stranku
 The organisation of this chapter is as follows:
 \begin{itemize}
-  \item Section~\ref{sec:analysis-http-flows} consists of the research from paper~\cite{Husak-2015-Security}
-  \item Section~\ref{sec:analysis-ipv6-threats} consists of the research from paper~\cite{Hendriks-2017-Flow}
-  \item Section~\ref{sec:analysis-ipv6-attacks} consists of the research from paper~\cite{Hendriks-2017-Threats}
-  \item Section~\ref{sec:analysis-ipv6-transition} consists of the research from paper~\cite{Elich-2013-Investigation}
-  \item Section~\ref{sec:analysis-geolocation} consists of the research from paper~\cite{Celeda-2013-Large}
-  \item Section~\ref{sec:analysis-characterisation} consists of the research from paper~\cite{Velan-2016-Network}
+  \item Section~\ref{sec:analysis-http-flows} analyses HTTP traffic in a large-scale environment with the use of application flow monitoring. The added value of application flow monitoring is established by detection of several previously undetected attacks.
+  \item Section~\ref{sec:analysis-ipv6-threats} shows that by extending flow exporter to parse IPv6 Extension Headers a new insight into the IPv6 traffic can be gained. The extension headers are analyzed and conclusions regarding their managements are drawn.
+  \item Section~\ref{sec:analysis-ipv6-attacks} studies the IPv6 specific attacks that can be detected by flow monitoring. The monitoring of IPv6 Extension Headers is used for attack detection.
+  \item Section~\ref{sec:analysis-ipv6-transition} reports on IPv6 deployment and the use of transition mechanisms. The basic flow monitoring is extended by the capability of analysing a tunnelled IPv6 traffic.
+  \item Section~\ref{sec:analysis-geolocation} shows how flow records can be extended with geolocation information and how this additional information can be employed for network analysis.
+  \item Section~\ref{sec:analysis-characterisation} proposes a network traffic characterisation method using flow-based statistics. The characteristics are used to better understand and describe the nature of the traffic and to compare different network traces against each other.
   \item Section~\ref{sec:use-cases-summary} summarizes the chapter.
 \end{itemize}
 
@@ -40,17 +36,672 @@ The organisation of this chapter is as follows:
 \newpage
 
 \section{Security Monitoring of HTTP Traffic Using Extended Flows}\label{sec:analysis-http-flows}
+% TODO: fix flow monitoring terminlogy
+
+HTTP is currently the most widely used protocol which takes up a significant portion of network traffic. Due to its popularity, it is beneficial to have a deeper understanding of HTTP network traffic and its content. From a network security perspective, we would like to know who is accessing our network and what the requested resources are. Patterns in network traffic and outstanding numbers of visited hosts and requested resources would help us to distinguish between legitimate and malicious traffic. The most suitable way of gaining an overview of HTTP traffic in a large-scale network is application flow monitoring, as defined in the previous chapter.
+
+We address two problems in this section. The first one is the lack of an overview of network traffic and insufficient security awareness. This applies especially in heterogeneous networks with distributed administration. Many administrators oversee web servers in their administration and may oversee their neighbourhood, but they are not aware of security threats in the rest of the network. The second problem is to find a suitable set of tools to analyse HTTP traffic and distinguish between legitimate and malicious traffic.
+
+To formalize the scope of our work, we pose two research questions which we shall answer:
+\begin{itemize}
+\item[\emph{(i)}] \emph{What classes of HTTP traffic relevant to security can be observed at network level and what is their impact on attack detection?}
+\item[\emph{(ii)}] \emph{What is the added value of application flow monitoring compared to basic flow monitoring from a security point of view?}
+\end{itemize}
+
+The first question is focused on common types of HTTP traffic that we can observe in the network. We expect to extend the traditional division of network hosts into clients and servers. We focus on the behaviour of hosts regardless of their client/server role: we are particularly interested in detecting security-related patterns produced by attackers, proxies, and crawlers. We search for implications of the presence of particular traffic patterns. We aim to improve malicious traffic detection, filter out false positives, apply better security policy, and set up trustworthy honeypots.
+
+The second question is focused on evaluating the contribution of application flow monitoring with respect to the detection of malicious behaviour in the network. We focus on the detection of patterns in the network traffic that are hard to observe using basic flow. Application flow would make detecting these events straightforward.
+
+Our work contributes to a better understanding of current security threats. For example, we can detect vulnerability scanners and learn about vulnerability itself at the same time.
+
+The answers to both questions are based on an analysis of real traffic in a campus network. We use network application flow monitoring processing the information from HTTP application layer, which provides HTTP elements to application flow records. Although it is possible to extract some information, such as the Server Name Indication, from the HTTPS protocol, this work focuses on the HTTP protocol only.
+
+We also use auxiliary methods to verify and validate the results, i.e., to confirm the membership of detected IP addresses into the proposed behaviour classes. Legitimate sources of traffic should be identifiable, e.g., Googlebot can be identified by a reverse DNS record of the source IP address \cite{Google--Verifying}. We check User-Agents in HTTP traffic to differentiate legitimate and illegitimate traffic, e.g., requests with forged User-Agent. Finally, we check the reachability of traffic destination through search engines to see if it is possible to find the resource without accessing it. We follow the principle of ``Google Hacking'' \cite{Billig-2008-Evaluation}, a technique used for finding vulnerabilities on web pages indexed by search engines.
+
+This section is divided into six subsections. Subsection \ref{subsec:httpsecurity-related_work} presents previous work in this field. Measurement tools and environment are described in Subsection \ref{subsec:httpsecurity-measurement}. The results are presented in Subsection \ref{subsec:httpsecurity-results} and discussed in Subsection \ref{subsec:httpsecurity-discussion}. Finally, Subsection \ref{subsec:httpsecurity-conclusion} concludes the section.
+
+\subsection{Related work}\label{subsec:httpsecurity-related_work}
+
+Although research has focused on analysis of HTTP traffic in recent years, there is only a small number of papers relevant to our work. To the best of our knowledge, we are not aware of any paper dealing with HTTP analysis using a flow-based approach. In addition to this, the motivation of the relevant papers is different, typically focusing on efficient traffic management, with only a minor focus on security, specifically attack detection and prevention. One exception is the work by \citeauthor{Perdisci-2010-Behavioral}~\cite{Perdisci-2010-Behavioral}. They employed network-level behavioural clustering of HTTP requests generated by malware. Their motivation was to provide quality input for algorithms that automatically generate network signatures. The second exception is the work by \citeauthor{Husak-2014-PhiGARo}~\cite{Husak-2014-PhiGARo} in which they use flow-based HTTP analysis to detect users who contacted malicious websites.
+
+Other related papers dealing with HTTP traffic analysis are listed in this paragraph. \citeauthor{Augustin-2011-Traffic}~\cite{Augustin-2011-Traffic} published a classification of web applications according to three traffic features: intensity (total volume of exchanged traffic), symmetry (ratio between upstream and downstream traffic) and shape (burstiness over time). \citeauthor{Xie-2013-ReSurf}~\cite{Xie-2013-ReSurf} addressed reconstructing web surfing behaviour from network packet traces. \citeauthor{Xu-2014-Toward}~\cite{Xu-2014-Toward} analysed User-Agents strings captured at the edge of a campus network using an extension of UASparser~\cite{Mallat-2017-UASparser}. They identified operating systems, types of devices (mobile, desktop) and applications (browser, crawler, P2P, automated updates and requests). A similar work by \citeauthor{Jin-2012-Integrated}~\cite{Jin-2012-Integrated} is motivated by efficient traffic management. \citeauthor{Hur-2012-Towards}~\cite{Hur-2012-Towards} proposed a smart phone traffic classification based on grouping User-Agent fields and extracting common strings.
+
+\subsection{Measurement tools and environment}\label{subsec:httpsecurity-measurement}
+
+This section describes the methods and tools used for acquiring the data from our campus network. We shall also provide characteristics of the network, in terms of its size and utilization.
+
+We performed all measurements on the campus network of Masaryk University. The network has more than 40,000 users and 15,000 active IP addresses each day in /16 network segment. The network contains both servers and client stations, including proxy servers and a segment of honeypots. Any incoming traffic to the honeypots is by nature suspicious~\cite{Provos-2007-Virtual}, which helps us to recognize malicious network traffic, e.g., HTTP requests on a honeypot web server. Only moderate filtering rules are applied globally to preserve the network neutrality of the academic environment.
+
+Our primary source of data for network traffic analysis are FlowMon~\cite{FlowmonNetworks--Flowmon} probes located throughout the campus network. These probes use NetFlow and IPFIX protocols to export measured traffic as flow records to central collectors~\cite{Hofstede-2014-Flow}. The collected flows are processed by various anomaly and intrusion detection systems, which report incidents to our CSIRT team. This network-centric approach allows us to monitor a complex network with many servers and services managed by different entities as opposed to host-based approaches such as log analysis. In such a case, it would be very difficult to even obtain system logs from every web server in such a varied environment. The monitored links are mostly 1\,Gb/s and 10\,Gb/s which makes the use of DPI systems impractical, or even impossible in the case of 10\,Gb/s links, due to high processing requirements.
+
+To capture data for this section, we used a probe measuring traffic from a 10\,Gb/s link which connects the campus to the ISP. We deployed measurement of the HTTP traffic on this probe using an application flow exporter. The exporter software supports the extraction of basic elements from HTTP headers, such as host name, document URL (split into hostname and path), User-Agent string, and response code. These elements are then exported using the IPFIX protocol as enterprise elements~\cite{rfc7011}. We used an IPFIXcol~\cite{Velan-2012-Flow} flow collector to receive and store the application flow records.
+
+A basic flow record usually consists of flow keys~\eqref{eq:httpsecurity-flow-key} and of other properties providing detailed information about the flow~\eqref{eq:httpsecurity-flow-additional}. The most common flow keys are L3/L4 protocol numbers, IP addresses, and ports. Additional elements usually contains information from packet headers together with statistical counters, e.g., timestamps, number of packets and bytes, and autonomous system numbers.
+
+\begin{equation} \label{eq:httpsecurity-flow-key}
+    \begin{split}
+        F_{key} =\ &(L3Proto, srcIP, dstIP, \\
+        & L4Proto, srcPort, dstPort)
+    \end{split}
+\end{equation}
+
+\begin{equation} \label{eq:httpsecurity-flow-additional}
+    \begin{split}
+        F_{additional} =\ &(timeStart, timeEnd, packets, octets, \\
+        & TCPflags, ToS, srcAS, dstAS )
+    \end{split}
+\end{equation}
+
+A basic flow record is then a concatenation of $F_{key}$ and $F_{additional}$. The HTTP measurement~\cite{Velan-2013-Design} adds information from the HTTP application layer~\eqref{eq:httpsecurity-key-http}. 
+
+\begin{equation} \label{eq:httpsecurity-key-http}
+    \begin{split}
+        F_{HTTP} =\ &(hostname, path, userAgent, requestMethod, \\
+        & responseCode, referrer, contentType )
+    \end{split}
+\end{equation}
+
+By concatenating a basic flow record with additional application elements an application flow record is created. In this case, it contains HTTP elements~\eqref{eq:httpsecurity-app-flow}.
+
+\begin{equation} \label{eq:httpsecurity-app-flow}
+        F_{app} = F_{key} \cdot F_{additional} \cdot F_{HTTP}
+\end{equation}
+
+We measured the $F_{app}$ vector in the environment of our campus network for three weeks over the summer break and three weeks in the semester. Thus, we could compare the amount of overall network traffic and suspicious events over two distinct time periods and traffic loads of the network. The amount of the traffic is lower in the summer break, although still comparable to the rest of the year. However, we assume that the amount of malicious traffic is constant over the year and is more apparent in the summer break.
+
+Table~\ref{tab:httpsecurity-data-sets} shows the size of each data set in packets, bytes, and flows. Moreover, it contains the number of HTTP requests observed. Although the number of requests is not high compared to the number of flows, there are at least as many responses, which often carry multimedia content. Therefore, the portion of HTTP traffic in bytes is very significant, despite the lower number of requests.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | c | c | c | c |} \hline
+Data set &  Flows & Packets & Bytes & HTTP Req.\\ \hline
+Summer 2014 & 3.733\,G & 188.953\,G & 198.362\,TB & 0.310\,G \\ \hline
+Spring 2015 & 6.680\,G & 552.523\,G & 604.704\,TB & 0.720\,G \\ \hline
+\end{tabular}
+\caption{Data Sets}
+\label{tab:httpsecurity-data-sets}
+\end{table}
+
+
+\subsection{Results}\label{subsec:httpsecurity-results}
+
+Four characteristics of network flows were monitored: source IP address, destination IP address, hostname, and HTTP request. We analysed only HTTP traffic incoming to our network. The destination IP addresses were restricted to the /16 IP range of Masaryk University, while the source IP addresses were restricted to all other IP ranges. In some selected cases, we evaluated also the HTTP requests in opposite direction, i.e., source IP was in our network range and the destination IP was not. We used the hostnames and destination IP addresses interchangeably during the analysis due to a negligible amount of multi-hosting in our network. Overall, we observed HTTP traffic sent to almost 500 web servers, i.e., approximately 3\,\% of all hosts in our network. IPv6 traffic and measurement artifacts were observed in the measurement, but were omitted from the analysis due to their negligible impact on results.
+
+The network traffic was analysed over five-minute and one-day intervals. A five-minute interval is the default granularity of data capture in network flow monitoring, i.e., one output file contains records of five minutes of network traffic. It allowed us to observe local anomalies, not only anomalies in the overall sample traffic. The one-day interval allowed us to compare anomalies over different days and discover repeated events and typical patterns. The one-day time window was chosen as it is long enough to contain an anomaly, while it is short enough in respect to the processing time of an analysis. The statistics presented in this section are based on an analysis of one-day intervals. However, for practical reasons, the five-minute interval is more convenient for detecting malicious events. We checked that the observed events can be detected even in the shorter time window.
+
+We classified the network traffic according to the three main parameters of an application flow record: guest (source IP address), host (destination IP address or hostname), and HTTP request. We were interested in the cardinality of the relation between the parameters rather than values of the parameters. A high occurrence of flows sharing one or more parameters would suggest unusual activity in the network and is key for the classification. The number of flows which share the three main parameters is, therefore, an additional parameter for classification. The parameters and selected classes are presented in Table~\ref{tab:httpsecurity-classes}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | c | c | c | c |} \hline
+ &\#Guests & \#Host & \#HTTP Requests & \#Flows \\ \hline
+Class I   & 1 &              1 & 1 & n \\ \hline
+Class II  & 1 &              n & 1 & n \\ \hline
+Class III & 1 & \textgreater 1 & n & \textgreater n \\ \hline
+\end{tabular}
+\caption{Traffic Classes}
+\label{tab:httpsecurity-classes}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/paper-httpsecurity/classes}
+  \caption{Selected Classes of HTTP Traffic}
+  \label{fig:httpsecurity-classes}
+\end{figure}
+
+
+We were particularly interested in the results of three queries. First, how many similar requests were demanded by one source IP to one destination IP? Second, how many destination IP addresses were contacted by one source IP address with the same request? And third, how many requests were demanded by one source IP to one destination IP? Each query is represented by a class, as shown in Table~\ref{tab:httpsecurity-classes}. The classes correspond to patterns in the network traffic as depicted in Figure~\ref{fig:httpsecurity-classes}. A detailed description of each query and class can be found in the following subsections.
+
+There are many other possible classes, although we found them to not be relevant from a security perspective. For example, many guests accessing a single host with a request suggests the popularity of a resource at the host. Such classes, however, could be interesting for general traffic classification, not security analysis.
+
+\subsubsection{Class I: Repeated requests}
+
+The first query asks for repeated requests between one guest and one host. We measured the number of occurrences of each triple, consisting of source IP, destination IP, and requested URL. Our assumption was that the repetition itself is common, but outstanding numbers may point to undesired behaviour. For example, password-protected web services may be exposed to brute-force attacks, which we can observe as a series of similar requests. The repeated request (A) is defined as follows:
+\begin{equation*}
+\begin{split}
+Repeated&Request(A) \iff A = \{F \mid \forall F, F':\\
+&F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)\\
+&\land \: F(path) = F'(path)\} \: \mbox{ and } |A| > threshold
+\end{split}
+\end{equation*}
+All flows in the set share the same source IP address, destination IP address, and requested HTTP path. The total number of flows in the set is bigger than the threshold.
+
+Sample results are presented in Table~\ref{tab:httpsecurity-repeat} from one day in summer 2014. As we can see, the numbers of repeated flows reaches tens of thousands, which represents outstanding traffic patterns. There is a disproportion in the numbers of flows with the same source IP, destination IP, and HTTP request. While the majority of the triples were unique or repeated several times, a small number of triples were observed to be repeated several thousand times or more. The nature of these repeated requests was revealed by analysing the request. The majority of repeated requests contained a substring such as \textit{admin} or \textit{login}, which suggests that these traffic patterns were caused by brute-force attacks against password-protected web services. Other interesting repeated requests contained the substring \textit{proxy}, which suggests communication between a client and a web-based proxy server. Furthermore, we found other repeated requests accessed large downloadable files, e.g., ISO images of Linux distributions.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | c | l | r|} \hline
+Guest & Host & HTTP Path & \#Flows \\ \hline
+G1  & H1 &                 /wp-\textbf{login}.php & 46,031 \\ \hline
+G2  & H2 &      /\textbf{admin}istrator/index.php & 27,965 \\ \hline
+G3  & H2 &      /\textbf{admin}istrator/index.php & 27,798 \\ \hline
+G4  & H3 &                 /wp-\textbf{login}.php & 25,316 \\ \hline
+G5  & H4 & \parbox[t]{5cm}{/pub/linux/slax/Slax-7.x/7.0.8/slax-Chinese-Simplified-7.0.8-i486.iso} & 5,921 \\ \hline
+G6  & H5 &           /\textbf{proxy}/lib\textbf{proxy}.pac & 5,036 \\ \hline
+G7  & H6 &                        /node/ & 4,286 \\ \hline
+G8  & H4 & \parbox[t]{5cm}{/pub/linux/slax/Slax-7.x/7.0.8/slax-English-US-7.0.8-i486.zip} & 4,170 \\ \hline
+G9  & H7 &                 /wp-\textbf{login}.php & 3,632 \\ \hline
+G10 & H7 &           /polit/wp-\textbf{login}.php & 3,632 \\ \hline
+\end{tabular}
+\caption{Top Repeated Requests from One Day (Data Set Summer 2014)}
+\label{tab:httpsecurity-repeat}
+\end{table}
+
+The second sample of results presented in Table~\ref{tab:httpsecurity-repeat2} was observed in one day in spring 2015. As we can see, there is a significant difference in the number of flows. However, the distribution of various types of repeated request is similar. One interesting anomaly is the guest G3, which performed repeated requests on 8 different hosts. This guest used different requests on different hosts, however the number of flows on each host is similar.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | c | l | r|} \hline
+Guest & Host & HTTP Path & \#Flows \\ \hline
+G1  & H1 & /\textbf{proxy}/lib\textbf{proxy}.pac & 5,147 \\ \hline
+G2  & H2 & \parbox[t]{5cm}{/pub/linux/fedora/epel/6/x86\_64/repodata/ e63d28ff5a765b11a7052496f481f31aebab\\17c28545908d54e65904a1046ec8-filelists.sqlite.bz2} & 4,244 \\ \hline
+G3  & H3 & /senat/studenti/wp-\textbf{login}.php & 3,992 \\ \hline
+G3  & H4 & /\textbf{admin}istrator/index.php & 3,945 \\ \hline
+G3  & H5 & /slovnik/\textbf{admin}istrator/index.php & 3,934 \\ \hline
+G3  & H6 & /\textbf{admin}istrator/index.php & 3,926 \\ \hline
+G3  & H7 & /capv2011/\textbf{admin}istrator/index.php & 3,924 \\ \hline
+G3  & H8 & /index.php & 3,921 \\ \hline
+G3  & H9 & /\textbf{admin}istrator/index.php & 3,794 \\ \hline
+G3  & H10 & /wp-\textbf{login}.php & 3,701 \\ \hline
+\end{tabular}
+\caption{Top Repeated Requests from One Day (Data Set Spring 2015)}
+\label{tab:httpsecurity-repeat2}
+\end{table}
+
+As we can see in Table~\ref{tab:httpsecurity-repeat-statistics}, which displays statistics for the whole monitored time window, almost half of the detected events were related to using a proxy. Brute-force password attacks were recognized only in 10.6\,\% of events. On the other hand, brute-force password attacks may generate more flows than other events in this class. They were the only events which generated more than 10,000 flows with the same source IP, destination IP, and HTTP path. However, we have also observed brute-force attacks of approximately a few thousand flows, but targeting multiple hosts over a short period of time.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l l r}
+Subclass & Path regular expression & Portion [\%] \\
+\hline
+\textbf{Proxy} & & \textbf{49.4} \\
+& .*libproxy.pac & 45.0 \\
+& .*sviproxy.pac &  4.3 \\
+& .*proxy.php    &  0.1 \\
+\hline
+\textbf{Brute-force} & & \textbf{10.6} \\
+& .*admin.*            &  6.7 \\
+& .*login.*            &  3.9 \\
+\hline
+\textbf{Others} & & \textbf{40.0} \\
+\end{tabular}
+\caption{Distribution of Repeated Request}
+\label{tab:httpsecurity-repeat-statistics}
+\end{table}
+
+\subsubsection{Class II: Similar requests on many hosts}
+
+The second query addresses identical requests from one source IP address to many destination IP addresses. Our assumption was that a guest accesses only a limited number of hosts or at least requests different paths from different hosts. Therefore, a guest accessing a large number of hosts with the same request (with the exception of ``/'') is suspicious and worth noting. We would also like to point out the similarity between this traffic pattern and network port scanning, e.g., TCP SYN scan~\cite{Bhuyan-2011-Surveying}. Therefore, we propose the name HTTP scan for this traffic class. HTTP scan (B) is defined as follows:
+\begin{equation*}
+\begin{split}
+HTTP&Scan(B) \iff B = \{F \mid \forall F, F':\\
+&F(srcip) = F'(srcip) \: \land \: F(dstip) \neq F'(dstip)\\
+&\land \: F(path) = F'(path) \} \mbox{ and } |B| > threshold
+\end{split}
+\end{equation*}
+All flows in the set share the same source IP address and requested HTTP path, while there are no flows with the same destination IP address. The total number of flows in the set is bigger than threshold.
+
+First, we analysed only the scans of our monitored network by external hosts. Sample results from one day in summer 2014 are displayed in Table~\ref{tab:httpsecurity-scanners}. For each scan we state a guest, i.e., the scanner, the requested HTTP path, the number of visited hosts, and the percentage of visited hosts of all hosts in the monitored network. There were two outstanding source IP addresses identified, one accessed almost all the web servers in our network and requested six paths. The second scanner accessed significantly less hosts with only one requested path. The other combinations of Source IP address and path, including the ``/'' request, were not observed to access more than ten hosts a day. We observed up to nineteen events a day in the measurement, including events where a guest requested more than one path. The same paths were also observed to be requested by different guests.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | l | c | r |} \hline
+Guest & HTTP Path & \#Hosts & \% \\ \hline
+G1 & /myadmin/scripts/setup.php                 & 497 & 100 \\ \hline
+G1 & /pma/scripts/setup.php                     & 497 & 100 \\ \hline
+G1 & /w00tw00t.at.blackhats.romanian.anti-sec:) & 497 & 100 \\ \hline
+G1 & /phpmyadmin/scripts/setup.php              & 495 &  99 \\ \hline
+G1 & /phpMyAdmin/scripts/setup.php              & 494 &  99 \\ \hline
+G1 & /MyAdmin/scripts/setup.php                 & 491 &  99 \\ \hline
+G2 & /manager/html                              & 118 &  24 \\ \hline
+\end{tabular}
+\caption{Top HTTP Scanners from One Day (Data Set Summer 2014)}
+\label{tab:httpsecurity-scanners}
+\end{table}
+
+The number of detected HTTP scans varied from 3 to 19 per day over the monitored time window. Ten scans per day were detected on average and scanning for multiple paths was common. The scan for six paths, displayed in Table~\ref{tab:httpsecurity-scanners}, was observed from four different IP addresses in one week. The other multiple-path scans did not use more than three paths in one scan.
+
+The second sample results are from one day in spring 2015. We can see an interesting similarity of request in the first and second classes. The guest G1 was scanning for HTTP paths which also appeared in the results of the previous class. This suggests that the first class includes brute-force attacks and the second class some sort of network reconnaissance. Therefore, we may have observed the two phases of a complex attack.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| c | l | c | r |} \hline
+Guest & HTTP Path & \#Hosts & \% \\ \hline
+G1 & /wordpress/wp-login.php & 337 & 68 \\ \hline
+G1 & /site/wp-login.php & 335 & 67 \\ \hline
+G1 & /wp-login.php & 332 & 67 \\ \hline
+G1 & /blog/wp-login.php & 201 & 40 \\ \hline
+G2 & /bins.php & 183 & 37 \\ \hline
+G3 & /cgi-bin/test-cgi & 102 & 21 \\ \hline
+\end{tabular}
+\caption{Top HTTP Scanners from One Day (Data Set Spring 2015)}
+\label{tab:httpsecurity-scanners2}
+\end{table}
+
+Second, we searched for the HTTP scans in the opposite direction, i.e., scanning external networks by a host from our network. The detection in this direction is tricky as there are no clear boundaries of scanned networks and it is hard to set an appropriate threshold. In addition to this, even a common user may generate hundreds of similar requests such as \textit{/favicon.ico}. Therefore, we do not present any significant results. However, it would be possible to identify a scan by searching for continuous scanned network segments or the longest common prefix of the scanned IP addresses to estimate a scan of a subnet.
+
+\subsubsection{Class III: Varying multiple requests on multiple hosts}
+
+The third query addressed the guests which requested a large number of unique paths on a single host. In this case, we seek guests which requested the majority of content from our hosts. Our assumption is that a large number of different requests from one guest to one host is a legitimate traffic pattern. On the other hand, outstanding numbers worth noting can also be observed. Then we looked for guests which requested an outstanding number of unique paths on more than one host. We assume that only crawlers behave in this way and it is unusual that any other guest would request such a large number of unique URLs on more hosts. The activity of a crawler (C) is defined as follows:
+\begin{equation*}
+\begin{split}
+Crawler&Candidate(C') \iff C' = \{F \mid \forall F, F':\\
+&F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)\\
+&\land \: F(path) \neq F'(path)\} \: \mbox{ and } |C'| > threshold_1
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+Crawler&(C) \iff C = \{F \mid \forall C^\prime_i, C^\prime_j:\\
+&F_i \in C^\prime_i \land F_j \in C^\prime_j \land F_i(srcip) = F_j(srcip)\}\\
+&\mbox{and } |C| > threshold_2
+\end{split}
+\end{equation*}
+We detect crawlers as guests which requested many resources from more hosts. First, all flows which have the same source IP address and destination IP address, but distinct requested HTTP paths, are grouped to sets. The first threshold is a minimal number of distinct requests on a single host. Second, we select source IP addresses which appeared in more sets. The second threshold is a minimal number of crawled hosts. The thresholds were selected to include at most 10\,\% of sets.
+
+In the first phase, we confirmed that the assumed traffic pattern occurs frequently with a varying number of requested URLs. We were not able to unambiguously mark outstanding numbers. In the second phase, we filtered out the guests which did not access more than one host. The remaining guests were characterized by common signs, e.g., they accessed similar sets of hosts and requested a similar number of URLs. We have marked these guests as crawlers and present sample results from a one-day measurement in Tables~\ref{tab:httpsecurity-crawlers} and \ref{tab:httpsecurity-crawlers2}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| l | l | c |} \hline
+Guest & Domain Name & \#Hosts \\ \hline
+207.46.13.62    & msnbot-207-46-13-62.search.msn.com  & 7 \\ \hline
+157.55.39.107   & msnbot-157-55-39-107.search.msn.com & 6 \\ \hline
+137.110.244.137 & bnserver2.sdsc.edu                  & 4 \\ \hline
+157.55.39.156   & msnbot-157-55-39-6.search.msn.com   & 4 \\ \hline
+157.55.39.6 & msnbot-157-55-39-156.search.msn.com & 4 \\ \hline
+37.187.28.19    & z3.sentione.com                     & 4 \\ \hline
+137.110.244.139 & integromedb-crawler.integromedb.org & 3 \\ \hline
+5.135.154.106   & nks02.sentione.com                  & 3 \\ \hline
+5.135.154.98    & nks03.sentione.com                  & 3 \\ \hline
+77.75.73.32 & fulltextrobot-77-75-73-32.seznam.cz & 3 \\ \hline
+77.75.77.17 & fulltextrobot-77-75-77-17.seznam.cz & 3 \\ \hline
+% 151.228.8.115 & 97e40873.skybroadband.com           & 2 \\ \hline
+% 157.55.39.13  & msnbot-157-55-39-13.search.msn.com  & 2 \\ \hline
+% 157.55.39.155 & msnbot-157-55-39-155.search.msn.com & 2 \\ \hline
+% 157.55.39.184 & msnbot-157-55-39-184.search.msn.com & 2 \\ \hline
+% 5.255.253.60  & spider-5-255-253-60.yandex.com      & 2 \\ \hline
+% 77.75.77.32   & fulltextrobot-77-75-77-32.seznam.cz & 2 \\ \hline
+\end{tabular}
+\caption{Top HTTP Crawlers from One Day (Data Set Summer 2014)}
+\label{tab:httpsecurity-crawlers}
+\end{table}
+% requests per host? zajimave pro implementaci
+
+Out of 11 crawlers detected in one day in summer 2014, 4 were identified as a well-known MSN search bot. The others were mostly local search engines, i.e., the Czech search engine Seznam (2 guests) and social media monitoring tool Sentione (3 guests). The two remaining guests were identified as a part of an IntegromeDB crawler collecting biomedical data.
+
+The second sample results are based on a one-day measurement in spring 2015. In the course of this day, we detected a higher activity of crawlers in our network. The recognized crawlers accessed significantly more hosts and generated more unique HTTP requests. We mostly observed well-known crawlers, such as the MSN search bot and two local search engines. One interesting finding was the detection of an unknown guest behaving like a crawler. The guest's IP address had no reverse domain name assigned and its WHOIS record pointed to a hosting company, which indicates a potentially malicious crawler.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{| l | l | c |} \hline
+Guest & Domain Name & \#Hosts \\ \hline
+157.55.39.97  & msnbot-157-55-39-97.search.msn.com  & 24 \\ \hline
+207.46.13.11  & msnbot-207-46-13-11.search.msn.com  & 23 \\ \hline
+157.55.39.28  & msnbot-157-55-39-28.search.msn.com  & 18 \\ \hline
+157.55.39.209 & msnbot-157-55-39-209.search.msn.com & 17 \\ \hline
+157.55.39.41  & msnbot-157-55-39-41.search.msn.com  & 15 \\ \hline
+195.113.155.3 & severus.mzk.cz & 11 \\ \hline
+77.75.77.123  & screenshotgenerator-77-75-77-123.seznam.cz & 11 \\ \hline
+77.75.77.200  & screenshotgenerator-77-75-77-200.seznam.cz & 11 \\ \hline
+46.229.164.99 & NOT FOUND & 10 \\ \hline
+\end{tabular}
+\caption{Top HTTP Crawlers from One Day (Data Set Spring 2015)}
+\label{tab:httpsecurity-crawlers2}
+\end{table}
+
+Similarly to HTTP scans, we were looking for the described activity in the opposite direction, i.e., crawling of external web servers by a crawler from our network. Again, the detection in the opposite direction is harder as there no clear thresholds and many potential false positives. The thresholds for crawler detection had to be set considerably higher to avoid false positives. However, no significant results demonstrating the advantages of this method were found.
+
+
+\subsection{Discussion}\label{subsec:httpsecurity-discussion}
+
+In previous section we outlined three relevant classes of network traffic. The classes cover similar traffic patterns and can be characterized by outstanding numbers of observed network flows. The first class revealed several interesting patterns with ambiguous results as it can be split into several subclasses according to the HTTP request used. The second class is assumed to be solely malicious as it contains scanning for application vulnerabilities. The third class is considered mostly legitimate and is assumed to cover the activity of search bots and crawlers. However, not all the bots and crawlers are welcome in the network. Impacts on network security and the confirmation of the assumptions are discussed in this section for each class. There is also an interesting correlation between the first and second class which suggests that the malicious activity may be observed in both classes.
+
+\subsubsection{Class I: Brute-forcing and proxy servers}
+
+The first class is characterized by a large number of the same HTTP request from one guest to one host. As we can see in the results, several types of network activity are covered by this class. Generally, we cannot distinguish between them by the number of observed flows. The subclasses are easily distinguishable by analysing the requested path.
+
+The first subclass was observed most often and was identified as communication between client and proxy. This subclass can be easily recognized by the substring \textit{proxy} in a requested path. All the detected hosts were legitimate proxy servers in our network. The clients were located in networks of ISPs in our country, so we suppose the clients were legitimate. The implication for network security monitoring in this case is the possibility of proxy detection. We are able to detect active proxy servers in the network and identify their clients. Therefore, we should be able to reveal illegitimate proxy servers in the network or the illegitimate use of a proxy by unauthorized clients, e.g., from networks with a bad reputation~\cite{MoreiraMoura-2013-Internet}.
+
+The second subclass was not observed often, but generated the record number of flows. Paths containing a substring such as \textit{admin} or \textit{login} suggest a request to a resource protected by authentication. Paths ending in \textit{wp-login} indicate the presence of an administrative interface of a well-known content management system WordPress, which is prone to brute-force password attacks~\cite{WordPressCodex-2014-Brute}. This path was observed very often and the high number of flows, typically over a short period of time, indicates an attack. We accessed the requested URLs and confirmed that the hosts are running WordPress and provide a login page at the requested path. Another well-known content management system, Joomla!, was also a target of brute-force password attacks. The login page of Joomla! is located under a generic-looking path \textit{/administrator/index.php} and we have confirmed the presence of Joomla! at the observed URLs.
+
+An interesting conclusion is that the dictionary attacks are rarely accompanied by any other network traffic from the source IP address. There were neither scans nor any other access to the host preceding the attack as is common among SSH brute-force attacks \cite{Vykopal-2013-Flow}. We suppose this is due to attackers using a ``Google Hacking'' technique \cite{Billig-2008-Evaluation}. In this technique, a search engine (e.g. Google, hence the name) is abused to do the reconnaissance for the attacker. The attacker searches a string typical for a WordPress login page and the search engine returns a list of WordPress instances which can be accessed instantly. Several well-aimed Google searches proved this assumption.
+
+Although we can easily identify the two subclasses by the presence of characteristic substrings, the group of requested path is uncategorized and creates a third subclass. Paths such as \textit{/node/} and \textit{/wiki/} do not indicate a vulnerable resource. Dynamically generated content was observed on the requested URLs which suggests that the requests were legitimate. Highly repeated requests for URLs of files for downloading can be explained by partitioning the download, e.g., by download managers, and, thus, is legitimate traffic.
+
+\subsubsection{Class II: HTTP scanners}
+
+The second class was marked as HTTP scanning. Requested paths suggest that the scanning guests are searching for specific web applications and their vulnerabilities. It is also common that more paths, versions, or applications are probed during one scan. This type of traffic is easily detectable and highly interesting from a network security perspective. We have not observed any traffic that could be mistaken for a scan or marked as a false positive in this class. Even the low threshold of scanned hosts is sufficient for detection of a scanner as not every scanner accesses every host in the network. Fairly good results can be achieved with a threshold set to one fifth of the number of web servers in the network.
+
+The HTTP scans were further analysed and correlated to TCP SYN scans on port 80. The results confirm the malicious nature of the scans. 46 \% of the HTTP scans were preceded or accompanied by a TCP SYN scan of the full range of our network. The first option is that the scanner first obtains the list of IP addresses with port 80 opened and then scans them with HTTP requests. The delay between the two phases varies from one hour to several days. The second option of HTTP scanning is to send a HTTP request instantly after receiving a response to the TCP SYN packet.
+
+TCP SYN scanning is easily detectable using network flow monitoring \cite{Sperotto-2010-Overview}, but scanners can avoid detection by scanning ``low \& slow'' \cite{Kang-2007-Distributed}. We propose using application flow monitoring to increase the detection rate of network scanning and lower the amount of false positives. We observed scanners that scanned no more than 5,000 IP addresses out of a /16 network range with a TCP SYN packet and continued HTTP scanning the web servers they found. Naturally, the scanners did not scan all the web servers, they typically found 100--250 hosts. On the other hand, as we stated earlier, more than 100 scanned hosts is enough to identify a scanner, at least in a network containing around 500 web servers. Therefore, we are able to identify a scanner which would otherwise avoid detection due to the high threshold of the TCP SYN scan detection method.
+
+Another interesting property of the HTTP scans is that some of the requested HTTP paths were observed as a target of brute-force attack as well. For example, the scanners were looking for running instances of WordPress by requesting paths ending in \textit{wp-login}. The same paths were subjects of thousands of repeated request, which we consider as a brute-force attack. This lead us to suggestion that the attackers search for victim of a brute-force attack using the HTTP scans, just like it is common for attackers to perform port scan before a brute-force attack against services such as SSH~\cite{Vykopal-2013-Flow}.
+
+\subsubsection{Class III: Web crawlers}
+
+The third recognized class of HTTP traffic was marked as crawlers. The query had to be further specified due to the interchangeability of crawlers and common guests when measured on a single host. Covering more hosts in the network provided us with a set of crawlers active in our network. The crawlers were further analysed to filter out false positives. Filtering methods consisted of querying reverse DNS records, querying the WHOIS database, and checking User-Agents used in HTTP requests. We confirmed the identified set was populated by legitimate crawlers. The User-Agents in the HTTP headers pointed to well-known search engines such as Googlebot, Bing, and Baidu. Reverse DNS and WHOIS records further confirmed the presumptions by referring to domains names of the search engine owners.
+
+Crawlers are mostly legitimate and welcome in the network~\cite{Sun-2010-Ethicality}. Almost all the crawlers we discovered were confirmed as legitimate. However, there are two reasons why we included them in a security-related analysis. First reason is small number of IP addresses that were identified as crawlers using the flow-based method, but we were not able to tell which any further information about them. Missing reverse DNS records or empty User-Agent fields in HTTP queries lead to suggestion that these IP addresses performed illegitimate crawling, e.g., e-mail harvesting that aims at discovering spam recipients~\cite{Hohlfeld-2012-Longtime}.
+
+The second reason of including crawlers in the analysis is the large number of flows they generate. Any potential detection method based on application flow analysis would have to deal with false positive alerts. Legitimate web crawlers can be easily mistaken for malicious traffic due to their omnipresence and large number of requests. On the other hand, we have to be careful about false negatives, i.e., malicious hosts disguising as crawlers to avoid attention. In addition to this, operators of web crawlers may change the addresses of their bots over time or not publish them at all, which makes creating a whitelist a difficult task. Our method is based on monitoring the behaviour of the potential crawler, which alleviates the possibility of false positives or false negative detections. The User-Agent field of HTTP application flow record can also be used for validation of the results.
+
+
+\subsection{Conclusion}\label{subsec:httpsecurity-conclusion}
+
+We presented an analysis of HTTP traffic using application flow monitoring in a large campus network. Contrary to previously published analyses, we were the first to focus on the security aspects.
+We identified three security-related traffic classes: repeated requests, HTTP scans, and web crawlers. Repeated request were further split into brute-force password attacks and proxies according to the observed HTTP request.
+
+This classification is based on an analysis of selected elements of application flow: source IP, destination IP, and requested URL split into domain and path.
+Our analysis supported the hypothesis that flow application monitoring with HTTP headers (Layer 7) enables the straightforward detection of current security issues compared to basic flow monitoring performed at Layers 3 and 4. Particularly, the brute-force password attacks and proxies are hard to differentiate using only basic flow monitoring.
+
+Malicious traffic is contained in the classes of HTTP scans and repeated request, in which we were able to identify brute-force attacks against well-known content management systems. Web crawlers represent a class of legitimate traffic that can be mistaken for malicious activity due to its large number of generated flows. However, suspicious crawlers can also be observed. We have also identified the use of proxies as a traffic class. Using a proxy is not malicious by nature, but is interesting for security enforcement. For example, the presence of an unauthorized proxy may violate security policy in the network.
+
+The classification is based on counting number of application flows which share one or more parameters. The classification can be thus easily converted into a threshold-based detection method. 
+We were able to detect malicious HTTP traffic in large-scale network and process it from one point with a low amount of false positives. Ten previously undetectable brute-force password attacks and 10 HTTP scans per day were detected on average in our campus network. In addition, previously unknown proxies and web crawlers were observed. 
+The large-scale network monitoring approach proved beneficial particularly during the detection of HTTP scans and web crawlers, which are hardly detectable using only local system logs or local monitoring.
+
+Further work will involve the integration of the proposed methods into the existing detection framework in the campus network. False positive and false negative ratios of the detection methods based on our proposed methods will be evaluated. The security incidents concerning HTTP will be resolvable globally in the whole network and the security awareness can be spread more effectively. 
+Additionally, we will use the discovered classes for setting up more efficient honeypots to respond to the requested vulnerability. This applies particularly to HTTP scanners and brute-force password attacks. We should be able to equip a honeypot with an appropriate resource, e.g., vulnerable web application that the adversaries were looking for, to attract and analyse specific attacks. 
+The honeypot use case involves both network monitoring and security incident analysis and can lead to an effective reaction to upcoming threats including a reaction to zero-day attacks.
+
 
 \section{Threats and Surprises Behind IPv6 Extension Headers}\label{sec:analysis-ipv6-threats}
+% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
 
 \section{Flow-Based Detection of IPv6-specific Network Layer Attacks}\label{sec:analysis-ipv6-attacks}
+% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
 
 \section{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}\label{sec:analysis-ipv6-transition}
+% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
+
+Despite IPv6 being the standard for several years its adoption is still in process~\cite{claffy}. There are several ways of getting IPv6 connectivity, the dual-stack being the preferred one. Most IPv6 studies deal with native IPv6. However, there are other globally used options known as transition mechanisms. They can provide IPv6 connectivity on networks without native IPv6 connectivity enabled or without an IPv6 ready infrastructure.
+
+The transition mechanisms tunnel IPv6 traffic through IPv4 network. Despite being supported by major operating systems, there is a lack of studies investigating the characteristics of the tunneled IPv6 traffic. In this context, this paper investigates border traffic of the Czech national research and education network operator (CESNET) and attempts to answer the following question: \emph{What are the characteristics of IPv6 transition mechanisms, in terms of their usage, popularity and impact on native IPv4 and IPv6?}
+
+Our research is mainly motivated by an exhaustion of the IPv4 address space and an exerting pressure on network operators and content providers to deploy IPv6. The transition mechanisms are used to facilitate the IPv6 adoption. Unfortunately, they introduce extra elements in the network which add to complexity and decrease performance and security. As a result, many existing methods for measuring and monitoring large-scale networks become ineffective.
+
+The contribution of our work is threefold: \emph{(i)} we provide an enhanced version of our flow-based IPv6 measurement system prototype, which enables IPv6 visibility in large-scale networks, \emph{(ii)} we analyze and show IPv6 transition mechanisms traffic characteristics including a tunneled one and \emph{(iii)} we show how the traffic of IPv6 transition mechanisms has evolved since 2010.
+
+% \emph{(i)} we provide an enhanced version of flow-based IPv6 measurement prototype, which enables IPv6 visibility in large-scale networks, \emph{(i)} we provide a flow-based IPv6 measurement system prototype, which enables IPv6 visibility in large-scale networks,
+
+The section is organized as follows. Subsection~\ref{subsec:ipv6-tunnels-related-work} outlines related work. Subsection~\ref{subsec:ipv6-tunnel-traffic} provides an overview of Teredo and 6to4 transition mechanisms. Subsection~\ref{subsec:ipv6-tunnels-met-mon-setup} describes the methodology and measurement setup. Subsection~\ref{subsec:ipv6-tunnels-outer-traffic-evaluation} investigates properties of IPv4 traffic carrying IPv6 payload. Subsection~\ref{subsec:ipv6-tunnels-inner-traffic-evaluation} focuses on the characteristics of encapsulated IPv6 traffic. Subsection~\ref{subsec:ipv6-tunnels-evaluation-of-ipv6} evaluates the use of IPv6 tunneled traffic. Finally, we draw conclusions and outline future work in Subsection~\ref{subsec:ipv6-tunnels-conclusion}.
+
+\section{Related Work} \label{subsec:ipv6-tunnels-related-work}
+
+The most widely used and discussed tunneling transition mechanisms are Teredo and 6to4. Although there are several studies focusing on performance evaluation of transition mechanisms listed below, the characteristics of the traffic generated by the tunneling transition mechanisms are not well known.
+
+A study by Aazam et al.~\cite{aazam} provides a performance evaluation and a comparison of Teredo and Intra-Site Automatic Tunnel Addressing Protocol (ISATAP) mechanisms with focus on certain parameters like throughput, end to end delay, round trip time and jitter. A study by Zander et al.~\cite{zander} compares Teredo tunneling capability and performance with native IPv6 and 6to4 using measurements related to web services. Teredo increases the time needed to fetch web objects compared to IPv4 or native IPv6. The conclusion is that Teredo seems to be limited by a lack of Teredo infrastructure forcing encapsulated packets to travel long distances. Moreover, the throughput is partially limited by the performance of Teredo relay servers.
+
+A study by Bahaman et al.~\cite{bahaman} discusses the performance of 6to4 with focus on communication over TCP. It states that the TCP transmission ability is reduced by the use of 6to4. However, it is still suitable for early stages of the transition period.
+
+Other papers discuss the impact of transition tunnels on network security. Krishnan et al.~\cite{rfc6169} present security concerns with recommendations on how to minimize security exposure due to tunnels. It is pointed out that tunnels can have negative impact on deep packet inspection and that transition mechanisms such as Teredo allow inbound access from the public Internet to a device through an opening created in a network address translation (NAT) device. This increased exposure can be used by attackers to effectively attack a device hidden behind a NAT device. A generally proposed security practice is to avoid the usage of tunnels at all and deploy other transition schemes like dual-stack.
+
+Finally, Sarrar et al.~\cite{sarrar} provides a brief insight into tunneled traffic in a study of the world IPv6 day impact on IPv6 traffic. The Teredo and 6to4 transition mechanisms were monitored and the Teredo was discovered to carry mainly control traffic. The study also showed that IPv6 fragments were responsible for a significant portion of 6to4 traffic. The authors suspect that these fragments were caused by broken software which most likely forgot to take the IPv6 header size into account.
+
+\section{Investigated IPv6 Transition Mechanisms} \label{subsec:ipv6-tunnel-traffic}
+
+The IPv6 traffic is usually divided between \emph{native} traffic and \emph{tunneled} traffic. The tunneled traffic is considered the one encapsulated using other protocols, e.g. UDP or IP protocol 41. This division is not necessarily accurate, since the traffic that seems to be native IPv6 can in fact originate from a client using some transition mechanism like Teredo or 6to4. To clarify this point we will differentiate between native IPv6 traffic, encapsulated tunnel traffic (IPv4 traffic containing IPv6 payload) and decapsulated tunnel traffic. The word tunnel might be omitted for the sake of brevity. 
+
+Teredo and 6to4 are the two most frequently used transition mechanisms in the CESNET network. Mechanisms like ISATAP, Anything in Anything (AYIYA) and others based on IP protocol 41 (6in4, 6over4) do not contribute to the tunneled traffic significantly and do not appear in our analysis, therefore we will not describe them in detail. We did not analyze NAT64 and DNS64 mechanisms since they should appear as a native IPv6 traffic on the outside.
+
+Teredo~\cite{rfc4380} is designed to provide IPv6 connectivity to an endpoint behind a NAT device. It requires two network components for operation: \emph{relays} and \emph{servers}. Teredo servers are used for initialization of Teredo (Fig.\,\ref{fig:ipv6-tunnels-monitoring-schema}, communication \ding{172}), and after that for opening a port on the user's NAT device in case of communication which is not initialized by the user. Relays are used for routing and bridging the IPv4 and IPv6 networks. Each Teredo endpoint uses a statically configured server and a relay, which can cause increased latency and low throughput in case of a distant server or relay. Teredo uses UDP for packet encapsulation making the traffic harder to identify.
+
+6to4~\cite{rfc3056} is only suitable for hosts with a public IPv4 address. It uses encapsulation in IP protocol 41 packets hence it is relatively easy to detect and monitor. The 6to4 relay servers are acting as a bridge between the IPv4 and IPv6 networks. These relays use any-cast prefix 192.88.99.0/24 therefore the optimal (nearest) relay server should automatically be used for communication.
+
+Fig.\,\ref{fig:ipv6-tunnels-monitoring-schema} shows traffic between two endpoints (communication \ding{175}), one of which uses Teredo and the other one 6to4. The IPv6 traffic from Teredo client travels part of its path in Teredo tunnel to be later decapsulated on the edge of IPv6 Internet and shortly after that to be encapsulated again, this time by 6to4 to travel the rest of its path over IPv4 Internet to the network of its destination. Depending on where the observation point is located, the tunnel (either Teredo or 6to4) or native IPv6 traffic can be observed.
+
+\begin{figure}[!tb]
+        \centering
+        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/tunely-schema}
+        \caption{Teredo and 6to4 principles: \ding{172} Teredo start setup, \ding{173} Teredo traffic transiting over IPv4 network, \ding{174} 6to4 traffic transiting over IPv4 network, \ding{175} communication between Teredo and 6to4 endpoint}
+        \label{fig:ipv6-tunnels-monitoring-schema}
+\end{figure}
+
+% Depending on where the observation point is stationed, the tunnel or native IPv6 traffic is observed.
+% Most of the our analysis refers to encapsulated tunnel traffic, since we are able to analyze both encapsulating and encapsulated packet headers and therefore gain more extensive information.
+
+\section{Methodology and Measurement Setup} \label{subsec:ipv6-tunnels-met-mon-setup}
+
+To perform a thorough inspection of tunneled traffic, we need to decapsulate packet headers of inner packets. We use the same flow-based framework as in~\cite{elich} which has been further modified~\cite{web} to extract more detailed information from tunneled data. The main part of the framework is a plug-in which replaces input and processing parts of existing flow generator INVEA FlowMon Exporter~\cite{ifp_cp}. 
+% The older version of framework extracted only a subset of fields the newer version is capable of. 
+
+Every packet is being processed to extract basic flow statistics and the processing of inner headers continues to the point when previously extracted fields indicate absence of observed encapsulation types.
+
+Teredo protocol is detected when IPv6 header is found encapsulated in UDP packet, AYIYA is searched for in packets on TCP or UDP port 5072. Other protocols are recognized by IPv6 address format, which is protocol specific and the 6to4 protocol can be additionally identified by usage of IPv4 anycast address belonging to 6to4 relay. If encapsulation is present, its type and encapsulated IPv6 header fields are used to extend the set of extracted fields and to identify individual flows taking place inside the tunnel. 
+
+Since we need to define new elements for flow records, Internet Protocol Flow Information Export (IPFIX) protocol is used. It allows using \emph{Enterprise Elements} which can extend flow records with additional tunnel information. 
+The framework is able to recognize and extract information from Teredo, AYIYA and other protocols that are based on IP protocol 41 such as ISATAP, 6to4 and 6over4. 
+We provide the source code of the measuring tool under BSD license at the project web page~\cite{web}.
+
+\begin{figure}[!tb]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/paper-tunnels/cesnet-map}
+\caption{CESNET monitored links}
+\label{fig:ipv6-tunnels-topology}
+\end{figure}
+
+\begin{table}[!tb]
+\centering
+        \begin{tabular}{lccc}
+        \textbf{Probe} & \textbf{Bits/s} & \textbf{Packets/s} & \textbf{Flows/s} \\ \toprule 
+        Telia & 1.65\,G & 274.9\,k & 22.1\,k \\
+        NIX & 7.17\,G & 1072.4\,k & 26.7\,k \\
+        PIONIER & 0.51\,G & 75.6\,k & 2.8\,k \\
+        SANET & 1.87\,G & 242.3\,k & 5.3\,k \\ \bottomrule
+        \end{tabular}
+        \caption{Observation points IPFIX statistics}
+        \label{tab:ipv6-tunnels-collected-data}
+\end{table}
+
+Resulting flow data provides us with information about the encapsulated source and destination addresses, ports and transport protocol, which is a common five-tuple used to distinguish individual flows. We respect this principle and thus have separated the flows encapsulated in the same tunnel based on the value of these elements. Apart from these key elements the framework gives information about \emph{Time to Live} (TTL), \emph{encapsulated HOP limit}, \emph{TCP flags} and \emph{ICMPv6 type} and \emph{code}, when present. Moreover, additional information about tunnel type is provided, including Teredo header and trailer types when present. The framework also newly supports geolocation using MaxMind~\cite{maxmind} GeoIP database for both outer and encapsulated addresses.
+
+The data are collected from several observation points located at the borders of CESNET network by passive probes; see Fig.\,\ref{fig:ipv6-tunnels-topology}. All measured lines are at least 10\,Gbit/s and together transport about 80,000\,flows/s during work hours, which results in total traffic of 15.4\,Gbit/s. We use IPFIXcol~\cite{ipfixcol} framework to collect the extended flow data over TCP and to store them. New elements can therefore be defined and used without any further difficulties or limitations.
+
+%Flexible IPFIX collector is needed to handle the flow records containing information about IPv6 tunnels. We use IPFIXcol~\cite{ipfixcol} framework to receive and store the extended flow data, since new elements can be defined in configuration XML and used without any further difficulties. FastBit database was chosen as a data storage for the flow records. The data from observation points are sent to the collector over TCP protocol, to ensure that no flow records are lost during transport.
+
+The IPFIX data was collected over one week in January 2013 without use of any sampling. Table~\ref{tab:ipv6-tunnels-collected-data} shows the average amount of traffic for all observation points. The total amount of stored data took approximately 2,485\,GB of disk space. All statistics presented below are based on flow count.
+
+\section{Characteristics of IPv4 Tunnel Traffic} \label{subsec:ipv6-tunnels-outer-traffic-evaluation}
+
+In this section we describe characteristics of IPv4 traffic containing IPv6 payload. The analysis is based purely on information from IPv4 headers and extended flow data are only used to accurately identify relevant flows. Three characteristics that can give us insight into tunneled traffic are addressed. Firstly, we describe TTL values of the various traffic sets, and then we look into a geolocation aspect. Lastly, the basic flow statistics are presented.
+
+\subsection{Frequency of TTL and HOP Values}
+We study the distribution of \textit{TTL values} of the observed flows. It is known that some operating systems use specific values, as shown in~\cite{TTL-ref}. Microsoft Windows has the default TTL set to 128. The value of 64 is mostly used by Mac~OS~X and Linux devices, including devices running Android. We expect that these operating systems form a majority and are therefore the most significant. Fig.\,\ref{fig:ipv6-tunnels-ipv4-ttl} shows the most frequently used TTL values for IPv4 flows carrying IPv6 payload. The TTL values are most frequent near the values set by OS vendors and the frequency is decreasing rapidly in less than ten hops. Therefore, we assume that most of the packets reach their destination in less than 32 hops. Thus we classify the flows according to their TTL numbers into four significant groups. The Windows traffic seems to be the most frequent one taking 60.3\,\% of the total, while Linux machines are not present so often with only 23.8\,\%. Apart from the Windows and Linux ranges, there are devices that set TTL to 255 and 32. Although the 255 are usually Cisco routers, in case of tunneled traffic we observed that the 6to4 traffic from anycast addresses have TTL set to 255 as well. The portion of the 255 range is 3.8\,\% and most of it originates from 6to4 relays. TTL numbers 24 and 26 are dominant in the group of values from 1 to 32, which makes 12.2\,\% of the total number of flows. We discovered that this is caused by a 6to4 tunnel that passes two observation points. The tunnel is heavily used and causes a large portion of tunneled traffic, which also affects other 6to4 measurements.
+
+Overall, the TTL distribution of IPv4 traffic is different as shown in Fig.\,\ref{fig:ipv6-tunnels-ipv4-ttl4}. The Linux portion of the traffic is higher and the TTL values of 32 and 255 are not as significant. A more detailed examination of the flow records shows that this is caused mainly by a high ratio of HTTP traffic. Even though there are more clients using Windows operating system, most of the web servers are based on Linux and therefore the responses have TTL less than 64. The DNS protocol shows similar characteristics except that the DNS traffic that we observe at our metering points is mostly generated by recursive domain name servers. Since the Linux DNS servers are the most widely used, they significantly contribute to the traffic generated by Linux machines.
+
+\begin{figure}[!tb]
+    \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/ttl}
+    \caption{TTL value distribution of IPv4 traffic containing IPv6 payload}
+    \label{fig:ipv6-tunnels-ipv4-ttl}
+\end{figure}
+
+\begin{figure}[!tb]
+    \includegraphics[width=1.0\linewidth]{figures/paper-tunnels/ttl/ttl4}
+    \caption{TTL value distribution of total observed IPv4 traffic}
+    \label{fig:ipv6-tunnels-ipv4-ttl4}
+\end{figure}
+
+IPv6 uses \textit{HOP limit} instead of TTL. Fig.\,\ref{fig:ipv6-tunnels-ipv6-native-hop} shows HOP limit distribution of native and decapsulated IPv6 traffic. Unlike IPv4, the HOP limit of 64 is the most frequent. We assume that Linux based machines use default HOP limit 64 and Windows machines use default HOP limit 128. This setting can be overridden by Stateless Address Autoconfiguration. Therefore, clients in managed networks (e.g. universities) might have the HOP limit set to different value, regardless of their operating system. We verified this fact on several Linux and Windows based machines. Due to significant share of HTTP(S) in IPv6 traffic, large portion of Windows traffic is expected. Since the share of HOP limit 128 is negligible, we expect that common HOP limit in observed IPv6 networks is set to 64.
+
+% pocitano z 29 a  30.1, bez nix2
+\begin{figure}[!tb]
+        \centering
+        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/native-hop}
+        \caption{HOP value distribution of IPv6 traffic}
+        \label{fig:ipv6-tunnels-ipv6-native-hop}
+\end{figure}
+
+
+\subsection{Location of IPv4 and IPv6 Endpoints}
+The second characteristic that we evaluate is \textit{geolocation aspect} of the IPv4 and IPv6 traffic. We focus on data from Telia link only, which connects the CESNET network to the United States. This highlights the differences in geolocation characteristics better. The statistics are computed separately for the incoming and outgoing lines and are shown in Fig.\,\ref{fig:ipv6-tunnels-top-ten-geo}. The IPv4 is more symmetric since the country statistics for both directions are similar. This is a normal behavior since most of the requests initiate a response and the routes are also symmetric. The IPv6 have different properties. We discovered that the addresses that cannot be geolocated are mostly link-local addresses (fe80::/10) or local-link multicast addresses (ff02::/16). Such addresses should not be routed at all, which indicates that there are routers with erroneous IPv6 configuration. This misconfiguration also causes the asymmetry of the traffic, as such requests cannot be answered.
+
+\begin{figure}[!tb]
+     \subfloat[Incoming traffic]{
+        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-in}
+        \label{fig:ipv6-tunnels-geo-native-in}
+    }\hspace{2mm}
+    \subfloat[Outgoing traffic]{
+        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-out}
+        \label{fig:ipv6-tunnels-geo-native-out}
+    }
+    \caption{Top 10 country distribution for native IPv4, IPv6 and decapsulated IPv6 addresses}
+    \label{fig:ipv6-tunnels-top-ten-geo}
+\end{figure}
+
+\subsection{Duration and Size of Flows}
+The third group of characteristics is represented by flow duration, number of packets per flow and packet size (bytes per packet) statistics. For evaluation we employ \textit{empirical complementary distribution function} (CCDF). We use the following formula to compute CCDF values:
+
+\begin{align}
+    \bar{F}(x)= P(X>x)=1-\frac{1}{n}\sum^{n}_{i=1}\mathbf{1}\{x_{i}\leq x\}
+\end{align}
+
+where $\mathbf{1}\{x_{i}\leq x\}$ is the indicator whether the event $\{x_{i}\leq x\}$ has occurred or not. The CCDF function describes how often the selected variable is above a particular level. From all traces we filtered out four subsets of traffic: TCP or UDP encapsulated traffic (TCP/UDP), all encapsulated traffic (ALL), IPv6 native or decapsulated traffic (IPv6) and IPv4 traffic (IPv4). The subsets were chosen in order to compare the tunneled traffic with other common traffic types. Further, for each of the subsets and each of the characteristics CCDF has been computed. Fig.\,\ref{fig:ipv6-tunnels-cdf_duration}, \ref{fig:ipv6-tunnels-cdf_packets} and \ref{fig:ipv6-tunnels-cdf_bytes} show the calculated CCDFs.
+
+\begin{figure}[!tb]
+     \centering
+     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_duration}
+     \caption{CCDF of flow duration}
+     \label{fig:ipv6-tunnels-cdf_duration}
+\end{figure}
+
+\begin{figure}[!tb]
+     \centering
+     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_packets}
+     \caption{CCDF of packets per flow}
+     \label{fig:ipv6-tunnels-cdf_packets}
+\end{figure}
+
+\begin{figure}[!tb]
+     \centering
+     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_bytes}
+     \caption{CCDF of packet size}
+     \label{fig:ipv6-tunnels-cdf_bytes}
+\end{figure}
+
+The majority of the flow duration of all subsets (Fig.\,\ref{fig:ipv6-tunnels-cdf_duration}) accounts for durations shorter than 10 seconds. The flow durations longer than 10 seconds represent only 11\,\% or less. The TCP/UDP contains much fewer short duration flows (TCP/UDP: 32.16\,\% $\leq$ 0.01 sec.; ALL: 54.66\,\%; IPv4: 59.84\,\%) which is explained by the absence of connection-maintaining flows necessary for other subsets. We can observe slightly increased frequencies of the flow duration between 7 and 11 seconds especially at TCP/UDP and ALL subsets. Hence, the tunneled traffic generally contains fewer short duration flows than IPv4 or IPv6 traffic.
+
+The packets per flow distribution (Fig.\,\ref{fig:ipv6-tunnels-cdf_packets}) suggests that single packet flows form only 31.6\,\% in the case of TCP/UDP, 51.42\,\% in the case of ALL, 57.99\,\% and 55.82\,\% in other cases. We expected tunneled traffic to behave in a similar way as IPv6 traffic. Nevertheless, we can observe a vertical shift between ALL and IPv6 CCDF. This shift is caused by single packet flows and it is caused by DNS traffic to root DNS servers, which uses IPv6 protocol. The slope of CCDF for TCP/UDP and ALL is higher than the slope for other subsets, which states higher frequencies of certain packet counts. In conclusion, the distribution of the packet counts of the tunneled traffic is slightly different from the distribution of the IPv4 and IPv6 traffic.
+
+The last characteristic described by CCDF is packet size (Fig.\,\ref{fig:ipv6-tunnels-cdf_bytes}). In the case of encapsulated traffic we consider the outer packet size including the encapsulation header. The earlier study of the packet size distribution mentions a significant difference between CCDFs of packet sizes. The authors of~\cite{ciflikli} state that the distribution of IPv4 traffic fits a heavy-tailed distribution, whereas IPv6 traffic does not. We expect the tunneled traffic to have similar characteristics as IPv6 traffic, and thus the CCDFs are expected to be similar, too. The Fig.\,\ref{fig:ipv6-tunnels-cdf_bytes} shows some discrepancies in this hypothesis. The packets larger than 400 bytes in the tunneled traffic represent only 5\,\%, while in the IPv6 the portion is still 15\,\%. Furthermore, packets smaller than 70 bytes are not present in the tunneled traffic, although they account for 26\,\% of IPv6. This is caused by a shift of graph to a higher packet size given by the encapsulation. The IPv4 header is usually 20 bytes long and in case of Teredo there are another 8 bytes for the UDP header. Even taking this shift into account there is still a noticeable drop at size of 200 bytes which is caused by a high share of ICMPv6 and BitTorrent control traffic.
+
+
+\section{IPv6 Tunneled Traffic Analysis} \label{subsec:ipv6-tunnels-inner-traffic-evaluation}
+
+In this section we focus on characteristics of encapsulated IPv6 traffic for which we use the same data set as in Section~\ref{subsec:ipv6-tunnels-outer-traffic-evaluation}. We show HOP limit statistics, detected Teredo servers and geolocation characteristics. We discuss the most used TCP and UDP ports inside the tunnels.
+
+\subsection{Distribution of HOP Limits}
+Fig.\,\ref{fig:ipv6-tunnels-tunnels-hop} shows HOP limit distribution for the encapsulated IPv6 traffic. The main difference from the TTL (Fig.\,\ref{fig:ipv6-tunnels-ipv4-ttl}) and HOP limit (Fig.\,\ref{fig:ipv6-tunnels-ipv6-native-hop}) statistics is that the values here are distributed with much less entropy. The limits 21, 64, 128 and 255 are achieved and also the most frequent ones. This is caused by the fact that most of the traffic never traversed the IPv6 network and the HOP limit was therefore never decreased. In fact, when the values are lower, we can be reasonably certain that the packets already traversed IPv6 network and are heading towards the IPv4 destination. The value 21 is used for Teredo bubbles by Windows 7 with Service Pack 1 and earlier.The Teredo bubbles are used as a special mechanism for NAT traversal, which is consistent with the fact that most of the clients are behind a NAT. We can see that some packets reach the value of the zero HOP limit, which is a known problem when the HOP limit is set as low as to 21. The value of 255 is used for IPv6 neighbor discovery messages, so that when host receives such packet with HOP limit lower than 255, the packet is considered invalid~\cite{rfc4861}.
+
+\begin{figure}[!tb]
+        \centering
+        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/hop}
+        \caption{HOP value distribution of encapsulated IPv6 traffic}
+        \label{fig:ipv6-tunnels-tunnels-hop}
+\end{figure}
+
+\subsection{Teredo Servers}
+There are two ways of detecting Teredo servers. Firstly, we can look at the traffic using UDP protocol on port 3544, which is a well-known Teredo port, and select the addresses that communicate most often. The shortcoming of this approach is that some other services might be using the Teredo port and therefore the results might not be accurate. Since we are able to decapsulate Teredo traffic, we can derive IPv4 addresses of Teredo servers directly from Teredo IPv6 addresses. This way we can even detect Teredo servers that are not communicating directly through our observation points. Table~\ref{tab:ipv6-tunnels-teredo-servers} shows Top 10 servers that were discovered in the encapsulated IPv6 addresses. Using the WHOIS database we confirmed that a majority of servers is operated by Microsoft, which is only to be expected since Teredo is a Microsoft technology. The most of Microsoft Teredo servers we identified are actually IP addresses of "teredo.ipv6.microsoft.com", which is the default Teredo server name configured under Windows. The address $83.170.6.76$ has a hostname indicating that it serves as a Miredo server (Teredo implementation for Linux and BSD). The last address belongs to CZ.NIC (Czech top level domain operator), which is known to promote IPv6 deployment in the Czech Republic and operates local Teredo and 6to4 servers.
+
+Table~\ref{tab:ipv6-tunnels-teredo-servers-3544} shows Teredo servers discovered as the most active on Teredo port 3544. This way we detect only Teredo servers that are establishing connections through our observation points. We can see that most users use Teredo servers in the United States or Great Britain to get IPv6 connectivity. This is known to increase latency of such connections and therefore we would recommend using local servers to Czech users, such as the CZ.NIC servers.
+
+\begin{table}
+    \subfloat[Based on Teredo IPv6 addresses]{
+        \small
+        \begin{tabular}{rccc}
+            \textbf{Server IP} & \textbf{Ratio} & \textbf{Owner} & \textbf{Country} \\ \toprule 
+            65.55.158.118 & 28.33\,\% & Microsoft & US \\
+            94.245.121.253 & 27.98\,\% & Microsoft & GB \\
+            157.56.149.60 & 26.49\,\% & Microsoft & US \\
+            157.56.106.184 & 10.18\,\% & Microsoft & US \\
+            94.245.115.184 & 6.41\,\% & Microsoft & GB \\
+            83.170.6.76 & 0.04\,\% & B. Schmidt & DE \\
+            170.252.100.131 & 0.01\,\% & Accenture & US \\
+            94.245.127.72 & 0.01\,\% & Microsoft & GB \\
+            94.245.121.251 & 0.01\,\% & Microsoft & GB \\
+            217.31.202.10 & 0.01\,\% & CZ.NIC & CZ \\ \bottomrule
+        \end{tabular}
+        \label{tab:ipv6-tunnels-teredo-servers}
+    }
+    
+    \vspace{3mm}
+    \subfloat[Based on UDP port 3544]{
+        \small
+        \begin{tabular}{rccc}
+            \textbf{Server IP} & \textbf{Ratio} & \textbf{Owner} & \textbf{Country} \\ \toprule 
+            94.245.121.253 & 43.24\,\% & Microsoft & GB \\
+            65.55.158.118 & 18.91\,\% & Microsoft & US \\
+            157.56.149.60 & 17.86\,\% & Microsoft & US \\
+            94.245.115.184 & 10.00\,\% & Microsoft & GB \\
+            157.56.106.184 & 6.50\,\% & Microsoft & US \\
+            94.245.121.254 & 0.72\,\% & Microsoft & GB \\
+            94.245.115.185 & 0.22\,\% & Microsoft & GB \\
+            65.55.158.119 & 0.18\,\% & Microsoft & US \\
+            83.170.6.76 & 0.18\,\% & B. Schmidt & DE \\
+            157.56.149.61 & 0.17\,\% & Microsoft & US \\ \bottomrule
+        \end{tabular}
+        \label{tab:ipv6-tunnels-teredo-servers-3544}
+    }
+    \caption{Top 10 discovered Teredo servers}
+\end{table}
+
+\subsection{Location of Tunnel Endpoints}
+The geolocation statistics of tunneled traffic are computed for Teredo and 6to4. We use encapsulated IPv6 addresses to determine the countries for each flow. Incoming and outgoing traffic is taken separately just as in Fig.\,\ref{fig:ipv6-tunnels-top-ten-geo}. The statistics are shown in Fig.\,\ref{fig:ipv6-tunnels-geo-tun-both}.
+The tunneled traffic shows very different geolocation characteristics compared to native and decapsulated IPv6 traffic even though both are from the same link. 
+Most of the native and decapsulated IPv6 communication takes place inside the EU, while large portion of tunneled traffic communication is performed with the USA and Russia. 
+
+\begin{figure}[!tb]
+    \subfloat[Incoming traffic]{
+        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-in}
+        \label{fig:ipv6-tunnels-geo-tun-in}
+    } \hspace{2mm}
+    \subfloat[Outgoing traffic]{
+        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-out}
+        \label{fig:ipv6-tunnels-eo-tun-out}
+    }
+    \caption{Top 10 country distribution for encapsulated IPv6 addresses}
+    \label{fig:ipv6-tunnels-geo-tun-both}
+\end{figure}
+
+To identify applications that are using IPv6 connection provided by transition mechanisms, we created a list of the most used encapsulated TCP and UDP ports. We observed several ports that can be found both in the source and destination port Top 10. The source and destination ports Top 10 represent 32.0\,\% and 40.5\,\% of the traffic respectively. The well-known ports are - \emph{HTTP - 80} (0.85\,\% of traffic as source port, 5.61\,\% as destination port), \emph{HTTPS - 443} (0.58\,\% and 1.48\,\%) and \emph{DNS - 53} (1.49\,\% and 1.48\,\%). Among the most frequent ports are ports 49001 (15.96\,\% and 9.91\,\%) and 51413 (10.12\,\% and 16.07\,\%) which are used by BitTorrent clients (namely Vuze
+and Transmission). We discovered that these ports are heavily used within the 6to4 tunnel as mentioned in Section \ref{subsec:ipv6-tunnels-outer-traffic-evaluation}.
+
+\subsection{Evaluation of IPv6 Adoption} \label{subsec:ipv6-tunnels-evaluation-of-ipv6}
+
+In this section we describe the deployment of the IPv6 protocol with respect to tunneled traffic. The overall statistics of IPv6 and tunneled traffic are mentioned. We provide a historical comparison to our previous measurement~\cite{elich}. 
+
+The network activity shows the correlation with human activity. Both IPv6 and tunneled traffic are considerably smaller during the weekend than during week days. As for the IPv6 traffic, the increase of traffic volume starts at 6 AM, reaches the peak around 11 AM and holds the high level till 4 PM. Then the traffic steadily decreases and reaches the minimum at 3 AM the next day. The tunneled traffic shows slow increase that starts at 6 AM and peaks around 6 PM. The decrease begins at 10 PM and reaches the minimum at 5 AM the next day. The possible cause of this shift from the IPv6 diurnal pattern is the fact that the tunneled traffic is widely made by BitTorrent clients.
+
+We measured the tunneled traffic back in 2010 on three CESNET border links to SANET, PIONIER and NIX. We found that the tunneled IPv6 was responsible for 1.5\,\% of total flows, which is the same share as we measured today. But the relative amount of bytes transferred has almost doubled from 0.66\,\% to 1.28\,\% of total bytes today. The share of the native and decapsulated IPv6 was only 0.10\,\% (0.21\,\% of bytes) compared to 3.39\,\% (4.42\,\% of bytes) today. The known services by port (HTTP, HTTPS and DNS) had a share less than 1\,\% of total flows. Today's share of these services is significantly higher (see Section~\ref{subsec:ipv6-tunnels-inner-traffic-evaluation}). The measurements show that the overall usage of both tunneling IPv6 transition mechanisms and native IPv6 has been raising.
+
+We distinguish between the encapsulated and decapsulated tunneled traffic, as mentioned in Section~\ref{subsec:ipv6-tunnel-traffic}. The decapsulated tunneled traffic is included in the measured IPv6 traffic. When we filter out the decapsulated Teredo and 6to4 traffic, they account together for 5.91\,\% of the measured IPv6 traffic. Teredo traffic takes part of 83.13\,\% of the decapsulated tunneled traffic and 6to4 16.87\,\%. Hence we should not consider all measured IPv6 traffic as native IPv6 traffic.
+
+The main contributor to tunneled traffic was Teredo with an occurrence of nearly 89\,\% followed by 6to4 with over 11\,\%, therefore the relative amount of 6to4 traffic has increased. We then detected the use of 13 Teredo servers compared to 53 today. The complete list of the detected servers can be downloaded at the project web page~\cite{web}. 
+
+\subsection{Conclusion and Future Work} \label{subsec:ipv6-tunnels-conclusion}
+
+In this paper we have taken a detailed look at the IPv6 transition mechanisms. We have provided an improved version of our tool for investigating IPv6 tunneled traffic. Considerable progress has been made with regard to understanding tunneled traffic behavior, especially concerning Teredo and 6to4 traffic. The results of this paper suggest that encapsulated traffic differs from IPv4 and IPv6 in several characteristics including TTL values, geolocation aspect and flow duration. Moreover, we have provided the list of Teredo servers and described the evolution of IPv6 adoption.
+
+This paper is the first step towards enhancing our understanding of encapsulated IPv6 traffic. We hope that our findings will be beneficial as a background to additional research into IPv6 transition mechanisms. To further our research we are planning to carry out an in-depth analysis of tunneled IPv6 traffic concerning the security matter. To be able to handle security incidents, the security threats will be identified and detection methods will be developed. Since our results are encouraging, they should be validated on other large-scale networks. On a wider level, research is also needed to evaluate the contribution of the IPv6 transition mechanisms to the IPv6 adoption.
+
+
 
 \section{Large-Scale Geolocation for NetFlow}\label{sec:analysis-geolocation}
+% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
 
 \section{Network Traffic Characterisation Using Flow-Based Statistics}\label{sec:analysis-characterisation}
+% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
 
 % this needs proper introduction as to why it is interesting and why it should be here at all
 
 \section{Summary}\label{sec:use-cases-summary}
+
+% HTTP security monitoring
+In the first section, we presented an analysis of HTTP traffic in a large-scale environment which uses application flow monitoring with HTTP protocol processing. In contrast to previously published analyses, we were the first to classify patterns of HTTP traffic which are relevant to network security. We described three classes of HTTP traffic which contain brute-force password attacks, connections to proxies, HTTP scanners, and web crawlers. Using the classification, we were able to detect up to 16 previously undetectable brute-force password attacks and 19 HTTP scans per day in our campus network. The activity of proxy servers and web crawlers was also observed. Symptoms of these attacks may be detected by other methods based on basic flow monitoring, but detection using the analysis of HTTP requests is more straightforward. We, thus, confirm the added value of application flow monitoring in comparison to the traditional method.
+
+% IPv6 tunnels
+The exhaustion of IPv4 address space increases pressure on network operators and content providers to continue the transition to IPv6. The IPv6 transition mechanisms such as Teredo and 6to4 allow IPv4 hosts to connect to IPv6 hosts. On the other hand, they increase network complexity and render ineffective many methods to observe IP traffic. In Section~\ref{sec:analysis-ipv6-transition}, we extended our flow-based measurement system to involve transition mechanisms information to provide full IPv6 visibility. Our traffic analysis focuses on IPv6 tunneled traffic and uses data collected over one week in the Czech national research and education network. The results expose various traffic characteristics of native and tunneled IPv6 traffic, among others the TTL and HOP limit distribution, geolocation aspect of the traffic, and list of Teredo servers used in the network. Furthermore, we show how the traffic of IPv6 transition mechanisms has evolved between 2010 and 2013.

@@ -66,19 +66,17 @@ IPsec follows the general scheme depicted in Figure~\ref{fig:protocols-scheme}. 
 
 
 \begin{figure}[!ht]
-  \begin{center}
-    \includegraphics[width=0.9\textwidth]{figures/ipsec_transport_mode}
-    \label{fig:ipsec-transport-mode}
-    \caption{The IPsec packet structure in the transport mode.}
-  \end{center}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/ipsec_transport_mode}
+  \caption{The IPsec packet structure in the transport mode.}
+  \label{fig:ipsec-transport-mode}
 \end{figure}
 
 \begin{figure}[!ht]
-  \begin{center}
-    \includegraphics[width=0.9\textwidth]{figures/ipsec_tunnel_mode}
-    \label{fig:ipsec-tunnel-mode}
-    \caption{The IPsec packet structure in the tunnel mode.}
-  \end{center}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/ipsec_tunnel_mode}
+  \caption{The IPsec packet structure in the tunnel mode.}
+  \label{fig:ipsec-tunnel-mode}
 \end{figure}
 
 The ESP protocol is the main protocol of IPsec. It provides data confidentiality, origin authentication, connectionless integrity, an anti-replay service, and limited traffic flow confidentiality~\cite{rfc4303}. ESP adds a header and a trailer to each transferred packet, see Figures~\ref{fig:ipsec-transport-mode} and~\ref{fig:ipsec-tunnel-mode}, placed according to the transport mode used. The ESP and AH protocols can operate in two modes: \textit{transport} and \textit{tunnel}. In the \textit{tunnel} mode, a new IP header is created for each packet with endpoints of the tunnel as the source and destination addresses; the original IP header is used in the \textit{transport} mode.
@@ -514,9 +512,9 @@ We have provided a summarizing overview of the feature-based traffic classificat
 % 		&&&&&&&& 
 	\end{tabular}
 	\end{center}
+	\end{varwidth}
 	\caption{A summary table of cited papers and methods they use to detect encrypted traffic.}
 	\label{tab:method_categories}
-	\end{varwidth}
 \end{sidewaystable}
 
 Most surveyed methods use flow or packet header features as an input for the classification techniques. The authors of~\cite{Alshammari-2009-Preliminary, Alshammari-2011-Can} compare the results gained by utilizing packet header features and flow features. They show that using both sets of features can result in faster and more accurate classification algorithms. Nevertheless, using all the available traffic features does not necessarily lead to the best classification performance as demonstrated by the authors of~\cite{Alshammari-2009-Classifying}.

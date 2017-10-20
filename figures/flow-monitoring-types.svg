@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="127.18916mm"
-   height="81.027252mm"
-   viewBox="0 0 127.18917 81.027253"
+   width="127.28916mm"
+   height="81.127258mm"
+   viewBox="0 0 127.28917 81.12726"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -21,24 +21,45 @@
      id="defs2">
     <pattern
        inkscape:collect="always"
+       xlink:href="#Strips1_10"
+       id="pattern2321"
+       patternTransform="matrix(0.15903821,0.15797195,-2.3857858,2.4018892,0,0)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_10"
+       id="pattern2340"
+       patternTransform="matrix(0.34538583,0.3348549,-7.8308694,8.0771442,0,0)" />
+    <pattern
+       inkscape:stockid="Stripes 1:10"
+       id="Strips1_10"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="11"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect1639"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:black;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
        xlink:href="#Strips1_5"
        id="pattern6365"
        patternTransform="matrix(0.19606885,-0.17050714,1.4694203,1.6897095,1.5875101,13.229169)" />
     <pattern
        inkscape:collect="always"
-       xlink:href="#Strips1_5"
-       id="pattern6359"
-       patternTransform="matrix(-0.15779311,-0.21292453,0.94675869,-0.70161952,1.5875101,13.229169)" />
-    <pattern
-       inkscape:collect="always"
        xlink:href="#Polkadots-med"
        id="pattern6345"
-       patternTransform="matrix(1.4552083,0,0,4.1677083,1.5875101,13.229169)" />
+       patternTransform="matrix(2.5391927,0,0,2.3904349,1.5875101,13.229169)" />
     <pattern
        inkscape:collect="always"
        xlink:href="#Polkadots-med"
        id="pattern6215"
-       patternTransform="scale(2.38125,3.50625)" />
+       patternTransform="matrix(3.7220697,0.25149133,-0.28248677,4.180802,0,0)" />
     <pattern
        inkscape:stockid="Polka dots, medium"
        id="Polkadots-med"
@@ -315,11 +336,6 @@
     <pattern
        inkscape:collect="always"
        xlink:href="#Strips1_5"
-       id="pattern6029"
-       patternTransform="matrix(0.27990245,0.34075082,-2.5596553,2.102574,0,0)" />
-    <pattern
-       inkscape:collect="always"
-       xlink:href="#Strips1_5"
        id="pattern6023"
        patternTransform="matrix(-0.32076037,0.30260412,-2.2731053,-2.4094917,0,0)" />
     <pattern
@@ -347,8 +363,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="186.42135"
-     inkscape:cy="191.6634"
+     inkscape:cx="189.66285"
+     inkscape:cy="114.99422"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -360,12 +376,13 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0">
+     fit-margin-bottom="0"
+     inkscape:snap-global="false">
     <inkscape:grid
        type="xygrid"
        id="grid4504"
-       originx="-21.563341"
-       originy="-181.90086" />
+       originx="-21.463344"
+       originy="-181.80086" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -375,7 +392,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -383,9 +400,9 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-21.563339,-34.071901)">
+     transform="translate(-21.463339,-34.071901)">
     <circle
-       style="fill:url(#pattern6215);fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#pattern6215);fill-opacity:1;stroke:#000000;stroke-width:0.465;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4528"
        cx="60.060421"
        cy="76.602074"
@@ -408,13 +425,13 @@
        cy="76.072914"
        r="17.197916" />
     <circle
-       style="fill:url(#pattern6023);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#pattern6023);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.465;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4522"
        cx="48.947918"
        cy="76.072914"
        r="17.197916" />
     <circle
-       style="fill:url(#pattern6029);fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#pattern2340);fill-opacity:1;stroke:#000000;stroke-width:0.465;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4526"
        cx="71.172905"
        cy="76.072914"
@@ -456,7 +473,7 @@
        x="102.12918"
        y="72.104172" />
     <rect
-       style="opacity:1;fill:url(#pattern6359);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:url(#pattern2321);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6349"
        width="7.9375"
        height="5.2916665"
