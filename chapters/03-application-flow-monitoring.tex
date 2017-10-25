@@ -210,8 +210,9 @@ HTTP protocol~\cite{rfc7230} has a number of properties that can be monitored an
 
 We implemented and evaluated three different types of parsing algorithms. The first algorithm (\emph{strcmp} approach) loops the HTTP header line by line and searches each line for given fields. It uses standard glibc string functions like \emph{memchr}, \emph{memmem} and \emph{strncmp}. The simplified pseudocode is shown in Algorithm~\ref{alg:strcmp}. The second algorithm (\emph{pcre} approach) uses several regular expressions taken from YAF to search the packet for specific patterns indicating HTTP header fields. The pseudocode for the \emph{pcre} algorithm is shown in Algorithm~\ref{alg:pcre}. We designed the third algorithm (\emph{flex} approach) to handle each packet as a long string. It uses finite automaton to find required HTTP fields and the Flex lexer is used to process the packets. The automaton design is shown in Fig.~\ref{fig:flex_schema}.
 
-\begin{figure}[!ht]
-\begin{minipage}[t]{0.49\textwidth}
+% This should be floating, but it is impossible to get labels straight when wrapped in figure env.
+\noindent\hspace{1pt}
+\begin{minipage}[t]{(0.49\textwidth)-2pt}
 \begin{algorithm}[H]
 \caption{\emph{strcmp} }
 \label{alg:strcmp}
@@ -233,7 +234,7 @@ We implemented and evaluated three different types of parsing algorithms. The fi
 \end{algorithmic}
 }
 \end{algorithm}
-\end{minipage}
+\end{minipage}%
 \hfill
 \begin{minipage}[t]{0.47\textwidth}
 \begin{algorithm}[H]
@@ -255,7 +256,6 @@ We implemented and evaluated three different types of parsing algorithms. The fi
 }
 \end{algorithm}
 \end{minipage}
-\end{figure}
 
 \begin{figure}[!ht]
         \centering
@@ -264,7 +264,7 @@ We implemented and evaluated three different types of parsing algorithms. The fi
         \label{fig:flex_schema}
 \end{figure}
 
-Since the Flex is a generic tool, its initialization before scanning each packet is quite an expensive operation. Therefore we decided to remove all unnecessary dynamic memory allocations and costly initializations to see whether the performance can be increased. We named the new version \emph{optimized flex}. The disadvantage of Flex is that it has to keep the data in its own writable buffer. Therefore the received data must be copied to such a buffer, which adds to the processing costs significantly. The advantage of the \emph{flex} parser is its simple maintenance and extension possibilities. The framework can be modified to parse any other application layer protocol just by changing the set of regular expression rules. The \emph{strcmp} parser would have to be rewritten from a scratch.
+Since the Flex is a generic tool, its initialization before scanning each packet is quite an expensive operation. Therefore we decided to remove all unnecessary dynamic memory allocations and costly initializations to see whether the performance can be increased. We named the new version \emph{optimized flex}. The disadvantage of Flex is that it has to keep the data in its own writeable buffer. Therefore the received data must be copied to such a buffer, which adds to the processing costs significantly. The advantage of the \emph{flex} parser is its simple maintenance and extension possibilities. The framework can be modified to parse any other application layer protocol just by changing the set of regular expression rules. The \emph{strcmp} parser would have to be rewritten from a scratch.
 
 The \emph{strcmp} implementation also offers a space for further improvement. Algorithm~\ref{alg:optimized-strcmp} shows an \emph{optimized strcmp} version of the code that features a better processing logic. The optimized version searches for specific strings by comparing several bytes at once, which is done by casting the character pointer to integer pointer. The number that is compared to the string is computed from ASCII codes of the characters and converted to network byte order. The size of the used integer depends on the length of the string; longer integers offer better performance.
 
