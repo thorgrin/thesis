@@ -395,6 +395,28 @@ The paper contains very good related work chapter and description of classificat
   Url                      = {http://dx.doi.org/10.1007/978-3-642-13193-6_32}
 }
 
+@InProceedings{Benson-2010-Network,
+  Title                    = {{Network Traffic Characteristics of Data Centers in the Wild}},
+  Author                   = {Benson, Theophilus and Akella, Aditya and Maltz, David A.},
+  Booktitle                = {Proceedings of the 10th ACM SIGCOMM Conference on Internet Measurement},
+  Year                     = {2010},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {267--280},
+  Publisher                = {ACM},
+  Series                   = {IMC '10},
+
+  Abstract                 = {Although there is tremendous interest in designing improved networks for data centers, very little is known about the network-level traffic characteristics of data centers today. In this paper, we conduct an empirical study of the network traffic in 10 data centers belonging to three different categories, including university, enterprise campus, and cloud data centers. Our definition of cloud data centers includes not only data centers employed by large online service providers offering Internet-facing applications but also data centers used to host data-intensive (MapReduce style) applications). We collect and analyze SNMP statistics, topology and packet-level traces. We examine the range of applications deployed in these data centers and their placement, the flow-level and packet-level transmission properties of these applications, and their impact on network and link utilizations, congestion and packet drops. We describe the implications of the observed traffic patterns for data center internal traffic engineering as well as for recently proposed architectures for data center networks.},
+  Acmid                    = {1879175},
+  Doi                      = {10.1145/1879141.1879175},
+  ISBN                     = {978-1-4503-0483-2},
+  Keywords                 = {characterization, data center traffic},
+  Location                 = {Melbourne, Australia},
+  Numpages                 = {14},
+  Owner                    = {velan},
+  Timestamp                = {2015.07.27}
+}
+
 @InProceedings{Bernaille-2007-Early,
   Title                    = {{Early Recognition of Encrypted Applications}},
   Author                   = {Bernaille, L. and Teixeira, R.},
@@ -890,6 +912,25 @@ e geolocation to NetFlow data from any flow exporter. After presenting prototype
   Url                      = {http://heartbleed.com/}
 }
 
+@Article{Crovella-1997-Self,
+  Title                    = {{Self-similarity in World Wide Web traffic: evidence and possible causes}},
+  Author                   = {Crovella, M.E. and Bestavros, A.},
+  Journal                  = {Networking, IEEE/ACM Transactions on},
+  Year                     = {1997},
+
+  Month                    = {Dec},
+  Number                   = {6},
+  Pages                    = {835-846},
+  Volume                   = {5},
+
+  Abstract                 = {The notion of self-similarity has been shown to apply to wide-area and local-area network traffic. We show evidence that the subset of network traffic that is due to World Wide Web (WWW) transfers can show characteristics that are consistent with self-similarity, and we present a hypothesized explanation for that self-similarity. Using a set of traces of actual user executions of NCSA Mosaic, we examine the dependence structure of WWW traffic. First, we show evidence that WWW traffic exhibits behavior that is consistent with self-similar traffic models. Then we show that the self-similarity in such traffic can be explained based on the underlying distributions of WWW document sizes, the effects of caching and user preference in file transfer, the effect of user “think time”, and the superimposition of many such transfers in a local-area network. To do this, we rely on empirically measured distributions both from client traces and from data independently collected at WWW servers},
+  Doi                      = {10.1109/90.650143},
+  ISSN                     = {1063-6692},
+  Keywords                 = {Internet;local area networks;performance evaluation;statistical analysis;telecommunication traffic;wide area networks;LAN traffic;NCSA Mosaic;WAN traffic;WWW document size distribution;WWW servers;WWW traffic;World Wide Web traffic;caching;client traces;dependence structure;empirically measured distributions;file transfer;local-area network;self-similar traffic models;self-similarity;statistical tests;user preference;user think time;wide-area network;Intelligent networks;Internet;Local area networks;Network servers;Tail;Telecommunication traffic;Traffic control;Web server;Web sites;World Wide Web},
+  Owner                    = {velan},
+  Timestamp                = {2015.08.05}
+}
+
 @InProceedings{Cui-2007-Discoverer,
   Title                    = {{Discoverer: Automatic Protocol Reverse Engineering from Network Traces}},
   Author                   = {Cui, Weidong and Kannan, Jayanthkumar and Wang, Helen J.},
@@ -1197,6 +1238,43 @@ The core of the paper is an evaluation and discussion of existing open-source DP
   Timestamp                = {2017.09.27}
 }
 
+@InProceedings{Fomenkov-2004-Longitudinal,
+  Title                    = {{Longitudinal Study of Internet Traffic in 1998-2003}},
+  Author                   = {Fomenkov, Marina and Keys, Ken and Moore, David and Claffy, K},
+  Booktitle                = {Proceedings of the Winter International Synposium on Information and Communication Technologies},
+  Year                     = {2004},
+  Pages                    = {1--6},
+  Publisher                = {Trinity College Dublin},
+  Series                   = {WISICT '04},
+
+  Abstract                 = {There is growing interest in capturing and analyzing Internet traffic characteristics in pursuit of insights into its evolution. We present a study of one of the few sources of publicly available long-term Internet traffic workload data, namely the NLANR PMA archive of packet header traces. Trace samples were collected at a number of academic, research, and commercial sites during years 1998--2003. We consider four metrics of traffic: bytes, packets, flows, and number of source-destination pairs. We also analyze the composition of traffic by protocol.},
+  Acmid                    = {984747},
+  Keywords                 = {Internet traffic workload characterization, TCP, UDP, flows, traffic scaling},
+  Location                 = {Cancun, Mexico},
+  Numpages                 = {6},
+  Owner                    = {velan},
+  Timestamp                = {2015.07.27}
+}
+
+@Article{Fraleigh-2003-Packet,
+  Title                    = {{Packet-level traffic measurements from the Sprint IP backbone}},
+  Author                   = {Fraleigh, C. and Moon, S. and Lyles, B. and Cotton, C. and Khan, M. and Moll, D. and Rockell, R. and Seely, T. and Diot, S.C.},
+  Journal                  = {Network, IEEE},
+  Year                     = {2003},
+
+  Month                    = {Nov},
+  Number                   = {6},
+  Pages                    = {6-16},
+  Volume                   = {17},
+
+  Abstract                 = {Network traffic measurements provide essential data for networking research and network management. In this article we describe a passive monitoring system designed to capture GPS synchronized packet-level traffic measurements on OC-3, OC-12, and OC-48 links. Our system is deployed in four POP in the Sprint IP backbone. Measurement data is stored on a 10 Tbyte storage area network and analyzed on a computing cluster. We present a set of results to both demonstrate the strength of the system and identify recent changes in Internet traffic characteristics. The results include traffic workload, analyses of TCP flow round-trip times, out-of-sequence packet rates, and packet delay. We also show that some links no longer carry Web traffic as their dominant component to the benefit of file sharing and media streaming. On most links we monitored, TCP flows exhibit low out-of-sequence packet rates, and backbone delays are dominated by the speed of light.},
+  Doi                      = {10.1109/MNET.2003.1248656},
+  ISSN                     = {0890-8044},
+  Keywords                 = {Internet;delays;monitoring;multimedia communication;packet switching;telecommunication traffic recording;transport protocols;GPS synchronized measurements;Internet traffic characteristics;OC-12;OC-3;OC-48 links;POP;Sprint IP backbone;TCP flow round-trip times;Web traffic;backbone delays;file sharing;media streaming;network management;network traffic measurements;out-of-sequence packet rates;packet delay;packet-level traffic measurements;passive monitoring system;traffic workload;Area measurement;Computer networks;Delay;Global Positioning System;Internet;Monitoring;Spine;Storage area networks;Streaming media;Telecommunication traffic},
+  Owner                    = {velan},
+  Timestamp                = {2015.07.27}
+}
+
 @TechReport{SP-800-77,
   Title                    = {{SP 800-77. Guide to IPsec VPNs}},
   Author                   = {Frankel, S.E. and Kent, K. and Lewkowski, R. and Orebaugh, A.D. and Ritchey, R.W. and Sharma, S.R.},
@@ -1240,6 +1318,25 @@ The core of the paper is an evaluation and discussion of existing open-source DP
   Keywords                 = {content-addressable storage;field programmable gate arrays;pattern matching;search engines;security of data;telecommunication security;FPGA;TCAM;field programmable gate array;gigabit network intrusion detection system;header rules matching system;long pattern matching architecture;packet matching;range pattern matching;router;searching pattern;signature set based NIDS;ternary content-addressable memory;Engines;Ethernet networks;Field programmable gate arrays;Intrusion detection;Packaging;Pattern matching;Software performance;Spine;Systems engineering and theory;TCPIP},
   Owner                    = {velan},
   Timestamp                = {2017.08.24}
+}
+
+@Article{Garcia-Dorado-2012-Characterization,
+  Title                    = {{Characterization of ISP Traffic: Trends, User Habits, and Access Technology Impact}},
+  Author                   = {Garcia-Dorado, J.L. and Finamore, A. and Mellia, M. and Meo, M. and Munafo, M.},
+  Journal                  = {Network and Service Management, IEEE Transactions on},
+  Year                     = {2012},
+
+  Month                    = {June},
+  Number                   = {2},
+  Pages                    = {142-155},
+  Volume                   = {9},
+
+  Abstract                 = {In the recent years, the research community has increased its focus on network monitoring which is seen as a key tool to understand the Internet and the Internet users. Several studies have presented a deep characterization of a particular application, or a particular network, considering the point of view of either the ISP, or the Internet user. In this paper, we take a different perspective. We focus on three European countries where we have been collecting traffic for more than a year and a half through 5 vantage points with different access technologies. This humongous amount of information allows us not only to provide precise, multiple, and quantitative measurements of "What the user do with the Internet" in each country but also to identify common/uncommon patterns and habits across different countries and nations. Considering different time scales, we start presenting the trend of application popularity; then we focus our attention to a one-month long period, and further drill into a typical daily characterization of users activity. Results depict an evolving scenario due to the consolidation of new services as Video Streaming and File Hosting and to the adoption of new P2P technologies. Despite the heterogeneity of the users, some common tendencies emerge that can be leveraged by the ISPs to improve their service.},
+  Doi                      = {10.1109/TNSM.2012.022412.110184},
+  ISSN                     = {1932-4537},
+  Keywords                 = {Internet;peer-to-peer computing;telecommunication traffic;video streaming;European countries;ISP traffic characterization;Internet users;P2P technologies;access technology impact;file hosting;network monitoring;user habits;video streaming;Availability;Bit rate;Internet;Monitoring;Optical fiber subscriber loops;Probes;Streaming media;ISP traffic;Network monitoring;traffic analyzer},
+  Owner                    = {velan},
+  Timestamp                = {2015.08.12}
 }
 
 @InCollection{Garcia-Dorado-2013-High,
@@ -1788,6 +1885,29 @@ The core of the paper is an evaluation and discussion of existing open-source DP
   Timestamp                = {2017.08.04}
 }
 
+@InProceedings{John-2007-Analysis,
+  Title                    = {{Analysis of Internet Backbone Traffic and Header Anomalies Observed}},
+  Author                   = {John, Wolfgang and Tafvelin, Sven},
+  Booktitle                = {Proceedings of the 7th ACM SIGCOMM Conference on Internet Measurement},
+  Year                     = {2007},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {111--116},
+  Publisher                = {ACM},
+  Series                   = {IMC '07},
+
+  Abstract                 = {The dominating Internet protocols, IP and TCP, allow some flexibility in implementation, including a variety of optional features. To support research and further development of these protocols, it is crucial to know about current deployment of protocol specific features and accompanying anomalies. This work is intended to reflect the current characteristics of Internet backbone traffic and point out misbehaviors and potential problems. On 20 consecutive days in April 2006 bidirectional traffic was collected on an OC-192 backbone link. The analysis of the data provides a comprehensive summary about current protocol usage including comparisons to prior studies. Furthermore, header misbehaviors and anomalies were found within almost every aspect analyzed and are discussed in detail. These observations are important information for designers of network protocols, network application and network attack detection systems.},
+  Acmid                    = {1298321},
+  Doi                      = {10.1145/1298306.1298321},
+  ISBN                     = {978-1-59593-908-1},
+  Keywords                 = {header anomalies, internet measurement, traffic analysis},
+  Location                 = {San Diego, California, USA},
+  Numpages                 = {6},
+  Owner                    = {velan},
+  Timestamp                = {2015.07.27},
+  Url                      = {http://doi.acm.org/10.1145/1298306.1298321}
+}
+
 @InCollection{Kang-2007-Distributed,
   Title                    = {{Distributed Evasive Scan Techniques and Countermeasures}},
   Author                   = {Kang, MinGyung and Caballero, Juan and Song, Dawn},
@@ -2137,6 +2257,27 @@ and Stiller, Burkhard},
   Url                      = {http://dx.doi.org/10.1109/ICIMP.2007.23}
 }
 
+@InProceedings{Leland-1993-Self,
+  Title                    = {{On the Self-similar Nature of Ethernet Traffic}},
+  Author                   = {Leland, Will E. and Taqqu, Murad S. and Willinger, Walter and Wilson, Daniel V.},
+  Booktitle                = {Conference Proceedings on Communications Architectures, Protocols and Applications},
+  Year                     = {1993},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {183--193},
+  Publisher                = {ACM},
+  Series                   = {SIGCOMM '93},
+
+  Abstract                 = {We demonstrate that Ethernet local area network (LAN) traffic is statistically self-similar, that none of the commonly used traffic models is able to capture this fractal behavior, and that such behavior has serious implications for the design, control, and analysis of high-speed, cell-based networks. Intuitively, the critical characteristic of this self-similar traffic is that there is no natural length of a "burst": at every time scale ranging from a few milliseconds to minutes and hours, similar-looking traffic bursts are evident; we find that aggregating streams of such traffic typically intensifies the self-similarity ("burstiness") instead of smoothing it.Our conclusions are supported by a rigorous statistical analysis of hundreds of millions of high quality Ethernet traffic measurements collected between 1989 and 1992, coupled with a discussion of the underlying mathematical and statistical properties of self-similarity and their relationship with actual network behavior. We also consider some implications for congestion control in high-bandwidth networks and present traffic models based on self-similar stochastic processes that are simple, accurate, and realistic for aggregate traffic.},
+  Acmid                    = {166255},
+  Doi                      = {10.1145/166237.166255},
+  ISBN                     = {0-89791-619-0},
+  Location                 = {San Francisco, California, USA},
+  Numpages                 = {11},
+  Owner                    = {velan},
+  Timestamp                = {2015.07.27}
+}
+
 @TechReport{Lesk-1975-Lex,
   Title                    = {{Lex -- a Lexical Analyzer Generator}},
   Author                   = {M. E. Lesk and E. Schmidt},
@@ -2363,6 +2504,26 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Url                      = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.101.7450&rep=rep1&type=pdf}
 }
 
+@InProceedings{Moore-2005-Toward,
+  Title                    = {{Toward the Accurate Identification of Network Applications}},
+  Author                   = {Moore, Andrew W. and Papagiannaki, Konstantina},
+  Booktitle                = {Proceedings of the 6th International Conference on Passive and Active Network Measurement},
+  Year                     = {2005},
+
+  Address                  = {Berlin, Heidelberg},
+  Pages                    = {41--54},
+  Publisher                = {Springer-Verlag},
+  Series                   = {PAM'05},
+
+  Acmid                    = {2150199},
+  Doi                      = {10.1007/978-3-540-31966-5_4},
+  ISBN                     = {3-540-25520-6, 978-3-540-25520-8},
+  Location                 = {Boston, MA},
+  Numpages                 = {14},
+  Owner                    = {velan},
+  Timestamp                = {2015.09.07}
+}
+
 @PhdThesis{MoreiraMoura-2013-Internet,
   Title                    = {{Internet Bad Neighborhoods}},
   Author                   = {Giovane César {Moreira Moura}},
@@ -2582,6 +2743,28 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Url                      = {http://dx.doi.org/10.1016/S1389-1286(99)00112-7}
 }
 
+@Article{Paxson-1995-Wide,
+  Title                    = {{Wide Area Traffic: The Failure of Poisson Modeling}},
+  Author                   = {Paxson, Vern and Floyd, Sally},
+  Journal                  = {IEEE/ACM Trans. Netw.},
+  Year                     = {1995},
+
+  Month                    = jun,
+  Number                   = {3},
+  Pages                    = {226--244},
+  Volume                   = {3},
+
+  Acmid                    = {208390},
+  Address                  = {Piscataway, NJ, USA},
+  Doi                      = {10.1109/90.392383},
+  ISSN                     = {1063-6692},
+  Issue_date               = {June 1995},
+  Numpages                 = {19},
+  Owner                    = {velan},
+  Publisher                = {IEEE Press},
+  Timestamp                = {2015.08.05}
+}
+
 @Misc{scp-description,
   Title                    = {{How the SCP protocol works.} \textit{Jan Pechanec's Weblog.}},
 
@@ -2692,6 +2875,27 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Owner                    = {Milan},
   Timestamp                = {2014.11.28},
   Url                      = {https://www.ssllabs.com/projects/client-fingerprinting/}
+}
+
+@InProceedings{Quan-2010-Characteristics,
+  Title                    = {On the Characteristics and Reasons of Long-lived Internet Flows},
+  Author                   = {Quan, Lin and Heidemann, John},
+  Booktitle                = {Proceedings of the 10th ACM SIGCOMM Conference on Internet Measurement},
+  Year                     = {2010},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {444--450},
+  Publisher                = {ACM},
+  Series                   = {IMC '10},
+
+  Acmid                    = {1879198},
+  Doi                      = {10.1145/1879141.1879198},
+  ISBN                     = {978-1-4503-0483-2},
+  Keywords                 = {computer-to-computer communication, long duration flow},
+  Location                 = {Melbourne, Australia},
+  Numpages                 = {7},
+  Owner                    = {velan},
+  Timestamp                = {2016.01.06}
 }
 
 @InProceedings{Rodriguez-2013-Empirical,

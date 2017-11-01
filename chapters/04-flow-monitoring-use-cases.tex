@@ -6,7 +6,9 @@ There are many usages for application traffic monitoring. The common goal is to 
 
 As a first example of traffic analysis with the use of application flow monitoring, we show how information from HTTP headers can be used to detect new classes of attacks on the application layer. This is the most common use case for application flow monitoring. 
 
-Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol so that information about multiple chained headers are collected for each flow. An analysis of chained headers is performed and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
+% Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol so that information about multiple chained headers are collected for each flow. An analysis of chained headers is performed and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
+
+Basic flow monitoring usually stops after the first header following the IP layer. However, many networks and networking protocols utilize encapsulation to traverse over network segments with unsupported equipment or to allow aggregating of traffic into virtual networks. IPv6 transition mechanism are a special class of protocols used to provide IPv6 connectivity over IPv4 networks. Most operating systems provide means to deliver IPv6 connectivity even when native IPv6 is not available. Therefore, we extended the basic flow monitoring with information from the IPv6 transition mechanisms and we report on the IPv6 deployment and the use of the transition mechanisms.
 
 Inserting information to the flow records from external sources is also considered to be a variant of application flow monitoring. We show an example of adding geolocation information both in the flow exporter and collector. We show that both implementations scale very well and that the geolocation data can be used for advanced traffic analysis.
 
@@ -18,13 +20,11 @@ Since most flow monitoring experiments are performed on a live network, it is im
 % Luuk Hendriks, Petr Velan, Ricardo de O. Schmidt, Pieter-Tjerk de Boer, and Aiko Pras. “Threats and Surprises Behind IPv6 Extension Headers”.
 % Luuk Hendriks, Petr Velan, Ricardo de O. Schmidt, Pieter-Tjerk de Boer, and Aiko Pras. “Flow-Based Detection of IPv6-specific Network Layer Attacks”
 % Petr Velan, Jana Medková, Tomáš Jirsík, and P. Čeleda. “Network Traffic Characterisation Using Flow-Based Statistics”. - needs proper intro in chapintro, or move to next chapter
-The papers related to this chapter are~\cite{Husak-2015-Security, Hendriks-2017-Flow, Hendriks-2017-Threats, Elich-2013-Investigation, Celeda-2013-Large, Velan-2016-Network}.
+The papers included in this chapter are~\cite{Husak-2015-Security, Elich-2013-Investigation, Celeda-2013-Large, Velan-2016-Network}. Other papers related to this chapter are~\cite{Hendriks-2017-Flow, Hendriks-2017-Threats}.
 
 The organisation of this chapter is as follows:
 \begin{itemize}
   \item Section~\ref{sec:analysis-http-flows} analyses HTTP traffic in a large-scale environment with the use of application flow monitoring. The added value of application flow monitoring is established by detection of several previously undetected attacks.
-  \item Section~\ref{sec:analysis-ipv6-threats} shows that by extending flow exporter to parse IPv6 Extension Headers a new insight into the IPv6 traffic can be gained. The extension headers are analyzed and conclusions regarding their managements are drawn.
-  \item Section~\ref{sec:analysis-ipv6-attacks} studies the IPv6 specific attacks that can be detected by flow monitoring. The monitoring of IPv6 Extension Headers is used for attack detection.
   \item Section~\ref{sec:analysis-ipv6-transition} reports on IPv6 deployment and the use of transition mechanisms. The basic flow monitoring is extended by the capability of analysing a tunnelled IPv6 traffic.
   \item Section~\ref{sec:analysis-geolocation} shows how flow records can be extended with geolocation information and how this additional information can be employed for network analysis.
   \item Section~\ref{sec:analysis-characterisation} proposes a network traffic characterisation method using flow-based statistics. The characteristics are used to better understand and describe the nature of the traffic and to compare different network traces against each other.
@@ -36,7 +36,6 @@ The organisation of this chapter is as follows:
 \newpage
 
 \section{Security Monitoring of HTTP Traffic Using Extended Flows}\label{sec:analysis-http-flows}
-% TODO: fix flow monitoring terminlogy
 
 HTTP is currently the most widely used protocol which takes up a significant portion of network traffic. Due to its popularity, it is beneficial to have a deeper understanding of HTTP network traffic and its content. From a network security perspective, we would like to know who is accessing our network and what the requested resources are. Patterns in network traffic and outstanding numbers of visited hosts and requested resources would help us to distinguish between legitimate and malicious traffic. The most suitable way of gaining an overview of HTTP traffic in a large-scale network is application flow monitoring, as defined in the previous chapter.
 
@@ -56,15 +55,15 @@ Our work contributes to a better understanding of current security threats. For 
 
 The answers to both questions are based on an analysis of real traffic in a campus network. We use network application flow monitoring processing the information from HTTP application layer, which provides HTTP elements to application flow records. Although it is possible to extract some information, such as the Server Name Indication, from the HTTPS protocol, this work focuses on the HTTP protocol only.
 
-We also use auxiliary methods to verify and validate the results, i.e., to confirm the membership of detected IP addresses into the proposed behaviour classes. Legitimate sources of traffic should be identifiable, e.g., Googlebot can be identified by a reverse DNS record of the source IP address \cite{Google--Verifying}. We check User-Agents in HTTP traffic to differentiate legitimate and illegitimate traffic, e.g., requests with forged User-Agent. Finally, we check the reachability of traffic destination through search engines to see if it is possible to find the resource without accessing it. We follow the principle of ``Google Hacking'' \cite{Billig-2008-Evaluation}, a technique used for finding vulnerabilities on web pages indexed by search engines.
+We also use auxiliary methods to verify and validate the results, i.e., to confirm the membership of detected IP addresses into the proposed behaviour classes. Legitimate sources of traffic should be identifiable, e.g., Googlebot can be identified by a reverse DNS record of the source IP address~\cite{Google--Verifying}. We check User-Agents in HTTP traffic to differentiate legitimate and illegitimate traffic, e.g., requests with forged User-Agent. Finally, we check the reachability of traffic destination through search engines to see if it is possible to find the resource without accessing it. We follow the principle of ``Google Hacking''~\cite{Billig-2008-Evaluation}, a technique used for finding vulnerabilities on web pages indexed by search engines.
 
 This section is divided into six subsections. Subsection \ref{subsec:httpsecurity-related_work} presents previous work in this field. Measurement tools and environment are described in Subsection \ref{subsec:httpsecurity-measurement}. The results are presented in Subsection \ref{subsec:httpsecurity-results} and discussed in Subsection \ref{subsec:httpsecurity-discussion}. Finally, Subsection \ref{subsec:httpsecurity-conclusion} concludes the section.
 
 \subsection{Related work}\label{subsec:httpsecurity-related_work}
 
-Although research has focused on analysis of HTTP traffic in recent years, there is only a small number of papers relevant to our work. To the best of our knowledge, we are not aware of any paper dealing with HTTP analysis using a flow-based approach. In addition to this, the motivation of the relevant papers is different, typically focusing on efficient traffic management, with only a minor focus on security, specifically attack detection and prevention. One exception is the work by \citeauthor{Perdisci-2010-Behavioral}~\cite{Perdisci-2010-Behavioral}. They employed network-level behavioural clustering of HTTP requests generated by malware. Their motivation was to provide quality input for algorithms that automatically generate network signatures. The second exception is the work by \citeauthor{Husak-2014-PhiGARo}~\cite{Husak-2014-PhiGARo} in which they use flow-based HTTP analysis to detect users who contacted malicious websites.
+Although research has focused on analysis of HTTP traffic in recent years, there is only a small number of papers relevant to our work. To the best of our knowledge, we are not aware of any paper dealing with HTTP analysis using a flow-based approach. In addition to this, the motivation of the relevant papers is different, typically focusing on efficient traffic management, with only a minor focus on security, specifically attack detection and prevention. One exception is the work by~\citeauthor{Perdisci-2010-Behavioral}~\cite{Perdisci-2010-Behavioral}. They employed network-level behavioural clustering of HTTP requests generated by malware. Their motivation was to provide quality input for algorithms that automatically generate network signatures. The second exception is the work by~\citeauthor{Husak-2014-PhiGARo}~\cite{Husak-2014-PhiGARo} in which they use flow-based HTTP analysis to detect users who contacted malicious websites.
 
-Other related papers dealing with HTTP traffic analysis are listed in this paragraph. \citeauthor{Augustin-2011-Traffic}~\cite{Augustin-2011-Traffic} published a classification of web applications according to three traffic features: intensity (total volume of exchanged traffic), symmetry (ratio between upstream and downstream traffic) and shape (burstiness over time). \citeauthor{Xie-2013-ReSurf}~\cite{Xie-2013-ReSurf} addressed reconstructing web surfing behaviour from network packet traces. \citeauthor{Xu-2014-Toward}~\cite{Xu-2014-Toward} analysed User-Agents strings captured at the edge of a campus network using an extension of UASparser~\cite{Mallat-2017-UASparser}. They identified operating systems, types of devices (mobile, desktop) and applications (browser, crawler, P2P, automated updates and requests). A similar work by \citeauthor{Jin-2012-Integrated}~\cite{Jin-2012-Integrated} is motivated by efficient traffic management. \citeauthor{Hur-2012-Towards}~\cite{Hur-2012-Towards} proposed a smart phone traffic classification based on grouping User-Agent fields and extracting common strings.
+Other related papers dealing with HTTP traffic analysis are listed in this paragraph. \citeauthor{Augustin-2011-Traffic}~\cite{Augustin-2011-Traffic} published a classification of web applications according to three traffic features: intensity (total volume of exchanged traffic), symmetry (ratio between upstream and downstream traffic) and shape (burstiness over time). \citeauthor{Xie-2013-ReSurf}~\cite{Xie-2013-ReSurf} addressed reconstructing web surfing behaviour from network packet traces. \citeauthor{Xu-2014-Toward}~\cite{Xu-2014-Toward} analysed User-Agents strings captured at the edge of a campus network using an extension of UASparser~\cite{Mallat-2017-UASparser}. They identified operating systems, types of devices (mobile, desktop) and applications (browser, crawler, P2P, automated updates and requests). A similar work by~\citeauthor{Jin-2012-Integrated}~\cite{Jin-2012-Integrated} is motivated by efficient traffic management. \citeauthor{Hur-2012-Towards}~\cite{Hur-2012-Towards} proposed a smart phone traffic classification based on grouping User-Agent fields and extracting common strings.
 
 \subsection{Measurement tools and environment}\label{subsec:httpsecurity-measurement}
 
@@ -367,7 +366,7 @@ The first subclass was observed most often and was identified as communication b
 
 The second subclass was not observed often, but generated the record number of flows. Paths containing a substring such as \textit{admin} or \textit{login} suggest a request to a resource protected by authentication. Paths ending in \textit{wp-login} indicate the presence of an administrative interface of a well-known content management system WordPress, which is prone to brute-force password attacks~\cite{WordPressCodex-2014-Brute}. This path was observed very often and the high number of flows, typically over a short period of time, indicates an attack. We accessed the requested URLs and confirmed that the hosts are running WordPress and provide a login page at the requested path. Another well-known content management system, Joomla!, was also a target of brute-force password attacks. The login page of Joomla! is located under a generic-looking path \textit{/administrator/index.php} and we have confirmed the presence of Joomla! at the observed URLs.
 
-An interesting conclusion is that the dictionary attacks are rarely accompanied by any other network traffic from the source IP address. There were neither scans nor any other access to the host preceding the attack as is common among SSH brute-force attacks \cite{Vykopal-2013-Flow}. We suppose this is due to attackers using a ``Google Hacking'' technique \cite{Billig-2008-Evaluation}. In this technique, a search engine (e.g. Google, hence the name) is abused to do the reconnaissance for the attacker. The attacker searches a string typical for a WordPress login page and the search engine returns a list of WordPress instances which can be accessed instantly. Several well-aimed Google searches proved this assumption.
+An interesting conclusion is that the dictionary attacks are rarely accompanied by any other network traffic from the source IP address. There were neither scans nor any other access to the host preceding the attack as is common among SSH brute-force attacks~\cite{Vykopal-2013-Flow}. We suppose this is due to attackers using a ``Google Hacking'' technique~\cite{Billig-2008-Evaluation}. In this technique, a search engine (e.g. Google, hence the name) is abused to do the reconnaissance for the attacker. The attacker searches a string typical for a WordPress login page and the search engine returns a list of WordPress instances which can be accessed instantly. Several well-aimed Google searches proved this assumption.
 
 Although we can easily identify the two subclasses by the presence of characteristic substrings, the group of requested path is uncategorized and creates a third subclass. Paths such as \textit{/node/} and \textit{/wiki/} do not indicate a vulnerable resource. Dynamically generated content was observed on the requested URLs which suggests that the requests were legitimate. Highly repeated requests for URLs of files for downloading can be explained by partitioning the download, e.g., by download managers, and, thus, is legitimate traffic.
 
@@ -377,7 +376,7 @@ The second class was marked as HTTP scanning. Requested paths suggest that the s
 
 The HTTP scans were further analysed and correlated to TCP SYN scans on port 80. The results confirm the malicious nature of the scans. 46 \% of the HTTP scans were preceded or accompanied by a TCP SYN scan of the full range of our network. The first option is that the scanner first obtains the list of IP addresses with port 80 opened and then scans them with HTTP requests. The delay between the two phases varies from one hour to several days. The second option of HTTP scanning is to send a HTTP request instantly after receiving a response to the TCP SYN packet.
 
-TCP SYN scanning is easily detectable using network flow monitoring \cite{Sperotto-2010-Overview}, but scanners can avoid detection by scanning ``low \& slow'' \cite{Kang-2007-Distributed}. We propose using application flow monitoring to increase the detection rate of network scanning and lower the amount of false positives. We observed scanners that scanned no more than 5,000 IP addresses out of a /16 network range with a TCP SYN packet and continued HTTP scanning the web servers they found. Naturally, the scanners did not scan all the web servers, they typically found 100--250 hosts. On the other hand, as we stated earlier, more than 100 scanned hosts is enough to identify a scanner, at least in a network containing around 500 web servers. Therefore, we are able to identify a scanner which would otherwise avoid detection due to the high threshold of the TCP SYN scan detection method.
+TCP SYN scanning is easily detectable using network flow monitoring~\cite{Sperotto-2010-Overview}, but scanners can avoid detection by scanning ``low \& slow''~\cite{Kang-2007-Distributed}. We propose using application flow monitoring to increase the detection rate of network scanning and lower the amount of false positives. We observed scanners that scanned no more than 5,000 IP addresses out of a /16 network range with a TCP SYN packet and continued HTTP scanning the web servers they found. Naturally, the scanners did not scan all the web servers, they typically found 100--250 hosts. On the other hand, as we stated earlier, more than 100 scanned hosts is enough to identify a scanner, at least in a network containing around 500 web servers. Therefore, we are able to identify a scanner which would otherwise avoid detection due to the high threshold of the TCP SYN scan detection method.
 
 Another interesting property of the HTTP scans is that some of the requested HTTP paths were observed as a target of brute-force attack as well. For example, the scanners were looking for running instances of WordPress by requesting paths ending in \textit{wp-login}. The same paths were subjects of thousands of repeated request, which we consider as a brute-force attack. This lead us to suggestion that the attackers search for victim of a brute-force attack using the HTTP scans, just like it is common for attackers to perform port scan before a brute-force attack against services such as SSH~\cite{Vykopal-2013-Flow}.
 
@@ -408,15 +407,9 @@ Further work will involve the integration of the proposed methods into the exist
 Additionally, we will use the discovered classes for setting up more efficient honeypots to respond to the requested vulnerability. This applies particularly to HTTP scanners and brute-force password attacks. We should be able to equip a honeypot with an appropriate resource, e.g., vulnerable web application that the adversaries were looking for, to attract and analyse specific attacks. 
 The honeypot use case involves both network monitoring and security incident analysis and can lead to an effective reaction to upcoming threats including a reaction to zero-day attacks.
 
-
-\section{Threats and Surprises Behind IPv6 Extension Headers}\label{sec:analysis-ipv6-threats}
-% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
-
-\section{Flow-Based Detection of IPv6-specific Network Layer Attacks}\label{sec:analysis-ipv6-attacks}
-% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis}\label{sec:analysis-ipv6-transition}
-% TODO: fix flow monitoring terminlogy
 
 Despite IPv6 being the standard for several years its adoption is still in process~\cite{Claffy-2011-Tracking}. There are several ways of getting IPv6 connectivity, the dual-stack being the preferred one. Most IPv6 studies deal with native IPv6. However, there are other globally used options known as transition mechanisms. They can provide IPv6 connectivity on networks without native IPv6 connectivity enabled or without an IPv6 ready infrastructure.
 
@@ -432,13 +425,13 @@ The section is organized as follows. Subsection~\ref{subsec:ipv6-tunnels-related
 
 The most widely used and discussed tunneling transition mechanisms are Teredo and 6to4. Although there are several studies focusing on performance evaluation of transition mechanisms listed below, the characteristics of the traffic generated by the tunneling transition mechanisms are not well known.
 
-A study by \citeauthor{Aazam-2010-Comparison}~\cite{Aazam-2010-Comparison} provides a performance evaluation and a comparison of Teredo and Intra-Site Automatic Tunnel Addressing Protocol (ISATAP) mechanisms with focus on certain parameters like throughput, end to end delay, round trip time and jitter. A study by \citeauthor{Zander-2012-Investigating}~\cite{Zander-2012-Investigating} compares Teredo tunneling capability and performance with native IPv6 and 6to4 using measurements related to web services. Teredo increases the time needed to fetch web objects compared to IPv4 or native IPv6. The conclusion is that Teredo seems to be limited by a lack of Teredo infrastructure forcing encapsulated packets to travel long distances. Moreover, the throughput is partially limited by the performance of Teredo relay servers.
+A study by~\citeauthor{Aazam-2010-Comparison}~\cite{Aazam-2010-Comparison} provides a performance evaluation and a comparison of Teredo and Intra-Site Automatic Tunnel Addressing Protocol (ISATAP) mechanisms with focus on certain parameters like throughput, end to end delay, round trip time and jitter. A study by~\citeauthor{Zander-2012-Investigating}~\cite{Zander-2012-Investigating} compares Teredo tunneling capability and performance with native IPv6 and 6to4 using measurements related to web services. Teredo increases the time needed to fetch web objects compared to IPv4 or native IPv6. The conclusion is that Teredo seems to be limited by a lack of Teredo infrastructure forcing encapsulated packets to travel long distances. Moreover, the throughput is partially limited by the performance of Teredo relay servers.
 
-A study by \citeauthor{Bahaman-2012-Network}~\cite{Bahaman-2012-Network} discusses the performance of 6to4 with focus on communication over TCP. It states that the TCP transmission ability is reduced by the use of 6to4. However, it is still suitable for early stages of the transition period.
+A study by~\citeauthor{Bahaman-2012-Network}~\cite{Bahaman-2012-Network} discusses the performance of 6to4 with focus on communication over TCP. It states that the TCP transmission ability is reduced by the use of 6to4. However, it is still suitable for early stages of the transition period.
 
 Other papers discuss the impact of transition tunnels on network security. Krishnan et al.~\cite{rfc6169} present security concerns with recommendations on how to minimize security exposure due to tunnels. It is pointed out that tunnels can have negative impact on deep packet inspection and that transition mechanisms such as Teredo allow inbound access from the public Internet to a device through an opening created in a network address translation (NAT) device. This increased exposure can be used by attackers to effectively attack a device hidden behind a NAT device. A generally proposed security practice is to avoid the usage of tunnels at all and deploy other transition schemes like dual-stack.
 
-Finally, \citeauthor{Sarrar-2012-Investigating}~\cite{Sarrar-2012-Investigating} provides a brief insight into tunneled traffic in a study of the world IPv6 day impact on IPv6 traffic. The Teredo and 6to4 transition mechanisms were monitored and the Teredo was discovered to carry mainly control traffic. The study also showed that IPv6 fragments were responsible for a significant portion of 6to4 traffic. The authors suspect that these fragments were caused by broken software which most likely forgot to take the IPv6 header size into account.
+Finally,~\citeauthor{Sarrar-2012-Investigating}~\cite{Sarrar-2012-Investigating} provides a brief insight into tunneled traffic in a study of the world IPv6 day impact on IPv6 traffic. The Teredo and 6to4 transition mechanisms were monitored and the Teredo was discovered to carry mainly control traffic. The study also showed that IPv6 fragments were responsible for a significant portion of 6to4 traffic. The authors suspect that these fragments were caused by broken software which most likely forgot to take the IPv6 header size into account.
 
 \subsection{Investigated IPv6 Transition Mechanisms} \label{subsec:ipv6-tunnel-traffic}
 
@@ -510,13 +503,13 @@ We study the distribution of \textit{TTL values} of the observed flows. It is kn
 
 Overall, the TTL distribution of IPv4 traffic is different as shown in Figure~\ref{fig:ipv6-tunnels-ipv4-ttl4}. The Linux portion of the traffic is higher and the TTL values of 32 and 255 are not as significant. A more detailed examination of the flow records shows that this is caused mainly by a high ratio of HTTP traffic. Even though there are more clients using Windows operating system, most of the web servers are based on Linux and therefore the responses have TTL less than 64. The DNS protocol shows similar characteristics except that the DNS traffic that we observe at our metering points is mostly generated by recursive domain name servers. Since the Linux DNS servers are the most widely used, they significantly contribute to the traffic generated by Linux machines.
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/ttl}
     \caption{TTL Value Distribution of IPv4 Traffic Containing IPv6 Payload}
     \label{fig:ipv6-tunnels-ipv4-ttl}
 \end{figure}
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \includegraphics[width=1.0\linewidth]{figures/paper-tunnels/ttl/ttl4}
     \caption{TTL Value Distribution of Total Observed IPv4 Traffic}
     \label{fig:ipv6-tunnels-ipv4-ttl4}
@@ -525,7 +518,7 @@ Overall, the TTL distribution of IPv4 traffic is different as shown in Figure~\r
 IPv6 uses \textit{HOP limit} instead of TTL. Figure~\ref{fig:ipv6-tunnels-ipv6-native-hop} shows HOP limit distribution of native and decapsulated IPv6 traffic. Unlike IPv4, the HOP limit of 64 is the most frequent. We assume that Linux based machines use default HOP limit 64 and Windows machines use default HOP limit 128. This setting can be overridden by Stateless Address Autoconfiguration. Therefore, clients in managed networks (e.g. universities) might have the HOP limit set to different value, regardless of their operating system. We verified this fact on several Linux and Windows based machines. Due to significant share of HTTP(S) in IPv6 traffic, large portion of Windows traffic is expected. Since the share of HOP limit 128 is negligible, we expect that common HOP limit in observed IPv6 networks is set to 64.
 
 % pocitano z 29 a  30.1, bez nix2
-\begin{figure}[!tb]
+\begin{figure}[tb]
         \centering
         \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/native-hop}
         \caption{HOP Value Distribution of IPv6 Traffic}
@@ -691,17 +684,16 @@ The main contributor to tunneled traffic was Teredo with an occurrence of nearly
 
 In this section we have taken a detailed look at the IPv6 transition mechanisms. We have provided an improved version of our tool for investigating IPv6 tunneled traffic. Considerable progress has been made with regard to understanding tunneled traffic behavior, especially concerning Teredo and 6to4 traffic. The results of this section suggest that encapsulated traffic differs from IPv4 and IPv6 in several characteristics including TTL values, geolocation aspect and flow duration. Moreover, we have provided the list of Teredo servers and described the evolution of IPv6 adoption.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Large-Scale Geolocation for NetFlow}\label{sec:analysis-geolocation}
-% TODO: fix flow monitoring terminlogy
 
-
-% Monitoring current high-speed networks requires smart capturing, aggregation and storage technologies to cope with the ever-increasing bandwidth. Flow monitoring technologies, such as NetFlow \cite{rfc3954} and IPFIX \cite{rfc7011}, aggregate individual packets into flows. This set of properties typically consists of source/destination IP addresses and port numbers, transport-layer protocol, IP Type of Service (ToS) and SNMP input interface.}, which makes them more scalable than packet-based alternatives. The actual packet aggregation is performed by flow exporters, while flow collectors receive the flow records and store them on stable storage. Data analysis applications, often plugins for flow collectors, can retrieve and analyze this data. One type of data analysis is geolocation.
-
-Geolocation of network traffic is the process of identifying the geographical location of hosts, by means of their IP addresses. The addition of this information to network traffic is useful for many activities, such as business advertisements, fraud detection and access control. Several types of geolocation can be identified. Active geolocation estimates the location of hosts mostly based on delay measurements \cite{Katz-Bassett-2006-Towards, Eriksson-2010-Learning}. This results in a high accuracy, but comes at the expense of lack of scalability, and high measurement overhead \cite{Poese-2011-IP}. On the other hand, passive geolocation relies on static datasets, such as databases, containing the geolocation information per IP address block. Online databases, such as geoPlugin \cite{--geoPlugin}, can be accessed easily from Web applications and often apply rate or request limiting. This makes them less suitable for bulk geolocation and high-interaction applications. Offline databases, such as MaxMind GeoLite \cite{MaxMind--GeoLite} and IP2Location \cite{IP2Location--IP}, do not have these limitations. Both the fact that databases can become outdated and that the majority of data used by passive geolocation approaches refers only to a few popular countries, impact the accuracy of these approaches \cite{Poese-2011-IP}.
+Geolocation of network traffic is the process of identifying the geographical location of hosts, by means of their IP addresses. The addition of this information to network traffic is useful for many activities, such as business advertisements, fraud detection and access control. Several types of geolocation can be identified. Active geolocation estimates the location of hosts mostly based on delay measurements~\cite{Katz-Bassett-2006-Towards, Eriksson-2010-Learning}. This results in a high accuracy, but comes at the expense of lack of scalability, and high measurement overhead~\cite{Poese-2011-IP}. On the other hand, passive geolocation relies on static datasets, such as databases, containing the geolocation information per IP address block. Online databases, such as geoPlugin~\cite{--geoPlugin}, can be accessed easily from Web applications and often apply rate or request limiting. This makes them less suitable for bulk geolocation and high-interaction applications. Offline databases, such as MaxMind GeoLite~\cite{MaxMind--GeoLite} and IP2Location~\cite{IP2Location--IP}, do not have these limitations. Both the fact that databases can become outdated and that the majority of data used by passive geolocation approaches refers only to a few popular countries, impact the accuracy of these approaches~\cite{Poese-2011-IP}.
  
 Existing geolocation approaches are designed for on-demand, mostly small-scale purposes, where the geolocation is performed by analysis applications that retrieve the flow data from collectors. However, when geolocation needs to be performed in large, high-speed networks, these approaches are not scalable anymore. The main reason for this is that the dataset to be geolocated is too large for these applications, mainly because multiple flow exporters are typically exporting flow data to a single collector. Also, these applications are often developed for data visualization, rather than bulk processing.
 
-The goal of this section is to demonstrate how flow-based geolocation can be performed in a large-scale fashion. As a first step, we propose a prototype for exporter-based geolocation, which adds geolocation data to flow records before they are sent to a collector. As such, the actual geolocation can be distributed over multiple exporters instead of being deployed on a single collector. Since data analysis is always done at a collector or by analysis applications that retrieve data from the collector, we also propose an extension to the state-of-the-art flow collection and analysis tool \textit{NfSen} \cite{Haag-2011-NfSen} that adds native geolocation support. We define \textit{native geolocation support} as the ability to process geolocated flow data in the same way as non-geolocated flow data with respect to storage, filtering, aggregation and statistics generation. After presenting the two prototypes, we analyze the performance footprint of our approaches on the primary tasks of flow exporters and collectors, and present several use cases that demonstrate the practical applicability of large-scale geolocation.
+The goal of this section is to demonstrate how flow-based geolocation can be performed in a large-scale fashion. As a first step, we propose a prototype for exporter-based geolocation, which adds geolocation data to flow records before they are sent to a collector. As such, the actual geolocation can be distributed over multiple exporters instead of being deployed on a single collector. Since data analysis is almost always done at a collector or by analysis applications that retrieve data from the collector, we also propose an extension to the state-of-the-art flow collection and analysis tool \textit{NfSen}~\cite{Haag-2011-NfSen} that adds native geolocation support. We define \textit{native geolocation support} as the ability to process geolocated flow data in the same way as non-geolocated flow data with respect to storage, filtering, aggregation and statistics generation. After presenting the two prototypes, we analyze the performance footprint of our approaches on the primary tasks of flow exporters and collectors, and present several use cases that demonstrate the practical applicability of large-scale geolocation.
 
 The remainder of this section is structured as follows. Subsection~\ref{subsec:geo-related_work} provides an overview of related works in the field of flow-based geolocation. The main contribution of this work is described in Subsections~\ref{subsec:geo-exporter_based_geolocation} and~\ref{subsec:geo-collector_based_geolocation}, where we present how we perform large-scale geolocation on flow exporters and collectors, respectively. In Subsection~\ref{subsec:geo-prototype_deployment} we describe the deployment of our prototypes and in Subsection~\ref{subsec:geo-use_cases} we present several use cases, which demonstrate their viability. Finally, we close this section in Subsection~\ref{subsec:geo-conclusions}, where we draw our conclusions.
 
@@ -723,11 +715,11 @@ The remainder of this section is structured as follows. Subsection~\ref{subsec:g
 
 \subsection{Related Work} \label{subsec:geo-related_work}
 
-Due to the increasing number of application areas for geolocation, many related works have been developed in the past. Closest to our work is \textit{nProbe}, a NetFlow/IPFIX probe for exporting NetFlow data to a flow collector \cite{--nProbe}. This flow exporter uses MaxMind GeoLite \cite{MaxMind--GeoLite} for the conversion of IP addresses to geographical locations and AS numbers. The fact that geolocation by \textit{nProbe} is exporter-based makes it scalable for use in large-scale networks. However, by storing the geolocation information in special fields, software support by collectors and applications is required to access this data. Geolocation by \textit{nProbe} is therefore not transparent to any flow collector, which makes this approach different from our work.
+Due to the increasing number of application areas for geolocation, many related works have been developed in the past. Closest to our work is \textit{nProbe}, a NetFlow/IPFIX probe for exporting NetFlow data to a flow collector~\cite{--nProbe}. This flow exporter uses MaxMind GeoLite~\cite{MaxMind--GeoLite} for the conversion of IP addresses to geographical locations and AS numbers. The fact that geolocation by \textit{nProbe} is exporter-based makes it scalable for use in large-scale networks. However, by storing the geolocation information in special fields, software support by collectors and applications is required to access this data. Geolocation by \textit{nProbe} is therefore not transparent to any flow collector, which makes this approach different from our work.
 
-Other related works, such as \textit{SiLK} \cite{CERTNSAT--SiLK}, \textit{ntop} \cite{--ntop} and \textit{Argus} \cite{QoSient--ARGUS}, are collector-based. \textit{SiLK} and \textit{ntop} add geolocation information to flow data both in an on-demand fashion and as a post-processing step. As such, geolocation information is used purely for visualization and native geolocation is not supported. \textit{Argus} is more advanced, since it creates an extended dataset from the NetFlow data, in which it can also store geolocation data. As such, full geolocation support is provided as long as the geolocation data has been added as a post-processing step to the dataset before.
+Other related works, such as \textit{SiLK}~\cite{CERTNSAT--SiLK}, \textit{ntop}~\cite{--ntop} and \textit{Argus}~\cite{QoSient--ARGUS}, are collector-based. \textit{SiLK} and \textit{ntop} add geolocation information to flow data both in an on-demand fashion and as a post-processing step. As such, geolocation information is used purely for visualization and native geolocation is not supported. \textit{Argus} is more advanced, since it creates an extended dataset from the NetFlow data, in which it can also store geolocation data. As such, full geolocation support is provided as long as the geolocation data has been added as a post-processing step to the dataset before.
 
-Besides exporter- and collector-based geolocation approaches, dedicated analysis applications have also been developed. These applications retrieve flow data from flow collectors and subsequently perform the geolocation. \textit{SURFmap} \cite{Hofstede--SURFmap, Hofstede-2009-SURFmap}, a plugin for the flow collector \textit{NfSen}, uses geolocation to visualize network traffic on a map using the Google Maps API. Due to a dependency on the Google Maps Geocoder for translating location names to coordinates, only a limited number of queries can be executed per day. A \textit{geofilter} has been included since version 2.3, which aims to filter flow data based on country, region or city keywords as a post-processing step. The specification of this \textit{geofilter} is one of the core elements of our collector-based geolocation prototype. Another application is \textit{HAPviewer} \cite{Blatter-2011-Extending}, which is able to provide flow-level statistics per country of communication partners. Both \textit{SURFmap} and \textit{HAPviewer} perform geolocation on-demand and do not provide native geolocation support.
+Besides exporter- and collector-based geolocation approaches, dedicated analysis applications have also been developed. These applications retrieve flow data from flow collectors and subsequently perform the geolocation. \textit{SURFmap}~\cite{Hofstede--SURFmap, Hofstede-2009-SURFmap}, a plugin for the flow collector \textit{NfSen}, uses geolocation to visualize network traffic on a map using the Google Maps API. Due to a dependency on the Google Maps Geocoder for translating location names to coordinates, only a limited number of queries can be executed per day. A \textit{geofilter} has been included since version 2.3, which aims to filter flow data based on country, region or city keywords as a post-processing step. The specification of this \textit{geofilter} is one of the core elements of our collector-based geolocation prototype. Another application is \textit{HAPviewer}~\cite{Blatter-2011-Extending}, which is able to provide flow-level statistics per country of communication partners. Both \textit{SURFmap} and \textit{HAPviewer} perform geolocation on-demand and do not provide native geolocation support.
 
 \begin{figure*}[!tb]
     \centering
@@ -738,13 +730,13 @@ Besides exporter- and collector-based geolocation approaches, dedicated analysis
 
 \subsection{Exporter-Based Geolocation} \label{subsec:geo-exporter_based_geolocation}
 
-Flow exporters can perform more tasks than only flow export nowadays, due to their increasing performance. In this work, we propose a prototype for exporter-based geolocation, which adds geolocation data to flow records in a way that is transparent to standard flow collectors. This means that the geolocation data can be accessed by any standards-compliant collector. Usually, multiple flow exporters send their data to a single flow collector. An exporter-based approach therefore aims to distribute the geolocation process over multiple devices. This improves the overall scalability in large networks and reduces the performance footprint on flow collectors.
+Flow exporters can perform more tasks than only flow export nowadays, due to their increasing performance. We propose a prototype for exporter-based geolocation, which adds geolocation data to flow records in a way that is transparent to standard flow collectors. This means that the geolocation data can be accessed by any standards-compliant collector. Usually, multiple flow exporters send their data to a single flow collector. An exporter-based approach therefore aims to distribute the geolocation process over multiple devices. This improves the overall scalability in large networks and reduces the performance footprint on flow collectors.
 
 Our exporter-based geolocation prototype has been developed as a plugin for the FlowMon~\cite{FlowmonNetworks--Flowmon} platform. Plugins can be used to alter flow creation, processing, filtering and export. The architecture of FlowMon is shown in Fig.~\ref{fig:geo-exporter-arch}. Packets on the line are received by \textit{input} plugins that store newly created flow records in the \textit{flow cache}. As soon as a record in the cache has been expired (\textit{e.g.} due to a timeout), it is removed from the cache, after which the \textit{export} plugin takes care of placing it in NetFlow packets. Our geolocation plugin is depicted as \textit{GeoPlugin}, which is executed by the \textit{export} plugin just before the record is exported. \textit{GeoPlugin} will do the actual geolocation and add the resulting data to the flow record.
 
-To make sure that our exporter-based geolocation is transparent to any flow collector, NetFlow v9 has been chosen as the export protocol. It provides a fixed set of fields that can be used to store information about a flow. To add country-level information to flow records, we either have to use reserved (vendor proprietary) fields, or reuse some of the existing fields. Only country-level geolocation information is considered in this work, due to the poor accuracy of geolocation databases with respect to region- and especially city-level geolocation data \cite{Poese-2011-IP}. NetFlow's reserved fields are typically not supported by collectors, which leaves the reuse of existing fields as the only option to ensure transparency, compatibility and early deployment. Since the \textit{SRC\_AS} and \textit{DST\_AS} fields are rarely used in typical flow monitoring setups (due to the lack of BGP data integration), we use these fields for storing the source and destination countries of IP addresses in flow records. After retrieving the geolocation data from the MaxMind GeoLite database, the resulting country-code is converted to a numerical value and stored in these fields. When flow collectors and analysis applications need to access the country-level information in the flow records, the \textit{SRC\_AS} and \textit{DST\_AS} fields need to be parsed and the values need to be translated to country codes.
+To make sure that our exporter-based geolocation is transparent to any flow collector, NetFlow v9 has been chosen as the export protocol. It provides a fixed set of fields that can be used to store information about a flow. To add country-level information to flow records, we either have to use reserved (vendor proprietary) fields, or reuse some of the existing fields. Only country-level geolocation information is considered in this work, due to the poor accuracy of geolocation databases with respect to region- and especially city-level geolocation data~\cite{Poese-2011-IP}. NetFlow's reserved fields are typically not supported by collectors, which leaves the reuse of existing fields as the only option to ensure transparency, compatibility and early deployment. Since the \textit{SRC\_AS} and \textit{DST\_AS} fields are rarely used in typical flow monitoring setups (due to the lack of BGP data integration), we use these fields for storing the source and destination countries of IP addresses in flow records. After retrieving the geolocation data from the MaxMind GeoLite database, the resulting country-code is converted to a numerical value and stored in these fields. When flow collectors and analysis applications need to access the country-level information in the flow records, the \textit{SRC\_AS} and \textit{DST\_AS} fields need to be parsed and the values need to be translated to country codes.
 
-In the future, we want to take advantage of the IPFIX protocol for exporting geolocation information. IPFIX is more flexible than NetFlow v9, supports more fields (named \textit{IPFIX Information Elements}) and makes it easier to define enterprise-specific fields. Several fields for adding location information to IPFIX have been proposed already in~\cite{draft-irtf-nmrg-location-ipfix-00}. However, those fields are only used for storing the location of an IPFIX flow exporter and are therefore not suitable for flow geolocation. Besides the flexible definition of fields, genuine IPFIX collectors are able to receive new fields and should be flexible enough to process them. However, no suitable IPFIX collectors are available so far.
+There are many advantages of using the IPFIX protocol for exporting geolocation information. IPFIX is more flexible than NetFlow v9, supports more fields (named \textit{IPFIX Information Elements}) and makes it easier to define enterprise-specific fields. Several fields for adding location information to IPFIX have been proposed already in~\cite{draft-irtf-nmrg-location-ipfix-00}. However, those fields are only used for storing the location of an IPFIX flow exporter and are therefore not suitable for flow geolocation. Besides the flexible definition of fields, genuine IPFIX collectors are able to receive new fields and should be flexible enough to process them. However, no suitable IPFIX collectors were available at the time of writing and reusing NetFlow v9 fields served well for our purposes, even though this approach is highly discouraged. Note that switching to the IPFIX protocols is only a matter of adjusting flow exporter configuration.
 
 \subsection{Collector-Based Geolocation} \label{subsec:geo-collector_based_geolocation}
 
@@ -816,7 +808,7 @@ In this section, we present analysis results from our collector-based geolocatio
 
 It is a difficult task for network administrators to ensure security awareness in the daily barrage of scans, spamming hosts, zero-day attacks and malicious network users, hidden in huge traffic volumes crossing the Internet. When security teams use geolocation for incident analysis, it is usually applied as a post-processing step. In contrast, our approaches perform geolocation as a pre-processing step, which allows to use geolocation data in the detection process, among others.
 
-An example is shown in Fig.~\ref{fig:geo-tcp-syn}, where the number of TCP SYN-only flows\footnote{We denote TCP-flows that consist of a single packet with the SYN-flag set by \textit{TCP SYN-only flows}.} per second during a period of one day is shown. These flows are typically created during the propagation phase of malware. We have identified that more than 40\,\% of them is originating from China. Also, the vast majority of traffic spikes is caused by Chinese connection attempts and only 22\,\% of Chinese TCP traffic completed the TCP-handshake. These findings demonstrate that this particular Chinese traffic is an interesting dataset for anomaly detection and malware analysis. Further investigation has revealed that using geolocation as a pre-processing step for anomaly detection can yield a dataset to be analyzed that is only 40\,\% of its original size in this particular case, resulting in faster and less complex data analysis. This allows to detect anomalies that normally stay below the thresholds of anomaly detection systems. By creating traffic profiles for countries that are known to generate a higher than average amount of malicious traffic, such as China, Russia, Taiwan, Korea and Thailand \cite{vanPolen-2011-Finding}, we have been able to detect long-term stealth attacks.
+An example is shown in Fig.~\ref{fig:geo-tcp-syn}, where the number of TCP SYN-only flows\footnote{We denote TCP-flows that consist of a single packet with the SYN-flag set by \textit{TCP SYN-only flows}.} per second during a period of one day is shown. These flows are typically created during the propagation phase of malware. We have identified that more than 40\,\% of them is originating from China. Also, the vast majority of traffic spikes is caused by Chinese connection attempts and only 22\,\% of Chinese TCP traffic completed the TCP-handshake. These findings demonstrate that this particular Chinese traffic is an interesting dataset for anomaly detection and malware analysis. Further investigation has revealed that using geolocation as a pre-processing step for anomaly detection can yield a dataset to be analyzed that is only 40\,\% of its original size in this particular case, resulting in faster and less complex data analysis. This allows to detect anomalies that normally stay below the thresholds of anomaly detection systems. By creating traffic profiles for countries that are known to generate a higher than average amount of malicious traffic, such as China, Russia, Taiwan, Korea and Thailand~\cite{vanPolen-2011-Finding}, we have been able to detect long-term stealth attacks.
 
 Another example that demonstrates the advantages of native geolocation support in a flow collector is shown in Fig.~\ref{fig:geo-icmp}. Fig.~\ref{fig:geo-icmp-traffic} shows an ordinary time-series of ICMP traffic for a period of twelve hours, while Fig.~\ref{fig:geo-icmp-geo-traffic} shows the same traffic but geolocated. Several anomalies - marked by numbers in the figures - can be identified, where the geolocated traffic makes the identification clearer due to the larger relative differences between anomalous and non-anomalous traffic. Peak~1 (incoming traffic) is caused by a Ukrainian host, scanning the complete university network using ICMP ECHO. Replying hosts were later contacted on TCP port 4899. Peaks~2, 3 and 4 (outgoing traffic) are caused by foreign hosts, which are sending spoofed UDP traffic to the university's DNS server to perform an amplification attack. This traffic is blocked by the firewall and ICMP Destination Unreachable is returned to a spoofed source IP address located in the United States.
 
@@ -826,7 +818,7 @@ When network administrators need to find and analyze anomalies using plots as in
 
 Traffic profiling is the process of analyzing the distribution of services and protocols in a network, such as the number of packets related to Web traffic or the number of flows of a certain type. When geolocation is applied, also statistics related to geographical locations can be generated, such as the number of connections to a certain country. Although this is also possible using existing geolocation approaches based on post-processing, our approach is able to generate these statistics in real-time and for the complete traffic mix. In this subsection, we provide two examples of geolocation-based traffic profiling: IPv4 vs. IPv6 usage statistics and HTTPS profiling.
 
-One method for measuring the world-wide spread of IPv4 and IPv6 deployment is based on counting the number of IPv4- and IPv6-enabled ASNs, respectively. Another method is to measure the percentage of IPv4 and IPv6 traffic per country. For our measurement point in the Czech Republic, the distribution of IPv4 traffic source countries is shown in Fig.~\ref{fig:geo-ipv4-traffic}. The fact that the United States are the source country generating the second most IPv4 traffic is not a surprise, given the fact that US-based social networks (Facebook, Twitter, LinkedIn) and content providers (Akamai, Google, Microsoft) generate a significant portion of the world-wide traffic \cite{Gehlen-2012-Uncovering}. This is confirmed by both manual inspection of the traffic and Fig.~\ref{fig:geo-https-traffic}, which shows that almost half of the HTTPS traffic, which is commonly used by those services, is going to and coming from the United States. Although the headquarters of these companies are all in the United States, their data is usually hosted closer to the service users, in regional data centers. This is achieved by using geolocation-aware-DNS (GeoDNS), which provides a means for service users to connect to the server that is closest to them from a geographical point of view. By probing the remote hosts in our data sets actively using ICMP ECHO, it is easily verified that the hosts are definitely not located in the United States, due to resulting non-transatlantic round-trip times. This is an example of a major inaccuracy of geolocation databases, which geolocate IP addresses to the companies' headquarters, instead of the real location of hosts.
+One method for measuring the world-wide spread of IPv4 and IPv6 deployment is based on counting the number of IPv4- and IPv6-enabled ASNs, respectively. Another method is to measure the percentage of IPv4 and IPv6 traffic per country. For our measurement point in the Czech Republic, the distribution of IPv4 traffic source countries is shown in Fig.~\ref{fig:geo-ipv4-traffic}. The fact that the United States are the source country generating the second most IPv4 traffic is not a surprise, given the fact that US-based social networks (Facebook, Twitter, LinkedIn) and content providers (Akamai, Google, Microsoft) generate a significant portion of the world-wide traffic~\cite{Gehlen-2012-Uncovering}. This is confirmed by both manual inspection of the traffic and Fig.~\ref{fig:geo-https-traffic}, which shows that almost half of the HTTPS traffic, which is commonly used by those services, is going to and coming from the United States. Although the headquarters of these companies are all in the United States, their data is usually hosted closer to the service users, in regional data centers. This is achieved by using geolocation-aware-DNS (GeoDNS), which provides a means for service users to connect to the server that is closest to them from a geographical point of view. By probing the remote hosts in our data sets actively using ICMP ECHO, it is easily verified that the hosts are definitely not located in the United States, due to resulting non-transatlantic round-trip times. This is an example of a major inaccuracy of geolocation databases, which geolocate IP addresses to the companies' headquarters, instead of the real location of hosts.
 
 The distribution of source countries of IPv6 traffic is shown in Fig.~\ref{fig:geo-ipv6-traffic}. Next to Czech Republic, much traffic is received from Denmark and Ireland. Closer analysis has revealed that the Danish traffic is caused by large repository synchronization (using FTP) by two data hosting providers. On the other hand, the Irish traffic is generated mainly by Google and Facebook. Surprisingly enough, this traffic is now geolocated to their real physical location. Google is known to have a large datacenter in Ireland and some Facebook partners, such as Zynga, host their services in the Amazon datacenter in Ireland as well.
 
@@ -846,10 +838,339 @@ To demonstrate the applicability of real-time geolocation in large-scale network
 
 All implementations used in this work are available at \url{http://ics.muni.cz/~celeda/geolocation/}.
 
-\section{Network Traffic Characterisation Using Flow-Based Statistics}\label{sec:analysis-characterisation}
-% TODO: s/section/subsection/g, fix all labels and refs, s/paper/section/g, import and format citations, put table caption below, fix flow monitoring terminlogy
 
-% this needs proper introduction as to why it is interesting and why it should be here at all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Network Traffic Characterisation Using Flow-Based Statistics}\label{sec:analysis-characterisation}
+
+%% motivation
+A lot of research is being performed in the areas of network traffic classification, anomaly detection, and network security in general. Researchers involved in these areas often evaluate their methods using live network traffic. However, performing research on live network traffic includes several caveats. First, repeating experiments on live traffic is infeasible. Second, the traffic has to be thoroughly described, since most methods heavily depend on the properties of the observed traffic. Last but not least, the network traffic's properties can change during the research cycle, which can lead to suboptimal results. Although this work does not directly utilize application flow monitoring, it provides a method of ensuring repeatability of flow monitoring experiments, which is useful both for basic and application flow monitoring.
+
+% repeatability
+To be able to repeat the experiments, a packet trace must be captured. Considering the speed and utilisation of current uplinks of the research organisations, hundreds or even thousands of gigabytes of network data would have to be stored. Together with privacy issues, this makes sharing such data sets almost impossible. 
+
+% traffic description & changes
+A description of data sets is an important part of any work concerning network traffic. The properties of the traffic highly correlate with the results of any experiments. When the researchers are not able to share their data set, its description should allow other researchers to find a similar data set which would exhibit similar results. Moreover, such a description can be checked for consistency thus ensuring that the results do not unduly fluctuate over time.
+
+%% goals
+The goal of this work is to provide a simple method for discerning different types of network traffic. This method allows us to compare network traffic from live networks and even packet traces and determine which traffic samples show similar properties. Finding similar traffic is highly desirable as it allows the independent evaluation of published experiments. Moreover, when applying the method continuously to a specific network, changes in the properties of the network can be not only observed, but also quantified.
+
+Flow-based characteristics~\cite{Hofstede-2014-Flow} are used by our method as they are easier to obtain than packet-based characteristics. Moore et al.~\cite{Moore-2005-Discriminators} list a number of discriminators that can be used for classifying traffic. We select a small subset of discriminators obtained from NetFlow v5~\cite{CiscoSystems-2007-NetFlow} records, that are available from most network devices. Our approach is generic and the set of discriminators can be extended for specific purposes. We show that the chosen discriminators provide enough information to distinguish between various networks.
+
+We analyse the traffic of five campus networks within the Masaryk University. The networks have different properties as they contain a different number of servers, workstations, personal client stations, and portable devices. The networks and the methodology are described in detail so that other researchers can repeat our steps and evaluate their own network traffic.
+
+%% results
+We show that it is possible to distinguish between networks based on simple characteristics derived from flow information. Day-night and weekday patterns in the traffic are important phenomena that need to be taken into consideration when deriving characteristics. The characteristics used in this section do not show any significant correlation which indicates that all of them contribute to the description of the network traffic.
+
+%% paper structure
+The rest of the section is structured as follows. Related work is surveyed in Subsection~\ref{subsec:characterization-related_work}. We describe the methodology for characterising network traffic in Subsection~\ref{subsec:characterization-methodology}. Results of applying the proposed method on several different networks are shown in Subsection~\ref{subsec:characterization-results}. The section is concluded in Subsection~\ref{subsec:characterization-conclusions}.
+
+
+\subsection{Related Work} \label{subsec:characterization-related_work}
+
+Statistical properties of Ethernet traffic were studied by Leland et al.~\cite{Leland-1993-Self}. They discovered that the traffic is statistically self-similar, which was later confirmed by several studies~\cite{Crovella-1997-Self, Paxson-1995-Wide}. These studies also showed that detailed characteristics, such as packet inter-arrival times, show large deviations and burstiness. Our study makes use of traffic flow properties which are aggregated over the whole network traffic and therefore much more stable.
+
+Fraleigh et al.~\cite{Fraleigh-2003-Packet} performed packet-level traffic measurement on the Sprint IP backbone. They showed that the measurement interval affects peaks in packet rate and bit rate. Using flow-based analysis makes it possible to normalise the data. Otherwise, it would be more difficult to compare the results from different networks. The authors also showed that different networks have different week and day-night patterns, as well as traffic types and packet size distribution. There was also a discrepancy between flows per second and bits per second for different networks. The authors argued that the network properties depend on the customer type of the link and its location.
+
+Fomenkov et al.~\cite{Fomenkov-2004-Longitudinal} studied network traffic behaviour on long-term data samples. The samples were captured from different networks, one to eight times a day, once per month for 60 to 120 seconds. Only packet headers were stored. The authors used packet, byte and flow rates as well as a number of \mbox{source-destination} IP~addresses to describe long term changes in Internet traffic characteristics. The burstiness of the traffic in combination with short measurement intervals impeded the day-night and weekday patterns. Even the expected long term growth of the traffic was not observed. This advocates using longer measurement intervals in our own work. Despite the intricate nature of the samples used, the authors reported that the average packet length increases with traffic growth. They also observed differences in the composition of traffic transport protocol usage between different networks.
+
+Report of traffic properties measured on a single backbone network link was given by John and Tafvelin in~\cite{John-2007-Analysis}. They collected 148 traces of 20 minutes duration in a single month. The report focused on IP and TCP protocol usage, namely the distributions of IP transport protocols, IP protocol properties, IP and TCP options and flags. Authors also confirmed that the packet size distribution became bimodal as reported by some of the previous researches. A DoS attack was discovered in the collected sample, which caused an anomaly in the number of UDP packets in one of the samples. The report implies that knowing the composition of network traffic is important for the research of anomaly detection and network security.
+
+Benson et al.~\cite{Benson-2010-Network} described traffic characteristics of data centres. They performed a top-down analysis of ten data centres identifying applications used and their communication patterns. The authors observed flow-level and packet-level communication characteristics such as active flows per interval, the distribution of flow sizes and lengths, packet sizes and packet inter-arrival times. They noticed day-night and weekly patterns in the communication and that there is a difference between core and edge links as well as some of the data centres. Their analysis supports our belief that it should be possible to differentiate between network links based on traffic characteristics.
+
+A characterisation of ISP traffic was performed by García-Dorado et al.~\cite{Garcia-Dorado-2012-Characterization}. The authors attempted to provide accurate, extensive, and quantitative measurements of application usage, bandwidth utilisation, and user preferences. They compared customers of different networks and access technologies for long periods of time. Unlike previous findings the daily patterns are reported to be quite invariant, although the weekdays were different from weekends in a campus network. Application traffic shares differed significantly between the individual networks. Moreover, notable changes were observed on the same link during the measurement period. This supports our assumption that measurements on live networks should be well documented and validated.
+
+All of the above-cited works focus on describing the properties and characteristics of network traffic. The key difference to our work is that we identify characteristics that vary between the networks and show that they can be used to differentiate and describe the networks in a uniform manner.
+
+\subsection{Methodology} \label{subsec:characterization-methodology}
+
+To be able to describe network traffic and find key properties that allow us to discern different networks, we collected data from several different parts of our campus network. Understanding the purpose of each network is imperative for the correct interpretation of the data collected, therefore we describe the networks used for collecting the data in detail. This section describes the processes and tools used to collect the data and the collected data itself. 
+
+\subsubsection{A Description of the Networks}
+
+We continually collect data from individual networks in our campus. We chose five networks that are very different by their nature and utilisation. For each network we selected two months of data, January and March. The networks are expected to exhibit different characteristics between the two months, since there is an exam period at Masaryk University in January and March is a standard midterm month. A summary of networks and the collected data is presented in Table~\ref{tab:characterization-measured-networks}.
+
+\begin{table}[!t]
+        \centering
+%         \small
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|l|r|r|r|} \hline
+            \textbf{Network} & \textbf{Packets} & \textbf{Bytes} & \textbf{Flows} \\ \hline
+            Faculty of Informatics & 227.1\,G & 236.4\,T & 3.6\,G \\ \hline
+            Institute of Computer Science & 107.3\,G & 106.2\,T & 0.7\,G \\ \hline
+            University Campus Bohunice & 449.8\,G & 473.9\,T & 4.1\,G \\ \hline
+            Virtual Switching Segment & 1\,119.2\,G & 1\,158.3\,T & 11.7\,G \\ \hline
+            Masaryk University & 1\,366.6\,G & 1\,427,7\,T & 20.1\,G \\ \hline
+        \end{tabular}
+%         \smallskip
+        \caption{Measured Networks}
+        \label{tab:characterization-measured-networks}
+\end{table}
+
+The \textbf{Faculty of Informatics} (FI) network represents a network of a university faculty. It connects staff offices, computer labs, and faculty servers. The faculty has its own Eduroam infrastructure which can be observed in the network. The network also contains servers with the information system for the entire Masaryk University.
+
+The \textbf{Institute of Computer Science} (ICS) has its own network connecting staff offices and a small server infrastructure to support office computers such as remote storage or update servers. Unlike the Faculty of Informatics, it does not connect to computer labs. 
+
+\textbf{University Campus Bohunice} (UCB) is a large campus building with hundreds of offices, computer labs and a large library. The faculty of Sports Studies and Faculty of Medicine are situated in the campus building. The Central European Institute of Technology (CEITEC) is also located on these premises and it generates a large volume of data due to intensive scientific computing.
+
+The \textbf{Virtual Switching Segment} (VSS) contains a server segment and also the Eduroam wireless network concentrator. Every Eduroam connection at the university goes through this network. Servers supporting the Masaryk University IT infrastructure, such as the Economic and Administrative Information System of Masaryk University or digital libraries, are also located in this network.
+
+\textbf{Masaryk University}'s (MU) network is measured as a whole at the uplink to ISP. The communication of every university subnet is observed at this point with the exception of internal communication.
+
+% Add network topology schema?
+
+\subsubsection{Data Collection}
+
+We have a flow probe~\cite{Hofstede-2014-Flow} monitoring each of the networks in our campus. The data from the probes is sent to a flow collector where it is stored for further processing. The flow monitoring architecture is depicted in Figure~\ref{fig:characterization-monitoring-architecture}.
+
+\begin{figure}[!t]
+        \begin{center}
+                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/monitoring_architecture}
+                \caption{Flow Monitoring Architecture Schema} \label{fig:characterization-monitoring-architecture}
+        \end{center}
+\end{figure}
+
+Flow exporters are configured to create flows with an active timeout of 300 seconds and an inactive timeout of 60 seconds. The flows are terminated using only these timeouts, TCP FIN and RST flags are not used for the flow termination. The exporters use a standard flow key consisting of IP addresses, L4 protocol and its ports. It is important that exporters have the same configuration, since different configurations may result in a different number of exported flow records. As we will show, the number of flow records is an important characteristic of the network.
+
+The flows from all probes are collected on a single collector. No sampling is used in the flow creation or collection process; therefore we have a complete flow trace of the measured network in a given period of time.
+
+
+\subsubsection{Data Preprocessing}
+
+This subsection describes how the raw flow data was processed. First, we generate statistics for short intervals so that the amount of data is reduced. These statistics do not carry any personal information, therefore they can be shared with other researchers without privacy concerns. Then we process these statistics, look at daily and weekly patterns, their averages and deviations. We identify characteristics which differ between the networks, describe them and use them to differentiate between the networks. To be able to compare the traffic characteristics of different networks, we need to normalise the volumetric properties of the traffic.
+
+Individual flow records are not needed to describe network traffic. Instead, the records must be aggregated and statistical indicators must be derived from the raw data. Since most flow-based frameworks process data in 5 minute intervals~\cite{Haag-2011-NfSen}, we chose the same interval for generating aggregated statistics.
+
+We generate five types of statistics from the original flow records: \emph{Basic volume}, \emph{Advanced volume}, \emph{Layer 3}, \emph{Layer 4} and \emph{Layer 7} statistics. These statistics are listed in Table~\ref{tab:characterization-collected-statistics}. There are 41 collected statistics in total when the bytes, packets and flows statistics are counted separately. 
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|c|l|} \hline
+            \textbf{Type} & \textbf{Statistic} \\ \hline
+            \multirow{3}{*}{Basic Volume} & Bytes per second \\
+            & Packets per second \\
+            & Flows per second \\ \hline
+            \multirow{2}{*}{Advanced volume} & Flow size in packets, bytes \\
+            & Flow connection length \\ \hline
+            \multirow{3}{*}{Layer 3} & Source host count \\
+            & Destination host count \\
+            & IPv4 / IPv6 bytes, packets, flows \\ \hline
+            \multirow{4}{*}{Layer 4} & IPv4 / IPv6 TCP bytes, packets, flows \\
+            & IPv4 / IPv6 UDP bytes, packets, flows \\
+            & IPv4 / IPv6 ICMP bytes, packets, flows \\
+            & IPv4 / IPv6 other protocol bytes, packets, flows \\ \hline
+            \multirow{1}{*}{Layer 7} & Top 10 ports by packets, bytes, flows \\
+            \hline
+        \end{tabular}
+        \caption{Collected Statistics}
+        \label{tab:characterization-collected-statistics}
+\end{table}
+
+The Advanced volume statistics represent the detailed volumetric characteristics of the network. Therefore, we compute mean, variance, standard deviation, median and all percentiles from 0.55 to 0.95 with increment of 0.05. Percentiles lower than the median are superfluous since half of the flows in every network are composed from single packet flows, which amount to zero length flows with small packet sizes (typically 40 bytes). We also computed covariance and correlation for each pair of these statistics. The port statistics are stored as a table of top 10 ports sorted by either packets, bytes or flows. We also the computed overall top port statistic for our analysis.
+
+\subsection{Results} \label{subsec:characterization-results}
+We carefully considered all the acquired data and divided it into seven areas of network behaviour that are studied in more detail. This section describes our findings and decisions taken when analysing the collected data.
+
+
+\subsubsection{Day-night Pattern}
+
+The day-night pattern is a key element of change in every network with human users. It is evident that we cannot compare traffic captured during the day with traffic captured at the night. The reason is that the traffic pattern during the night generally contains much less user generated traffic and the properties are very different, as we present further in our analysis. The day-night pattern is best observed in flows per second since it expresses the number of connections. Using bytes or packets per second distorts the pattern since there are heavier flows during the day than at the night~\cite{Quan-2010-Characteristics}. It is possible to use the number of hosts to show the day-night pattern but the results are very strongly correlated, therefore we decided to use flows per second.
+
+\begin{figure}[!t]
+        \begin{center}
+                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-ukb-jan}
+                \caption{Flows per Second in the UCB Network} \label{fig:characterization-flows-ukb-jan}
+        \end{center}
+\end{figure}
+
+The day-night behaviour of the network discloses a lot of information about the purpose of the network. Figure~\ref{fig:characterization-flows-ukb-jan} shows flows per second in University Campus Bohunice network in January. The data from all the days is superimposed in the graph so that the day-night pattern is clearly visible. The red colour shows the weekends and the black is for workdays. It is possible to even see a lunch break in the data at half past eleven. The weekends are flat and do not exhibit the day-night patterns since there are not many users at the weekend.
+
+\begin{figure}[!t]
+        \begin{center}
+                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-vss-jan}
+                \caption{Flows per Second in the VSS Network} \label{fig:characterization-flows-vss-jan}
+        \end{center}
+\end{figure}
+
+Figure~\ref{fig:characterization-flows-vss-jan} shows the Virtual Switching Segment network which has quite different properties. Since there are Eduroam users and servers that are accessed from outside the university, we can see that there is a day-night pattern visible even at the weekends. Moreover, we can see periodical communication which is caused by automated server backups and updates.
+
+%Darkest night (5) brigtest day (12 ukb, ics,  14 fi, mu, vss) in January, March is different for ics night and fi day
+\begin{table}[!htb]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|l|r|r|r|r|r|r|} \hline
+                \multirow{2}{*}{\centering\textbf{Network}}  & \multirow{2}{*}{\centering\textbf{Day}} & \multirow{2}{*}{\centering\textbf{Night}} & \multicolumn{2}{c|}{\textbf{Day-night Ratio}}  & \multicolumn{2}{c|}{\textbf{Week Ratio}}  \\ \cline{4-7}
+                & & & \textbf{January} & \textbf{March} & \textbf{January} & \textbf{March} \\ \hline
+                \textit{UCB} & 13 & 5 &  1.96 & 2.08 & 1.85  & 1.87 \\ \hline
+                \textit{ICS} & 13 & 1 & 2.25  & 1.70 & 2.24 & 1.52 \\ \hline
+                \textit{MU} & 14 & 5 & 3.08 & 3.62 & 1.45 & 1.95 \\ \hline
+                \textit{FI} & 10 & 5 & 2.04 & 2.16 & 1.47 & 1.64 \\ \hline
+                \textit{VSS} & 14 & 5 & 2.16 & 2.73 & 1.43 & 1.77 \\ \hline
+        \end{tabular}
+        \caption{Day to Night and Workday to Weekend Ratio According to Flows per Second}
+        \label{tab:characterization-day-night-ratio}
+\end{table}
+
+For each network the most and the least busy hour of the day according to flows per second was determined (as shown in Table~\ref{tab:characterization-day-night-ratio}). Given the property of the network, the \textit{day-night ratio} will be, from now on, computed as a ratio between the average of the property during the busiest hour in the day and the least busy hour at night. Using day-night ratios specific to each network allows us to compare the behaviour of each network regardless of the absolute size of the network. 
+%Otherwise, we would have to propose a \emph{standard day} and apply a timezone correction before computing the ratios. Unfortunately, we do not have access to a network in different timezone to compare the results and we present all data in the Europe/Prague timezone for simplicity.
+
+Table~\ref{tab:characterization-day-night-ratio} also describes the day-night pattern for all networks. We processed the data from January and March 2015 separately to show the difference between the exam period and the teaching period. The day-night ratio expresses the ratio of flow count as described earlier. The largest difference between the day-night ratios in January and March is in the traffic from the entire university and the VSS traffic. This is a seasonal change caused by students leaving the campus and returning only for their exams. The traffic from faculty networks (FI, VSS) increases only slightly in the teaching period, indicating that the faculty networks are not highly utilised by students. The ICS network shows the opposite trend, which is likely caused by project deadlines and people working harder after the Christmas vacation to meet them.
+
+We also computed an interval which has the maximal ratio of average flows per second to the rest of the day. We have observed two types of network. The activity in networks FI, MU and VSS start at circa 7:00 and ends at 23:00, while the activity in networks UCB and ICS start at 8:00 and ends at circa 17:00. This can be attributed to the fact that that UCB and ICS networks are used while people work and the rest of the networks are used while people are awake.
+
+The day-night pattern provides important information about the networks and their usage. We can use figures from Table~\ref{tab:characterization-day-night-ratio} to describe the day-night pattern of these networks.
+
+\subsubsection{Weekday Pattern}
+
+Another significant pattern that can be observed in network traffic is the weekday pattern. Figures~\ref{fig:characterization-flows-week-ukb-jan} and~\ref{fig:characterization-flows-week-vss-jan} show the weekday pattern in January for UCB and VSS. The graphs are constructed by superimposing the data from individual weeks. There are significant differences between the networks. The weekend traffic at UCB is almost flat but VSS shows behaviour that suggests that there is a significant number of users communicating over the network even at weekends.
+%
+\begin{figure}[!t]
+        \begin{center}
+                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-week-ukb-jan}
+                \caption{Flows per Second in the UCB Network} \label{fig:characterization-flows-week-ukb-jan}
+        \end{center}
+\end{figure}
+
+\begin{figure}[!htb]
+        \begin{center}
+                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-week-vss-jan}
+                \caption{Flows per Second in the VSS Network} \label{fig:characterization-flows-week-vss-jan}
+        \end{center}
+        \vspace{-1mm}
+\end{figure}
+
+The difference between work days and weekends can be expressed as a ratio of average flows per second measured during the busiest hours on workdays and at weekends. Table~\ref{tab:characterization-day-night-ratio} shows the results for January and March. This characteristic shows a correlation with the day-night pattern. 
+We presume that if the network is accessed by other users, such as students, outside working hours, it will probably be accessed also on weekends by the same users.
+% We presume that this is caused by the fact that when the network has other users than employees, such as students, these user will generate network traffic in night hours as well as during the weekends. 
+However, we can still employ this statistic to differentiate between networks, since the correlation is not strong and the statistic still adds new information.
+
+\subsubsection{Flow Characteristics}
+
+Using basic network characteristics such as packets per flow, bytes per packet, flow length or number of hosts is difficult due to day-night and weekly patterns. The variance of these variables renders averaging the values useless. Therefore, we have taken another approach. Average values are computed for whole weeks and the averages are used as base values. The variance of week averages computed over the months is on average less than 10\,\%, which is low enough to use these values to characterise the networks. 
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \setlength{\tabcolsep}{5pt}
+        \begin{tabular}{|l|r|r|r|r|} \hline
+                \multirow{2}{*}{\centering\textbf{Network}} & \multicolumn{2}{c|}{\textbf{Length of The Flow}} & \multicolumn{2}{c|}{\textbf{Packets per Flow}} \\ \cline{2-5}
+                  & \textbf{Week avg.} & \textbf{Day-night rat.} & \textbf{Week avg.} & \textbf{Day-night rat.} \\ \hline
+                \textit{UCB} &  10.07 s & 2.18 &  112.86 & 1.28 \\ \hline
+                \textit{ICS} & 10.34 s & 1.68 & 205.36 &  0.66 \\  \hline
+                \textit{MU} & 13.09 s & 2.13 & 71.79  & 0.81 \\  \hline
+                \textit{FI} & 5.40 s & 1.77 & 67.60 & 0.70 \\  \hline
+                \textit{VSS} & 7.14 s & 2.04 & 106.25 & 0.94 \\  \hline
+        \end{tabular}
+        \caption{Average Length of Flow and Packets per Flow}
+        \label{tab:characterization-avg-lengths}
+\end{table}
+
+Bytes per packet statistic had little variance over the measured networks and it gives almost no information to discern the networks. We found that flow length and packet per flow statistics differ more significantly, as shown in Table~\ref{tab:characterization-avg-lengths}, and can be used to discern the networks. The day-night ratios show that the networks with similar averages might have different day-night behaviour for the same statistics. Therefore, the ratios add new information to the week averages.
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|l|c|c|c|c|} \hline
+                \multirow{2}{*}{\centering\textbf{Network}} & \multicolumn{2}{c|}{\textbf{Source Hosts}} & \multicolumn{2}{c|}{\textbf{Destination Hosts}} \\ \cline{2-5}
+                  & \textbf{January} & \textbf{March} & \textbf{January} & \textbf{March} \\ \hline
+                
+                \textit{UCB} & 2.66 & 2.51 & 1.91 & 1.90 \\ \hline
+                \textit{ICS} & 2.76 & 3.11 & 1.99 & 2.35 \\ \hline
+                 \textit{MU} & 2.49 & 2.66 & 1.65 & 2.08 \\ \hline
+                \textit{FI} & 1.24 & 1.35 & 1.22  & 1.31 \\ \hline
+                \textit{VSS} & 2.93 & 4.93 & 2.48 & 4.12 \\ \hline
+        \end{tabular}
+        \caption{Source and Destination Hosts Day-Night Ratios}
+        \label{tab:characterization-day-night-hosts-ratio}
+\end{table}
+
+The average number of hosts is a statistic directly related to the size of the network and cannot be used to describe the type of the network without normalisation. Therefore, we use only the day-night host ratios, as shown in Table~\ref{tab:characterization-day-night-hosts-ratio}, which are independent of the absolute number of hosts. Source and destination directions are determined by the direction of the flow. There is a significant difference between host ratios in January and March for the VSS network. The UCB is quite indifferent in comparison, as the ratios remain almost the same. This shows that the statistic can be used to find differences between the networks.
+
+We have shown that comparing basic characteristics on networks must be done in sufficiently large intervals that are the same for all networks. In our case the average values taken over an entire week proved to be stable enough to be used as a network characteristic. The ratio between characteristics measured during the day and night period also provides relevant information about the behaviour of the network and can also be used as an important network characteristic.
+
+
+\subsubsection{IPv6 Utilisation}
+
+The utilisation of the IPv6 protocol in the network is a Layer 3 characteristic that indicates the technological readiness of the network. The adoption of IPv6 is slow and IPv4 traffic is still dominant. We use this fact to differentiate between networks with different levels of IPv6 readiness. The amount of IPv6 traffic is affected by IPv6 ready servers in the networks and IPv6 services accessed by users outside the network. Table~\ref{tab:characterization-ipv6-utilization} shows the ratio of IPv6 to total traffic in flows, packets and bytes. The packets and bytes ratios are strongly correlated, however, they differ from the flows statistic. The UCB, ICS and MU networks clearly stand out in these characteristics.
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|l|r|r|r|} \hline
+ \textbf{Network} & \textbf{Flows} & \textbf{Packets} & \textbf{Bytes} \\ \hline
+ \textit{UCB} & 0.02\,\% & 0.01\,\% & 0.00\,\% \\ \hline
+ \textit{ICS} & 5.58\,\% & 12.35\,\% & 13.57\,\% \\ \hline
+ \textit{MU} & 12.98\,\% & 1.94\,\% & 1.41\,\% \\ \hline
+ \textit{FI} & 3.22\,\% & 2.04\,\% & 2.10\,\% \\ \hline
+ \textit{VSS} & 4.66\,\% & 0.23\,\% & 0.17\,\% \\ \hline
+        \end{tabular}
+        \caption{IPv6 Utilisation}
+        \label{tab:characterization-ipv6-utilization}
+\end{table}
+
+
+\subsubsection{Protocol Share}
+
+We investigated the differences in Layer 4 protocol usage in the data sets. TCP and UDP are the dominating protocols in all networks and the shares of ICMP and other protocols are so negligible that they can hardly be used to describe the networks. The shares of TCP and UDP differ significantly between day and night time. Table~\ref{tab:characterization-tcp-udp-share-flows-table} shows the average TCP and UDP shares during the day and night in flows.
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|l|r|r|r|r|} \hline
+                \multirow{2}{*}{\textbf{Network}} & \multicolumn{2}{c|}{\textbf{Day}} & \multicolumn{2}{c|}{\textbf{Night}} \\ \cline{2-5}
+                 & \textbf{Tcp} & \textbf{Udp} & \textbf{Tcp} & \textbf{Udp} \\ \hline
+                \textit{UCB} & 38.52\,\% & 59.76\,\% & 19.44\,\% & 77.66\,\% \\  \hline
+                \textit{ICS} & 41.26\,\% & 56.88\,\% & 28.20\,\% & 68.84\,\%\\  \hline
+                \textit{MU} & 55.55\,\% & 43.03\,\% & 42.99\,\% & 54.25\,\% \\  \hline
+                \textit{FI} & 49.96\,\% & 49.07\,\% & 25.15\,\% & 73.49\,\% \\  \hline
+                \textit{VSS} & 30.67\,\% & 67.76\,\% & 19.30\,\% & 78.00\,\% \\  \hline
+        \end{tabular}
+        \caption{TCP and UDP Share in Day and Night in Flows}
+        \label{tab:characterization-tcp-udp-share-flows-table}
+\end{table}
+
+The increase in TCP traffic during the day is caused by users since most of the services use the TCP protocol. We also investigated protocol shares in packets and bytes and found that they match the overall packet to flow and byte per packet ratio. The results show that the TCP to UDP ratio differs between the networks and can be used for their description.
+
+\subsubsection{Most frequent ports}
+Traffic analysis by port numbers provides evidence of application usage in the network. Although the port numbers are not considered to be accurate enough for application identification~\cite{Moore-2005-Toward}, most of the traffic adheres to well-known port numbers, which is accurate enough for our purpose. We computed the top 10 port statistics by flows and packets in January and March for all networks. The flows statistic is more stable and more suitable for analysing the behaviour of the network. We selected ten well-known ports that were most often observed in the statistic. Table~\ref{tab:characterization-ports} shows the percentage of flows that belong to these ports. We can observe that the networks have very different usage of the ports which makes port usage an important characteristic of the network. Note that we did not study day-night variance of port usage, but we expect that its fluctuation may be used to refine the results.
+
+\begin{table}[!t]
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{|c|c|r|r|r|r|r|} \hline
+                \multicolumn{2}{|c|}{\textbf{Port / Network}} & \textbf{UCB} & \textbf{ICS} & \textbf{MU} & \textbf{FI} & \textbf{VSS} \\ \hline
+                \textbf{DNS} & \textbf{53} & 9.7\,\% & 30.2\,\% & 21.5\,\% & 12.2\,\% & 42.7\,\% \\ \hline
+                \multirow{2}{*}{\textbf{HTTP(S)}} & \textbf{80} & 9.2\,\% & 7.4\,\% & 20.2\,\% & 16.8\,\% & 5.9\,\% \\ \cline{2-7}
+                & \textbf{443} & 6.5\,\% & 8.3\,\% & 14.7\,\% & 20.1\,\% & 4.0\,\% \\ \hline
+                \multirow{2}{*}{\textbf{Mail}} & \textbf{25} & -- & -- & 1.0\,\% & 0.6\,\% & -- \\  \cline{2-7}
+                & \textbf{993} & -- & 1.7\,\% & -- & 0.6\,\% & -- \\ \cline{1-7}
+                \textbf{Samba} & \textbf{445} & 1.0\,\% & -- & -- & -- & 0.7\,\%  \\ \hline
+                \textbf{SSH} & \textbf{22} & -- & -- & 1.4\,\% & 0.3\,\% & -- \\ \hline
+                \textbf{NTP} & \textbf{123} & -- & 0.9\,\% & 7.1\,\% & 43.9\,\% & -- \\ \hline
+                \textbf{SNMP} & \textbf{161} & 52.8\,\% & 11.9\,\% & -- & -- & 23.5\,\% \\ \hline
+                \textbf{Telnet} & \textbf{23} & 1.0\,\% & 1.3\,\% & 1.6\,\% & 0.4\,\% & -- \\ \hline
+        \end{tabular}
+        \caption{The Most Common Ports by Flows in January}
+        \label{tab:characterization-ports}
+\end{table}
+
+\subsection{Conclusions} \label{subsec:characterization-conclusions}
+
+We have presented an analysis of network traffic measured at five different campus networks at Masaryk University. Our goal was to show that the properties of the networks can be extracted and quantified and that we can use the results to differentiate and describe the networks. We have made several observations during our analysis which affect the derivation of network characteristics.
+
+\begin{itemize}
+    \setlength\itemsep{4pt}
+    \item Flow-based statistics are more stable than byte or packet based statistics. Therefore it is more practical to use flow statistics to track long-term changes in network behaviour.
+    \item Day-night and weekday patterns must be taken into consideration when computing network characteristics.
+    \item Long enough samples of the traffic must be available.
+    \item Using ratios between day and night helps to compensate for the day-night pattern and the size of the network. However, there is still a slight correlation between network size and the day-night ratios.
+    \item To describe a network used to perform an experiment, the description of behaviour using network characteristics should be complemented with absolute volumetric information.
+\end{itemize}
+
+Our measurements have confirmed that it is possible to differentiate between networks based on the observed characteristics. Moreover, the campus networks showed quite stable characteristics over time even though the measurements were taken during the winter exam and spring teaching periods. Furthermore, we tested the correlation of the described characteristics and found that they are only very weakly correlated. This shows that each of the characteristics is valuable and carries information about the network. However, the presented characteristics are not by any means complete. We analysed a subset of possible characteristics derived from flow records, which can be easily measured on a network. Thus we believe that more work is required to identify other useful characteristics and utilise them to describe the behaviour of the networks.
+
 
 \section{Summary}\label{sec:use-cases-summary}
 
@@ -860,4 +1181,7 @@ In the first section, we presented an analysis of HTTP traffic in a large-scale 
 The exhaustion of IPv4 address space increases pressure on network operators and content providers to continue the transition to IPv6. The IPv6 transition mechanisms such as Teredo and 6to4 allow IPv4 hosts to connect to IPv6 hosts. On the other hand, they increase network complexity and render ineffective many methods to observe IP traffic. In Section~\ref{sec:analysis-ipv6-transition}, we extended our flow-based measurement system to involve transition mechanisms information to provide full IPv6 visibility. Our traffic analysis focuses on IPv6 tunneled traffic and uses data collected over one week in the Czech national research and education network. The results expose various traffic characteristics of native and tunneled IPv6 traffic, among others the TTL and HOP limit distribution, geolocation aspect of the traffic, and list of Teredo servers used in the network. Furthermore, we show how the traffic of IPv6 transition mechanisms has evolved between 2010 and 2013.
 
 % Geolocation
-The importance of IP address geolocation has increased significantly in recent years, due to its applications in business advertisements and security analysis, among others. Current approaches perform geolocation mostly on-demand and in a small-scale fashion. As soon as geolocation needs to be performed in real-time and in high-speed and large-scale networks, these approaches are not scalable anymore. To solve this problem, we propose two approaches to large-scale geolocation. Firstly, we present an exporter-based approach, which adds geolocation data to flow records in a way that is transparent to any flow collector. Secondly, we present a flow collector-based approach, which adds native geolocation to NetFlow data from any flow exporter. After presenting prototypes for both approaches, we demonstrate the applicability of large-scale geolocation by means of use cases. Our prototypes have shown to be scalable enough for deployment on the 10\,Gbps Internet connection of the Masaryk University.
+The importance of IP address geolocation has increased significantly in recent years, due to its applications in business advertisements and security analysis, among others. Current approaches perform geolocation mostly on-demand and in a small-scale fashion. As soon as geolocation needs to be performed in real-time and in high-speed and large-scale networks, these approaches are not scalable anymore. To solve this problem, we propose two approaches to large-scale geolocation in Section~\ref{sec:analysis-geolocation}. Firstly, we present an exporter-based approach, which adds geolocation data to flow records in a way that is transparent to any flow collector. Secondly, we present a flow collector-based approach, which adds native geolocation to NetFlow data from any flow exporter. After presenting prototypes for both approaches, we demonstrate the applicability of large-scale geolocation by means of use cases. Our prototypes have shown to be scalable enough for deployment on the 10\,Gbps Internet connection of the Masaryk University.
+
+% Traffic characterization
+Performing research on live network traffic requires the traffic to be well documented and described. The results of such research are heavily dependent on the particular network. Section~\ref{sec:analysis-characterisation} presents a study of network characteristics, which can be used to describe the behaviour of a network. We propose a number of characteristics that can be collected from the networks and evaluate them on five different networks of Masaryk University. The proposed characteristics cover IP, transport and application layers of the network traffic. Moreover, they reflect strong day-night and weekday patterns that are present in most of the networks. Variation in the characteristics between the networks indicates that they can be used for the description and differentiation of the networks. Furthermore, a weak correlation between the chosen characteristics implies their independence and contribution to network description.
