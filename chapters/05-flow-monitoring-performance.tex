@@ -1,23 +1,40 @@
 \chapter{Flow Monitoring Performance}\label{chap:flow-monitoring-performance}
 
-\iinfo{Text below is mostly from Challenges of Application Flow Monitoring.}
+\begin{chapintro}
 
-\itodo{TODO: Howto measure flow monitoring performance - skoro samostatná kapitola\\
-\url{https://www.netcope.com/getattachment/ecf0b75f-b961-485a-94e1-ee6e1bd7bef4/Modelling-of-High-Bandwidth-Systems.aspx}}
-\itodo{TODO: biflow}
-\itodo{TODO: Include more details}
-\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc. \cite{Nassopulos-2014-Flow}}
-\itodo{TODO: Put in papers from IM2015}
-\itodo{TODO: Title is Flow Monitoring Performance, split to application and classic}
-\itodo{Speedup by ommiting SSL/TLS processing for most application plugins}
+Intro
 
-\itodo{Flow expiration process - describe how flowmonexp does it and theoretical reasoning why it works quite well. Include some math to explain the ratios}
-\itodo{What happens when processing is too slow? Which packets are dropped?}
-\itodo{Survey of flow caches in hardware, unsuitable for application monitoring}
-\itodo{SW optimization: copy whole packet and parse during flow export in a separate thread - HTTP}
+The papers related to this chapter are~\cite{Velan-2015-High, Pus-2015-Hardware}.
+
+The organisation of this chapter is as follows:
+\begin{itemize}
+  \item Section~
+  \item Section~
+  \item Section~
+  \item Section~
+  \item Section~
+  \item Section~\ref{sec:perf-summary} summarizes the chapter.
+\end{itemize}
+
+\end{chapintro}
+
+\newpage
+
+
+% TODO consider a background section
+\section{How to Measure Flow Monitoring Performance}
+
+\itodo{\url{https://www.netcope.com/getattachment/ecf0b75f-b961-485a-94e1-ee6e1bd7bef4/Modelling-of-High-Bandwidth-Systems.aspx}}
 \itodo{Talk about CPU vs memory bottlenecks in general}
-\itodo{Single packet flows can be handled separately, described by Rick and other papers}
-\itodo{Measurement interference on 10x10G, need to drop on DMA, not input}
+
+\section{High-Speed Packet Capture}
+
+% use related work from \section{High-Density Flow Monitoring}
+% flow monitoring utilizes sequential read: dpdk vs sze2 (find paper?)
+% multiqueue: supported protocols in HFE
+% timestamps
+\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc. \cite{Nassopulos-2014-Flow}}
+\itodo{find something on interrupts vs polling}
 \itodo{
 - Packet capture - from line to software \\
 - - Technologies: PF\_RING, PF\_RING ZC, Linux NAPI, FPGA (DPDK, PF\_RING, DNA/Libzero)\\
@@ -26,34 +43,33 @@
 - - Timestamping: More information about packet capture can be found for example in the work of \citeauthor{Garcia-Dorado-2013-High}~\cite{Garcia-Dorado-2013-High}.\\
 }
 
-\section{Accelerating Application Flow Monitoring}
 
-\itodo{move relevant content from the application section}
+\section{Hardware Acceleration in Flow Monitoring}
 
-\section{Accelerating Application Flow Monitoring}
+\itodo{Survey of flow caches in hardware, unsuitable for application monitoring}
+% mostly for basic flow monitoring, but for the SDM
 
 We have shown that there are many different challenges when building application flow monitoring system. Most of the described processes are performance sensitive, especially packet reception, packet parsing, and flow aggregation. To achieve application flow monitoring throughput of tens of gigabits per second, several optimization and acceleration techniques can be applied. This section focuses on these techniques. Note that we avoid the use of sampling since it degrades the quality of exported data, as shown by the authors of~\cite{Brauckhoff-2006-Impact}. Although we describe acceleration techniques, their design, and main ideas, we will not go into details about their evaluation and testing, which is out of the scope of this article. 
 
 It has been shown by the authors of~\cite{Velan-2015-High} that standard flow monitoring can achieve more than 100 Gb/s throughput on a commodity CPU when hardware accelerated NICs are used. The work of \citeauthor{Kekely-2016-Software}~\cite{Kekely-2016-Software} shows that it is possible to utilize these NICs to achieve 100 Gb/s throughput even for application flow monitoring. We discuss both hardware accelerated techniques and software optimizations in this section. Table~\ref{tab:flow-acc-techniques} gives an overview of the discussed techniques.
 
-
+% TODO abolish or update the table, it needs to point to the next section as well. It should probably contain only approaches for this section, maybe show as usable for basic/application flow monitoring
+% TODO similar table in the next section
 \begin{table}[ht!]
-	\centering
-	\begin{tabular}{|l|l|}
-	\hline
-	\textbf{Hardware acceleration} & \textbf{Software acceleration} \\ \hline
-	Multiple reception buffers & Multithreading \\
-	Packet trimming & NUMA awareness \\
-	Packet header preprocessing & Flow state in parsers \\
-	Flow processing offloading & Flow cache design \\
-	Application identification & Flow cache timeouts \\ \hline
-	\end{tabular}
-	\caption{Flow Acceleration Techniques}
-	\label{tab:flow-acc-techniques}
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Hardware acceleration} & \textbf{Software acceleration} \\ \hline
+    Multiple reception buffers & Multithreading \\
+    Packet trimming & NUMA awareness \\
+    Packet header preprocessing & Flow state in parsers \\
+    Flow processing offloading & Flow cache design \\
+    Application identification & Flow cache timeouts \\ \hline
+    \end{tabular}
+    \caption{Flow Acceleration Techniques}
+    \label{tab:flow-acc-techniques}
 \end{table}
 
-
-\subsection{Hardware Accelerated Techniques}
 
 A field-programmable gate array (FPGA) is usually used in hardware accelerated network interface cards. It allows to parse packet headers and perform other tasks such as packet trimming or computing hashes to identify flows in the NICs. It usually supports transferring data to multiple buffers in RAM so that the software can efficiently use a multi-threading model. There are several manufacturers that provide such NICs, such as Napatech, Myricom, Mellanox Technologies, or Netcope Technologies. NICs can support hardware acceleration even without an FPGA chip, however, the capabilities are usually more limited and cannot be extended after the card is produced. For example, Intel produces many NICs without an FPGA chip that provide basic hardware acceleration such as packet hashing and transport to multiple RAM buffers.
 
@@ -67,8 +83,10 @@ Packet trimming and packet parsing in the NIC are not usable for application flo
 
 Since only a small portion of all packets carry important application protocol information, it is beneficial to recognize such packets in the NIC and mark them for further processing in software. As the NIC cannot do complex application header processing, only a simple mechanism, such as pattern matching, can be utilized for packet classification. The work of the WAND Research Group~\cite{Alcock-2012-libprotoident} shows that it is possible to achieve reasonable traffic classification accuracy using only the beginning of a packet payload. Once the packets carrying application protocol headers are marked, the software parsers can process only these important packets. Moreover, other packets can be trimmed or parsed in the NIC and only important information can be passed for processing in the software. Packet classification can also benefit the SDM. When a flow is offloaded to NIC and a packet with application protocol header is matched, the processing of such a flow can be returned to the software. This approach would efficiently solve the abovementioned problem of HTTP pipelining. The accuracy and usability of pattern matching for packet classification depend on target application protocols and resource limitation of the NIC as well. Further research is needed to determine whether this method can be used for real world application flow monitoring.
 
-
-\subsection{Acceleration in Software}
+\section{Flow Exporter Software Optimization}
+\itodo{do not forget biflow}
+\itodo{Flow expiration process - describe how flowmonexp does it and theoretical reasoning why it works quite well. Include some math to explain the ratios}
+\itodo{Single packet flows can be handled separately, described by Rick and other papers}
 
 The performance of flow monitoring can be greatly enhanced by offloading as much of the necessary packet processing as possible to the NIC. However, to build a high-performance flow monitoring solution the software processing must be carefully tuned as well. Moreover, the FPGA-based NICs are much more expensive than commodity NICs and cannot always be deployed. This section focuses on flow monitoring optimizations that can be achieved by careful software design and system configuration.
 
@@ -94,7 +112,19 @@ Flow cache inactive timeout expiration has a large impact on the performance, as
 
 There are many other optimizations that can be performed to increase application flow monitoring performance, such as efficient flow key computation, processing packets in batches, ensuring CPU cache line alignment of flow records and so on. However, they are mostly a code micro-optimization no different from fine-tuning any other high-performance application and are out of the scope of this article.
 
+%TODO split the anove text into the following subsections, or just have it all together
+\subsection{Basic Flow Monitoring}
 
-\section{Conclusions}
+\subsection{Application Flow Monitoring}
+\itodo{Speedup by omitting SSL/TLS processing for most application plugins}
+\itodo{SW optimization: copy whole packet and parse during flow export in a separate thread - HTTP}
 
-\section{Relevant Publications}
+
+
+
+\section{High-Density Flow Monitoring}
+\itodo{TODO: Put in paper from IM2015}
+\itodo{What happens when processing is too slow? Which packets are dropped?}
+\itodo{Measurement interference on 10x10G, need to drop on DMA, not input}
+
+\section{Summary}\label{sec:perf-summary}
