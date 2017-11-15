@@ -4,7 +4,7 @@
 
 Intro
 
-The papers related to this chapter are~\cite{Velan-2015-High, Pus-2015-Hardware}.
+The paper included in this chapter is~\cite{Velan-2015-High}. Another paper related to this chapter is~\cite{Pus-2015-Hardware}.
 
 The organisation of this chapter is as follows:
 \begin{itemize}
@@ -32,17 +32,19 @@ The goal of this section is two-fold. Firstly, it describes the parameters that 
 
 \subsection{Measuring Overall Throughput}
 
-The overall throughput of the flow monitoring process depends upon a number of factors. Moreover there are two methods of measuring the throughput even if all of these factors are set. The first method is to generate the testing traffic in such a rate that is above the capability of the monitoring process to handle. The throughput is then determined as the number of packets that were actually processed by the exporter. This method gives an upper bound on the capabilities of the monitoring process and the measurement is quite easy to carry out. However, deploying the flow monitoring system based on such an estimate can easily lead to dropped packets in practice as well. The second method measures throughput without packet loss or with a defined packet loss rate. Given a predetermined packet loss rate, the traffic is generated so that the flow monitoring system performs with lower that given packet loss rate. The throughput is then increased until the packet loss matches the predetermined value and the throughput at that point is considered to be the result of the measurement. Both performance measurement methods are important. The first one gives an upper bound of the capabilities of the flow monitoring process and the second one shows how much jitter is introduced in the process.
+The overall throughput of the flow monitoring process depends upon a number of factors. Moreover there are two methods of measuring the throughput even if all of these factors are set. The first method is to generate the testing traffic in such a rate that is above the capability of the monitoring process to handle. The throughput is then determined as the number of packets that were actually processed by the flow exporter. This method gives an upper bound on the capabilities of the monitoring process and the measurement is quite easy to carry out. However, deploying the flow monitoring system based on such an estimate can easily lead to dropped packets in practice since there is quite a large packet drop associated with the measurement as well. The second method measures throughput without packet loss or with a defined packet loss rate. Given a predetermined packet loss rate, the traffic is generated so that the flow monitoring system performs with lower that given packet loss rate. The throughput is then increased until the packet loss matches the predetermined value and the throughput at that point is considered to be the result of the measurement. Both performance measurement methods are important. The first one gives an upper bound of the capabilities of the flow monitoring process and the second one shows how much traffic can be safely processed with acceptable packet loss.
 
-% konfigurace hw: pocet cpu, frekvence cpu, pocet pameti, proustnost do pametu, zapojeni karet k jednotlivym cpu, NUMa aware
-When evaluation the performance of a flow monitoring process, the hardware on which it runs must be taken into consideration. The performance depends on the frequency of the processor, available instruction sets and size of caches. When the exporter software is able to utilize multiple threads the number of cores of the processor and the number of processors matter as well. Moreover, when there are more than one processor, the NUMA architecture is important. The buffers of processes and threads running on a one CPU should be in a memory connected to the same CPU. Otherwise the latency for accessing this memory is increased as the data must go through the QuickPath Interconnect bus (in case of Intel processors). 
+% konfigurace hw: pocet cpu, frekvence cpu, pocet pameti, proustnost do pametu, zapojeni karet k jednotlivym cpu, NUMA aware
+When evaluating the performance of a flow monitoring process, the hardware on which it runs must be taken into consideration. The performance depends on the frequency of the processor, available instruction sets and size of caches. When the exporter software is able to utilize multiple threads the number of cores of the processor and the number of processors matter as well. Moreover, when there are more than one processor, the correct use of Non-Uniform Memory Access (NUMA) architecture is important. The buffers of processes and threads running on a one CPU should be in a memory connected to the same CPU. Otherwise the latency for accessing this memory is increased as the data must go through the QuickPath Interconnect~\cite{IntelCorporation-2009-Introduction} bus (in case of Intel processors).
 
 % packet capture, discussed in the next section
-
+The choice of packet capture solution often limits the upper bound on the throughput of the flow monitoring process. Although packet capture is an important part of flow monitoring process, it is used for other tasks as well and is of interest to various researchers~\cite{Garcia-Dorado-2013-High, Nassopulos-2014-Flow}. High-speed packet capture is described in more detail in Section~\ref{sec:performance-capture}.
 
 % konfigurace exporteru: timeouty, velikost flow cache, velikost bufferu, mnozina ziskavanych dat -> velikost flow recordu
+The configuration of the flow exporter has a great impact on the throughput as well. The active and inactive timeouts significantly affect the number of created flows~\cite{Hofstede-2014-Flow} which in turn affects the utilization of the flow cache and therefore the total throughput. The flow cache size should be tuned to the expected number of flows so that the data locality is preserved as much as possible. Moreover, the size of flow records depends on the number of extracted properties and it affects the size of the cache as well. The more properties extracted, the larger the flow record. Naturally, the number of extracted properties has a direct impact on the throughput since each property must be extracted and stored in the flow record, which requires computing power and more memory accesses.
 
 % testovaci provoz: velikost paketu, slozitost paketu, pocet toku
+
 
 % jak toto resit: dobre popsat system a podminky, za kterych se meri. dobre popsat testovaci provoz. pro testovani neni problem pouzit synteticky provoz, ma jednodussi popis.
 
@@ -119,6 +121,7 @@ Since only a small portion of all packets carry important application protocol i
 \itodo{do not forget biflow}
 \itodo{Flow expiration process - describe how flowmonexp does it and theoretical reasoning why it works quite well. Include some math to explain the ratios}
 \itodo{Single packet flows can be handled separately, described by Rick and other papers}
+\itodo{Flow termination per application - application specific timeouts~\cite{Rodriguez-2013-Empirical}}
 
 The performance of flow monitoring can be greatly enhanced by offloading as much of the necessary packet processing as possible to the NIC. However, to build a high-performance flow monitoring solution the software processing must be carefully tuned as well. Moreover, the FPGA-based NICs are much more expensive than commodity NICs and cannot always be deployed. This section focuses on flow monitoring optimizations that can be achieved by careful software design and system configuration.
 
