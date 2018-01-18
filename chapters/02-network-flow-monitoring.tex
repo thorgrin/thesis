@@ -69,25 +69,25 @@ Other vendors created their own versions of flow exporting protocols, although t
 In 2001, it was clear that exporting flow information from switching devices is going to be supported by vendors. However, no standard flow export protocol existed at the time and NetFlow v5 was not yet released to general public. For that reason the IETF started \Index{IP Flow Information Export} (\Index{IPFIX}) WG~\cite{IETF--IP}. The original charter~\cite{IESG-2001-IP} defined six specific goals for the WG: 
 
 \begin{itemize}
-	\item Define \emph{``standard IP flow''}.
-	\item Devise flow data encoding that support multiple levels of aggregation.
-	\item Allow packet sampling in IP flow.
-	\item Identify and address security and privacy concerns affecting flow data.
-	\item Specify the transport mapping for IP flow information.
-	\item Ensure that the flow export system is reliable.
+    \item Define \emph{``standard IP flow''}.
+    \item Devise flow data encoding that support multiple levels of aggregation.
+    \item Allow packet sampling in IP flow.
+    \item Identify and address security and privacy concerns affecting flow data.
+    \item Specify the transport mapping for IP flow information.
+    \item Ensure that the flow export system is reliable.
 \end{itemize}
 
 The charter was updated over the years to match current requirements. Several vendors were engaged in the IPFIX WG’s activities, most notably Cisco, which significantly contributed from the start. The WG defined set of requirements for the IPFIX protocol~\cite{rfc3917} and evaluated existing candidate protocols~\cite{rfc3955} to decide the most suitable approach in defining the new protocol. The NetFlow v9 specification (RFC 3954) was designed with IPFIX requirements in mind~\cite{Trammell-2011-Introduction} and was released in order to compete in this evaluation (RFC 3955). After the evaluation the NetFlow v9 was chosen as a basis of the new IPFIX protocol. For this reason, the IPFIX is sometimes called NetFlow v10 and even starts with protocol version 10 in its header. However, the IPFIX protocol supports many new features and is not completely backwards compatible with NetFlow.
 
 The IPFIX WG did more than just design the IPFIX protocol. In the 29 RFCs submitted before its conclusion, the WG paid attention to e.g.:
 \begin{itemize}
-	\item Bidirectional flow export~\cite{rfc5103}
-	\item Architecture for IP flow information export~\cite{rfc5470}
-	\item Reducing redundancy in flow~\cite{rfc5473}
-	\item Definitions of Managed Objects (MIB) for IPFIX~\cite{rfc5815, rfc6615, rfc8038}
-	\item IP flow mediation framework~\cite{rfc5982, rfc6183}
-	\item IP flow anonymization~\cite{rfc6235}
-	\item IPFIX configuration data model~\cite{rfc6728}
+    \item Bidirectional flow export~\cite{rfc5103}
+    \item Architecture for IP flow information export~\cite{rfc5470}
+    \item Reducing redundancy in flow~\cite{rfc5473}
+    \item Definitions of Managed Objects (MIB) for IPFIX~\cite{rfc5815, rfc6615, rfc8038}
+    \item IP flow mediation framework~\cite{rfc5982, rfc6183}
+    \item IP flow anonymization~\cite{rfc6235}
+    \item IPFIX configuration data model~\cite{rfc6728}
 \end{itemize}
 The IPFIX protocol specification is described by \emph{``Specification of the IP Flow Information Export (IPFIX) Protocol for the Exchange of Flow Information''}~\cite{rfc7011} which became an Internet Standard. The working group was concluded in 2014, however, IPFIX related Internet-Drafts are still being created by involved parties. Further information about IPFIX development is provided by \citeauthor{Brownlee-2011-Flow} in \cite{Brownlee-2011-Flow}.
 
@@ -99,7 +99,7 @@ sFlow is an industry standard that is supported by number of vendors in their pa
 
 In 2002 the IETF started Packet Sampling (PSAMP) Working Group~\cite{IETF--Packet} which was chartered to define a standard set of capabilities for network elements to sample subsets of packets by statistical and other methods~\cite{IESG--Packet}. The result is similar to sFlow, however, the PSAMP uses IPFIX protocol for data export~\cite{rfc5477}. The WG was concluded in 2009 after publishing four RFCs. The proposed standards include sampling and filtering techniques for IP packet selection~\cite{rfc5475}, packet sampling protocol specifications~\cite{rfc5476} and information model for packet sampling export~\cite{rfc5477}.
 
-OpenFlow~\cite{ONF-2012-OpenFlow} is an open-source implementation of the Software Defined Networking (SDN) concept~\cite{Singh-2017-Survey, Hu-2014-Survey}. The idea of SDN is to separate control plane and data plane of networking devices. This means that the packet forwarding rules are known only to SDN controllers. The other networking devices that process the traffic ask the controllers what to do with individual flows. After the decision is made for the first packet of the flow, a flow record is kept in the cache so that subsequent lookups do not require the controller interaction. The OpenFlow is a protocol of communication between the networking devices and the controllers. It has been shown by \citeauthor{Yu-2013-FlowSense}~\cite{Yu-2013-FlowSense} that the information stored in the flow caches can be exported using the OpenFlow protocol to the controller and used for network monitoring. Although the approach to network monitoring is somewhat similar to flow monitoring on non-SDM networking devices, there are significant differences. The control traffic itself is utilized to transfer data about new and expired flow records. Therefore, configuration of flow monitoring is directly affected by configuration of SDN network and vice versa. This imposes undesirable restrictions on the flow monitoring process. Moreover, the distributed architecture of the monitoring is tightly coupled with the deployment of the network controllers. For these reasons, this thesis does not consider SDN specific flow monitoring. It should be noted, that the SDN enabled networking devices can still export valid flow data as defined by the IPFIX standard. In such a case, the SDN capabilities are irrelevant for flow monitoring purposes.
+OpenFlow~\cite{ONF-2012-OpenFlow} is an open-source implementation of the Software Defined Networking (SDN) concept~\cite{Singh-2017-Survey, Hu-2014-Survey}. The idea of SDN is to separate control plane and data plane of networking devices. This means that the packet forwarding rules are known only to SDN controllers. The other networking devices that process the traffic ask the controllers what to do with individual flows. After the decision is made for the first packet of the flow, a flow record is kept in the cache so that subsequent lookups do not require the controller interaction. The OpenFlow is a protocol of communication between the networking devices and the controllers. It has been shown by \citeauthor{Yu-2013-FlowSense}~\cite{Yu-2013-FlowSense} that the information stored in the flow caches can be exported using the OpenFlow protocol to the controller and used for network monitoring. Although the approach to network monitoring is somewhat similar to flow monitoring on non-SDM networking devices, there are significant differences. The control traffic itself is utilized to transfer data about new and expired flow records. Therefore, configuration of flow monitoring is directly affected by configuration of SDN network and vice versa. This imposes undesirable restrictions on the flow monitoring process. Moreover, the distributed architecture of the monitoring is tightly coupled with the deployment of the network controllers. For these reasons, this thesis does not consider SDN specific flow monitoring. It should be noted, that the SDN enabled networking devices can still export valid flow data as defined by the IPFIX standard. In any case, the SDN capabilities are irrelevant for flow monitoring purposes.
 
 % TODO Add paper ``Towards a NetFlow implementation for OpenFlow Software-Defined Networks'' (https://itc29.org/en/program/conference-program.html)
 
@@ -122,7 +122,7 @@ To be able to accurately describe the flow monitoring process, we need to have a
 
 \end{displaycquote}
 
-The Observation Point is defined as a location where IP packets can be observed. The definition says that a flow is a set of packets within certain time span. Furthermore, the packets in a flow have a set of common properties and these properties are either derived from data contained in the packet data or from packet treatment (e.g. next hop IP address or input interface). Although this definition is quite generic, it covers most of the common IP flow creation techniques.
+The Observation Point is defined as a location where IP packets can be observed. The definition says that a flow is a set of packets within a certain time span. Furthermore, the packets in a flow have a set of common properties and these properties are either derived from data contained in the packet data or from packet treatment (e.g. next hop IP address or input interface). Since this definition is quite generic, it covers most of the common IP flow creation techniques.
 
 The IPFIX Protocol is an internet standard~\cite{rfc7011} with its own definition of a flow that builds upon the NetFlow v9 definition. It tries to specify what “properties derived from data contained in packet data” means and differentiates two types of data. The first are the values contained in packet headers, the second type covers the characteristics of the packet itself (e.g. packet length). The definition is as follows:
 
@@ -145,7 +145,7 @@ The IPFIX Protocol is an internet standard~\cite{rfc7011} with its own definitio
 
     \item one or more fields derived from packet treatment (e.g., next
         hop IP address, output interface)
-	\end{enumerate}
+    \end{enumerate}
         
     A packet is defined as belonging to a Flow if it completely
     satisfies all the defined properties of the Flow.
@@ -154,13 +154,14 @@ The IPFIX Protocol is an internet standard~\cite{rfc7011} with its own definitio
 
 Although this definition is a part of the IPFIX internet standard, there are several problems:
 \begin{enumerate}
-	\item It is not clear what a \emph{packet header} is. One interpretation is that it includes all protocol headers in the packet up to the packet payload (i.e. application layer). However, the transport header is mentioned explicitly and the example indicates that it can also mean only network layer, in which case the data link layer is completely ignored.
-	\item The \emph{characteristics of the packet} are not sufficiently described. One can interpret this as anything that cannot be computed directly from the packet header fields. The example states that a number of certain types of headers is considered as part of packet characteristics. The total packet length can be also included here (it was event used as an example in the early drafts in 2002).
-	\item The IPFIX standard limits the definition of flows only to IP traffic. However, the IPFIX export protocol can be used for other purposes as well, such as exporting MIB variables~\cite{rfc6615} or monitoring of ethernet layer~\cite{Hofstede-2011-Flow}. Therefore the generic flow definition should allow even non-IP packets. Note that the NetFlow v9 definition of flow explicitly defines IP flows, not generic flows.
-    \item Flows using transport header fields cannot be correctly defined for fragmented IP packets, since transport layer information is present only in the first packet fragment. Both NetFlow v9 and IPFIX definitions require that the set of common properties used to decide to which flow the packet belongs must be derived only from the single packet, which is not possible in case of fragmented packets.
+    \item It is not clear what a \emph{packet header} is. One interpretation is that it includes all protocol headers in the packet up to the packet payload (i.e. application layer). However, the transport header is mentioned explicitly and the example indicates that it can also mean only network layer, in which case the data link layer is completely ignored.
+    \item The \emph{characteristics of the packet} are not sufficiently described. One can interpret this as anything that cannot be computed directly from the packet header fields. The example states that a number of certain types of headers are considered as part of the packet's characteristics. The total packet length can be also included here (it was even used as an example in the early drafts in 2002).
+    \item The IPFIX standard limits the definition of flows only to IP traffic. 
+    However, flows are often created with the use of link layer headers. Moreover, the flow concept works even for non-IP connections, e.g. in technological networks. Therefore, the generic flow definition should allow even non-IP packets. It should be notes that the NetFlow v9 definition of flow explicitly defines IP flows, not generic flows.
+    \item Flows using transport header fields cannot be correctly defined for fragmented IP packets, since transport layer information is present only in the first packet fragment. Both NetFlow v9 and IPFIX definitions a set of common properties used to decide which flow the packet belongs to. This must be derived only from the single packet, which is not possible in case of fragmented packets.
 \end{enumerate}
 
-In order to provide the most complete definition of flow, we must address all the above mentioned issues. The most direct solution is to start with the NetFlow v9 definition, allow non-IP packets and be more clear about deriving data from previous packets of the same flow which is used for correct handling of the packet fragmentation. Therefore, the definition used in this thesis is as follows:
+In order to provide the most complete definition of flow, we must address all the above mentioned issues. The most direct solution is to start with the NetFlow v9 definition, allow non-IP packets and be clearer about deriving data from previous packets of the same flow which is used for correctly handling the packet fragmentation. Therefore, the definition used in this thesis is as follows:
 
 \begin{definition}\label{def:flow}
 
@@ -172,66 +173,66 @@ In order to provide the most complete definition of flow, we must address all th
 
 \end{definition}
 
-There are two more terms connected to flow that need to be defined: \emph{flow keys} and \emph{flow records}. The IPFIX definition of the Flow Key needs to be adapted to our definition of flow. We can conveniently shorten the definition to the following:
+There are two more terms connected to flow that need to be defined: \emph{flow key} and \emph{flow record}. The IPFIX definition of the Flow Key needs to be adapted to our definition of flow. We can conveniently shorten the definition to the following:
 
 \begin{definition}\label{def:flow-key}
 
-    Each of the common properties that is used to specify a~\emph{flow} is called a~\emph{\Index{flow key}}.
+    A \emph{flow key} is a set of common properties that is used to specify a~\emph{flow}.
 
 \end{definition}
 
-A flow record is basically a tuple containing flow keys and other properties measured for the flow. Moreover, we allow inclusion of more information about the flow that is derived from external sources. An example can be a name of a user to which particular IP address belonged at the time of measurement. The following definition reflects that:
+A flow record is basically a tuple containing the flow key and other properties measured for the flow. Moreover, we allow inclusion of more information about the flow that is derived from external sources. An example can be a name of a user to which particular IP address belonged at the time of measurement. The following definition reflects that:
 
 \begin{definition}\label{def:flow-record}
 
-    A~\emph{\Index{flow record}} is a tuple describing particular \emph{flow} containing values of:
+    A~\emph{\Index{flow record}} is a tuple which describes a particular \emph{flow} containing values of:
 
     \begin{enumerate}
-    	\item all \emph{flow keys} used to specify the \emph{flow},
-    	\item other properties of the \emph{flow} derived from:
-    	\begin{enumerate}
-    		\item data contained in the packets of the \emph{flow},
-    		\item the packet treatment of the \emph{flow} at the \emph{observation point},
-    		\item external source of information.
-    	\end{enumerate}
+        \item the \emph{flow key} used to specify the \emph{flow},
+        \item other properties of the \emph{flow} derived from:
+        \begin{enumerate}
+            \item data contained in the packets of the \emph{flow},
+            \item the packet treatment of the \emph{flow} at the \emph{observation point},
+            \item external source of information.
+        \end{enumerate}
     \end{enumerate}
 
 \end{definition}
 
-To make the definitions above more clear, we now give an example of concrete properties that might be contained in a flow record. Table~\ref{tab:flow.properties} shows examples of flow record properties that can be derived from packet data and packet treatment. The properties can be aggregated when the derived value differs between individual packets of the flow or where counters such as number of packets are involved. A~summary function is usually applied to number of bytes of of each packet, TCP flags are aggregated using a logical OR function, flow start timestamp is derived using a minimum function on each packet timestamp. The non-aggregated properties may be used as flow keys.
+To make the definitions above clearer, we provide an example of concrete properties that might be contained in a flow record in Table~\ref{tab:flow.properties}. The table shows examples of flow record properties that can be derived from packet data and packet treatment. The properties can be aggregated when the derived value differs between individual packets of the flow or where counters such as the number of packets are involved. A~summation function is usually applied to the number of bytes in each packet, TCP flags are aggregated using a logical OR function, the flow start timestamp is derived using a minimum function on each packet timestamp. The non-aggregated properties may be used as part of a flow key.
 
 \begin{table}[ht!]
-	\centering
-	\begin{tabular}{lll}
-	\toprule
-	                                           & \textbf{Aggregated properties}  & \textbf{Non-aggregated properties}  \\ \midrule
-	\multirow{3}{*}{\textbf{Packet data}}      & Number of bytes                 & Source IP address                   \\ 
-	                                           & TCP flags                       & Destination port                    \\ 
-	                                           & Time to Live                    & Transport protocol                  \\ \midrule
-	\multirow{2}{*}{\textbf{Packet treatment}} & Number of packets               & Input interface number              \\ 
-	                                           & Flow start timestamp            & Next-Hop IP address                 \\ \bottomrule
-	\end{tabular}
-	\caption{Examples of Flow Properties}
-	\label{tab:flow.properties}
+    \centering
+    \begin{tabular}{lll}
+    \toprule
+                                               & \textbf{Aggregated properties}  & \textbf{Non-aggregated properties}  \\ \midrule
+    \multirow{3}{*}{\textbf{Packet data}}      & Number of bytes                 & Source IP address                   \\ 
+                                               & TCP flags                       & Destination port                    \\ 
+                                               & Time to Live                    & Transport protocol                  \\ \midrule
+    \multirow{2}{*}{\textbf{Packet treatment}} & Number of packets               & Input interface number              \\ 
+                                               & Flow start timestamp            & Next-Hop IP address                 \\ \bottomrule
+    \end{tabular}
+    \caption{Examples of Flow Properties}
+    \label{tab:flow.properties}
 \end{table}
 
-The Definition~\ref{def:flow} states what the flow is. However, although we tried to be as explicit as possible, the definition is informal and therefore subject to different interpretations. For this reason we now provide a formal definition of flow, which not only refines the informal definition, but also provides a guide to the construction of the flows.
+Definition~\ref{def:flow} states what the flow is. Although we tried to be as explicit as possible, the definition is informal and therefore subject to different interpretations. For this reason we now provide a formal definition of flow, which not only refines the informal definition, but also provides a guide to the construction of the flows.
 
 \begin{defn}
 Let $P$ be a set of all packets. Let $T$ be a set of packet treatment information. We define a set of \Index{extended packets}
 \begin{equation*}
-	\widehat{P} = P\times T,
+    \widehat{P} = P\times T,
 \end{equation*}
-so that $\widehat{p} \in \widehat{\mathcal{P}}$ denotes a packet $p$ together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of packets observed at an \emph{observation point}:
+so that $\widehat{p} \in \widehat{P}$ denotes a packet $p$ together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of packets observed at an \emph{observation point}:
 \begin{equation*}
-	\mathbb{S} = \{1, \ldots, n\} \lor \mathbb{N},
+    \mathbb{S} = \{1, \ldots, n\} \lor \mathbb{N},
 \end{equation*}
 where $n \in \mathbb{N}$ is the number of observed packets when the number is finite.
 
 We denote sequence of packets and extended packets observed at an \emph{observation point} respectively:
 \begin{align*}
-	\mathcal{P} &= (p_i)_{i \in \mathbb{S}},\, p_i \in P,\\
-	\widehat{\mathcal{P}} &= (\widehat{p}_i)_{i \in \mathbb{S}},\, \widehat{p}_i \in \widehat{P}.
+    \mathcal{P} &= (p_i)_{i \in \mathbb{S}},\, p_i \in P,\\
+    \widehat{\mathcal{P}} &= (\widehat{p}_i)_{i \in \mathbb{S}},\, \widehat{p}_i \in \widehat{P}.
 \end{align*}
 \end{defn}
 Both sequences are of size $|\mathbb{S}|$. 
@@ -240,54 +241,54 @@ Let us now define a \emph{\Index{flow selection function}} $\varphi$ which takes
 \begin{defn}\label{def:flow-selection-function}
 Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\widehat{P}$ be a set of extended packets. We say that a function of type
 \begin{equation*}
- 	\varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
+    \varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
 \end{equation*}
 is a \emph{flow selection function}.
 \end{defn}
 
-Before we give a formal definition of a flow\index{flow!formal definition of}, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a \emph{flow selection function} $\varphi$. We require whether each packet belongs to the flows is determined by all previous packets of that flow, therefore we construct the flow by induction as described in Algorithm~\ref{alg:flow-construction}.
+Before we give a formal definition of a flow\index{flow!formal definition of}, we provide the following intuition for our definition. A flow $\mathcal{F}$ is a sequence of packets defined by a sequence of extended packets with indexes in $\mathbb{S}$ and a \emph{flow selection function} $\varphi$. We require that a packet belongs to a flow if it is determined by all previous packets of that flow. Therefore we construct the flow by induction as described in Algorithm~\ref{alg:flow-construction}.
 
 \begin{algorithm}
     \caption{Construction of a flow}
     \label{alg:flow-construction}
     \begin{algorithmic}[1]
-        \STATE Denote $\mathbb{I}$ the set of indexes of packets that belong to the flow $\mathcal{F}$
+        \STATE Denote $\mathbb{I}$ the set of packet indexes that belong to the flow $\mathcal{F}$
         \STATE Start with $\mathbb{I} = \emptyset$
-        \WHILE{An index $k$ of the first extended packet $\widehat{p}_k$ for which $\varphi((\widehat{p}_n)_{n\in \mathbb{I}},\, \widehat{p}_{\alpha}) = true$ exists}
-			\STATE Add $k$ to $\mathbb{I}$
+        \WHILE{An index $k$ of the first extended packet $\widehat{p}_k$ for which $\varphi((\widehat{p}_n)_{n\in \mathbb{I}},\, \widehat{p}_k) = true$ exists}
+            \STATE Add $k$ to $\mathbb{I}$
         \ENDWHILE
         \STATE The flow $\mathcal{F}$ is a sequence of packets with indexes from $\mathbb{I}$
     \end{algorithmic}
 \end{algorithm}
 
-We now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using \emph{flow selection function} $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
+We shall now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using \emph{flow selection function} $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
 \begin{defn}\label{def:formal-flow}
-Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{N}$ be (possibly finite) mutually corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
+Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{S}$ be (possibly finite) mutually corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
 
 We define a \emph{flow index set} $\mathbb{I} = \mathbb{I}\left((\widehat{p}_i)_{i \in S},\, \varphi\right)$ as 
 \begin{align*}
 \mathbb{I} &= \lim_{i \to \infty} J_i \text{, where } J_i \text{ is defined inductively over }i \in \mathbb{N} \text{ as:} \notag\\
 J_i &= \left\{
-	\begin{array}{ll}
-		\left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\} & \text{for } i = 1 , \\[0.7em]
-		J_{i-1} \cup \{\min\{ \alpha \in S \mid \alpha > \sup(J_{i-1}), & \multirow{2}{*}{\text{for } i > 1.} \\
-		\quad \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true \}\} &
-	\end{array}\right.
+    \begin{array}{ll}
+        \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\} & \text{for } i = 1 , \\[0.7em]
+        J_{i-1} \cup \{\min\{ \alpha \in S \mid \alpha > \sup(J_{i-1}), & \multirow{2}{*}{\text{for } $i > 1$.} \\
+        \quad \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true \}\} &
+    \end{array}\right.
 \end{align*}
 
 Finally, we define flow $\mathcal{F} = \mathcal{F}\left((p_i)_{i \in S},\, \mathbb{I}\right)$ as:
 \begin{equation*}
-	\mathcal{F} = (p_i)_{i \in \mathbb{I}},\, p_i \in \mathcal{P}.
+    \mathcal{F} = (p_i)_{i \in \mathbb{I}},\, p_i \in \mathcal{P}.
 \end{equation*}
 
 \end{defn}
 
-Since we need the $\min$ function to be defined for empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
+Since we need the $\min$ function to be defined for an empty set (the cases where no flow is defined and where we have already added all possible indexes from $\mathbb{S}$), we define
 \begin{equation*}
-	\left\{\min\ \emptyset \right\} = \emptyset
+    \left\{\min\ \emptyset \right\} = \emptyset
 \end{equation*}
 
-The Definition~\ref{def:formal-flow} of flow creates single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a \emph{flow selection function} $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as described in Algorithm~\ref{alg:flow-sequence-construction}.
+Definition~\ref{def:formal-flow} of flow creates a single flow for a sequence of extended packets $\widehat{\mathcal{P}}$ and a \emph{flow selection function} $\varphi$. The flow $\mathcal{F}$ is selected based on the first extended packet accepted by $\varphi$. Since we naturally expect that every packet is a part of only a single flow, we can construct a sequence of flows $(\mathcal{F}_i)_{i \in \mathbb{N}}$ by induction as described in Algorithm~\ref{alg:flow-sequence-construction}.
 
 \begin{algorithm}
     \caption{Construction of a sequence of flows}
@@ -296,12 +297,12 @@ The Definition~\ref{def:formal-flow} of flow creates single flow for a sequence 
         \STATE Denote $S_1 = \mathbb{S}$
         \STATE Set counter $i = 1$
         \REPEAT
-			\STATE Apply the \emph{flow selection function} $\varphi$ to extended packets with indexes in $S_i$
-			\STATE Denote indexes of matching extended packets $\mathbb{I}_i$
-			\STATE Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
-			\STATE Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $S_{i+1}$
-			\STATE Increment counter $i = i + 1$
-        \UNTIL{$\mathcal{F}_i$ is empty}
+            \STATE Apply the \emph{flow selection function} $\varphi$ to extended packets with indexes in $S_i$
+            \STATE Denote indexes of matching extended packets $\mathbb{I}_i$
+            \STATE Flow $\mathcal{F}_i $ is a sequence of packets with indexes from $\mathbb{I}_i$
+            \STATE Remove indexes in $\mathbb{I}_i$ from $S_i$, denote the new sequence $S_{i+1}$
+            \STATE Increment counter $i = i + 1$
+        \UNTIL{$\mathcal{S}_i$ is empty}
     \end{algorithmic}
 \end{algorithm}
 
@@ -309,16 +310,16 @@ Let us now provide a more formal definition of a sequence of flows $(\mathcal{F}
 \begin{defn}\label{def:formal-flow-sequence}
 Let $\mathcal{P}, \widehat{\mathcal{P}}$ be sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}. We define the sequence $(\mathcal{F}_i)_{i \in \mathbb{N}}$ of flows inductively:
 \begin{align*}
-	\mathcal{F}_i &= \mathcal{F}_i\left((p_j)_{j\in S_i},\, \mathbb{I}_i\right) \text{, where} \\
-	S_1 &= \mathbb{S}, \\
-	S_i &= S_{i-1} \setminus \mathbb{I}_{i-1}, \\
-	\mathbb{I}_{i} &= \mathbb{I}_i\left((\widehat{p}_j)_{j \in S_i},\, \varphi\right).
+    \mathcal{F}_i &= \mathcal{F}_i\left((p_j)_{j\in S_i},\, \mathbb{I}_i\right) \text{, where} \\
+    S_1 &= \mathbb{S}, \\
+    S_i &= S_{i-1} \setminus \mathbb{I}_{i-1}, \\
+    \mathbb{I}_{i} &= \mathbb{I}_i\left((\widehat{p}_j)_{j \in S_i},\, \varphi\right).
 \end{align*}
 \end{defn}
 
-The Definition~\ref{def:formal-flow-sequence} provides a guide to constructing a sequence of flow records. The procedure can be easily modified to run in real time so that each newly observed extended packet can be added to the appropriate flow. Since we know that every packet is a part of only a single flow, we apply the \emph{flow selection function} $\varphi$ to each existing flow (enriched by packet treatment information) and the new extended packet and add the packet to the first flow that matches. If none of the existing flow matches, we apply the function $\varphi$ to this packet only and start a new flow if necessary. 
+Definition~\ref{def:formal-flow-sequence} provides a guide to constructing a sequence of flow records. The procedure can be easily modified to run in real time so that each newly observed extended packet can be added to the appropriate flow. In our definition, we want every packet to be a part of only a single flow. Therefore, we apply the \emph{flow selection function} $\varphi$ to each pair of existing flow (enriched by packet treatment information) and the new extended packet. Then, we add the packet to the first flow that matches. If none of the existing flows match, we apply the function $\varphi$ to this packet only and start a new flow if necessary. 
 
-We can see that the flow creation process significantly depends upon the implementation of the \emph{flow selection function}. We will discuss the common implementations in the Subsection~\ref{subsec:flow-creation}.
+From this, we can see that the flow creation process depends solely upon the implementation of the \emph{flow selection function}. We will shortly discuss common implementations in the Subsection~\ref{subsec:flow-creation}.
 
 \section{Flow Monitoring Architecture}\label{sec:flow-monitoring-architecture}
 
@@ -568,29 +569,29 @@ Secondary task of packet processing is packet sampling and packet filtering, as 
 
 \subsection{Flow Creation}\label{subsec:flow-creation}
 
-The extracted packet metadata are aggregated to create flow records. The definition of the flow selection function requires all preceding extended packets of the same flow to determine whether a new packet belongs to particular flow. Since it is not viable to keep all packets of a flow in memory, only selected information is stored in real world implementations. All active flows have a flow record with all necessary information stored in a \emph{\Index{flow cache}}. When a new packet arrives, the flow selection function is called for each stored flow record and the metadata of the new packet to determine, to which flow the new packet belongs. If a matching flow record is found, it is updated using the packet metadata (e.g. packet and byte counters are incremented, flow end timestamp is updated). If no such record exists, the packet is considered to be the first packet of a new flow and a corresponding flow record is created in the flow cache. Algorithm~\ref{alg:flow-record-construction} illustrates the flow creation process. Note that the flow selection function is denoted $\phi$ as we refer to a concrete implementation here instead of the formal definition.
+The extracted packet metadata are aggregated to create flow records. The definition of the flow selection function requires all preceding extended packets of the same flow to determine whether a new packet belongs to particular flow. Since it is not viable to keep all packets of a flow in memory, only selected information is stored in real world implementations. All active flows have a flow record with all the necessary information stored in a \emph{\Index{flow cache}}. When a new packet arrives, the flow selection function is called for each stored flow record and the metadata of the new packet to determine, to which flow the new packet belongs. If a matching flow record is found, it is updated using the packet metadata (e.g. packet and byte counters are incremented, and the flow end timestamp is updated). If no such record exists, the packet is considered to be the first packet of a new flow and a corresponding flow record is created in the flow cache. Algorithm~\ref{alg:flow-record-construction} illustrates the flow creation process. It is worth noting that the flow selection function is denoted $\phi$ as we refer to a concrete implementation here instead of the formal definition.
 
 \begin{algorithm}
-	\caption{Construction of flow records}
-	\label{alg:flow-record-construction}
-	\begin{algorithmic}[1]
-		\LOOP 
-			\STATE Get new packet $P$
-			\STATE Extract packet metadata $M$
-			\STATE Set \textbf{found} = \FALSE
-			\FORALL{flow record $\mathcal{F}$ in flow cache}
-				\STATE Apply flow selection function $\phi$ to $\mathcal{F}$ and $M$
-				\IF{$\phi(\mathcal{F}, {M}) = true$}
-					\STATE Aggregate $M$ to $\mathcal{F}$
-					\STATE Set \textbf{found} = \TRUE;
-					\STATE \textbf{break}
-				\ENDIF
-			\ENDFOR
-			\IF{\NOT found}
-				\STATE Create new flow record $\mathcal{F}$ from $M$
-				\STATE Insert $\mathcal{F}$ into flow cache
-			\ENDIF
-		\ENDLOOP
+    \caption{Construction of flow records}
+    \label{alg:flow-record-construction}
+    \begin{algorithmic}[1]
+        \LOOP 
+            \STATE Get new packet $P$
+            \STATE Extract packet metadata $M$
+            \STATE Set \textbf{found} = \FALSE
+            \FORALL{flow record $\mathcal{F}$ in flow cache}
+                \STATE Apply flow selection function $\phi$ to $\mathcal{F}$ and $M$
+                \IF{$\phi(\mathcal{F}, {M}) = true$}
+                    \STATE Aggregate $M$ to $\mathcal{F}$
+                    \STATE Set \textbf{found} = \TRUE;
+                    \STATE \textbf{break}
+                \ENDIF
+            \ENDFOR
+            \IF{\NOT found}
+                \STATE Create new flow record $\mathcal{F}$ from $M$
+                \STATE Insert $\mathcal{F}$ into flow cache
+            \ENDIF
+        \ENDLOOP
     \end{algorithmic}
 \end{algorithm}
 
@@ -598,11 +599,11 @@ Testing the extracted packet metadata against each flow record has a linear time
 
 There are several reasons why a flow record can exit the flow cache\index{flow!record expiration}{}:
 \begin{description}
-	\item[Inactive timeout\index{timeout!inactive}] occurs when no new packets belonging to the flow arrive for a time interval called \emph{inactive timeout}. This timeout is used to end inactive connections and has a significant influence on flow cache memory requirements. When set too low the inactive timeout can erroneously split idle connections where keep-alive packet are sent in a longer interval than the inactive timeout. The inactive timeout is sometimes called \emph{idle timeout}\index{timeout!idle} as well.
-	\item[Active timeout\index{timeout!active}] occurs when the flow is longer than a time interval called \emph{active timeout}. The reason for active timeout is to keep exported flow information fresh. For example some SSH connections may be active for months when left open in an UNIX/Linux screen utility and without the active timeout the information about the connection would be too late for any practical purpose, such as monitoring the amount of traffic for a given time period. The active timeout is usually much longer than the inactive one. For example, Cisco IOS flow cache has the default of 30 minutes for the active timeout and 15 seconds for the inactive one~\cite{CiscoSystems-2013-Cisco}.
-	\item[Natural expiration] occurs when the connection is closed normally. This is often implemented for TCP connections where packets with RST or FIN flag indicate the end of connection.
-	\item[Resource constraints] such as lack of memory can cause flow records to be exported from the flow cache to allow new flows to be inserted. Some implementations of flow caches using hash tables have fixed number of flows that can be stored under single hash. Therefore, when a new flow record needs to be created one of the existing flow records is usually expired.
-	\item[Exporter shutdown] usually causes all flow records in the flow cache to be exported so that the information about observed packets is not lost. This cause is not often mentioned in the literature, however, we consider it an important one. The exporter must be restarted each time a configuration is changed unless it supports dynamic reconfiguration, which none of the open-source exporters does. Therefore the exported shutdown can happen surprisingly often.
+    \item[Inactive timeout\index{timeout!inactive}] occurs when no new packets belonging to the flow arrive for a time interval called \emph{inactive timeout}. This timeout is used to end inactive connections and has a significant influence on flow cache memory requirements. When set too low the inactive timeout can erroneously split idle connections where keep-alive packet are sent in a longer interval than the inactive timeout. The inactive timeout is sometimes called \emph{idle timeout}\index{timeout!idle} as well.
+    \item[Active timeout\index{timeout!active}] occurs when the flow is longer than a time interval called \emph{active timeout}. The reason for active timeout is to keep exported flow information fresh. For example some SSH connections may be active for months when left open in an UNIX/Linux screen utility and without the active timeout the information about the connection would be too late for any practical purpose, such as monitoring the amount of traffic for a given time period. The active timeout is usually much longer than the inactive one. For example, Cisco IOS flow cache has the default of 30 minutes for the active timeout and 15 seconds for the inactive one~\cite{CiscoSystems-2013-Cisco}.
+    \item[Natural expiration] occurs when the connection is closed normally. This is often implemented for TCP connections where packets with RST or FIN flag indicate the end of connection.
+    \item[Resource constraints] such as lack of memory can cause flow records to be exported from the flow cache to allow new flows to be inserted. Some implementations of flow caches using hash tables have fixed number of flows that can be stored under single hash. Therefore, when a new flow record needs to be created one of the existing flow records is usually expired.
+    \item[Exporter shutdown] usually causes all flow records in the flow cache to be exported so that the information about observed packets is not lost. This cause is not often mentioned in the literature, however, we consider it an important one. The exporter must be restarted each time a configuration is changed unless it supports dynamic reconfiguration, which none of the open-source exporters does. Therefore the exported shutdown can happen surprisingly often.
 \end{description}
 
 The RFC 5470~\cite{rfc5470} considers both timeouts and resource constraints as causes for a flow record to expire but omits natural close of connection and the possibility of exporter shutdown. Flow record expiration setting can significantly influence not only the  number of generated flow records, as shown by the authors of~\cite{Rodriguez-2013-Empirical}, but also further flow processing and various flow-based detection methods. Implementation of flow record expiration has an impact on the overall flow monitoring performance. Periodically checking the flow cache for expired flows can create latency in packet capture that may result in packet loss. Several approaches to this problem are described in the work of \citeauthor{Molina-2006-Design}~\cite{Molina-2006-Design}.

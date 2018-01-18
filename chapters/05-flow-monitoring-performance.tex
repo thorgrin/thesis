@@ -1,4 +1,4 @@
-\chapter{Flow Monitoring Performance}\label{chap:flow-monitoring-performance}
+ \chapter{Flow Monitoring Performance}\label{chap:flow-monitoring-performance}
 
 \begin{chapintro}
 
@@ -34,40 +34,46 @@ The goal of this section is two-fold. Firstly, it describes the parameters that 
 
 The overall throughput of the flow monitoring process depends upon a number of factors. Moreover there are two methods of measuring the throughput even if all of these factors are set. The first method is to generate the testing traffic in such a rate that is above the capability of the monitoring process to handle. The throughput is then determined as the number of packets that were actually processed by the flow exporter. This method gives an upper bound on the capabilities of the monitoring process and the measurement is quite easy to carry out. However, deploying the flow monitoring system based on such an estimate can easily lead to dropped packets in practice since there is quite a large packet drop associated with the measurement as well. The second method measures throughput without packet loss or with a defined packet loss rate. Given a predetermined packet loss rate, the traffic is generated so that the flow monitoring system performs with lower that given packet loss rate. The throughput is then increased until the packet loss matches the predetermined value and the throughput at that point is considered to be the result of the measurement. Both performance measurement methods are important. The first one gives an upper bound of the capabilities of the flow monitoring process and the second one shows how much traffic can be safely processed with acceptable packet loss.
 
-% konfigurace hw: pocet cpu, frekvence cpu, pocet pameti, proustnost do pametu, zapojeni karet k jednotlivym cpu, NUMA aware
-When evaluating the performance of a flow monitoring process, the hardware on which it runs must be taken into consideration. The performance depends on the frequency of the processor, available instruction sets and size of caches. When the exporter software is able to utilize multiple threads the number of cores of the processor and the number of processors matter as well. Moreover, when there are more than one processor, the correct use of Non-Uniform Memory Access (NUMA) architecture is important. The buffers of processes and threads running on a one CPU should be in a memory connected to the same CPU. Otherwise the latency for accessing this memory is increased as the data must be accessed by a memory controlloer of another process through a bus such, as the QuickPath Interconnect~\cite{IntelCorporation-2009-Introduction} bus of its newer version Ultra Path Interconnect (in case of Intel processors).
+When evaluating the performance of a flow monitoring process, the hardware on which it runs must be taken into consideration. The performance depends on the frequency of the processor, available instruction sets and size of caches. When the exporter software is able to utilize multiple threads the number of cores of the processor and the number of processors matter as well. Moreover, when there are more than one processor, the correct use of Non-Uniform Memory Access (NUMA) architecture is important. The buffers of processes and threads running on a one CPU should be in a memory connected to the same CPU. Otherwise the latency for accessing this memory is increased as the data must be accessed by a memory controller of another process through a bus such, as the QuickPath Interconnect~\cite{IntelCorporation-2009-Introduction} bus or its newer version Ultra Path Interconnect (in case of Intel processors).
 
-% packet capture, discussed in the next section
 The choice of packet capture solution often limits the upper bound on the throughput of the flow monitoring process. Although packet capture is an important part of flow monitoring process, it is used for other tasks as well and is of interest to various researchers~\cite{Garcia-Dorado-2013-High, Nassopulos-2014-Flow}. High-speed packet capture is described in more detail in Section~\ref{sec:performance-capture}.
 
-% konfigurace exporteru: timeouty, velikost flow cache, velikost bufferu, mnozina ziskavanych dat -> velikost flow recordu
-The configuration of the flow exporter has a great impact on the throughput as well. The active and inactive timeouts significantly affect the number of created flows~\cite{Hofstede-2014-Flow} which in turn affects the utilization of the flow cache and therefore the total throughput. The flow cache size should be tuned to the expected number of flows so that the data locality is preserved as much as possible. Moreover, the size of flow records depends on the number of extracted properties and it affects the size of the cache as well. The more properties extracted, the larger the flow record. Naturally, the number of extracted properties has a direct impact on the throughput since each property must be extracted and stored in the flow record, which requires computing power and more memory accesses.
+The configuration of the flow exporter has a great impact on the throughput as well. The active and inactive timeouts significantly affect the number of created flows and flow records~\cite{Hofstede-2014-Flow} which in turn affects the utilization of the flow cache and therefore the total throughput. The flow cache size should be tuned to the expected number of flows so that the data locality is preserved as much as possible. Moreover, the size of flow records depends on the number of extracted properties and it affects the size of the cache as well. The more properties extracted, the larger the flow record. Naturally, the number of extracted properties has a direct impact on the throughput since each property must be extracted and stored in the flow record, which requires computing power and more memory accesses.
 
-% testovaci provoz: velikost paketu, slozitost paketu, pocet toku
+One of the most important aspects of throughput measurement is the used dataset. Choosing shortest packets and a single flow allows to benchmark the packet parser, shortest packets and a large number of flows put great stress on the flow cache. Using more complex packets with multiple protocol layers tests the packet parser capabilities and performance as well. The relative sizes of flows in the data set matter as well. When there are a few dominant flows, the corresponding flow records are kept cached and the overall performance increases. However, if the packets of the flows are equally interlaced, the caching of the flow records is limited. Since the choice of the dataset has such an extensive impact on the flow monitoring process and its throughput, it is imperative to choose a correct dataset that supports the intentions of the given benchmark. A guidance for choosing a dataset can be found in the work of the IETF Internet IP Performance Measurement working group~\cite{IESG-1997-IP}, especially~\cite{rfc2330}.
+\itodo{imix}
 
-
-% jak toto resit: dobre popsat system a podminky, za kterych se meri. dobre popsat testovaci provoz. pro testovani neni problem pouzit synteticky provoz, ma jednodussi popis.
+We have argued that there are many factors that influence the throughput of a flow monitoring system. Since it is clearly not possible to test all combinations of the input parameters, it is necessary to choose a set of appropriate settings that cover either the most extreme scenarios or approximate some important real world scenario. The work of~\citeauthor{Nassopulos-2014-Flow}~\cite{Nassopulos-2014-Flow} shows that performing a measurement using a large number of configurations allows to derive results that can help with the optimization effort. They show that the implementation of the flow cache as well as the composition of the traffic has large impact on the flow monitoring process. Regardless of the chosen parameters, a proper description of the used configuration and dataset must always accompany all presented results. Therefore, we recommend to use a synthetic dataset that can be described in a few simple rules if possible.
 
 
 \subsection{Measuring an Impact of Optimizations}
-\itodo{\url{https://www.netcope.com/getattachment/ecf0b75f-b961-485a-94e1-ee6e1bd7bef4/Modelling-of-High-Bandwidth-Systems.aspx}}
-\itodo{Talk about CPU vs memory bottlenecks in general}
-% mention roofline model as a possibility of future work
 
-% pokud chceme delat optimalizace, je dobre bud koukat na celkove zlepseni, nebo merit prumerny cas straveny pro jednotlive ukony - viz paper od netcope
+Throughput measurement is an integral part of any performance optimization effort. The goal of the measurement in this case is two-fold. Firstly, bottlenecks and need to be identified so that the optimization can be effective. For example, if a flow cache lookup takes 70\,\% of the total processing time for single packet, optimizing packet parser is not very effective. Secondly, the measurement is repeated examine the effect of a given optimization. Moreover, it is necessary to verify that optimizing for a single use case does not have a negative impact on other use cases. Therefore, a thorough performance measurement is repeated often during any optimization process.
 
-% paper od netcope ma ale dost nedostatky, nereflektuje limity pameti, na ktere se casto narazi, lokalitu a podobne. rozhodne by bylo dobre dorovnat o roofline model
-% zlepseni muze byt zrychlujici, ale jen pro nektere konfigurace.
+Identifying bottlenecks can be a complicated process. It is often beneficial to measure execution time spent on processing a single packet throughout the flow monitoring process. The authors of~\cite{NETCOPETechnologies-2017-Modelling} show that it is possible to roughly estimate the time required for packet reception and parsing based on several parameters. Using similar process can help to identify bottlenecks in the flow processing as well.
 
-% ve zbytku kapitoly budeme navrhovat optimalizace, ktere zlepsuji propustnost nebo alespon snizuji zatez systemu. Pozitivni efekt byl ve vetsine pripadu overen v praxi, ale nebylo provedeno rigorozni mereni, ktere by mohlo byt publikovano.
+The processing speed of a computer is limited by the speed of the processor and the time required to fetch data from memory. If a computation requires only a small amount of memory that fits in CPU registers or L1 cache, the processor can be fully utilized. However, when a lot of data needs to be processed, there are many uncached accessed to memory with high latency. This causes the CPU utilization to be low. It is therefore very useful to measure number of instructions per processor cycle (IPC). The higher the IPC, the better the CPU is utilized. When optimizing such a process, the computation should be simplified. However, when the IPC is low, the CPU waits for data from memory. In such a case, optimizing data locality and memory accesses is the best way to improve the performance. 
+
+Since multi-core CPUs are a standard nowadays, a good way to improve performance is to process the data using multiple threads. However, it is important to keep in mind that the bandwidth of CPU memory controller is limited and that passing data between the threads consumes the bandwidth as well. Finding a good balance is often a difficult task which requires experimentation and thorough measurement of the system load.
+
+A good way to understand the relationship between CPU processing power and memory bandwidth is to use Roofline Performance Model~\cite{Williams-2009-Roofline}. Its core parameter is Arithmetic Intensity which is the ratio of total floating-point operations to total data movement. The visualisation of the model shows both the implementation performance limitation and limitations of the used architecture. However, correctly estimating arithmetic intensity of the flow measurement process is a challenging task.
+
+Optimizations proposed in Sections~\ref{sec:performance-hw-acceleration} and~\ref{sec:performance-sw-optimization} either reduce the amount of processed data or reduce the number of computation steps necessary to process each packet. We also discuss multithreaded flow processing and point out the pitfalls and caveats that can result in incorrect results.
+
 
 \section{High-Speed Packet Capture}\label{sec:performance-capture}
+
+%packet capture is part of flow monitoring
+
+% device + driver must make packet reception available to users
+% standard NICs drivers pass packets to kernel for processing, this enables the system to use the NIC for normal communication through network sockets. TCP processing, etc, much overhead, no fun. not suitable for monitoring. 
+% lots of drivers that try to limit copying and bypass the kernel.
 
 % use related work from \section{High-Density Flow Monitoring}
 % flow monitoring utilizes sequential read: dpdk vs sze2 (find paper?)
 % multiqueue: supported protocols in HFE
 % timestamps
-\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc. \cite{Nassopulos-2014-Flow}}
+\itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc.}
 \itodo{find something on interrupts vs polling}
 \itodo{
 - Packet capture - from line to software \\
