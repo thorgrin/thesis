@@ -1522,6 +1522,20 @@ The core of the paper is an evaluation and discussion of existing open-source DP
   Url                      = {http://dx.doi.org/10.1007/978-3-642-30633-4_11}
 }
 
+@Misc{Hendriks-2016-Assessing,
+  Title                    = {{Assessing the quality of flow measurements from OpenFlow devices}},
+
+  Author                   = {Luuk Hendriks and {de Oliveira Schmidt}, R. and R. Sadre and Jeronimo Bezerra and Aiko Pras},
+  Month                    = {4},
+  Year                     = {2016},
+
+  Abstract                 = {Since its initial proposal in 2008, OpenFlow has evolved to become today’s main enabler of Software-Defined Networking. OpenFlow specifies operations for network forwarding devices and a communication protocol between data and control planes. Although not primarily designed as a traffic measurement tool, many works have proposed to use measured data from OpenFlow to support, e.g., traffic engineering or security in OpenFlow-enabled networks. These works, however, generally do not question or address the quality of actual measured data obtained from OpenFlow devices. Therefore, in this paper we assess the quality of measurements in real OpenFlow devices from multiple vendors. We demonstrate that inconsistencies and measurement artifacts can be found due to particularities of different OpenFlow implementations, making it impractical to deploy an OpenFlow measurement-based approach in a network consisting of devices from multiple vendors. In addition, we show that the accuracy of measured packet and byte counts and duration for flows vary among the tested devices, and in some cases counters are not even implemented for the sake of forwarding performance.},
+  Keywords                 = {counters, EWI-27762, OpenFlow, Traffic measurements, IR-104409},
+  Owner                    = {velan},
+  Pages                    = {1--8},
+  Timestamp                = {2018.01.19}
+}
+
 @InProceedings{Hendriks-2017-Flow,
   Title                    = {{Flow-Based Detection of IPv6-specific Network Layer Attacks}},
   Author                   = {Hendriks, Luuk and Velan, Petr and de O. Schmidt, Ricardo and de Boer, Pieter-Tjerk and Pras, Aiko},
@@ -3207,6 +3221,21 @@ Moreover, new attacks on state of the art implementations are given and a new fr
   Url                      = {http://www.cisco.com/web/about/ac123/ac147/archived_issues/ipj_12-4/124_ssh.html}
 }
 
+@InProceedings{Suarez-Varela-2017-Towards,
+  Title                    = {{Towards a NetFlow Implementation for OpenFlow Software-Defined Networks}},
+  Author                   = {Suárez-Varela, José and Barlet-Ros, Pere},
+  Booktitle                = {2017 29th International Teletraffic Congress (ITC 29)},
+  Year                     = {2017},
+  Month                    = Sep,
+  Pages                    = {187-195},
+  Volume                   = {1},
+
+  Doi                      = {10.23919/ITC.2017.8064355},
+  Keywords                 = {IP networks;software defined networking;telecommunication traffic;IPFIX;Internet Protocol Flow Information Export;NetFlow implementation;Open vSwitch;OpenDaylight;OpenFlow software-defined networks;OpenFlow switches;concurrent flows;flow monitoring rules;flow tables;flow-level measurements;traffic sampling;Control systems;Monitoring;Pipelines;Protocols;Sampling methods;Scalability;Network measurements;OpenFlow;Software-Defined Networks},
+  Owner                    = {velan},
+  Timestamp                = {2018.01.31}
+}
+
 @InProceedings{Sun-2010-Novel,
   Title                    = {{An Novel Hybrid Method for Effectively Classifying Encrypted Traffic}},
   Author                   = {Sun, G. and Xue, Y. and Dong, Y. and Wang, D. and Li, C.},
@@ -3388,6 +3417,18 @@ Moreover, new attacks on state of the art implementations are given and a new fr
 
   Owner                    = {velan},
   Timestamp                = {2017.10.25}
+}
+
+@InProceedings{Velan-2018-Improving,
+  Title                    = {{Improving Network Flow Definition: Formalization and Applicability}},
+  Author                   = {Velan, Petr},
+  Booktitle                = {NOMS 2018 - 2018 IEEE/IFIP Network Operations and Management Symposium},
+  Year                     = {in press},
+
+  Abstract                 = {Network flow monitoring has been used for more than 20 years and has become an important part of network accounting and security. A significant effort was invested into the standardization of flow monitoring by the Internet Engineering Task Force (IETF). The flow monitoring has steadily evolved to satisfy new requirements created by the demand for increased visibility and accuracy. Therefore, it is not surprising that even the most recent flow definition created by the IETF does not consider several specifics of the flow monitoring process as it is used nowadays. This paper presents a revised flow definition that is more generic and is designed to accommodate more specific flow monitoring requirements. Moreover, we formalize our definition to avoid ambiguity and imprecision introduced by the use of natural language. One additional benefit of formalizing the flow definition is that it implicitly describes the flow creation process as well.},
+  Keywords                 = {network;flow;formal;definition},
+  Owner                    = {velan},
+  Timestamp                = {2018.01.31}
 }
 
 @InProceedings{Velan-2014-Next,

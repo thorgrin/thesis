@@ -128,6 +128,7 @@ Since only a small portion of all packets carry important application protocol i
 \itodo{Flow expiration process - describe how flowmonexp does it and theoretical reasoning why it works quite well. Include some math to explain the ratios}
 \itodo{Single packet flows can be handled separately, described by Rick and other papers}
 \itodo{Flow termination per application - application specific timeouts~\cite{Rodriguez-2013-Empirical}}
+\itodo{Opt-out flow processing - plugins can say whether they want to see a specific flow anymore}
 
 The performance of flow monitoring can be greatly enhanced by offloading as much of the necessary packet processing as possible to the NIC. However, to build a high-performance flow monitoring solution the software processing must be carefully tuned as well. Moreover, the FPGA-based NICs are much more expensive than commodity NICs and cannot always be deployed. This section focuses on flow monitoring optimizations that can be achieved by careful software design and system configuration.
 
