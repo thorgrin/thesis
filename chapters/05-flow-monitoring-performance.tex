@@ -2,7 +2,7 @@
 
 \begin{chapintro}
 
-Intro
+Intro, flow monitoring on commodity hardware, possibly using HW accelerated NIC.
 
 The paper included in this chapter is~\cite{Velan-2015-High}. Another paper related to this chapter is~\cite{Pus-2015-Hardware}.
 
@@ -40,17 +40,16 @@ The choice of packet capture solution often limits the upper bound on the throug
 
 The configuration of the flow exporter has a great impact on the throughput as well. The active and inactive timeouts significantly affect the number of created flows and flow records~\cite{Hofstede-2014-Flow} which in turn affects the utilization of the flow cache and therefore the total throughput. The flow cache size should be tuned to the expected number of flows so that the data locality is preserved as much as possible. Moreover, the size of flow records depends on the number of extracted properties and it affects the size of the cache as well. The more properties extracted, the larger the flow record. Naturally, the number of extracted properties has a direct impact on the throughput since each property must be extracted and stored in the flow record, which requires computing power and more memory accesses.
 
-One of the most important aspects of throughput measurement is the used dataset. Choosing shortest packets and a single flow allows to benchmark the packet parser, shortest packets and a large number of flows put great stress on the flow cache. Using more complex packets with multiple protocol layers tests the packet parser capabilities and performance as well. The relative sizes of flows in the data set matter as well. When there are a few dominant flows, the corresponding flow records are kept cached and the overall performance increases. However, if the packets of the flows are equally interlaced, the caching of the flow records is limited. Since the choice of the dataset has such an extensive impact on the flow monitoring process and its throughput, it is imperative to choose a correct dataset that supports the intentions of the given benchmark. A guidance for choosing a dataset can be found in the work of the IETF Internet IP Performance Measurement working group~\cite{IESG-1997-IP}, especially~\cite{rfc2330}.
-\itodo{imix}
+One of the most important aspects of throughput measurement is the used dataset. Choosing shortest packets and a single flow allows to benchmark the packet parser, shortest packets and a large number of flows put great stress on the flow cache. Using more complex packets with multiple protocol layers tests the packet parser capabilities and performance as well. The relative sizes of flows in the data set matter as well. When there are a few dominant flows, the corresponding flow records are kept cached and the overall performance increases. However, if the packets of the flows are equally interlaced, the caching of the flow records is limited. Since the choice of the dataset has such an extensive impact on the flow monitoring process and its throughput, it is imperative to choose a correct dataset that supports the intentions of the given benchmark. A guidance for choosing a dataset can be found in the work of the IETF Internet IP Performance Measurement working group~\cite{IESG-1997-IP} and IETF Benchmarking Methodology working group~\cite{IESG-1989-Benchmarking}, especially in~\cite{rfc2330, rfc6985}.
 
-We have argued that there are many factors that influence the throughput of a flow monitoring system. Since it is clearly not possible to test all combinations of the input parameters, it is necessary to choose a set of appropriate settings that cover either the most extreme scenarios or approximate some important real world scenario. The work of~\citeauthor{Nassopulos-2014-Flow}~\cite{Nassopulos-2014-Flow} shows that performing a measurement using a large number of configurations allows to derive results that can help with the optimization effort. They show that the implementation of the flow cache as well as the composition of the traffic has large impact on the flow monitoring process. Regardless of the chosen parameters, a proper description of the used configuration and dataset must always accompany all presented results. Therefore, we recommend to use a synthetic dataset that can be described in a few simple rules if possible.
+We have argued that there are many factors that influence the throughput of a flow monitoring system. Since it is clearly not possible to test all combinations of the input parameters, it is necessary to choose a set of appropriate settings that cover either the most extreme scenarios or approximate some important real world scenario. The work of~\citeauthor{Nassopulos-2014-Flow}~\cite{Nassopulos-2014-Flow} shows that performing a measurement using a large number of configurations allows to derive results that can help with the optimization effort. They show that the implementation of the flow cache as well as the composition of the traffic has large impact on the flow monitoring process. Regardless of the chosen parameters, a proper description of the used configuration and dataset must always accompany all presented results. Therefore, we recommend to use a synthetic dataset that can be described in a few simple rules.
 
 
 \subsection{Measuring an Impact of Optimizations}
 
-Throughput measurement is an integral part of any performance optimization effort. The goal of the measurement in this case is two-fold. Firstly, bottlenecks and need to be identified so that the optimization can be effective. For example, if a flow cache lookup takes 70\,\% of the total processing time for single packet, optimizing packet parser is not very effective. Secondly, the measurement is repeated examine the effect of a given optimization. Moreover, it is necessary to verify that optimizing for a single use case does not have a negative impact on other use cases. Therefore, a thorough performance measurement is repeated often during any optimization process.
+Throughput measurement is an integral part of any performance optimization effort. The goal of the measurement in this case is two-fold. Firstly, bottlenecks and need to be identified so that the optimization can be effective. For example, if a flow cache lookup takes 70\,\% of the total processing time for single packet, optimizing packet parser is not very effective. Secondly, the measurement is repeated to examine the effect of a given optimization. Moreover, it is necessary to verify that optimizing for a single use case does not have a negative impact on other use cases. Therefore, a thorough performance measurement is repeated often during any optimization process.
 
-Identifying bottlenecks can be a complicated process. It is often beneficial to measure execution time spent on processing a single packet throughout the flow monitoring process. The authors of~\cite{NETCOPETechnologies-2017-Modelling} show that it is possible to roughly estimate the time required for packet reception and parsing based on several parameters. Using similar process can help to identify bottlenecks in the flow processing as well.
+Identifying bottlenecks can be a complicated process. It is often beneficial to measure execution time spent on processing a single packet throughout the flow monitoring process. The authors of~\cite{NETCOPETechnologies-2017-Modelling} show that it is possible to roughly estimate the time required for packet reception and parsing based on several parameters. \citeauthor{Gallenmueller-2015-Comparison} apply similar methodology to compare the performance of several high-performance packet processing frameworks in~\cite{Gallenmueller-2015-Comparison}. Using a similar process can help to identify bottlenecks in the flow processing as well.
 
 The processing speed of a computer is limited by the speed of the processor and the time required to fetch data from memory. If a computation requires only a small amount of memory that fits in CPU registers or L1 cache, the processor can be fully utilized. However, when a lot of data needs to be processed, there are many uncached accessed to memory with high latency. This causes the CPU utilization to be low. It is therefore very useful to measure number of instructions per processor cycle (IPC). The higher the IPC, the better the CPU is utilized. When optimizing such a process, the computation should be simplified. However, when the IPC is low, the CPU waits for data from memory. In such a case, optimizing data locality and memory accesses is the best way to improve the performance. 
 
@@ -63,15 +62,53 @@ Optimizations proposed in Sections~\ref{sec:performance-hw-acceleration} and~\re
 
 \section{High-Speed Packet Capture}\label{sec:performance-capture}
 
-%packet capture is part of flow monitoring
+Packet capture is the first step of the flow monitoring process and has a significant impact on the overall performance. Moreover, as it is an important part of other network applications, such as switching and routing~\cite{Kawashima-2016-Host}, the high-speed packet capture using commodity hardware running Linux operating system has been an active research area in recent years. Since the performance of packet capture directly impacts the performance of the whole flow monitoring process, the aim of this section is to present basic principles and significant technologies in this area. Furthermore, some techniques of the packet capture, such as Receive Side Scaling (RSS), have direct impact on the functionality of flow monitoring as well.
 
-% device + driver must make packet reception available to users
-% standard NICs drivers pass packets to kernel for processing, this enables the system to use the NIC for normal communication through network sockets. TCP processing, etc, much overhead, no fun. not suitable for monitoring. 
-% lots of drivers that try to limit copying and bypass the kernel.
+The goal of high-speed packet capture is to deliver packets from Network Interface Card (NIC) to the user-space application as fast as possible while providing desired functionality, such as packet fanout to multiple threads and applications. The main difference between high-speed packet capture and standard packet processing in operating system is that the high-speed packet capture is not connection oriented. It does not provide socket API for applications to easily communicate through. Instead, it allows applications to effectively receive and send raw packets. However, to understand the packet capture process and its limitations, we shortly describe how Linux network stack receives packets, as it is the common starting point of all packet capture frameworks.
+
+\subsection{Linux Network Stack}
+
+The basic function of every NIC is to receive packet from the network and pass it to the RAM memory, where it is processed further. Direct Memory Access (DMA) is used for the data transfer. The main advantage is that it does not require cooperation of the CPU and does not consume any CPU cycles. The NIC can access only a limited memory region for which the DMA access is permitted. In the Linux network stack this region is part of the kernel memory and is not directly accessible to the user-space. The way to notify the kernel of arrival used to be through Interrupt ReQuest (IRQ). However, as the network speed increased to 1\,Gbps speed, full utilization of the network used to cause an interrupt storm -- way too many interrupts for the system to handle efficiently. The original networking stack was replaced by New API (usually called NAPI), which uses polling for high speed packet reception and falls back to interrupts for lower packet rates. This combination of both interrupt and polling approaches allows to consume CPU cycles for low traffic and avoids interrupt storms for high packet rates. The NAPI was introduced in Linux kernel version 2.4.20 and 2.6.
+
+After the packet is present in RAM and the kernel is notifies, either by interrupt or polling, the packet is copied to kernel internal structure called \emph{sk\_buff}. This structure is then pushed to kernel network stack, where it is processed and made available to user applications. However, every call to a system \emph{recv*} function also needs to provide a pointer to an user-space buffer to which the data are copied. Therefore, the packet is copied twice by the kernel, as demonstrated in Figure~\ref{fig:NAPI_no_MMAP}.
+
+\begin{figure}[!tb]
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \includegraphics{figures/NAPI}
+        \caption{Without PACKET\_MMAP feature}
+        \label{fig:NAPI_no_MMAP}
+    \end{subfigure}%
+    \begin{subfigure}[t]{0.5\textwidth}
+        \includegraphics{figures/NAPI_MMAP}
+        \caption{With PACKET\_MMAP feature}
+        \label{fig:NAPI_MMAP}
+    \end{subfigure}
+    \caption{Packet transition through memory in Linux NAPI.}
+    \label{fig:NAPI}
+\end{figure}
+
+The Linux network stack (with \emph{sk\_buff}) cannot be used for packet capture, because the stack takes care of all layers of the packets and delivers only the application content to the application. However, there is an option to use raw packets where the application receives and sends complete packets with all headers, including the Ethernet. The reception of raw packets uses different structure than the \emph{sk\_buff}, however, two copy operations are needed for each packet as well. Apart to the excessive copying of the packets, there is another significant performance hit. The standard API for working with packets requires to perform a system call for reception of each packet (two call when a timestamp is needed as well). Moreover, it is not possible to utilize the RSS feature provided by some NICs and process packets independently on multiple cores.
+
+To provide an efficient way to perform packet capture using standard Linux kernel and drivers, \emph{PACKET\_MMAP}~\cite{LinuxKernelOrganization-2017-PACKETMMAP} feature was added to the kernel. It utilizes a shared buffer between the kernel and the user-space which alleviates the need to copy the packet for the second time, as show in Figure~\ref{fig:NAPI_MMAP}. Moreover, the number of packets that can be read in a single batch is not limited, which significantly lowers the number of necessary system calls and thus improves performance. Another advantage of the \emph{PACKET\_MMAP} feature is that the processing of packets can be performed by multiple threads. The distribution of packets can be performed using hash, round robin, random selection, and several other policies.
+
+Although the Linux NAPI has evolved to support fast packet handling, there are several important performance limitations left:
+\begin{itemize}
+  \item The packets are copied from DMA memory region to the user-space accessible buffers.
+  \item There is no support for RSS (Receive Side Scaling).
+  \item There is no support for NUMA architecture awareness.
+\end{itemize}
+
+There are several frameworks that aim to remove these limitations to achieve the highest possible throughput for packet I/O operations.
+
+\subsection{High-Speed Packet I/O Frameworks}
+
+% lots of drivers that try to limit copying and bypass the kernel (UIO drivers)
+
 
 % use related work from \section{High-Density Flow Monitoring}
 % flow monitoring utilizes sequential read: dpdk vs sze2 (find paper?)
-% multiqueue: supported protocols in HFE
+% multiqueue: supported protocols in HFE (RSS)
 % timestamps
 \itodo{TODO: Give a background about high-speed packet capture, lucaderi, etc.}
 \itodo{find something on interrupts vs polling}
@@ -82,6 +119,20 @@ Optimizations proposed in Sections~\ref{sec:performance-hw-acceleration} and~\re
 - - http://www.beba-project.eu/public\_deliverables/BEBA\_D3.3.pdf\\
 - - Timestamping: More information about packet capture can be found for example in the work of \citeauthor{Garcia-Dorado-2013-High}~\cite{Garcia-Dorado-2013-High}.\\
 }
+
+% netmap 2012
+% PFQ 2012
+% DPDK 2012
+% PF_RING 2005
+% PF_RING ZC
+% SNF
+% NAPATECH
+% SZE2
+% NAPI kernel 2.4.20 (2002), predtim byl interrupt per packet, tohle umi polling pro high load, TX_RING - raw packet access, mapped mememory also called PACKET_MMAP
+
+
+
+% latency - not a big issue for flow monitoring, unless high precision timestamps are used
 
 
 \section{Hardware Acceleration in Flow Monitoring}\label{sec:performance-hw-acceleration}

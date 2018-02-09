@@ -67,7 +67,7 @@
 
 %% motivace
 % proc je potreba sledovat sit 
-The Internet has become a crucial medium for business, entertainment, communication, learning, access to information, and other human endeavours. As the society becomes increasingly dependent upon the availability and security of online services, the revenue from disrupting the normal operation of these service increases as well. Gaining unauthorized access, disrupting functionality, stealing and selling confidential data, and impersonation are only a few examples of these disruptions. Various methods, such as firewalls and anti-virus software, are intended to thwart such attacks and reduce the associated risks. To protect users on their networks, network administrators often deploy network monitoring systems to detect and mitigate the threats.
+\noindent The Internet has become a crucial medium for business, entertainment, communication, learning, access to information, and other human endeavours. As the society becomes increasingly dependent upon the availability and security of online services, the revenue from disrupting the normal operation of these service increases as well. Gaining unauthorized access, disrupting functionality, stealing and selling confidential data, and impersonation are only a few examples of these disruptions. Various methods, such as firewalls and anti-virus software, are intended to thwart such attacks and reduce the associated risks. To protect users on their networks, network administrators often deploy network monitoring systems to detect and mitigate the threats.
 % The ubiquity of network attacks has become a status quo in network
 
 % pro velky site je dobre pouzivat flow, da se slusne analyzovat a narozdil od DPI skaluje
@@ -90,9 +90,9 @@ This work concludes with an outlook at the future of the flow monitoring. We ide
 }
 
 \thesislong{thanks}{
-    This is the acknowledgement for my thesis, which can
+This is the acknowledgement for my thesis, which can
 
-    span multiple paragraphs.
+span multiple paragraphs.
 }
 
 \usepackage{makeidx}      %% The `makeidx` package contains
@@ -218,8 +218,13 @@ This work concludes with an outlook at the future of the flow monitoring. We ide
 
 % Environment for chapter introductions (use \setlength{\parindent}{15pt} to indent paragraphs)
 \newenvironment{chapintro}
-{\begin{displayquote}\setlist[itemize]{leftmargin=*,after=\vspace*{-\baselineskip}}\itshape\leftskip=-5mm\rightskip=-5mm}
+{\begin{displayquote}\setlist[itemize]{leftmargin=15mm,rightmargin=10mm,after=\vspace*{-\baselineskip}}\itshape\leftskip=5mm\rightskip=5mm}
 {\end{displayquote}}
+
+% Without geometry package
+% \newenvironment{chapintro}
+% {\begin{displayquote}\setlist[itemize]{leftmargin=*,after=\vspace*{-\baselineskip}}\itshape\leftskip=-5mm\rightskip=-5mm}
+% {\end{displayquote}}
 
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
@@ -234,6 +239,25 @@ This work concludes with an outlook at the future of the flow monitoring. We ide
 
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
+
+% Change geometry, needs to be placed after \thesisload
+\usepackage[paper=a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,foot=1cm]{geometry}
+
+% Chapter titles
+\usepackage[noindentafter]{titlesec}
+% \titleformat{\chapter}[display]
+% {\raggedleft}
+% {\fontsize{40}{30}\selectfont\thechapter\vspace{0.5em}}
+% {0pt}
+% {\fontsize{20}{10}\selectfont}
+% [\rule{0.75\linewidth}{1pt}]
+
+\titleformat{name=\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\titleformat{name=\chapter,numberless}[display]
+{\normalfont\Large\bfseries}{}{0pt}{}
+\titlespacing{name=\chapter,numberless}{0pt}{-40pt}{20pt}
 
 % Quotes in italics with centered reference (package csquotes)
 \renewcommand{\mkbegdispquote}[2]{\itshape}
