@@ -90,7 +90,7 @@ After the packet is present in RAM and the kernel is notifies, either by interru
 
 The Linux network stack (with \emph{sk\_buff}) cannot be used for packet capture, because the stack takes care of all layers of the packets and delivers only the application content to the application. However, there is an option to use raw packets where the application receives and sends complete packets with all headers, including the Ethernet. The reception of raw packets uses different structure than the \emph{sk\_buff}, however, two copy operations are needed for each packet as well. Apart to the excessive copying of the packets, there is another significant performance hit. The standard API for working with packets requires to perform a system call for reception of each packet (two call when a timestamp is needed as well). Moreover, it is not possible to utilize the RSS feature provided by some NICs and process packets independently on multiple cores.
 
-To provide an efficient way to perform packet capture using standard Linux kernel and drivers, \emph{PACKET\_MMAP}~\cite{LinuxKernelOrganization-2017-PACKETMMAP} feature was added to the kernel. It utilizes a shared buffer between the kernel and the user-space which alleviates the need to copy the packet for the second time, as show in Figure~\ref{fig:NAPI_MMAP}. Moreover, the number of packets that can be read in a single batch is not limited, which significantly lowers the number of necessary system calls and thus improves performance. Another advantage of the \emph{PACKET\_MMAP} feature is that the processing of packets can be performed by multiple threads. The distribution of packets can be performed using hash, round robin, random selection, and several other policies.
+To provide an efficient way to perform packet capture using standard Linux kernel and drivers, \emph{PACKET\_MMAP}~\cite{LinuxKernelOrganization-2017-PACKETMMAP} feature was added to the kernel. It utilizes a shared buffer between the kernel and the user-space which alleviates the need to copy the packet for the second time, as show in Figure~\ref{fig:NAPI_MMAP}. Moreover, the number of packets that can be read in a single batch is not limited, which significantly lowers the number of necessary system calls and thus improves performance. Another advantage of the PACKET\_MMAP feature is that the processing of packets can be performed by multiple threads. The distribution of packets can be performed using hash, round robin, random selection, and several other policies.
 
 Although the Linux NAPI has evolved to support fast packet handling, there are several important performance limitations left:
 \begin{itemize}
@@ -103,7 +103,24 @@ There are several frameworks that aim to remove these limitations to achieve the
 
 \subsection{High-Speed Packet I/O Frameworks}
 
+
+Although there were several works analysing the performance packet capture applications, such as~\cite{Degioanni-2003-Profiling}, one of the first alternatives to using the Linux network stack for packet capture was \emph{PF\_RING}. The PF\_RING socket was created by \citeauthor{Deri-2004-Improving} and its first description appeared in~\cite{Deri-2004-Improving}. The PACKET\_MMAP was very new at that time and some of the introduced features, such as memory mapping overlapped. However, the PF\_RING had several advantages. Firstly, the packets were not queued into kernel network structures at all. It meant, that they were not available to standard applications using socket API, but only to applications that used the PF\_RING sockets. Secondly, packet sampling was implemented at lower level, which meant that sampled packets were not even passed to upper layers. Lastly, multiple applications were able to simultaneously open several PF\_RING sockets without interference. However, the main performance limitations remained the same as with Linux NAPI.
+
+
+The problem with unnecessary copying between DMA-able memory and shared buffer was already solved when a specialized NICs with custom drivers were used. One of the most used cards for this purpose was the DAG NIC~\cite{UniversityWaikato--Dag} which was eventually commercialized by the Endace~\cite{ETL--Endace} company. The DAG NIC used FPGA chip that could be programmed to provide specific functionality, such as high-precision packet timestamping. Moreover, it meant that it was possible for the driver to instruct the card to upload packets in a correct format directly to the buffer that was shared to the user-space. \citeauthor{Degioanni-2004-Introducing} used this approach and proposed a design for distributing packets to multiple threads to better utilize CPU parallelism~\cite{Degioanni-2004-Introducing}. However, the card did not support RSS and thus the single buffer to which the NIC uploaded the packets remained to be a bottleneck.
+
+% nCAP, PF_RING DNA - exclusive access, specific drivers, worked only with some intel cards
+% https://www.ntop.org/pf_ring/introducing-pf_ring-dna-direct-nic-access/
+
+
+% 2010 PF_RING with RSS reature, numa aware, DNA eventually became ZC (packet fanout across multiple threads, cloud ready) and is available today as such.
+
+% 2012 netmap, dpdk, pfq
+
+% basically all FPGA based cards have some kind of zero copy driver (Napatech, Myricom, Mellanox Technologies, or Netcope Technologie, Endace), new Intel cards are often matching the capablities
 % lots of drivers that try to limit copying and bypass the kernel (UIO drivers)
+
+% TODO list performance comparison papers? implementation details are important, each framework has specific aim and users and thus features.
 
 
 % use related work from \section{High-Density Flow Monitoring}
@@ -122,11 +139,12 @@ There are several frameworks that aim to remove these limitations to achieve the
 
 % netmap 2012
 % PFQ 2012
-% DPDK 2012
+% DPDK 2012 (http://dpdk.org/doc/nics)
 % PF_RING 2005
-% PF_RING ZC
-% SNF
+% PF_RING ZC https://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/
+% SNF (myricom)
 % NAPATECH
+% Mellanox
 % SZE2
 % NAPI kernel 2.4.20 (2002), predtim byl interrupt per packet, tohle umi polling pro high load, TX_RING - raw packet access, mapped mememory also called PACKET_MMAP
 
