@@ -221,9 +221,9 @@ Let $P$ be a set of all packets. Let $T$ be a set of packet treatment informatio
 \end{equation*}
 so that $\widehat{p} \in \widehat{P}$ denotes a packet $p$ together with its packet treatment information. Let $\mathbb{S}$ be a set of indexes of packets observed at an \emph{observation point}:
 \begin{equation*}
-    \mathbb{S} = \{1, \ldots, n\} \lor \mathbb{N},
+    \mathbb{S} = \{1, \ldots, n\}, %\lor \mathbb{N},
 \end{equation*}
-where $n \in \mathbb{N}$ is the number of observed packets when the number is finite.
+where $n \in \mathbb{N}$ is the number of observed packets.% when the number is finite.
 
 We denote sequence of packets and extended packets observed at an \emph{observation point} respectively:
 \begin{align*}
@@ -259,15 +259,16 @@ Before we give a formal definition of a flow\index{flow!formal definition of}, w
 
 We shall now define set $\mathbb{I}$ of indexes from $(\widehat{p}_i)$ selected using \emph{flow selection function} $\varphi$, and flow $\mathcal{F}$ so that it conforms with the Definition~\ref{def:flow} as follows:
 \begin{defn}\label{def:formal-flow}
-Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{S}$ be (possibly finite) mutually corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
+Let $(p_i)_{i \in S}, (\widehat{p}_i)_{i \in S}, S \subseteq \mathbb{S}$ be %(possibly finite)
+mutually corresponding sequences of packets and extended packets respectively, $\varphi$ a \emph{flow selection function}.
 
 We define a \emph{flow index set} $\mathbb{I} = \mathbb{I}\left((\widehat{p}_i)_{i \in S},\, \varphi\right)$ as 
 \begin{align*}
-\mathbb{I} &= \lim_{i \to \infty} J_i \text{, where } J_i \text{ is defined inductively over }i \in \mathbb{N} \text{ as:} \notag\\
+\mathbb{I} &= \bigcup_{i \to \infty} J_i \text{, where } J_i \text{ is defined inductively over }i \in \mathbb{N} \text{ as:} \notag\\
 J_i &= \left\{
     \begin{array}{ll}
         \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\} & \text{for } i = 1 , \\[0.7em]
-        J_{i-1} \cup \{\min\{ \alpha \in S \mid \alpha > \sup(J_{i-1}), & \multirow{2}{*}{\text{for } $i > 1$.} \\
+        J_{i-1} \cup \{\min\{ \alpha \in S \mid \alpha > \max(J_{i-1}), & \multirow{2}{*}{\text{for } $i > 1$.} \\
         \quad \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true \}\} &
     \end{array}\right.
 \end{align*}

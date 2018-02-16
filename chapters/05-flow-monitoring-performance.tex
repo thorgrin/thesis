@@ -149,16 +149,16 @@ make clear which proposals are novel (my own), ticks/emph, maybe two table side 
 }
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{l|c||l|c}
+    \begin{tabular}{l|l}
     \toprule
-    \textbf{Hardware acceleration} && \textbf{Software acceleration} & \\ \hline
-    Receive Side Scaling && Multithreading & \\ \hline
-    Packet trimming && NUMA awareness & \\ \hline
-    Packet header preprocessing && Flow state in parsers & \cmark \\ \hline
-    Flow processing offloading && Flow cache design & \\ \hline
-    Application identification & \cmark & Flow expiration & \\ \bottomrule
+    \textbf{Hardware acceleration} & \textbf{Software acceleration} \\ \hline
+    Receive Side Scaling & Multithreading \\
+    Packet trimming & NUMA awareness \\
+    Packet header preprocessing & \emph{Flow state in parsers} \\
+    Flow processing offloading & Flow cache design \\
+    \emph{Application identification} & Flow expiration \\ \bottomrule
     \end{tabular}
-    \caption{Flow Acceleration Techniques}
+    \caption{Flow Acceleration Techniques (\emph{Novel Proposals Are Highlighted}).}
     \label{tab:flow-acc-techniques}
 \end{table}
 
