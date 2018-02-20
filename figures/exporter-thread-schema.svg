@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="exporter.svg">
+   sodipodi:docname="exporter-thread-schema.svg">
   <defs
      id="defs4">
     <marker
@@ -193,16 +193,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="227.02699"
-     inkscape:cy="163.18066"
+     inkscape:zoom="3.959798"
+     inkscape:cx="100.66186"
+     inkscape:cy="180.86021"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1139"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="3840"
+     inkscape:window-height="2105"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:snap-bbox-midpoints="true"
@@ -232,7 +232,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -248,11 +248,11 @@
          sodipodi:linespacing="125%"
          id="text4686-7"
          y="745.39697"
-         x="575.40002"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="576.94403"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
          xml:space="preserve"><tspan
            y="745.39697"
-           x="575.40002"
+           x="576.94403"
            id="tspan4688-6"
            sodipodi:role="line">Packet parsing</tspan></text>
       <rect
@@ -272,11 +272,11 @@
          sodipodi:linespacing="125%"
          id="text5100-5"
          y="674.30383"
-         x="583.15149"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="584.82635"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
          xml:space="preserve"><tspan
            y="674.30383"
-           x="583.15149"
+           x="584.82635"
            id="tspan5102-7"
            sodipodi:role="line">Flow cache</tspan></text>
       <path
@@ -308,7 +308,7 @@
          id="text3365"
          y="570.21936"
          x="682.85712"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:'TeX Gyre Pagella, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
          xml:space="preserve"><tspan
            y="570.21936"
            x="682.85712"
@@ -337,15 +337,15 @@
            y="561.64789" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-           x="584.88354"
-           y="582.5188"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="583.85101"
+           y="582.32074"
            id="text3394-7-3-6-3"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan3396-3-9-1-2"
-             x="584.88354"
-             y="582.5188">Thread 2N+1</tspan></text>
+             x="583.85101"
+             y="582.32074">Thread 2N+1</tspan></text>
       </g>
       <g
          transform="translate(-6.4285593,-4.2857143)"
@@ -356,12 +356,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-7-3"
-             y="719.66162"
-             x="533.12573"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="531.7807"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="533.12573"
+               y="719.46362"
+               x="531.7807"
                id="tspan3396-3-9"
                sodipodi:role="line">Thread N+1</tspan></text>
         </g>
@@ -382,12 +382,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-7-3-6"
-             y="719.66162"
-             x="531.12866"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="530.26709"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="531.12866"
+               y="719.46362"
+               x="530.26709"
                id="tspan3396-3-9-1"
                sodipodi:role="line">Thread 2N</tspan></text>
         </g>
@@ -408,12 +408,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394"
-             y="719.66162"
-             x="531.59253"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="531.02875"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="531.59253"
+               y="719.46362"
+               x="531.02875"
                id="tspan3396"
                sodipodi:role="line">Thread 1</tspan></text>
         </g>
@@ -434,12 +434,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-7"
-             y="719.66162"
-             x="530.75757"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="529.58356"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="530.75757"
+               y="719.46362"
+               x="529.58356"
                id="tspan3396-3"
                sodipodi:role="line">Thread N</tspan></text>
         </g>
@@ -489,27 +489,27 @@
          sodipodi:linespacing="125%"
          id="text5158"
          y="812.36218"
-         x="579.87512"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="580.55078"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
          xml:space="preserve"><tspan
            y="812.36218"
-           x="579.87512"
+           x="580.55078"
            id="tspan5160"
-           sodipodi:role="line">Input buffers</tspan></text>
+           sodipodi:role="line">Input queues</tspan></text>
       <g
          transform="translate(-0.35711992,9.64286)"
          id="g5217">
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-           x="548.98053"
-           y="783.85944"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="549.31573"
+           y="783.53931"
            id="text4690-7"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan4692-7"
-             x="548.98053"
-             y="783.85944">0</tspan></text>
+             x="549.31573"
+             y="783.53931">0</tspan></text>
         <g
            id="g4706-3"
            transform="translate(280.8123,450.34373)">
@@ -548,12 +548,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text4690-78"
-             y="793.5072"
-             x="664.2948"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="793.20715"
+             x="663.43329"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="793.5072"
-               x="664.2948"
+               y="793.20715"
+               x="663.43329"
                id="tspan4692-3"
                sodipodi:role="line">N-1</tspan></text>
         </g>
@@ -612,11 +612,11 @@
          sodipodi:linespacing="125%"
          id="text4686-7-5"
          y="744.44196"
-         x="332.92886"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="333.75854"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
          xml:space="preserve"><tspan
            y="744.44196"
-           x="332.92886"
+           x="333.75854"
            id="tspan4688-6-7"
            sodipodi:role="line">Packet parsing</tspan></text>
       <rect
@@ -637,7 +637,7 @@
          id="text5100-5-3"
          y="635.46808"
          x="418.16284"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:'TeX Gyre Pagella, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
          xml:space="preserve"><tspan
            y="635.46808"
            x="418.16284"
@@ -655,7 +655,7 @@
          id="text3365-5"
          y="569.26434"
          x="439.67163"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:'TeX Gyre Pagella, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
          xml:space="preserve"><tspan
            y="569.26434"
            x="439.67163"
@@ -684,15 +684,15 @@
            y="561.64789" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-           x="586.85132"
-           y="582.5188"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="586.10101"
+           y="582.32074"
            id="text3394-7-3-6-3-6"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan3396-3-9-1-2-3"
-             x="586.85132"
-             y="582.5188">Thread N+2</tspan></text>
+             x="586.10101"
+             y="582.32074">Thread N+2</tspan></text>
       </g>
       <g
          transform="translate(-191.75691,-5.240725)"
@@ -703,12 +703,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-7-3-3"
-             y="719.63477"
-             x="533.12573"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="531.7807"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.63477"
-               x="533.12573"
+               y="719.46362"
+               x="531.7807"
                id="tspan3396-3-9-8"
                sodipodi:role="line">Thread N+1</tspan></text>
         </g>
@@ -729,12 +729,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-0"
-             y="719.66162"
-             x="531.59253"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="531.02875"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="531.59253"
+               y="719.46362"
+               x="531.02875"
                id="tspan3396-8"
                sodipodi:role="line">Thread 1</tspan></text>
         </g>
@@ -755,12 +755,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text3394-7-4"
-             y="719.66162"
-             x="530.75757"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="719.46362"
+             x="529.58356"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="719.66162"
-               x="530.75757"
+               y="719.46362"
+               x="529.58356"
                id="tspan3396-3-0"
                sodipodi:role="line">Thread N</tspan></text>
         </g>
@@ -811,15 +811,15 @@
          id="g5217-2">
         <text
            xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-           x="548.98053"
-           y="783.85944"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="549.31573"
+           y="783.53931"
            id="text4690-7-0"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan4692-7-2"
-             x="548.98053"
-             y="783.85944">0</tspan></text>
+             x="549.31573"
+             y="783.53931">0</tspan></text>
         <g
            id="g4706-3-5"
            transform="translate(280.8123,450.34373)">
@@ -859,12 +859,12 @@
           <text
              sodipodi:linespacing="125%"
              id="text4690-78-2"
-             y="793.40894"
-             x="664.2948"
-             style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+             y="793.20715"
+             x="663.43329"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
              xml:space="preserve"><tspan
-               y="793.40894"
-               x="664.2948"
+               y="793.20715"
+               x="663.43329"
                id="tspan4692-3-8"
                sodipodi:role="line">N-1</tspan></text>
         </g>
@@ -920,17 +920,17 @@
          sodipodi:linespacing="125%"
          id="text5158-4"
          y="811.40717"
-         x="337.40396"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="337.00403"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
          xml:space="preserve"><tspan
            y="811.40717"
-           x="337.40396"
+           x="337.00403"
            id="tspan5160-7"
-           sodipodi:role="line">Input buffers</tspan></text>
+           sodipodi:role="line">Input queues</tspan></text>
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeX Gyre Pagella, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
        x="359.9577"
        y="830.25708"
        id="text4356"
@@ -941,7 +941,7 @@
          y="830.25708">(a)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:10px;line-height:125%;font-family:'TeX Gyre Pagella';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'TeX Gyre Pagella, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
        x="603.065"
        y="830.25708"
        id="text4360"
