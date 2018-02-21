@@ -117,7 +117,7 @@ Data set &  Flows & Packets & Bytes & HTTP Req.\\ \hline
 Summer 2014 & 3.733\,G & 188.953\,G & 198.362\,TB & 0.310\,G \\ \hline
 Spring 2015 & 6.680\,G & 552.523\,G & 604.704\,TB & 0.720\,G \\ \hline
 \end{tabular}
-\caption{Data Sets}
+\caption{Data Sets.}
 \label{tab:httpsecurity-data-sets}
 \end{table}
 
@@ -138,14 +138,14 @@ Class I   & 1 &              1 & 1 & n \\ \hline
 Class II  & 1 &              n & 1 & n \\ \hline
 Class III & 1 & \textgreater 1 & n & \textgreater n \\ \hline
 \end{tabular}
-\caption{Traffic Classes}
+\caption{Traffic Classes.}
 \label{tab:httpsecurity-classes}
 \end{table}
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{figures/paper-httpsecurity/classes}
-  \caption{Selected Classes of HTTP Traffic}
+  \includegraphics[width=0.8\textwidth]{figures/paper-httpsecurity/classes}
+  \caption{Selected Classes of HTTP Traffic.}
   \label{fig:httpsecurity-classes}
 \end{figure}
 
@@ -183,7 +183,7 @@ G8  & H4 & \parbox[t]{5cm}{/pub/linux/slax/Slax-7.x/7.0.8/slax-English-US-7.0.8-
 G9  & H7 &                 /wp-\textbf{login}.php & 3,632 \\ \hline
 G10 & H7 &           /polit/wp-\textbf{login}.php & 3,632 \\ \hline
 \end{tabular}
-\caption{Top Repeated Requests from One Day (Data Set Summer 2014)}
+\caption{Top Repeated Requests from One Day (Data Set Summer 2014).}
 \label{tab:httpsecurity-repeat}
 \end{table}
 
@@ -194,7 +194,7 @@ The second sample of results presented in Table~\ref{tab:httpsecurity-repeat2} w
 \begin{tabular}{| c | c | l | r|} \hline
 Guest & Host & HTTP Path & \#Flows \\ \hline
 G1  & H1 & /\textbf{proxy}/lib\textbf{proxy}.pac & 5,147 \\ \hline
-G2  & H2 & \parbox[t]{5cm}{/pub/linux/fedora/epel/6/x86\_64/repodata/ e63d28ff5a765b11a7052496f481f31aebab\\17c28545908d54e65904a1046ec8-filelists.sqlite.bz2} & 4,244 \\ \hline
+G2  & H2 & \parbox[t]{6cm}{/pub/linux/fedora/epel/6/x86\_64/ repodata/e63d28ff5a765b11a7052496\\f481f31aebab17c28545908d54e65904a\\1046ec8-filelists.sqlite.bz2} & 4,244 \\ \hline
 G3  & H3 & /senat/studenti/wp-\textbf{login}.php & 3,992 \\ \hline
 G3  & H4 & /\textbf{admin}istrator/index.php & 3,945 \\ \hline
 G3  & H5 & /slovnik/\textbf{admin}istrator/index.php & 3,934 \\ \hline
@@ -204,7 +204,7 @@ G3  & H8 & /index.php & 3,921 \\ \hline
 G3  & H9 & /\textbf{admin}istrator/index.php & 3,794 \\ \hline
 G3  & H10 & /wp-\textbf{login}.php & 3,701 \\ \hline
 \end{tabular}
-\caption{Top Repeated Requests from One Day (Data Set Spring 2015)}
+\caption{Top Repeated Requests from One Day (Data Set Spring 2015).}
 \label{tab:httpsecurity-repeat2}
 \end{table}
 
@@ -226,7 +226,7 @@ Subclass & Path regular expression & Portion [\%] \\
 \hline
 \textbf{Others} & & \textbf{40.0} \\
 \end{tabular}
-\caption{Distribution of Repeated Request}
+\caption{Distribution of Repeated Request.}
 \label{tab:httpsecurity-repeat-statistics}
 \end{table}
 
@@ -256,7 +256,7 @@ G1 & /phpMyAdmin/scripts/setup.php              & 494 &  99 \\ \hline
 G1 & /MyAdmin/scripts/setup.php                 & 491 &  99 \\ \hline
 G2 & /manager/html                              & 118 &  24 \\ \hline
 \end{tabular}
-\caption{Top HTTP Scanners from One Day (Data Set Summer 2014)}
+\caption{Top HTTP Scanners from One Day (Data Set Summer 2014).}
 \label{tab:httpsecurity-scanners}
 \end{table}
 
@@ -275,7 +275,7 @@ G1 & /blog/wp-login.php & 201 & 40 \\ \hline
 G2 & /bins.php & 183 & 37 \\ \hline
 G3 & /cgi-bin/test-cgi & 102 & 21 \\ \hline
 \end{tabular}
-\caption{Top HTTP Scanners from One Day (Data Set Spring 2015)}
+\caption{Top HTTP Scanners from One Day (Data Set Spring 2015).}
 \label{tab:httpsecurity-scanners2}
 \end{table}
 
@@ -324,7 +324,7 @@ Guest & Domain Name & \#Hosts \\ \hline
 % 5.255.253.60  & spider-5-255-253-60.yandex.com      & 2 \\ \hline
 % 77.75.77.32   & fulltextrobot-77-75-77-32.seznam.cz & 2 \\ \hline
 \end{tabular}
-\caption{Top HTTP Crawlers from One Day (Data Set Summer 2014)}
+\caption{Top HTTP Crawlers from One Day (Data Set Summer 2014).}
 \label{tab:httpsecurity-crawlers}
 \end{table}
 % requests per host? zajimave pro implementaci
@@ -347,7 +347,7 @@ Guest & Domain Name & \#Hosts \\ \hline
 77.75.77.200  & screenshotgenerator-77-75-77-200.seznam.cz & 11 \\ \hline
 46.229.164.99 & NOT FOUND & 10 \\ \hline
 \end{tabular}
-\caption{Top HTTP Crawlers from One Day (Data Set Spring 2015)}
+\caption{Top HTTP Crawlers from One Day (Data Set Spring 2015).}
 \label{tab:httpsecurity-crawlers2}
 \end{table}
 
@@ -447,8 +447,8 @@ Figure~\ref{fig:ipv6-tunnels-monitoring-schema} shows traffic between two endpoi
 
 \begin{figure}[!tb]
         \centering
-        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/tunely-schema}
-        \caption{Teredo and 6to4 Principles: \ding{172} Teredo Start Setup, \ding{173} Teredo Traffic Transiting over IPv4 Network, \ding{174} 6to4 Traffic Transiting over IPv4 Network, \ding{175} Communication between Teredo and 6to4 Endpoint}
+        \includegraphics{figures/paper-tunnels/tunely-schema}
+        \caption{Teredo and 6to4 Principles: \ding{172} Teredo Start Setup, \ding{173} Teredo Traffic Transiting over IPv4 Network, \ding{174} 6to4 Traffic Transiting over IPv4 Network, \ding{175} Communication between Teredo and 6to4 Endpoint.}
         \label{fig:ipv6-tunnels-monitoring-schema}
 \end{figure}
 
@@ -470,8 +470,8 @@ We provide the source code of the measuring tool under BSD license at the projec
 
 \begin{figure}[!tb]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/paper-tunnels/cesnet-map}
-\caption{CESNET monitored links}
+\includegraphics[width=0.8\textwidth]{figures/paper-tunnels/cesnet-map}
+\caption{CESNET Monitored Links.}
 \label{fig:ipv6-tunnels-topology}
 \end{figure}
 
@@ -484,7 +484,7 @@ We provide the source code of the measuring tool under BSD license at the projec
         PIONIER & 0.51\,G & 75.6\,k & 2.8\,k \\
         SANET & 1.87\,G & 242.3\,k & 5.3\,k \\ \bottomrule
         \end{tabular}
-        \caption{Observation Points IPFIX Statistics}
+        \caption{Observation Points IPFIX Statistics.}
         \label{tab:ipv6-tunnels-collected-data}
 \end{table}
 
@@ -504,14 +504,16 @@ We study the distribution of \textit{TTL values} of the observed flows. It is kn
 Overall, the TTL distribution of IPv4 traffic is different as shown in Figure~\ref{fig:ipv6-tunnels-ipv4-ttl4}. The Linux portion of the traffic is higher and the TTL values of 32 and 255 are not as significant. A more detailed examination of the flow records shows that this is caused mainly by a high ratio of HTTP traffic. Even though there are more clients using Windows operating system, most of the web servers are based on Linux and therefore the responses have TTL less than 64. The DNS protocol shows similar characteristics except that the DNS traffic that we observe at our metering points is mostly generated by recursive domain name servers. Since the Linux DNS servers are the most widely used, they significantly contribute to the traffic generated by Linux machines.
 
 \begin{figure}[tb]
-    \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/ttl}
-    \caption{TTL Value Distribution of IPv4 Traffic Containing IPv6 Payload}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ttl/ttl}
+    \caption{TTL Value Distribution of IPv4 Traffic Containing IPv6 Payload.}
     \label{fig:ipv6-tunnels-ipv4-ttl}
 \end{figure}
 
 \begin{figure}[tb]
-    \includegraphics[width=1.0\linewidth]{figures/paper-tunnels/ttl/ttl4}
-    \caption{TTL Value Distribution of Total Observed IPv4 Traffic}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ttl/ttl4}
+    \caption{TTL Value Distribution of Total Observed IPv4 Traffic.}
     \label{fig:ipv6-tunnels-ipv4-ttl4}
 \end{figure}
 
@@ -520,8 +522,8 @@ IPv6 uses \textit{HOP limit} instead of TTL. Figure~\ref{fig:ipv6-tunnels-ipv6-n
 % pocitano z 29 a  30.1, bez nix2
 \begin{figure}[tb]
         \centering
-        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/native-hop}
-        \caption{HOP Value Distribution of IPv6 Traffic}
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ttl/native-hop}
+        \caption{HOP Value Distribution of IPv6 Traffic.}
         \label{fig:ipv6-tunnels-ipv6-native-hop}
 \end{figure}
 
@@ -531,14 +533,16 @@ The second characteristic that we evaluate is \textit{geolocation aspect} of the
 
 \begin{figure}[!tb]
      \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-in}
-        \caption{Incoming Traffic}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-in}
+        \caption{Incoming Traffic.}
         \label{fig:ipv6-tunnels-geo-native-in}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-out}
-        \caption{Outgoing Traffic}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-native-out}
+        \caption{Outgoing Traffic.}
         \label{fig:ipv6-tunnels-geo-native-out}
     \end{subfigure}
     \caption{Top 10 Country Distribution for Native IPv4, IPv6 and Decapsulated IPv6 Addresses}
@@ -556,22 +560,22 @@ where $\mathbf{1}\{x_{i}\leq x\}$ is the indicator whether the event $\{x_{i}\le
 
 \begin{figure}[!tb]
      \centering
-     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_duration}
-     \caption{CCDF of Flow Duration}
+     \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/cdf_functions/cdf_duration}
+     \caption{CCDF of Flow Duration.}
      \label{fig:ipv6-tunnels-cdf_duration}
 \end{figure}
 
 \begin{figure}[!tb]
      \centering
-     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_packets}
-     \caption{CCDF of Packets per Flow}
+     \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/cdf_functions/cdf_packets}
+     \caption{CCDF of Packets per Flow.}
      \label{fig:ipv6-tunnels-cdf_packets}
 \end{figure}
 
 \begin{figure}[!tb]
      \centering
-     \includegraphics[width=1.00\textwidth]{figures/paper-tunnels/cdf_functions/cdf_bytes}
-     \caption{CCDF of Packet Size}
+     \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/cdf_functions/cdf_bytes}
+     \caption{CCDF of Packet Size.}
      \label{fig:ipv6-tunnels-cdf_bytes}
 \end{figure}
 
@@ -591,8 +595,8 @@ Figure~\ref{fig:ipv6-tunnels-tunnels-hop} shows HOP limit distribution for the e
 
 \begin{figure}[!tb]
         \centering
-        \includegraphics[width=1.00\linewidth]{figures/paper-tunnels/ttl/hop}
-        \caption{HOP Value Distribution of Encapsulated IPv6 Traffic}
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ttl/hop}
+        \caption{HOP Value Distribution of Encapsulated IPv6 Traffic.}
         \label{fig:ipv6-tunnels-tunnels-hop}
 \end{figure}
 
@@ -619,7 +623,7 @@ Table~\ref{tab:ipv6-tunnels-teredo-servers-3544} shows Teredo servers discovered
             94.245.121.251 & 0.01\,\% & Microsoft & GB \\
             217.31.202.10 & 0.01\,\% & CZ.NIC & CZ \\ \bottomrule
         \end{tabular}
-        \caption{Based on Teredo IPv6 Addresses}
+        \caption{Based on Teredo IPv6 Addresses.}
         \label{tab:ipv6-tunnels-teredo-servers}
     \end{subtable}
     \par\medskip
@@ -642,7 +646,7 @@ Table~\ref{tab:ipv6-tunnels-teredo-servers-3544} shows Teredo servers discovered
         \caption{Based on UDP Port 3544}
         \label{tab:ipv6-tunnels-teredo-servers-3544}
     \end{subtable}
-    \caption{Top 10 Discovered Teredo Servers}
+    \caption{Top 10 Discovered Teredo Servers.}
 \end{table}
 
 \subsubsection{Location of Tunnel Endpoints}
@@ -652,16 +656,18 @@ Most of the native and decapsulated IPv6 communication takes place inside the EU
 
 \begin{figure}[!tb]
     \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-in}
-        \caption{Incoming Traffic}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-in}
+        \caption{Incoming Traffic.}
         \label{fig:ipv6-tunnels-geo-tun-in}
     \end{subfigure}
     \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.97\linewidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-out}
-        \caption{Outgoing Traffic}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-tunnels/ctry_distribution/ctry_distribution-tun-out}
+        \caption{Outgoing Traffic.}
         \label{fig:ipv6-tunnels-eo-tun-out}
     \end{subfigure}
-    \caption{Top 10 Country Distribution for Encapsulated IPv6 Addresses}
+    \caption{Top 10 Country Distribution for Encapsulated IPv6 Addresses.}
     \label{fig:ipv6-tunnels-geo-tun-both}
 \end{figure}
 
@@ -721,12 +727,12 @@ Other related works, such as \textit{SiLK}~\cite{CERTNSAT--SiLK}, \textit{ntop}~
 
 Besides exporter- and collector-based geolocation approaches, dedicated analysis applications have also been developed. These applications retrieve flow data from flow collectors and subsequently perform the geolocation. \textit{SURFmap}~\cite{Hofstede--SURFmap, Hofstede-2009-SURFmap}, a plugin for the flow collector \textit{NfSen}, uses geolocation to visualize network traffic on a map using the Google Maps API. Due to a dependency on the Google Maps Geocoder for translating location names to coordinates, only a limited number of queries can be executed per day. A \textit{geofilter} has been included since version 2.3, which aims to filter flow data based on country, region or city keywords as a post-processing step. The specification of this \textit{geofilter} is one of the core elements of our collector-based geolocation prototype. Another application is \textit{HAPviewer}~\cite{Blatter-2011-Extending}, which is able to provide flow-level statistics per country of communication partners. Both \textit{SURFmap} and \textit{HAPviewer} perform geolocation on-demand and do not provide native geolocation support.
 
-\begin{figure*}[!tb]
+\begin{figure}[!tb]
     \centering
-    \includegraphics[width=\textwidth]{figures/paper-geolocation/nfgeodump.png}
+    \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/nfgeodump.png}
     \caption{Screenshot of Collector-Based Geolocation Prototype.}
     \label{fig:geo-nfgeodump_screenshot}
-\end{figure*}
+\end{figure}
 
 \subsection{Exporter-Based Geolocation} \label{subsec:geo-exporter_based_geolocation}
 
@@ -754,15 +760,15 @@ The primary tasks of flow exporters and collectors are data export and collectio
 
 \begin{figure}[!tb]
     \centering
-    \includegraphics[width=\textwidth]{figures/paper-geolocation/performance/performance}
-    \caption{MaxMind GeoLite Country Database Performance}
+    \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/performance/performance}
+    \caption{MaxMind GeoLite Country Database Performance.}
     \label{fig:geo-mm-perf}
 \end{figure}
 
 \begin{figure}[!tb]
     \centering
-    \includegraphics[width=\textwidth]{figures/paper-geolocation/ctry-cn-tw/flows}
-    \caption{Incoming TCP SYN-Only Flows}
+    \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/ctry-cn-tw/flows}
+    \caption{Incoming TCP SYN-Only Flows.}
     \label{fig:geo-tcp-syn}
 \end{figure}
 
@@ -771,36 +777,39 @@ The primary tasks of flow exporters and collectors are data export and collectio
 In this section, we present analysis results from our collector-based geolocation prototype, organized by two use cases. It is based on the deployment described in Subsection~\ref{subsec:geo-prototype_deployment}. The first use case demonstrates the applicability of our (pre-processed) geolocation approaches for the sake of anomaly detection. The second use case presents week-long traffic profiling at the country-level.
 
 \begin{figure}[!tb]
-    \centering
     \begin{subfigure}[t]{\textwidth}
-        \includegraphics[width=\textwidth]{figures/paper-geolocation/icmp/packets}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/icmp/packets}
         \caption{ICMP}
         \label{fig:geo-icmp-traffic}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[t]{\textwidth}
-        \includegraphics[width=\textwidth]{figures/paper-geolocation/icmp-geo/packets}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/icmp-geo/packets}
         \caption{Geolocated ICMP}
         \label{fig:geo-icmp-geo-traffic}
     \end{subfigure}
-    \caption{Geolocated and Non-Geolocated ICMP Traffic}
+    \caption{Geolocated and Non-Geolocated ICMP Traffic.}
     \label{fig:geo-icmp}
 \end{figure}
 
 \begin{figure}[!tb]
     \centering
     \begin{subfigure}[t]{\textwidth}
-        \includegraphics[width=\textwidth]{figures/paper-geolocation/ipv4-ctry-breakdown/ipv4-ctry-breakdown-in}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/ipv4-ctry-breakdown/ipv4-ctry-breakdown-in}
         \caption{IPv4}
         \label{fig:geo-ipv4-traffic}
     \end{subfigure}%   
     \hfill
     \begin{subfigure}[t]{\textwidth}
-        \includegraphics[width=\textwidth]{figures/paper-geolocation/ipv6-ctry-breakdown/ipv6-ctry-breakdown-in}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/ipv6-ctry-breakdown/ipv6-ctry-breakdown-in}
         \caption{IPv6}
         \label{fig:geo-ipv6-traffic}
     \end{subfigure}
-    \caption{Distribution of Incoming Traffic over Countries (1 Week)}
+    \caption{Distribution of Incoming Traffic over Countries (1 Week).}
     \label{fig:geo-ip_ctry_breakdown}
 \end{figure}
 
@@ -824,8 +833,8 @@ The distribution of source countries of IPv6 traffic is shown in Fig.~\ref{fig:g
 
 \begin{figure}[!tb]
     \centering
-    \includegraphics[width=\textwidth]{figures/paper-geolocation/https/flows}
-    \includegraphics[width=\textwidth]{figures/paper-geolocation/https/packets}
+    \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/https/flows}
+    \includegraphics[width=0.8\textwidth]{figures/paper-geolocation/https/packets}
     \caption{Distribution of HTTPS Traffic over Countries}
     \label{fig:geo-https-traffic}
 \end{figure}
@@ -904,7 +913,7 @@ We continually collect data from individual networks in our campus. We chose fiv
             Masaryk University & 1\,366.6\,G & 1\,427,7\,T & 20.1\,G \\ \hline
         \end{tabular}
 %         \smallskip
-        \caption{Measured Networks}
+        \caption{Measured Networks.}
         \label{tab:characterization-measured-networks}
 \end{table}
 
@@ -918,16 +927,15 @@ The \textbf{Virtual Switching Segment} (VSS) contains a server segment and also 
 
 \textbf{Masaryk University}'s (MU) network is measured as a whole at the uplink to ISP. The communication of every university subnet is observed at this point with the exception of internal communication.
 
-% Add network topology schema?
-
 \subsubsection{Data Collection}
 
 We have a flow probe~\cite{Hofstede-2014-Flow} monitoring each of the networks in our campus. The data from the probes is sent to a flow collector where it is stored for further processing. The flow monitoring architecture is depicted in Figure~\ref{fig:characterization-monitoring-architecture}.
 
 \begin{figure}[!t]
         \begin{center}
-                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/monitoring_architecture}
-                \caption{Flow Monitoring Architecture Schema} \label{fig:characterization-monitoring-architecture}
+                \includegraphics{figures/paper-characterization/monitoring_architecture}
+                \caption{Flow Monitoring Architecture Schema.}
+                \label{fig:characterization-monitoring-architecture}
         \end{center}
 \end{figure}
 
@@ -964,7 +972,7 @@ We generate five types of statistics from the original flow records: \emph{Basic
             \multirow{1}{*}{Layer 7} & Top 10 ports by packets, bytes, flows \\
             \hline
         \end{tabular}
-        \caption{Collected Statistics}
+        \caption{Collected Statistics.}
         \label{tab:characterization-collected-statistics}
 \end{table}
 
@@ -980,8 +988,9 @@ The day-night pattern is a key element of change in every network with human use
 
 \begin{figure}[!t]
         \begin{center}
-                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-ukb-jan}
-                \caption{Flows per Second in the UCB Network} \label{fig:characterization-flows-ukb-jan}
+                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/flows-ukb-jan}
+                \caption{Flows per Second in the UCB Network.}
+                \label{fig:characterization-flows-ukb-jan}
         \end{center}
 \end{figure}
 
@@ -989,8 +998,8 @@ The day-night behaviour of the network discloses a lot of information about the 
 
 \begin{figure}[!t]
         \begin{center}
-                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-vss-jan}
-                \caption{Flows per Second in the VSS Network} \label{fig:characterization-flows-vss-jan}
+                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/flows-vss-jan}
+                \caption{Flows per Second in the VSS Network.} \label{fig:characterization-flows-vss-jan}
         \end{center}
 \end{figure}
 
@@ -1009,7 +1018,7 @@ Figure~\ref{fig:characterization-flows-vss-jan} shows the Virtual Switching Segm
                 \textit{FI} & 10 & 5 & 2.04 & 2.16 & 1.47 & 1.64 \\ \hline
                 \textit{VSS} & 14 & 5 & 2.16 & 2.73 & 1.43 & 1.77 \\ \hline
         \end{tabular}
-        \caption{Day to Night and Workday to Weekend Ratio According to Flows per Second}
+        \caption{Day to Night and Workday to Weekend Ratio According to Flows per Second.}
         \label{tab:characterization-day-night-ratio}
 \end{table}
 
@@ -1028,15 +1037,15 @@ Another significant pattern that can be observed in network traffic is the weekd
 %
 \begin{figure}[!t]
         \begin{center}
-                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-week-ukb-jan}
-                \caption{Flows per Second in the UCB Network} \label{fig:characterization-flows-week-ukb-jan}
+                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/flows-week-ukb-jan}
+                \caption{Flows per Second in the UCB Network.} \label{fig:characterization-flows-week-ukb-jan}
         \end{center}
 \end{figure}
 
 \begin{figure}[!htb]
         \begin{center}
-                \includegraphics[width=\columnwidth]{figures/paper-characterization/flows-week-vss-jan}
-                \caption{Flows per Second in the VSS Network} \label{fig:characterization-flows-week-vss-jan}
+                \includegraphics[width=0.8\textwidth]{figures/paper-characterization/flows-week-vss-jan}
+                \caption{Flows per Second in the VSS Network.} \label{fig:characterization-flows-week-vss-jan}
         \end{center}
         \vspace{-1mm}
 \end{figure}
@@ -1063,7 +1072,7 @@ Using basic network characteristics such as packets per flow, bytes per packet, 
                 \textit{FI} & 5.40 s & 1.77 & 67.60 & 0.70 \\  \hline
                 \textit{VSS} & 7.14 s & 2.04 & 106.25 & 0.94 \\  \hline
         \end{tabular}
-        \caption{Average Length of Flow and Packets per Flow}
+        \caption{Average Length of Flow and Packets per Flow.}
         \label{tab:characterization-avg-lengths}
 \end{table}
 
@@ -1082,7 +1091,7 @@ Bytes per packet statistic had little variance over the measured networks and it
                 \textit{FI} & 1.24 & 1.35 & 1.22  & 1.31 \\ \hline
                 \textit{VSS} & 2.93 & 4.93 & 2.48 & 4.12 \\ \hline
         \end{tabular}
-        \caption{Source and Destination Hosts Day-Night Ratios}
+        \caption{Source and Destination Hosts Day-Night Ratios.}
         \label{tab:characterization-day-night-hosts-ratio}
 \end{table}
 
@@ -1106,7 +1115,7 @@ The utilisation of the IPv6 protocol in the network is a Layer 3 characteristic 
  \textit{FI} & 3.22\,\% & 2.04\,\% & 2.10\,\% \\ \hline
  \textit{VSS} & 4.66\,\% & 0.23\,\% & 0.17\,\% \\ \hline
         \end{tabular}
-        \caption{IPv6 Utilisation}
+        \caption{IPv6 Utilisation.}
         \label{tab:characterization-ipv6-utilization}
 \end{table}
 
@@ -1127,7 +1136,7 @@ We investigated the differences in Layer 4 protocol usage in the data sets. TCP 
                 \textit{FI} & 49.96\,\% & 49.07\,\% & 25.15\,\% & 73.49\,\% \\  \hline
                 \textit{VSS} & 30.67\,\% & 67.76\,\% & 19.30\,\% & 78.00\,\% \\  \hline
         \end{tabular}
-        \caption{TCP and UDP Share in Day and Night in Flows}
+        \caption{TCP and UDP Share in Day and Night in Flows.}
         \label{tab:characterization-tcp-udp-share-flows-table}
 \end{table}
 
@@ -1152,7 +1161,7 @@ Traffic analysis by port numbers provides evidence of application usage in the n
                 \textbf{SNMP} & \textbf{161} & 52.8\,\% & 11.9\,\% & -- & -- & 23.5\,\% \\ \hline
                 \textbf{Telnet} & \textbf{23} & 1.0\,\% & 1.3\,\% & 1.6\,\% & 0.4\,\% & -- \\ \hline
         \end{tabular}
-        \caption{The Most Common Ports by Flows in January}
+        \caption{The Most Common Ports by Flows in January.}
         \label{tab:characterization-ports}
 \end{table}
 

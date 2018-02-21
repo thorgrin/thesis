@@ -1,4 +1,4 @@
-\documentclass[oneside,11pt,nocover,
+\documentclass[twoside,11pt,nocover,
   printed, %% This option enables the default options for the
            %% digital version of a document. Replace with `printed`
            %% to enable the default options for the printed version
@@ -28,7 +28,7 @@
   main=english, %% By using `czech` or `slovak` as the main locale
                 %% instead of `english`, you can typeset the thesis
                 %% in either Czech or Slovak, respectively.
-  czech         %% The additional keys allow
+  czech,british %% The additional keys allow
 ]{babel}        %% foreign texts to be typeset as follows:
 %%
 %%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
@@ -44,8 +44,8 @@
     advisor       = {doc. Ing. Pavel Čeleda, Ph.D.},
     title         = {Application-Aware Flow Monitoring},
     TeXtitle      = {Application-Aware Flow Monitoring},
-    keywords      = {network, monitoring, network flow, NetFlow, IPFIX, performance, 100Gbps},
-    TeXkeywords   = {network, monitoring, network flow, NetFlow, IPFIX, performance, 100\,Gbps},
+    keywords      = {network, monitoring, measurement, flow, application flow, NetFlow, IPFIX, performance, 100Gbps},
+    TeXkeywords   = {network, monitoring, measurement, flow, application flow, NetFlow, IPFIX, performance, 100\,Gbps},
     bib           = {bibliography.bib,publications.bib,rfcused.bib},
 }
 \thesislong{abstract}{%
@@ -107,7 +107,10 @@ span multiple paragraphs.
 %         style=,
         sorting=none,
         autolang=other,
-        sortlocale=auto]{biblatex}
+        sortlocale=auto,
+        dateabbrev=false, % do not shorten visited on dates
+        urldate=long      % use full dates, no 20/10/2018
+        ]{biblatex}
 
 % clear unnecessary fields that might be filled in the bib files.
 % \AtEveryBibitem affects only bibliography, \AtEveryCitekey to affect the \fullcite command as well
@@ -308,9 +311,15 @@ span multiple paragraphs.
 
 %------------------------------------------------------------------------------
 
-% Print bibliography at the end (should happen automatically,
-% but this removes overleaf's warning)
+% Allow more breaks in URLs in bibliography
+\setcounter{biburlnumpenalty}{6000}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+% Print bibliography in british format, it is nicer than american
+\begin{otherlanguage}{british}
 \printbibliography[heading=bibintoc] %% Print the bibliography.
+\end{otherlanguage}
 
 %------------------------------------------------------------------------------
 

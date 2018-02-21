@@ -58,7 +58,7 @@ There is a number of open-source tools and commercial products that support an e
     \centering
     \footnotesize
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{>{\centering}m{1.5cm}| >{\centering}m{2cm} |c|>{\centering}m{0.8cm}|>{\centering\arraybackslash}m{5.1cm}}
+    \begin{tabular}{>{\centering}m{1.5cm}| >{\centering}m{2cm} |c|>{\centering}m{0.8cm}|>{\centering\arraybackslash}m{6.0cm}}
     \toprule
     \textbf{Vendor}    & \textbf{Product}                   & \textbf{IPFIX} & \textbf{App. ident.} & \textbf{App. visibility}  \\ \hline
     CERT NetSA         & YAF                                & \cmark         & \cmark                       & FTP, HTTP, IMAP, RTSP, SIP, SMTP, SSH, DNS, SSL/TLS, IRC, NNTP, POP3, SLP, TFTP, MySQL, DNP3, Modbus and RTP \\ \hline
@@ -106,7 +106,7 @@ Figure~\ref{fig:flow-monitoring-types} demonstrates the relations between the de
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/flow-monitoring-types}
+    \includegraphics{figures/flow-monitoring-types}
   \end{center}
   \caption{Relations between Different Flow Monitoring Types}
   \label{fig:flow-monitoring-types}
@@ -166,7 +166,7 @@ The creation of application layer parsers is a complicated process. Although the
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics[]{figures/encapsulation}
+    \includegraphics{figures/encapsulation}
   \end{center}
   \caption{Traffic Encapsulation Example}
   \label{fig:encapsulation}
@@ -212,8 +212,6 @@ There are other works that inspect the HTTP protocol headers. In~\cite{Schneider
 \subsection{Parser Design} \label{subsec:http-tool_design}
 
 HTTP protocol~\cite{rfc7230} has a number of properties that can be monitored and exported together with basic flow data. The most commonly monitored ones are present in almost every HTTP request or response header. Based on the properties monitored by the state-of-the-art DPI tools we selected the following ones for our parsers: \emph{HTTP method, status code, host, request URI, content type, user agent and referer}. Keeping track of every bidirectional HTTP connection is too resource consuming on high-speed networks, thus we focus on the evaluation of each individual packet. This approach is more common for flow exporters since it is more resistant to resource depletion attacks.
-
-We implemented and evaluated three different types of parsing algorithms. The first algorithm (\emph{strcmp} approach) loops the HTTP header line by line and searches each line for given fields. It uses standard glibc string functions like \emph{memchr}, \emph{memmem} and \emph{strncmp}. The simplified pseudocode is shown in Algorithm~\ref{alg:strcmp}. The second algorithm (\emph{pcre} approach) uses several regular expressions taken from YAF to search the packet for specific patterns indicating HTTP header fields. The pseudocode for the \emph{pcre} algorithm is shown in Algorithm~\ref{alg:pcre}. We designed the third algorithm (\emph{flex} approach) to handle each packet as a long string. It uses finite automaton to find required HTTP fields and the Flex lexer is used to process the packets. The automaton design is shown in Fig.~\ref{fig:flex_schema}.
 
 % This should be floating, but it is impossible to get labels straight when wrapped in figure env.
 \noindent\hspace{1pt}
@@ -261,10 +259,13 @@ We implemented and evaluated three different types of parsing algorithms. The fi
 }
 \end{algorithm}
 \end{minipage}
+\vspace{10pt}
 
-\begin{figure}[!ht]
+We implemented and evaluated three different types of parsing algorithms. The first algorithm (\emph{strcmp} approach) loops the HTTP header line by line and searches each line for given fields. It uses standard glibc string functions like \emph{memchr}, \emph{memmem} and \emph{strncmp}. The simplified pseudocode is shown in Algorithm~\ref{alg:strcmp}. The second algorithm (\emph{pcre} approach) uses several regular expressions taken from YAF to search the packet for specific patterns indicating HTTP header fields. The pseudocode for the \emph{pcre} algorithm is shown in Algorithm~\ref{alg:pcre}. We designed the third algorithm (\emph{flex} approach) to handle each packet as a long string. It uses finite automaton to find required HTTP fields and the Flex lexer is used to process the packets. The automaton design is shown in Fig.~\ref{fig:flex_schema}.
+
+\begin{figure}[t]
         \centering
-        \includegraphics[width=\textwidth]{figures/paper-http/flex_schema}
+        \includegraphics[width=0.8\textwidth]{figures/paper-http/flex_schema}
         \caption{\emph{flex} Algorithm Schema}
         \label{fig:flex_schema}
 \end{figure}
@@ -353,10 +354,10 @@ This case study uses the standard version of each parser that supports seven HTT
 
 First we discuss the Fig.~\ref{fig:http-pcap_1500}. The \emph{no HTTP} meter is capable of parsing more than 11 million packets per second. This result is not influenced by the application data carried in the packet since the data is not accessed by the \emph{no HTTP} parser. Employing event the fastest of the HTTP parsing algorithms the performance drops to the nearly one half of parsed packets per second. All of the HTTP parsers show the decrease in the performance as the ratio $r$ increases since the amount of request and response packets, which are more time demanding to parse, grows.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
         \centering
-        \includegraphics[width=\textwidth]{figures/paper-http/1500_pcap_norm_1}
-        \caption{Parser Performance Comparison with Respect to HTTP Proportion (0\,\% - No HTTP, 100\,\% - Only HTTP Headers) in the Traffic - Full Packets 1500\,B}
+        \includegraphics[width=0.8\textwidth]{figures/paper-http/1500_pcap_norm_1}
+        \caption{Parser Performance Comparison with Respect to HTTP Proportion (0\,\% - No HTTP, 100\,\% - Only HTTP Headers) in the Traffic - Full Packets 1500\,B.}
         \label{fig:http-pcap_1500}
 \end{figure}
 
@@ -366,10 +367,10 @@ The main difference between \emph{flex} and \emph{optimized flex} parsers is in 
 
 The performance of the \emph{pcre} parser is the lowest. The PCRE algorithm converts the regular expression to a tree structure and then performs a depth-first search while reading the input string. In case there is no match in the current tree branch, the algorithm backs up and tries another one. Therefore, for a complex regular expression, the pattern matching is not that fast as simple string search using functions like \emph{strcmp}. Another reason why the \emph{pcre} parser is not fast is that it performs all searches on whole packet payload. The other algorithms are processing the data sequentially.
 
-\begin{figure}
+\begin{figure}[tb]
         \centering
-        \includegraphics[width=\textwidth]{figures/paper-http/384_pcap_norm_1}
-        \caption{Parser Performance Comparison with Respect to HTTP Proportion (0\,\% - No HTTP, 100\,\% - Only HTTP Headers) in the Traffic - Truncated Packets 384\,B}
+        \includegraphics[width=0.8\textwidth]{figures/paper-http/384_pcap_norm_1}
+        \caption{Parser Performance Comparison with Respect to HTTP Proportion (0\,\% - No HTTP, 100\,\% - Only HTTP Headers) in the Traffic - Truncated Packets 384\,B.}
         \label{fig:http-pcap_384}
 \end{figure}
 
@@ -381,11 +382,11 @@ This case study was designed to show the impact of a number of parsed HTTP heade
 
 When payload packets are detected, they do not have their content parsed for additional HTTP header fields. Therefore, a test set containing only HTTP request and response packets was used. The case study starts with an empty plugin, that does not parse HTTP header fields and just labels the HTTP packets. In the next steps, we cumulatively add an additional header field to parse until we parse all of the seven supported fields. We run the tests for both full and truncated packets. The average performance of the parsers for each of the added field is shown in Fig.~\ref{fig:http-field}.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
-    \includegraphics[width=\textwidth]{figures/paper-http/mod_1500}
-    \caption{An HTTP Parser Throughput for 1500\,B Packets; Supported Fields - (0) \emph{none} - HTTP Protocol labeling, (1) \emph{+host}, (2) \emph{+method}, (3) \emph{+status code}, (4) \emph{+request URI}, (5) \emph{+content type}, (6) \emph{+referer}, (7) \emph{+user agent}} \label{fig:http-field}
-    \label{fig:http-field_1500}
+    \includegraphics[width=0.8\textwidth]{figures/paper-http/mod_1500}
+    \caption{An HTTP Parser Throughput for 1500\,B Packets; Supported Fields - (0) \emph{none} - HTTP Protocol labeling, (1) \emph{+host}, (2) \emph{+method}, (3) \emph{+status code}, (4) \emph{+request URI}, (5) \emph{+content type}, (6) \emph{+referer}, (7) \emph{+user agent}.} 
+    \label{fig:http-field}
 \end{figure}
 
 
@@ -397,8 +398,9 @@ Same as in the previous case study, the parsers processing truncated packets sho
 
 This case study investigates the possible effects of the position of the CR and LF control characters in the packet payload on the parser performance. The mentioned ASCII characters represent the end of line in the HTTP header. Some of the proposed algorithms use these characters as the trigger to stop parsing. Therefore the position of these characters affects the performance of the parsers. The packets with the CRLF characters at the very \emph{beginning} should be parsed faster than the packets having the CRLF at the \emph{end} since the algorithm terminates as soon as it identifies the CRLF characters. The test sets with modified binary payload packets (see Subsection~\ref{subsec:http-metodology}) enables us to compare the algorithms taking into account this perspective.
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{figures/paper-http/1500_noflex}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/paper-http/1500_noflex}
     \caption{Packet Content Effect - Packet Length 1500\,B}
     \label{fig:http-packet_structure}
 \end{figure}

@@ -48,7 +48,8 @@ Almost all the presented encryption protocols can be divided into two main phase
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{figures/protocols_scheme}
-		\caption{A general scheme of network security protocols.} \label{fig:protocols-scheme}
+		\caption{A General Scheme of Network Security Protocols.}
+		\label{fig:protocols-scheme}
 	\end{center}
 \end{figure}
 
@@ -68,14 +69,14 @@ IPsec follows the general scheme depicted in Figure~\ref{fig:protocols-scheme}. 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.9\textwidth]{figures/ipsec_transport_mode}
-  \caption{The IPsec packet structure in the transport mode.}
+  \caption{The IPsec Packet Structure in the Transport Mode.}
   \label{fig:ipsec-transport-mode}
 \end{figure}
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.9\textwidth]{figures/ipsec_tunnel_mode}
-  \caption{The IPsec packet structure in the tunnel mode.}
+  \caption{The IPsec Packet Structure in the Tunnel Mode.}
   \label{fig:ipsec-tunnel-mode}
 \end{figure}
 
@@ -93,7 +94,8 @@ The main part of TLS is the Record Protocol~\cite{rfc5246}, which acts as an env
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{figures/tls_record}
-		\caption{The TLS Record packet format.} \label{fig:tls-record}
+		\caption{The TLS Record Packet Format.} 
+		\label{fig:tls-record}
 	\end{center}
 \end{figure}
 
@@ -107,7 +109,8 @@ In a similar fashion to the TLS protocol, the Secure Shell (SSH) protocol~\cite{
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{figures/ssh_packet}
-		\caption{The SSH protocol packet format.} \label{fig:ssh-packet}
+		\caption{The SSH protocol packet format.} 
+		\label{fig:ssh-packet}
 	\end{center}
 \end{figure}
 
@@ -158,7 +161,8 @@ A very good example of extracting information from communication peers is demons
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.9\linewidth]{figures/certificate}
-		\caption{Example of Skype X.509 certificate.} \label{fig:certificates-contents}
+		\caption{Example of Skype X.509 Certificate.}
+		\label{fig:certificates-contents}
 	\end{center}
 \end{figure}
 
@@ -187,7 +191,8 @@ To present the current state of research on encrypted traffic classification in 
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{figures/taxonomy}
-		\caption{A multilevel taxonomy of traffic classification methods~\cite{Khalife-2014-multilevel}.} \label{fig:taxonomy}
+		\caption{A Multilevel Taxonomy of Traffic Classification Methods~\cite{Khalife-2014-multilevel}.} 
+		\label{fig:taxonomy}
 	\end{center}
 \end{figure}
 
@@ -205,7 +210,7 @@ To present the current state of research on encrypted traffic classification in 
 		\multicolumn{2}{ c| }{\textit{Hybrid \& Miscellaneous}} & combination of inputs, external knowledge \\ \hline
 	\end{tabularx}
 	\smallskip
-	\caption{Classification input level.}
+	\caption{Classification Input Level.}
 	\label{tab:classification-input}
 \end{table}
 
@@ -230,7 +235,7 @@ To present the current state of research on encrypted traffic classification in 
 		\multicolumn{2}{ c| }{\textit{Hybrid \& Miscellaneous}} & combination of methods, external knowledge \\ \hline
 	\end{tabularx}
 	\smallskip
-	\caption{Classification technique level.}
+	\caption{Classification Technique Level.}
 	\label{tab:classification-technique}
 \end{table}
 
@@ -255,7 +260,7 @@ To present the current state of research on encrypted traffic classification in 
 		Hybrid \& Miscellaneous & combination of outputs or classes, external knowledge \\ \hline
 	\end{tabularx}
 	\smallskip
-	\caption{Classification output level.}
+	\caption{Classification Output Level.}
 	\label{tab:classification-output}
 \end{table}
 
@@ -419,7 +424,8 @@ Korczynski and Duda~\cite{Korczynski-2014-Markov} proposed using stochastic fing
 \begin{figure}[!t]
 	\begin{center}
 		\includegraphics[width=0.9\linewidth]{figures/graphlets}
-		\caption{A visual representation of transport-layer interactions for various applications \cite{Karagiannis-2005-BLINC}.} \label{fig:graphlets}
+		\caption{A Visual Representation of Transport-Layer Interactions for Various Applications \cite{Karagiannis-2005-BLINC}.}
+		\label{fig:graphlets}
 	\end{center}
 \end{figure}
 
@@ -458,19 +464,19 @@ We have provided a summarizing overview of the feature-based traffic classificat
 \newcommand{\legendskip}{1.5cm}
 \begin{sidewaystable}
 	\centering
-	\tiny
+	\scriptsize
 	\begin{varwidth}{\textheight}
-	\renewcommand{\arraystretch}{0.9}
+	\renewcommand{\arraystretch}{1.1}
 	\setlength{\tabcolsep}{0.6em} % less horizontal padding to fit to page
 	\vfuzz=100pt % just get rid of those freaking warnings as an alternative to rewriting the whole table
 	\begin{tabu}{c|[1pt] c|[1pt] l|l|l|l|l|[1pt] c|c|[1pt] l|l|l|l|l|l|l|l|[1pt] r @{$~\to~$} l|[1pt] c| c|[1pt] l|l|l|l|c}
 		\multicolumn{1}{c|[1pt]}{} & \multicolumn{1}{c|[1pt]}{} & \multicolumn{5}{c|[1pt]}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|[1pt]}{} & \multicolumn{8}{c|[1pt]}{} & \multicolumn{2}{c|[1pt]}{} & & \multicolumn{1}{c|[1pt]}{} & \multicolumn{5}{c}{} \\
 				
-		\multirow{3}{*}{\rotatebox[origin=r]{90}{\textbf{Reference}\hspace{30pt}}} & \multirow{3}{*}{\rotatebox[origin=r]{90}{\centering \textbf{Publication year}\hspace{12pt}}} & \multicolumn{5}{c|[1pt]}{\textbf{Input}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Number of features}\hspace{7pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Feature selection}\hspace{14pt}}} & \multicolumn{8}{c|[1pt]}{\textbf{Technique}} & \multicolumn{2}{c|[1pt]}{\multirow{3}{*}{\textbf{Output}\vspace{23pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Encrypted protocol ident.}\hspace{-9pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Real-time identification}\hspace{-4pt}}} & \multicolumn{5}{c}{\multirow{2}{*}{\textbf{Data set}\vspace{11pt}}}\\[0.10cm]
+		\multirow{3}{*}{\rotatebox[origin=r]{90}{\textbf{Reference}\hspace{38pt}}} & \multirow{3}{*}{\rotatebox[origin=r]{90}{\centering \textbf{Publication year}\hspace{13pt}}} & \multicolumn{5}{c|[1pt]}{\textbf{Input}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Number of features}\hspace{7pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Feature selection}\hspace{17pt}}} & \multicolumn{8}{c|[1pt]}{\textbf{Technique}} & \multicolumn{2}{c|[1pt]}{\multirow{3}{*}{\textbf{Output}\vspace{23pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Encrypted proto. ident.}\hspace{-5pt}}} & \multirow{3}{*}{\rotatebox[origin=l]{90}{\textbf{Real-time ident.}\hspace{20pt}}} & \multicolumn{5}{c}{\multirow{2}{*}{\textbf{Data set}\vspace{11pt}}}\\[0.10cm]
 		
 		\cline{3-7} \cline{10-17} \cline{22-26}
 		
-		\multicolumn{1}{c|[1pt]}{} & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Traf. Payload}\hspace{13pt}}} & \multicolumn{4}{c|[1pt]}{\textbf{Traf. Properties}\bigstrut} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=r]{90}{\textbf{Payload Ins.}\hspace{12pt}}} &\multirow{2}{*}{\rotatebox[origin=r]{90}{\textbf{Graphlets}\hspace{18pt}}} & \multicolumn{2}{c|}{\textbf{Statis.}} &	\multicolumn{3}{c|}{\textbf{Machine}} & \multicolumn{1}{c|[1pt]}{\multirow{2}{*}{\textbf{Method(s)}\vspace{-33pt}}} & \multicolumn{2}{c|[1pt]}{} & & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Public}\hspace{31pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Private}\hspace{29pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Real}\hspace{36pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Artificial}\hspace{23pt}}} & \multirow{2}{*}{\parbox[c]{1.4cm}{\textbf{Ground truth}\vspace{-32pt}}} \\
+		\multicolumn{1}{c|[1pt]}{} & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Traf. Payload}\hspace{15pt}}} & \multicolumn{4}{c|[1pt]}{\textbf{Traf. Properties}\bigstrut} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=r]{90}{\textbf{Payload Ins.}\hspace{14pt}}} &\multirow{2}{*}{\rotatebox[origin=r]{90}{\textbf{Graphlets}\hspace{22pt}}} & \multicolumn{2}{c|}{\textbf{Statis.}} &	\multicolumn{3}{c|}{\textbf{Machine}} & \multicolumn{1}{c|[1pt]}{\multirow{2}{*}{\textbf{Method(s)}\vspace{-33pt}}} & \multicolumn{2}{c|[1pt]}{} & & \multicolumn{1}{c|[1pt]}{} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Public}\hspace{40pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Private}\hspace{38pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Real}\hspace{47pt}}} & \multirow{2}{*}{\rotatebox[origin=l]{90}{\textbf{Artificial}\hspace{31pt}}} & \multirow{2}{*}{\parbox[c]{1.4cm}{\textbf{Ground truth}\vspace{-32pt}}} \\
 		
 		\cline{4-7} \cline{12-16}
 		
