@@ -28,7 +28,7 @@
   main=english, %% By using `czech` or `slovak` as the main locale
                 %% instead of `english`, you can typeset the thesis
                 %% in either Czech or Slovak, respectively.
-  czech,british %% The additional keys allow
+  czech%,british %% The additional keys allow
 ]{babel}        %% foreign texts to be typeset as follows:
 %%
 %%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
@@ -112,6 +112,10 @@ span multiple paragraphs.
         urldate=long      % use full dates, no 20/10/2018
         ]{biblatex}
 
+\DefineBibliographyStrings{english}{%
+urlseen = {Accessed on},
+}
+        
 % clear unnecessary fields that might be filled in the bib files.
 % \AtEveryBibitem affects only bibliography, \AtEveryCitekey to affect the \fullcite command as well
 % example: \AtEveryCitekey{\ifentrytype{incollection}{\clearfield{doi}}{}}
@@ -282,7 +286,7 @@ span multiple paragraphs.
 \makeatother
 \DeclareFontShape{T1}{qpl}{m}{sl}{<->ssub * qpl/m/it}{}
 
-% supress warning about mutliple page groups in included pdfs
+% supress warning about multiple page groups in included pdfs
 \pdfsuppresswarningpagegroup=1
 
 % We want to use the AMSb symbol for mathbb
@@ -316,10 +320,16 @@ span multiple paragraphs.
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
+% TODO we can split literature by type, keywords, etc.
+% http://ctan.mirrors.hoobly.com/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsubsection.3.13.4
+% \printbibheading
+% \printbibliography[nottype=onlineheading=subbibliography,title={Printed Sources}]
+% \printbibliography[type=online,heading=subbibliography,title={Online Sources}]
+
 % Print bibliography in british format, it is nicer than american
-\begin{otherlanguage}{british}
+% \begin{otherlanguage}{british}
 \printbibliography[heading=bibintoc] %% Print the bibliography.
-\end{otherlanguage}
+% \end{otherlanguage}
 
 %------------------------------------------------------------------------------
 
