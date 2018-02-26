@@ -1,40 +1,221 @@
-\chapter{Next Generation Flow}\label{chap:next-generation-flow}
+\chapter{Next Generation Flow Monitoring}\label{chap:next-generation-flow}
 
+\begin{chapintro}
+
+
+
+% cca 250 words
+
+The paper included in this chapter is~\cite{Velan-2016-EventFlow}.
+
+The organisation of this chapter is as follows:
+\begin{itemize}
+  \item Section~\ref{sec:ng-background}
+  \item Section~\ref{sec:eventflow} 
+  \item Section~\ref{sec:metaflow} 
+  \item Section~\ref{sec:app-events} 
+  \item Section~\ref{sec:ng-summary} summarizes the chapter.
+\end{itemize}
+
+\end{chapintro}
+
+\newpage
+
+
+\section{Background}\label{sec:ng-background}
+% TODO mozna nebude potreba, ale bude se hodit v intru, pripadne v zaveru
 \itodo{Popsat milniky flow monitoringu - pocatky, security, application visibility, high-speed, ...\\
-Ukazat, kam se muze flow dostat dal - eventflow a metaflow\\
+Ukazat, kam se muze flow dostat dal - eventflow, metaflow, application event\\
 timeline obrazek}
 
-\section{EventFlow}
+\section{EventFlow}\label{sec:eventflow}
 
-\section{MetaFlow}
+%% motivation
+Application flow monitoring parses data from application headers and adds application specific elements to flow records. This way the information from application level can be easily transferred to flow collectors, stored, and utilised together with the information about the network communication. Current approach is to treat separate application protocols individually, e.g., develop an application processing module for each monitored protocol, as shown in Chapter~\ref{chap:application-flow-monitoring}. However, connections between different protocols are lost in this scenario. For example, when a~user wants to access a~web page, several different flows records are created. The DNS server must be contacted to resolve the hostname of the web page to an IP address. After the basic document is loaded, the user's browser automatically loads linked content, such as images, cascading style sheets, and java script libraries. The generated requests are recorded as flows, however, little relation between the flows is preserved.
+
+Information about relations between individual flows can be useful in several scenarios. First, when an advertisement on a web page contains malware, the page can be traced using the relation and notified of the malicious content. Second, aggregates of the related flows can be created to simplify behavioural analysis of network traffic. Moreover, the analysis can use the additional information to improve its accuracy. Last, traffic classification engines can also benefit from having access to information about flow relations~\cite{Wang-2014-Internet}.
+
+%% goals
+In this section we present a~flow monitoring extension, called EventFlow, which allows to keep track of relations between HTTP and DNS application flows. Information about flow relation is inserted to flow records to keep track of individual user actions, i.e., events. We develop a~prototype of the EventFlow extension and evaluate its properties on network traffic trace from an ISP network. Results show that at least 10\,\% of HTTP and DNS flow records form more complex events. We believe, that this is only a~lower bound and that further improvements can be made to relate even more flows into events.
+
+The rest of the section is structured as follows. Related work is surveyed in Subsection~\ref{subsec:eventflow-related_work}. We propose the architecture of EventFlow measurement in Section~\ref{subsec:eventflow-architecture}. Subsection~\ref{subsec:eventflow-prototype} describes the implementation of the EventFlow prototype. Experimental evaluation of the EventFlow prototype is performed in Subsection~\ref{subsec:eventflow-evaluation}. The section is concluded in Subsection~\ref{subsec:eventflow-conclusions}.
+
+
+\subsection{Related Work} \label{subsec:eventflow-related_work}
+
+Madhyastha and Krishnamurthy~\cite{Madhyastha-2008-Generic} propose a~generic language for application-specific flow sampling. Their language allows applications to select flows with special properties so that the negative impact of sampling on these applications is minimised. This can be useful for intrusion detection systems or traffic classification applications. Although the goal of this work is different from ours, it also aims to improve the collected data, so that traffic analysis applications can achieve higher accuracy.
+% language for app-specific flow sampling
+% better flow sampling, applications can say what they need
+% allows to select flows with special properties -> ease of processing for end applications such as IDS or traffic classification applications.
+
+The authors of~\cite{Lee-2015-Flow} also focus on improving quality of sampled flow data. They show that the traffic classification accuracy can be increased using related sampling, which assigns higher probability to connections that are part of the same application. The authors propose to use a~source IP address as a~measure of relation between connection sessions.
+% sampling based on flow relation - same IP address
+% more flow per application session 
+% better classification accuracy
+
+Hu et al.~\cite{Hu-2009-Entropy} propose an entropy based aggregation system to mitigate an impact of DoS attacks and worm spreads on a~network monitoring system. The main contribution of their approach is a~flow key attribute selection algorithm that chooses key attributes by which the flows are aggregated. Two dimensional hash table is used to implement their approach. The aggregated flows are called metaflows. The main difference from EventFlow is that we label existing flows belonging to same user action, while the metaflow is a~substitute flow for many flows created during a malicious network activity.
+% aggregation to metaflows in case of DoS or worm spread
+% the most important part is selection of flows to aggregate and appropriate key attributes for the aggregation
+% two dimensional hash table
+
+Dolberg et al.~\cite{Dolberg-2012-Efficient} introduce a~multidimensional flow aggregation aimed to reduce the volume of collected data. The authors use tree structures for storing the data by chosen dimension such as IP addresses or ports. EventFlow proposed in our work might be used in this scenario to aggregate flows by the same events.
+% multi-dimensional aggregation of stored information
+% reducing the amount of data
+% using tree structures
+% has a few relevant aggregation citations
+
+% Removed for the lack of space
+The usual approach to reduce the volume of collected data is to use sampling. Estan et al.~\cite{Estan-2004-Building} propose to use adaptive sampling rate to achieve highest possible accuracy within given data collection constrains. Their main contribution is a system for renormalisation of flow entries after the sampling rate was changed. The authors propose an extension to standard flow counting that increases the accuracy of the counters for sampled flow.
+% adaptive sampling rate
+% renormalization of flow entries after sampling rate change by manipulating packet and byte counters in existing entries
+
+
+\subsection{EventFlow Architecture} \label{subsec:eventflow-architecture}
+
+This section describes the architecture of the EventFlow monitoring. The goal is to label all flows that are the results of a~single user action with the same event identifier (EID). For example, accessing \url{http://www.w3.org/} creates 1 DNS request, 37 HTTP requests, and 8 HTTPS requests. We aim to assign a~single unique EID to the flows generated for all these DNS and HTTP requests.
+
+\begin{figure}[!tb]
+    \centering 
+    \includegraphics{figures/paper-eventflow/dependencies}
+    \caption{Relations between HTTP and DNS Requests and Responses.}
+    \label{fig:eventflow-relations}
+\end{figure}
+
+Four basic types of flows are recognised by the EventFlow: HTTP requests, HTTP responses, DNS requests and DNS responses. There are relations between these types of flows in network traffic, as shown in Figure~\ref{fig:eventflow-relations}. When HTTP request to a~new site is performed, the IP address of the site must be resolved first. Therefore, a~DNS request is created. After the request is observed, a~reply usually follows, which results in the relation 1). After the DNS reply arrives, the client knows the IP address of the server and makes the HTTP request, which creates the relation 2). An HTTP response follows the request, as indicated by the relation 3). The HTTP response can contain an HTML page which links to several additional resources such as external style sheets or images. The loading of these resources triggers more HTTP requests, resulting in relation 4). When these requests point to previously unresolved domains, new DNS requests are created, which introduces the relation 5).
+
+We base the EventFlow architecture on the relations between the requests and responses. When an HTTP or a~DNS flow is encountered, we must make sure that it is assigned the same EID as the related flows. Therefore, we create four sets of records: expected HTTP requests, expected HTTP responses, expected DNS requests and expected DNS responses. When processing an HTTP or a~DNS flow, we add new record to the set or sets it relates to. Then, when a~next flow is processed, it is matched against appropriate expected set to see whether it is a~part of existing event. If it is, an EID of the event is assigned to the flow record. For example, when a~DNS response is encountered, a~new record is put into the expected HTTP requests set (because of relation 2), see Figure~\ref{fig:eventflow-relations}). Then, when an HTTP request is processed, we check the expected HTTP requests set to see whether we are expecting this request based on a~previous DNS response. If the request is matched, it is assigned the same EID as the DNS response. 
+
+\begin{table}[!t]
+        \caption{Matched Flow Properties.}
+        \centering
+        \renewcommand{\arraystretch}{1.1}
+        \begin{tabular}{l|c|c|c|c|c|c}
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Source IP}\hspace{33pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination IP}\hspace{19pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination Port}\hspace{9pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{URL}\hspace{48pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Domain}\hspace{39pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \hspace{3pt}\textbf{DNS Transaction ID}} \\ \toprule
+                        Expected HTTP Request  & \cmark &  &  & \cmark & \cmark &  \\ \hline
+                        Expected HTTP Reply    & \cmark & \cmark & \cmark &  &  &  \\ \hline
+                        Expected DNS Request   & \cmark &  &  &  & \cmark &  \\ \hline
+                        Expected DNS Reply     & \cmark & \cmark & \cmark &  &  & \cmark \\ \bottomrule
+        \end{tabular}
+        \label{tab:eventflow-matched-properties}
+\end{table}
+
+Each of the sets of expected records uses different flow properties to match a~flow record. When matching an HTTP request flow against the expected HTTP requests set, the source IP address of the flow must match as well as the requested domain or the URL, if available. Checking the source IP address ensures that flows from different hosts are not combined into a~single event. A~domain name is checked for the records that were inserted in the set when DNS reply was encountered. In case an HTTP response caused the record to be inserted, the full URL is available, not only the domain name. Replies are checked based on IP addresses and destination port. Source port is not checked since  the services are expected to run on standard, well-known ports. The DNS reply is also checked for transaction ID, which is a unique identifier tying the request and response. However, the DNSSEC extension is ignored and does not affect the EventFlow. Therefore, any malicious responses would still be part of an event. List of the used properties is provided in Table~\ref{tab:eventflow-matched-properties}.
+
+An expiration of the records from the expected sets must be ensured. When a~record from any of the expected sets is matched, it is removed. However, many inserted records will never be matched. For example, when a~DNS request is made to accommodate a~different service than HTTP, the expected HTTP request might never appear. We need to free such records from the sets eventually. A~timeout is used to keep the expected sets from being congested by redundant records. A~timestamp is assigned to each record upon insertion to a~set. Then, each time the set is searched, records older than the timeout are removed. The timeout should be as short as possible to avoid blending of several events. However, it should be at least as long as it takes to process the longest user action, which might be up to a~couple of seconds in case of complicated queries to slow sites.
+
+There are several caveats to our approach and some limitations of the architecture that should be addressed in the future. Our approach does not handle HTTP redirection codes, therefore the first request and the HTTP 3xx redirection response are assigned different EID than the subsequent request to the resource. This problem can be rectified simply by adding a~handler for the HTTP 3xx redirection responses that will put a~new record with the redirect URL to the expected HTTP requests set.
+
+Another limitation of our approach is that the URLs are only extracted from HTML documents. However, modern web sites often use a~JavaScript code to request additional resources through the Ajax technique. Such requests cannot be easily matched to an event, since it would require to reconstruct the complete web page and process the included JavaScript code, which is infeasible for the flow monitoring system.
+
+There are also several caveats that cannot be avoided. Some of the requested documents might be cached by clients which would cause EventFlow to lose track of related URLs. However, cached DNS queries are of no consequence to the EventFlow since no traffic is generated for them and no information about a~flow relation is lost. Actions of different users can be mingled when Network Address Translation is used. And finally, the growing deployment of HTTPS reduces the usefulness of the EventFlow for the HTTP protocol. Nevertheless, it can always be used in environments utilising an HTTPS proxy such as data centres or enterprise networks.
+
+
+
+\subsection{EventFlow Prototype} \label{subsec:eventflow-prototype}
+
+We build the EventFlow prototype as a~plugin for the FlowMon~\cite{FlowmonNetworks--Flowmon} flow monitoring software. The FlowMon exporter is a~flexible flow exporter that provides support for various extensions. These extensions are used to implement a support for additional packet inputs, application protocol processing and different export protocols. We utilise the capabilities of the exporter to create an EventFlow extension plugin. The prototype can either be deployed to process data on live network or to analyse captured samples.
+
+\begin{figure}[!tb]
+    \centering 
+    \includegraphics{figures/paper-eventflow/prototype-schema}
+    \caption{EventFlow Prototype Schema.}
+    \label{fig:eventflow-prototype-schema}
+\end{figure}
+
+
+% how flowmon works
+The FlowMon exporter consists of three main components as shown in Figure~\ref{fig:eventflow-prototype-schema}. The first component is a~packet parser. It receives packets from the network and extracts information from network to application layer of each packet. The extracted information is used to create a~partial flow record, which contains all necessary information about the parsed packet such as IP addresses, ports, timestamps, byte counter, etc. It also contains application layer information when an application parsing is performed. The partial flow record is passed to the second component of the exporter which is a flow cache. The partial record is either inserted as a~new flow record or it is used to update an existing flow record, which is an aggregation of previous partial flow records. When a~flow record expires, it is released from the flow cache to an export component. The purpose of the export component is to convert raw flow records to a flow export protocol format such as NetFlow~\cite{rfc3954} or IPFIX~\cite{rfc7011} and pass the flow records over the network for further processing.
+
+Plugins, that extend the FlowMon exporter to process specific application layer protocols, such as DNS or HTTP, have access to several parts of the flow creation and export process. Each plugin can request to see the raw packet payload, process it, and add its own information to flow records, such as HTTP Host, Content-Type, or Response Code. Furthermore, the plugins are allowed to provide their own functionality for insert, update, and release methods of the flow cache. And last, each plugin defines how the information inserted into flow records is processed by the export component.
+
+The EventFlow prototype is implemented as an application protocol extension. However, it also utilises the data provided by other application plugins. The EventFlow combines information from the DNS and HTTP protocols to detect relations between flows, therefore it requires the DNS and HTTP application plugins to be deployed as well. The prototype extends the packet parser to extract URLs from HTML pages. These URLs are sent together with partial flow record to the flow cache, however, they are used only internally and they are newer exported in the flow records. When a~new flow record is created in the flow cache, the expected sets (see Section~\ref{sec:architecture}) are searched for a~match to the new record using DNS, HTTP, and URL information provided in the partial record. If a~match is found, the new flow records is assigned an Event ID (8 byte unsigned integer) of the matched record from the expected sets. Otherwise, if no match is found, a new EID is incrementally assigned to the new flow record. After the flow is expired from the cache, the EID is a~part of the record and is sent by the export component along with the rest of the flow record.
+
+Using an 8 byte integer for EID and assigning it incrementally to individual events ensures that there are no collisions due to EID overflow in practice. However, an assignment that is individual for each flow probe and persistent over the reboots of the system would be required for a~real-world deployment. The EID is assigned only to flows of the HTTP and DNS traffic, since it would provide no benefit to other flows as event relation tracking is not implemented for other protocols yet. Moreover, the size of the flows grows only by 8 bytes at maximum, which has negligible impact on the flow collector disk space requirements.
+
+
+\subsection{Experimental Evaluation} \label{subsec:eventflow-evaluation}
+
+We evaluate the prototype in two scenarios. First, we assess the functionality of the prototype on a~simple example web site. Once we have verified the functionality, we run EventFlow on a~packet trace from live network to determine how many flows can be joined to events in real traffic. The IPFIXcol~\cite{Velan-2012-Flow} flow collector is used to collect and process the generated flows. The main advantage of the collector is that it can be easily configured to work with the Event ID element.
+
+We do not evaluate the performance of the prototype in this phase. We are aware of several performance inefficiencies that need to be solved before any valuable results can be measured. For example, one of the most expensive parts of the prototype is the management of sets of expected records. We expect that changing the underlying data structures will significantly improve the performance.
+
+\subsubsection{Functional Evaluation}
+For the first scenario, we create a~simple website with two pages, each linking the other page, displaying an image, and referencing a~different JavaScript library. The evaluation proceeds as follows. We request the first page in a~browser and few seconds after it loads we follow the link to the other page. The packet trace of these actions is recorded and processed by the EventFlow prototype, and the resulting flows are collected by the IPFIXcol.
+
+We expect to see a~flow record for each of the requests and responses. However, due to the HTTP pipelining the whole communication with the web server hosting the test pages is done using a single connection. Therefore, there is a~pair of flows for the accessing the two web pages with the linked images (which were on the same server), two pairs of flows for each off-site JavaScript library, and three pairs of DNS flows for IP address resolution. There are 12 flows created in this test scenario in total. The 12 flows are divided in two events by the EventFlow prototype. The first event contains flows for the two DNS requests, HTTP communication with the web server and download of the first JavaScript library. The second event does not contain an HTTP flow due to the HTTP pipelining but contains the DNS request and the subsequent download of the second JavaScript library.
+
+The functional evaluation shows that the prototype correctly recognises related flows and labels them as a~part of the same event. The flow exporter can be extended to handle HTTP pipelining by creating new flow record for each pipelined request. Such extension would make the measurement more accurate and we plan to deploy it in the future.
+
+\subsubsection{Real Traffic Evaluation}
+
+\begin{table}[!tb]
+	\caption{Real Traffic Evaluation Statistics.}
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{|l|r|} \hline
+		\textit{Total Flows} & 613953 \\ \hline
+		\textit{HTTP Requests} & 33294  \\  \hline
+		\textit{HTTP Responses} & 49753  \\  \hline
+		\textit{DNS Requests} & 197926  \\  \hline
+		\textit{DNS Responses} & 224588  \\  \hline
+		\textit{Events with $>$ 1 Flow} & 28064  \\  \hline
+		\textit{Flows in Events with $>$ 1 Flow} & 55881  \\  \hline
+		\textit{All Events} & 388749 \\  \hline
+		\textit{Flows in All Events} & 418671 \\  \hline
+	\end{tabular}
+	\label{tab:eventflow-stats}
+\end{table}
+
+The purpose of the real traffic test is to determine how many flows can be joined into events. We collect a~short (approximately one minute) trace of 10 million packets from an ISP network on ports 53 and 80 which are likely to be DNS and HTTP packets. Table~\ref{tab:eventflow-stats} shows statistics that describe the packet trace as well as the results of the evaluation. We can see that from the total number of more than 600 thousand flows more than 400 thousand are part of events. Furthermore, over 55 thousand flows are part of events which contain more than one flow. Therefore, we can conclude that more than 10\,\% of observed HTTP and DNS flows are recognised as a~part of more complex events by the EventFlow prototype.
+
+The number of flows in complex events is not as high as might be expected given the large number of HTTP and DNS requests and responses. We believe that this is caused by a~quite short time window of our trace, which is likely to have captured large number of separate responses and requests. Moreover, we believe that better results can be achieved by fine-tuning the timeout of the records in the expected sets of the EventFlow prototype.
+
+
+\subsection{Conclusions} \label{subsec:eventflow-conclusions}
+
+We have presented an EventFlow monitoring architecture that allows to keep track of relations between HTTP and DNS application flows, which can be used to simplify behavioural analysis of network traffic, improve network threat detection and network traffic classification. The changes to existing flow monitoring architecture are negligible, which facilitates wide deployment. The relation between flows is encoded as an 8 byte unsigned integer called Event ID which is shared by the related flows. The proposed architecture can be further extended to handle more complex HTTP communication, such as redirection return codes.
+
+A~prototype of EventFlow plugin for the FlowMon flow exporter has been evaluated on a~trace of 10 million packets. We showed that more than 10\,\% of observed HTTP and DNS flows are recognised as a~part of more complex events by our prototype. We believe that this result will improve on longer packet trace as well as with more accurate settings of the prototype. Prospective improvements to the prototype as well as its more detailed evaluation, including a~performance evaluation, are left for a~future work.
+
+We believe that the network analysis will benefit from the supplemental information about flow relations. Our work has shown that it is possible to acquire such information without a significant impact on an existing monitoring architecture and that it is possible extend the flow monitoring to trace relations of other application protocols.
+
+%% shortcommings
+% browser caching
+% dns caching -> no request, no problem
+% dns might be elsewhere (but should not if it is not cached)
+% urls created by javascript
+% redirections HTTP codes 3xx
+% https
+
+%% results
+% prototype implementation for flow exporter
+% evaluation on real ISP network
+
+%% privacy issues
+% asi do nejake sekce
+% strojove zpracovani HTML stranek dela dneska kazdy
+% k analytikum se dostane pouze informace o souvislostech toku
+
+% future work: addressing the javascript shortcoming, VoIP, FTP
+
+
+
+\section{MetaFlow}\label{sec:metaflow}
 % zobecneni eventflow, vice urovni toku (zanorene protokoly), i aplikacni protokoly by mohly mit svoje specificke toky (kazdy Lx protokol svuj tok, vsecko provazane)
 % PAM 2018
 
+\section{Application Events and Flow}\label{sec:app-events}
 % dalsi moznosti se jevi exportovat toky a vedle nich aplikacni udalosti. nervat to primo do toku, protoze to cele ty toky rozbiji a neni to moc elegantni na zpracovani
 
-\section{Flexible Flow Collector}
+% application events jsou hezky obecny veci, dobre by to umoznovalo kombinovat i data z logu a podobne.
 
-\itodo{
-- IPFIXcol\\
-- Collector design\\
-- Problems with IPFIX protocol processing (Projít s Lukášem Hutákem)\\
-- Flexible flow data storage (db vs nfdump vs FastBit vs new format?)\\
-- IF IPFIX format needs to be described, look at Hofstede et al. V.E.\\
 
-- Mediator: fix intro in chapter 2: section Flow Monitoring Architecture if described here
+\section{Summary}\label{sec:ng-summary}
 
-- Take a look at https://github.com/VerizonDigital/vflow
-}
-
-\section{Flexible Flow Data Storage}\label{sec:flexible-flow-data-storage}
-\itodo{IM 2013 fbitdump vs nfdump comparison}
-
-\section{Conclusions}
-
-\section{Relevant Publications}
-
-\itodo{
-- AIMS 2012 ipfixcol design\\
-- IM 2013 fbitdump vs nfdump comparison\\
-- NOMS 2015 EventFlow
-}
+% EventFlow
+Network flow monitoring is being supplemented with an application flow visibility to provide more detailed information about network traffic. However, the current concept of flows does not provide a~mechanism to keep track of semantic relations between individual flows that are created as a~part of a~single user action. We propose an extension to the flow measurement, called EventFlow, which allows to preserve relations between HTTP and DNS application flows that are a~part of single user action, most typically browsing a~web page. We describe an architecture of the EventFlow extension and its limitations. A~prototype implementation of the EventFlow is introduced and evaluated on a~packet trace from an ISP network. We show that a~significant number of flow records can be recognised as a~part of a~single user action.

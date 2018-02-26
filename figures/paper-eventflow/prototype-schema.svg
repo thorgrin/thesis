@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="112.67659mm"
+   height="43.224445mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="prototype-schema.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path3921"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         id="path3918"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="257.36561"
+     inkscape:cy="122.48883"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="3840"
+     inkscape:window-height="2105"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     units="mm">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-195.49999"
+       originy="-830.00001" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-195.49999,-69.204664)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="394.79218"
+       y="112.21591"
+       id="text3029"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3031"
+         x="394.79218"
+         y="112.21591">Flow Cache</tspan></text>
+    <g
+       id="g5975"
+       transform="translate(75.195376,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text3041"
+         y="142.82619"
+         x="486.39883"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="142.82619"
+           x="486.39883"
+           id="tspan3043"
+           sodipodi:role="line">IPFIX</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="262.25125"
+       y="96.819901"
+       id="text2991"
+       sodipodi:linespacing="100%"
+       transform="scale(1.0017353,0.9982677)"><tspan
+         sodipodi:role="line"
+         x="262.25125"
+         y="96.819901"
+         id="tspan3003">Layer 3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="262.18253"
+       y="117.85634"
+       id="text3007"
+       sodipodi:linespacing="100%"
+       transform="scale(1.0017353,0.9982677)"><tspan
+         sodipodi:role="line"
+         id="tspan3009"
+         x="262.18253"
+         y="117.85634">Layer 4</tspan><tspan
+         sodipodi:role="line"
+         x="262.18253"
+         y="131.60634"
+         id="tspan3011" /></text>
+    <g
+       id="g3839"
+       transform="translate(18,-5)">
+      <g
+         id="g4250">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="248.9584"
+           y="191.84904"
+           id="text3017"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             id="tspan3019"
+             x="248.9584"
+             y="191.84904">HTTP</tspan></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3823"
+           width="44.5"
+           height="19.499983"
+           x="244.99998"
+           y="177.36218" />
+      </g>
+    </g>
+    <g
+       id="g3834"
+       transform="translate(28,-32.5)">
+      <g
+         id="g4245">
+        <rect
+           style="opacity:1;fill:#c9c9c9;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3825"
+           width="44.5"
+           height="18.999998"
+           x="235"
+           y="230.36218" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="240.33997"
+           y="244.48218"
+           id="text3021"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             id="tspan3023"
+             x="240.33997"
+             y="244.48218">URLs</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g3848"
+       transform="translate(10,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text3045"
+         y="137.19218"
+         x="234.59125"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="137.19218"
+           x="234.59125"
+           id="tspan3047"
+           sodipodi:role="line">Applications</tspan></text>
+      <rect
+         y="122.86216"
+         x="230.00002"
+         height="98.999992"
+         width="89.5"
+         id="rect3821"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3844"
+         d="m 320,142.36219 -90,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g3875"
+       transform="translate(18,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text3013"
+         y="162.09906"
+         x="252.61644"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="162.09906"
+           x="252.61644"
+           id="tspan3015"
+           sodipodi:role="line">DNS</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect3823-1"
+         width="44.5"
+         height="18.999998"
+         x="244.99998"
+         y="147.86218" />
+    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3891"
+       width="89.5"
+       height="40.000004"
+       x="240.00002"
+       y="82.862167" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 240,101.86217 90,0"
+       id="path3893"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="244.41643"
+       y="79.187164"
+       id="text4538"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan4540"
+         x="244.41643"
+         y="79.187164">Packet Parser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="198.57045"
+       y="142.82619"
+       id="text2987"
+       sodipodi:linespacing="100%"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+         sodipodi:role="line"
+         id="tspan2989"
+         x="198.57045"
+         y="142.82619">Packets</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 195.49999,147.36218 41.8039,0"
+       id="path4572"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g5148"
+       transform="translate(36,0)">
+      <g
+         id="g5133">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           x="298"
+           y="142.81018"
+           id="text3025"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             x="298"
+             y="142.81018"
+             id="tspan4568"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">Partial Flow</tspan></text>
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow1Mend)"
+           d="m 294.78738,147.36219 61.83039,0"
+           id="path4763"
+           inkscape:connector-curvature="0" />
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text5144"
+         y="159.25284"
+         x="306.63901"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="159.25284"
+           x="306.63901"
+           id="tspan5146"
+           sodipodi:role="line">+ URLs</tspan></text>
+    </g>
+    <g
+       id="g5190"
+       transform="translate(46,-28)">
+      <rect
+         y="145.86215"
+         x="350"
+         height="59.000034"
+         width="68.5"
+         id="rect5156"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text5158"
+         y="160.49084"
+         x="366.66516"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           id="tspan5178"
+           y="160.49084"
+           x="366.66516"
+           sodipodi:role="line">Insert</tspan></text>
+      <text
+         sodipodi:linespacing="100%"
+         id="text5162"
+         y="179.97005"
+         x="361.9664"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="179.97005"
+           x="361.9664"
+           id="tspan5164"
+           sodipodi:role="line">Update</tspan></text>
+      <text
+         sodipodi:linespacing="100%"
+         id="text5166"
+         y="199.85852"
+         x="361.62909"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="199.85852"
+           x="361.62909"
+           id="tspan5168"
+           sodipodi:role="line">Release</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path5170"
+         d="m 350,184.86216 69,0"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5172"
+         d="m 350,165.36218 69,0"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g5209"
+       transform="translate(64.5,-5.5)">
+      <rect
+         y="92.36216"
+         x="409.99997"
+         height="25.000019"
+         width="78.000031"
+         id="rect5207"
+         style="fill:#c9c9c9;fill-opacity:1;stroke:#000000;stroke-width:0.99999994;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text5201"
+         y="102.08717"
+         x="418.70258"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="102.08717"
+           x="418.70258"
+           id="tspan5203"
+           sodipodi:role="line">EvenFlow</tspan><tspan
+           id="tspan5205"
+           y="112.08717"
+           x="418.70258"
+           sodipodi:role="line">Expected Sets</tspan></text>
+    </g>
+    <g
+       id="g5405"
+       transform="translate(56,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text3033"
+         y="142.81018"
+         x="416.14041"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="142.81018"
+           x="416.14041"
+           id="tspan3035"
+           sodipodi:role="line">Flow</tspan></text>
+      <text
+         sodipodi:linespacing="100%"
+         id="text5215"
+         y="159.30858"
+         x="414.94876"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="159.30858"
+           x="414.94876"
+           id="tspan5217"
+           sodipodi:role="line">+EID</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path5219"
+         d="m 410.89404,147.36218 30.57413,0"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
+    </g>
+    <g
+       id="g5414"
+       transform="translate(-8.5,2.5)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text3037"
+         y="147.68779"
+         x="513.79993"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="147.68779"
+           x="513.79993"
+           id="tspan3039"
+           sodipodi:role="line">Export</tspan></text>
+      <rect
+         y="135.36217"
+         x="510"
+         height="18.999998"
+         width="49"
+         id="rect5412"
+         style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+       d="m 459,126.36218 15,-15"
+       id="path5419"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 553.50003,147.36219 39.3377,0"
+       id="path5789"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:100%;font-family:TeXGyrePagella;-inkscape-font-specification:'TeXGyrePagella, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="555.74481"
+       y="159.48477"
+       id="text6017"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan6019"
+         x="555.74481"
+         y="159.48477">Protocol</tspan></text>
+  </g>
+</svg>
