@@ -317,14 +317,18 @@ urlseen = {Accessed on},
 % Allow more white space per line
 \emergencystretch=1em
 
+% Custom bibheading with unnumbered section
 \defbibheading{simplebibheading}{\section*{#1}}
 
+% Print bibliography heading and include it in ToC
 \printbibheading[heading=bibintoc]
 
+% Print authored publications
 \newrefcontext[labelprefix={A}]
 \printbibliography[keyword=velan,heading=simplebibheading,title={Authored publications referenced in the thesis}]
 \endrefcontext
 
+% Print the rest of the publications
 \printbibliography[notkeyword=velan,heading=simplebibheading,title={Other publications referenced in the thesis},resetnumbers=true]
 
 % Print bibliography in british format, it is nicer than american
