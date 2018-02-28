@@ -80,12 +80,12 @@ After the packet is present in RAM and the kernel is notified, either by interru
 \begin{figure}[!tb]
     \centering
     \begin{subfigure}[t]{0.5\textwidth}
-        \includegraphics{figures/NAPI}
+        \includegraphics{figures/c05/NAPI}
         \caption{Without PACKET\_MMAP feature}
         \label{fig:NAPI_no_MMAP}
     \end{subfigure}%
     \begin{subfigure}[t]{0.5\textwidth}
-        \includegraphics{figures/NAPI_MMAP}
+        \includegraphics{figures/c05/NAPI_MMAP}
         \caption{With PACKET\_MMAP feature}
         \label{fig:NAPI_MMAP}
     \end{subfigure}
@@ -117,7 +117,7 @@ To eliminate unnecessary packet copying even without the use of a specialized NI
 
 \begin{figure}[!tb]
   \begin{center}
-    \includegraphics{figures/zero_copy}
+    \includegraphics{figures/c05/zero_copy}
   \end{center}
   \caption{Packet transition through memory using a zero copy approach.}
   \label{fig:zero_copy}
@@ -179,7 +179,7 @@ Figure~\ref{fig:rss} shows the principle of the RSS. Each packet is processed an
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics[]{figures/rss}
+    \includegraphics{figures/c05/rss}
   \end{center}
   \caption{Receive Side Scaling Packet Distribution.}
   \label{fig:rss}
@@ -238,7 +238,7 @@ The three main parts of flow monitoring process can be naturally executed in dif
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics{figures/exporter-thread-noRSS}
+    \includegraphics{figures/c05/exporter-thread-noRSS}
   \end{center}
   \caption{Multithreaded Flow Monitoring on a Single Input Queue.}
   \label{fig:exporter-thread-noRSS}
@@ -249,7 +249,7 @@ For NICs with RSS support, the flow processing can utilize more than a single qu
 
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics{figures/exporter-thread-schema}
+    \includegraphics{figures/c05/exporter-thread-schema}
   \end{center}
   \caption{Multithreaded Flow Measurement with a RSS Support: a) Single Flow Cache; b) Multiple Flow Caches.}
   \label{fig:exporter-thread-schema}
