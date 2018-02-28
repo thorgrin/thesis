@@ -93,6 +93,7 @@ span multiple paragraphs.
         sorting=none,
         autolang=other,
         sortlocale=auto,
+        defernumbers=true,
         dateabbrev=false, % do not shorten visited on dates
         urldate=long      % use full dates, no 20/10/2018
         ]{biblatex}
@@ -129,8 +130,17 @@ urlseen = {Accessed on},
       \pernottype{inbook}
       \step[fieldset=editor, null]
     }
+    \map[overwrite=true]{ % select authors publications
+      \pertype{article}
+      \pertype{inproceedings}
+      \step[fieldsource=author,
+            match={Velan},
+            final]
+      \step[fieldset=keywords, fieldvalue=velan]
+    }
   }
 }
+
 
 % TO-DO notes
 \usepackage{xargs}
@@ -182,7 +192,6 @@ urlseen = {Accessed on},
 % \usepackage{a4wide}
 \usepackage{tabularx}
 % \usepackage{amssymb}
-% \usepackage[hyphens]{url}
 % \usepackage[titletoc]{appendix}
 % \usepackage{color}
 \usepackage{textcomp} % itemize bullet symbol font
@@ -299,21 +308,28 @@ urlseen = {Accessed on},
 \include{chapters/08-conclusions}
 
 %------------------------------------------------------------------------------
+% Bibliography
 
 % Allow more breaks in URLs in bibliography
 \setcounter{biburlnumpenalty}{6000}
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
+% Allow more white space per line
+\emergencystretch=1em
 
-% TODO we can split literature by type, keywords, etc.
-% http://ctan.mirrors.hoobly.com/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsubsection.3.13.4
-% \printbibheading
-% \printbibliography[nottype=onlineheading=subbibliography,title={Printed Sources}]
-% \printbibliography[type=online,heading=subbibliography,title={Online Sources}]
+\defbibheading{simplebibheading}{\section*{#1}}
+
+\printbibheading[heading=bibintoc]
+
+\newrefcontext[labelprefix={A}]
+\printbibliography[keyword=velan,heading=simplebibheading,title={Authored publications referenced in the thesis}]
+\endrefcontext
+
+\printbibliography[notkeyword=velan,heading=simplebibheading,title={Other publications referenced in the thesis},resetnumbers=true]
 
 % Print bibliography in british format, it is nicer than american
 % \begin{otherlanguage}{british}
-\printbibliography[heading=bibintoc] %% Print the bibliography.
+% \printbibliography[heading=bibintoc] %% Print the bibliography.
 % \end{otherlanguage}
 
 %------------------------------------------------------------------------------
