@@ -282,7 +282,7 @@ Most network traffic classification tools address all network protocols and not 
 
 \textit{PACE}~\cite{pace} is a commercial classification library written in C, which uses pattern matching augmented by heuristics, behavioural and statistical analysis. In addition to standard protocol and application recognition, it is able to identify obfuscated protocols such as BitTorrent or Skype. According to its website, PACE is able to identify thousands of network applications and protocols.
 
-\textit{Cisco Network Based Application Recognition (NBAR)}~\cite{nbar} is another example of a commercial tool for classifying network traffic. This tool is primarily used on Cisco routers for quality and security purposes. According to its authors, NBAR is also able to recognize stateful protocols and non-TCP and non-UDP IP protocols.
+\textit{Cisco Network Based Application Recognition (NBAR)}~\cite{CiscoSystems--Network} is another example of a commercial tool for classifying network traffic. This tool is primarily used on Cisco routers for quality and security purposes. According to its authors, NBAR is also able to recognize stateful protocols and non-TCP and non-UDP IP protocols.
 
 \textit{nDPI}~\cite{Deri-2014-nDPI} is an open-source classifier forked from the (currently closed) project OpenDPI, which was in turn derived from PACE. nDPI analyzes at most eight packets from each connection for classifying traffic, however each packet is examined separately. If the connection contains multiple matches, then the most detailed match is returned. For encrypted traffic recognition, nDPI contains only a SSL decoder that extracts the host name from the server certificate. Using these names, nDPI is able to identify specific network applications.
 

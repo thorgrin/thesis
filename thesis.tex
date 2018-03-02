@@ -94,12 +94,16 @@ span multiple paragraphs.
         autolang=other,
         sortlocale=auto,
         defernumbers=true,
+        backref=true,
+        backrefstyle=three,
         dateabbrev=false, % do not shorten visited on dates
         urldate=long      % use full dates, no 20/10/2018
         ]{biblatex}
 
 \DefineBibliographyStrings{english}{%
-urlseen = {Accessed on},
+  urlseen = {Accessed on},
+  backrefpage = {page},% originally "cited on page"
+  backrefpages = {pages},% originally "cited on pages"
 }
         
 % clear unnecessary fields that might be filled in the bib files.
