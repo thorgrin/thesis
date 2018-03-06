@@ -1,6 +1,27 @@
-\chapter{Conclusions}\label{chap:conclusions}
+\chapter{Conclusion}\label{chap:conclusions}
 
-\section{Answers to Research Questions}
+The flow monitoring has evolved significantly in the past several years. The most substantial progress has been made in the performance  area of flow monitoring, which needed to match the development of networking toward 100\,Gbps technologies, and in processing of application layer information. This thesis has presented our contributions in both of these areas. 
+
+\section{Research Goals}
+
+We have established the following three research goals in the introduction of this thesis:
+\begin{itemize}
+  \item Propose application flow monitoring which utilizes application layer information to facilitate flow analysis and threat detection.
+  \item Evaluate performance of flow monitoring and propose optimisations to facilitate monitoring of high-speed networks.
+  \item Analyse options of monitoring of encrypted traffic, survey encryption protocols and methods for encrypted traffic classification.
+\end{itemize}
+
+To address the first goal, we have proposed and defined application-aware flow monitoring (i.e. application flow monitoring). We started by analysing the current definition of flow, provided an improved alternative, and formalized our definition. Based on the definition of flow, we have proposed a definition of application flow. Since the use of the terms flow, IP flow, and application flow differs in the literature, we have introduced a consistent terminology to deal with the potentially confusing differences. After that, we have described the application-aware flow monitoring system and pointed out the important differences to the basic flow. 
+
+To show the value of application flow monitoring for traffic analysis, we have analysed four different use cases. The first, most common use case, has utilized extended information from HTTP headers to detect new classes of attack on the application layer. The second use case has shown how IPv6 tunnelled traffic can be observed and analysed with application flow monitoring. We have demonstrated that the newly acquired information helps us to better understand the network traffic. The third use case has added geolocation information to flow records to aid traffic analysis and the fourth discussed how different samples of network traffic might be compared and experiments repeated on a live networks.
+
+Our work on the second research goal has included both application and basic flow monitoring. We have designed and implemented application flow monitoring for HTTP protocol and evaluated its performance. Multiple approaches to design of HTTP application parser were taken into consideration and utilized. By comparing results of different parser implementations, we have shown that the performance of application flow monitoring system is significantly affected by the design of application parsers. Moreover the composition of the traffic matters even more than for the basic flow as the percentage of the given application in the traffic affects the performance substantially.
+
+We have discussed how the design of the flow monitoring process affects the performance. Performing application analysis for multiple protocols at speeds of and beyond 100\,Gbps is not possible without heavy acceleration using specialized NICs~\cite{Kekely-2016-Software} and even then depends on the traffic composition. We have build a high-density flow monitoring system, which could process traffic from sixteen 10\,Gbps links and analysed its performance. We compared settings with and without hardware acceleration for different packet sizes and different number of simultaneous flows. Our results have shown that full line rate can be achieved on real networks. We believe, that the results could be improved by applying more optimizations.
+
+% TODO encryption
+
+% \section{Summary of Contributions}
 
 \section{Further Research}
 
@@ -16,3 +37,4 @@
 Concepts provided in the last chapter can help with the items above.
 
 Traffic generation - we need synthetic and real-like traffic for testing of monitoring equipment. Synthetic is easy with Spirent and similar products, real-like not so much.
+
