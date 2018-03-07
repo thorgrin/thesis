@@ -217,12 +217,6 @@ span multiple paragraphs.
 \usepackage{varwidth} % Rotated table with caption
 \usepackage{tabu}
 \usepackage{bigstrut}
-% TODO fancyhdr - na levou stranu chapter, na pravou section, jako Rick nebo Pavel Benacek
-% \usepackage{fancyhdr}
-% \fancyfoot{}
-% \fancyhead[RO,LE]{\thepage}
-% \fancyhead[LO]{\leftmark}
-% \fancyhead[RE]{\rightmark}
 
 % Environment for chapter introductions (use \setlength{\parindent}{15pt} to indent paragraphs)
 \newenvironment{chapintro}
@@ -253,19 +247,53 @@ span multiple paragraphs.
 
 % Chapter titles
 \usepackage[noindentafter]{titlesec}
-% \titleformat{\chapter}[display]
-% {\raggedleft}
-% {\fontsize{40}{30}\selectfont\thechapter\vspace{0.5em}}
-% {0pt}
-% {\fontsize{20}{10}\selectfont}
-% [\rule{0.75\linewidth}{1pt}]
-
+% Numbered chapters
 \titleformat{name=\chapter}[display]
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 
+% Numberless chapters
 \titleformat{name=\chapter,numberless}[display]
 {\normalfont\Large\bfseries}{}{0pt}{}
 \titlespacing{name=\chapter,numberless}{0pt}{-40pt}{20pt}
+
+% Redefine thesisheadings style to have section names on left pages
+\makeatletter
+\def\ps@thesisheadings{%
+  \def\chaptermark##1{%
+    \markboth{%
+      \ifnum\c@secnumdepth >\m@ne
+        \thechapter.\ %
+      \fi ##1}{}}
+  \def\sectionmark##1{%
+    \markright{%
+      \thesection.\ ##1%
+    }
+  }
+  \let\@oddfoot\@empty
+  \let\@oddhead\@empty
+  \def\@oddhead{%
+    \vbox{%
+      \hbox to \textwidth{%
+      \hfil{\sc\rightmark}}%
+      \vskip 4pt\hrule}}
+  \if@twoside
+    \def\@evenhead{%
+      \vbox{%
+        \hbox to \textwidth{%
+          {\sc\leftmark}%
+          \hfil}
+        \vskip 4pt\hrule}}
+  \else
+    \let\@evenhead\@oddhead
+  \fi 
+  \def\@oddfoot{\hfil\PageFont\thepage}
+  \if@twoside
+    \def\@evenfoot{\PageFont\thepage\hfil}%
+  \else
+    \let\@evenfoot\@oddfoot
+  \fi 
+  \let\@mkboth\markboth}
+\makeatother
 
 % Quotes in italics with centered reference (package csquotes)
 \renewcommand{\mkbegdispquote}[2]{\itshape}
