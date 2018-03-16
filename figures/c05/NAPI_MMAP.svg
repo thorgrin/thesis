@@ -126,6 +126,21 @@
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path5894-8" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5022-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path5020-5"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -135,8 +150,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="203.90844"
-     inkscape:cy="41.315409"
+     inkscape:cx="59.807568"
+     inkscape:cy="88.991131"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -163,7 +178,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -216,7 +231,7 @@
            height="50"
            x="110"
            y="112.51968" /></flowRegion><flowPara
-         id="flowPara4532"></flowPara></flowRoot>    <rect
+         id="flowPara4532" /></flowRoot>    <rect
        style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4534"
        width="58.208336"
@@ -225,30 +240,9 @@
        y="27.125" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 58.208334,40.354164 v 13.22918"
+       d="M 58.208334,37.70833 V 53.583344"
        id="path4536"
        inkscape:connector-curvature="0" />
-    <g
-       id="g5848">
-      <text
-         id="text4520"
-         y="48.8801"
-         x="35.743202"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           id="tspan5242"
-           style="stroke-width:0.26458332"
-           y="48.8801"
-           x="35.743202"
-           sodipodi:role="line">DMA region</tspan></text>
-      <rect
-         y="45.645832"
-         x="34.395836"
-         height="5.2916665"
-         width="18.520826"
-         id="rect4540"
-         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
     <g
        id="g4547"
        transform="translate(29.104166,-5.2916669)">
@@ -303,9 +297,9 @@
            height="20"
            x="200"
            y="132.51968" /></flowRegion><flowPara
-         id="flowPara5004"></flowPara></flowRoot>    <g
+         id="flowPara5004" /></flowRoot>    <g
        id="g5249"
-       transform="translate(-1.3229184,-4.5832926e-6)">
+       transform="translate(-1.3229248,-2.6458373)">
       <rect
          y="35.0625"
          x="50.270832"
@@ -359,13 +353,62 @@
          style="stroke-width:0.26458332">DMA Transfer</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 58.208331,35.062496 V 27.124997"
+       d="M 58.208331,32.416663 V 27.124997"
        id="path6682"
        inkscape:connector-curvature="0" />
+    <g
+       id="g943"
+       transform="translate(9.2604166,7.9375)">
+      <g
+         transform="translate(-9.2604171,-9.2604193)"
+         id="g5848-0">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           x="35.743202"
+           y="48.8801"
+           id="text4520-8"><tspan
+             sodipodi:role="line"
+             x="35.743202"
+             y="48.8801"
+             style="stroke-width:0.26458332"
+             id="tspan5242-0">DMA region</tspan></text>
+        <rect
+           style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4540-4"
+           width="18.520826"
+           height="5.2916665"
+           x="34.395836"
+           y="45.645832" />
+      </g>
+      <g
+         style="stroke-width:0.99999654"
+         transform="matrix(1.0000035,0,0,1.0000035,-6.614689,-6.3501392)"
+         id="g4916">
+        <rect
+           style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499906;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4907"
+           width="21.166592"
+           height="11.641632"
+           x="30.427078"
+           y="37.708332" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:TeXGyrePagella;-inkscape-font-specification:TeXGyrePagella;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.2645824"
+           x="36.356937"
+           y="41.205067"
+           id="text4911"><tspan
+             sodipodi:role="line"
+             id="tspan4909"
+             x="36.356937"
+             y="41.205067"
+             style="stroke-width:0.2645824">sk_buff</tspan></text>
+      </g>
+    </g>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7570);stroke-miterlimit:4;stroke-dasharray:0.79374995,0.79374995;stroke-dashoffset:0"
-       d="m 43.656247,45.64583 7.9375,-5.291667"
-       id="path7638"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.79374996, 0.79374996;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker5022-9)"
+       d="m 51.941914,45.096906 5.208083,-6.85941"
+       id="path5012"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
