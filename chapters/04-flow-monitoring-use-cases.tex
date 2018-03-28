@@ -2,17 +2,17 @@
 
 \begin{chapintro}
 
-There are many usages for application traffic monitoring. The common goal is to extend the set of collected information elements and thus provide a deeper understanding of network traffic. This chapter shows several use cases for application flow monitoring, that were published in separate papers. The contribution of this chapter is a summary of the contributions of those papers.
+There are many usages for application traffic monitoring. The common goal is to extend the set of collected information elements and thus provide a deeper understanding of network traffic. This chapter shows several use cases for application flow monitoring, which were published in separate papers. The contribution of this chapter is a summary of the contributions of those papers.
 
 As a first example of traffic analysis with the use of application flow monitoring, we show how information from HTTP headers can be used to detect new classes of attacks on the application layer. This is the most common use case for application flow monitoring. 
 
-% Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol so that information about multiple chained headers are collected for each flow. An analysis of chained headers is performed and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
+% Basic flow monitoring usually stops after the first header following the IP layer. However, the IPv6 protocol allows header chains of an arbitrary length. Therefore, we have extended the analysis of IPv6 protocol, so that information about multiple chained headers is collected for each flow. An analysis of chained headers is performed, and we attempted to interpret their usage. Moreover, we show that these chained headers can be used for attacks and also show, how to detect such attacks using the application flow monitoring. In addition to this work, we also show how IPv6 transition mechanisms can be monitored so that even tunnelled IPv6 traffic can be monitored.
 
-Basic flow monitoring usually stops after the first header following the IP layer. However, many networks and networking protocols utilize encapsulation to traverse over network segments with unsupported equipment or to allow aggregating of traffic into virtual networks. IPv6 transition mechanism are a special class of protocols used to provide IPv6 connectivity over IPv4 networks. Most operating systems provide means to deliver IPv6 connectivity even when native IPv6 is not available. Therefore, we extended the basic flow monitoring with information from the IPv6 transition mechanisms and we report on the IPv6 deployment and the use of the transition mechanisms.
+Basic flow monitoring usually stops after the first header following the IP layer. However, many networks and networking protocols utilise encapsulation to traverse over network segments with unsupported equipment or to allow aggregating of traffic into virtual networks. IPv6 transition mechanisms are a distinctive class of protocols used to provide IPv6 connectivity over IPv4 networks. Most operating systems provide means to deliver IPv6 connectivity even when native IPv6 is not available. Therefore, we extended the basic flow monitoring with information from the IPv6 transition mechanisms and we report on the IPv6 deployment and the use of the transition mechanisms.
 
 Inserting information to the flow records from external sources is also considered to be a variant of application flow monitoring. We show an example of adding geolocation information both in the flow exporter and collector. We show that both implementations scale very well and that the geolocation data can be used for advanced traffic analysis.
 
-Since most flow monitoring experiments are performed on a live network, it is impossible to exactly replicate the results. We show a method of characterising network traffic so that it is possible to compare multiple network traces and search for similarities. This allows us not only to compare different networks but to quantify changes in network profile in time.
+Since most flow monitoring experiments are performed on a live network, it is impossible to replicate the results exactly. We show a method of characterising network traffic so that it is possible to compare multiple network traces and search for similarities. This allows us not only to compare different networks but to quantify changes in network profile in time.
 
 % Martin Husák, Petr Velan, and Jan Vykopal. “Security Monitoring of HTTP Traffic Using Extended Flows”.
 % Martin Elich, Petr Velan, Tomáš Jirsík, and Pavel Čeleda. “An Investigation Into Teredo and 6to4 Transition Mechanisms: Traffic Analysis”.
@@ -27,7 +27,7 @@ The organisation of this chapter is as follows:
   \item Section~\ref{sec:analysis-http-flows} analyses HTTP traffic in a large-scale environment with the use of application flow monitoring. The added value of application flow monitoring is established by detection of several previously undetected attacks.
   \item Section~\ref{sec:analysis-ipv6-transition} reports on IPv6 deployment and the use of transition mechanisms. The basic flow monitoring is extended by the capability of analysing a tunnelled IPv6 traffic.
   \item Section~\ref{sec:analysis-geolocation} shows how flow records can be extended with geolocation information and how this additional information can be employed for network analysis.
-  \item Section~\ref{sec:analysis-characterisation} proposes a network traffic characterisation method using flow-based statistics. The characteristics are used to better understand and describe the nature of the traffic and to compare different network traces against each other.
+  \item Section~\ref{sec:analysis-characterisation} proposes a network traffic characterisation method using flow-based statistics. The characteristics are used to understand and describe the nature of the traffic better and to compare different network traces against each other.
   \item Section~\ref{sec:use-cases-summary} summarizes the chapter.
 \end{itemize}
 
@@ -108,16 +108,16 @@ By concatenating a basic flow record with additional application elements an app
 
 We measured the $F_{app}$ vector in the environment of our campus network for three weeks over the summer break and three weeks in the semester. Thus, we could compare the amount of overall network traffic and suspicious events over two distinct time periods and traffic loads of the network. The amount of the traffic is lower in the summer break, although still comparable to the rest of the year. However, we assume that the amount of malicious traffic is constant over the year and is more apparent in the summer break.
 
-Table~\ref{tab:httpsecurity-data-sets} shows the size of each data set in packets, bytes, and flows. Moreover, it contains the number of HTTP requests observed. Although the number of requests is not high compared to the number of flows, there are at least as many responses, which often carry multimedia content. Therefore, the portion of HTTP traffic in bytes is very significant, despite the lower number of requests.
+Table~\ref{tab:httpsecurity-data-sets} shows the size of each dataset in packets, bytes, and flows. Moreover, it contains the number of HTTP requests observed. Although the number of requests is not high compared to the number of flows, there are at least as many responses, which often carry multimedia content. Therefore, the portion of HTTP traffic in bytes is very significant, despite the lower number of requests.
 
 \begin{table}[ht]
 \centering
 \begin{tabular}{| c | c | c | c | c |} \hline
-Data set &  Flows & Packets & Bytes & HTTP Req.\\ \hline
+Dataset &  Flows & Packets & Bytes & HTTP Req.\\ \hline
 Summer 2014 & 3.733\,G & 188.953\,G & 198.362\,TB & 0.310\,G \\ \hline
 Spring 2015 & 6.680\,G & 552.523\,G & 604.704\,TB & 0.720\,G \\ \hline
 \end{tabular}
-\caption{Data Sets.}
+\caption{Datasets.}
 \label{tab:httpsecurity-data-sets}
 \end{table}
 
@@ -183,7 +183,7 @@ G8  & H4 & \parbox[t]{5cm}{/pub/linux/slax/Slax-7.x/7.0.8/slax-English-US-7.0.8-
 G9  & H7 &                 /wp-\textbf{login}.php & 3,632 \\ \hline
 G10 & H7 &           /polit/wp-\textbf{login}.php & 3,632 \\ \hline
 \end{tabular}
-\caption{Top Repeated Requests from One Day (Data Set Summer 2014).}
+\caption{Top Repeated Requests from One Day (Dataset Summer 2014).}
 \label{tab:httpsecurity-repeat}
 \end{table}
 
@@ -204,7 +204,7 @@ G3  & H8 & /index.php & 3,921 \\ \hline
 G3  & H9 & /\textbf{admin}istrator/index.php & 3,794 \\ \hline
 G3  & H10 & /wp-\textbf{login}.php & 3,701 \\ \hline
 \end{tabular}
-\caption{Top Repeated Requests from One Day (Data Set Spring 2015).}
+\caption{Top Repeated Requests from One Day (Dataset Spring 2015).}
 \label{tab:httpsecurity-repeat2}
 \end{table}
 
@@ -256,7 +256,7 @@ G1 & /phpMyAdmin/scripts/setup.php              & 494 &  99 \\ \hline
 G1 & /MyAdmin/scripts/setup.php                 & 491 &  99 \\ \hline
 G2 & /manager/html                              & 118 &  24 \\ \hline
 \end{tabular}
-\caption{Top HTTP Scanners from One Day (Data Set Summer 2014).}
+\caption{Top HTTP Scanners from One Day (Dataset Summer 2014).}
 \label{tab:httpsecurity-scanners}
 \end{table}
 
@@ -275,7 +275,7 @@ G1 & /blog/wp-login.php & 201 & 40 \\ \hline
 G2 & /bins.php & 183 & 37 \\ \hline
 G3 & /cgi-bin/test-cgi & 102 & 21 \\ \hline
 \end{tabular}
-\caption{Top HTTP Scanners from One Day (Data Set Spring 2015).}
+\caption{Top HTTP Scanners from One Day (Dataset Spring 2015).}
 \label{tab:httpsecurity-scanners2}
 \end{table}
 
@@ -324,7 +324,7 @@ Guest & Domain Name & \#Hosts \\ \hline
 % 5.255.253.60  & spider-5-255-253-60.yandex.com      & 2 \\ \hline
 % 77.75.77.32   & fulltextrobot-77-75-77-32.seznam.cz & 2 \\ \hline
 \end{tabular}
-\caption{Top HTTP Crawlers from One Day (Data Set Summer 2014).}
+\caption{Top HTTP Crawlers from One Day (Dataset Summer 2014).}
 \label{tab:httpsecurity-crawlers}
 \end{table}
 % requests per host? zajimave pro implementaci
@@ -347,7 +347,7 @@ Guest & Domain Name & \#Hosts \\ \hline
 77.75.77.200  & screenshotgenerator-77-75-77-200.seznam.cz & 11 \\ \hline
 46.229.164.99 & NOT FOUND & 10 \\ \hline
 \end{tabular}
-\caption{Top HTTP Crawlers from One Day (Data Set Spring 2015).}
+\caption{Top HTTP Crawlers from One Day (Dataset Spring 2015).}
 \label{tab:httpsecurity-crawlers2}
 \end{table}
 
@@ -588,7 +588,7 @@ The last characteristic described by CCDF is packet size (Figure~\ref{fig:ipv6-t
 
 \subsection{IPv6 Tunneled Traffic Analysis} \label{subsec:ipv6-tunnels-inner-traffic-evaluation}
 
-In this section we focus on characteristics of encapsulated IPv6 traffic for which we use the same data set as in Section~\ref{subsec:ipv6-tunnels-outer-traffic-evaluation}. We show HOP limit statistics, detected Teredo servers and geolocation characteristics. We discuss the most used TCP and UDP ports inside the tunnels.
+In this section we focus on characteristics of encapsulated IPv6 traffic for which we use the same dataset as in Section~\ref{subsec:ipv6-tunnels-outer-traffic-evaluation}. We show HOP limit statistics, detected Teredo servers and geolocation characteristics. We discuss the most used TCP and UDP ports inside the tunnels.
 
 \subsubsection{Distribution of HOP Limits}
 Figure~\ref{fig:ipv6-tunnels-tunnels-hop} shows HOP limit distribution for the encapsulated IPv6 traffic. The main difference from the TTL (Figure~\ref{fig:ipv6-tunnels-ipv4-ttl}) and HOP limit (Figure~\ref{fig:ipv6-tunnels-ipv6-native-hop}) statistics is that the values here are distributed with much less entropy. The limits 21, 64, 128 and 255 are achieved and also the most frequent ones. This is caused by the fact that most of the traffic never traversed the IPv6 network and the HOP limit was therefore never decreased. In fact, when the values are lower, we can be reasonably certain that the packets already traversed IPv6 network and are heading towards the IPv4 destination. The value 21 is used for Teredo bubbles by Windows 7 with Service Pack 1 and earlier.The Teredo bubbles are used as a special mechanism for NAT traversal, which is consistent with the fact that most of the clients are behind a NAT. We can see that some packets reach the value of the zero HOP limit, which is a known problem when the HOP limit is set as low as to 21. The value of 255 is used for IPv6 neighbor discovery messages, so that when host receives such packet with HOP limit lower than 255, the packet is considered invalid~\cite{rfc4861}.
@@ -827,7 +827,7 @@ When network administrators need to find and analyze anomalies using plots as in
 
 Traffic profiling is the process of analyzing the distribution of services and protocols in a network, such as the number of packets related to Web traffic or the number of flows of a certain type. When geolocation is applied, also statistics related to geographical locations can be generated, such as the number of connections to a certain country. Although this is also possible using existing geolocation approaches based on post-processing, our approach is able to generate these statistics in real-time and for the complete traffic mix. In this subsection, we provide two examples of geolocation-based traffic profiling: IPv4 vs. IPv6 usage statistics and HTTPS profiling.
 
-One method for measuring the world-wide spread of IPv4 and IPv6 deployment is based on counting the number of IPv4- and IPv6-enabled ASNs, respectively. Another method is to measure the percentage of IPv4 and IPv6 traffic per country. For our measurement point in the Czech Republic, the distribution of IPv4 traffic source countries is shown in Fig.~\ref{fig:geo-ipv4-traffic}. The fact that the United States are the source country generating the second most IPv4 traffic is not a surprise, given the fact that US-based social networks (Facebook, Twitter, LinkedIn) and content providers (Akamai, Google, Microsoft) generate a significant portion of the world-wide traffic~\cite{Gehlen-2012-Uncovering}. This is confirmed by both manual inspection of the traffic and Fig.~\ref{fig:geo-https-traffic}, which shows that almost half of the HTTPS traffic, which is commonly used by those services, is going to and coming from the United States. Although the headquarters of these companies are all in the United States, their data is usually hosted closer to the service users, in regional data centers. This is achieved by using geolocation-aware-DNS (GeoDNS), which provides a means for service users to connect to the server that is closest to them from a geographical point of view. By probing the remote hosts in our data sets actively using ICMP ECHO, it is easily verified that the hosts are definitely not located in the United States, due to resulting non-transatlantic round-trip times. This is an example of a major inaccuracy of geolocation databases, which geolocate IP addresses to the companies' headquarters, instead of the real location of hosts.
+One method for measuring the world-wide spread of IPv4 and IPv6 deployment is based on counting the number of IPv4- and IPv6-enabled ASNs, respectively. Another method is to measure the percentage of IPv4 and IPv6 traffic per country. For our measurement point in the Czech Republic, the distribution of IPv4 traffic source countries is shown in Fig.~\ref{fig:geo-ipv4-traffic}. The fact that the United States are the source country generating the second most IPv4 traffic is not a surprise, given the fact that US-based social networks (Facebook, Twitter, LinkedIn) and content providers (Akamai, Google, Microsoft) generate a significant portion of the world-wide traffic~\cite{Gehlen-2012-Uncovering}. This is confirmed by both manual inspection of the traffic and Fig.~\ref{fig:geo-https-traffic}, which shows that almost half of the HTTPS traffic, which is commonly used by those services, is going to and coming from the United States. Although the headquarters of these companies are all in the United States, their data is usually hosted closer to the service users, in regional data centers. This is achieved by using geolocation-aware-DNS (GeoDNS), which provides a means for service users to connect to the server that is closest to them from a geographical point of view. By probing the remote hosts in our datasets actively using ICMP ECHO, it is easily verified that the hosts are definitely not located in the United States, due to resulting non-transatlantic round-trip times. This is an example of a major inaccuracy of geolocation databases, which geolocate IP addresses to the companies' headquarters, instead of the real location of hosts.
 
 The distribution of source countries of IPv6 traffic is shown in Fig.~\ref{fig:geo-ipv6-traffic}. Next to Czech Republic, much traffic is received from Denmark and Ireland. Closer analysis has revealed that the Danish traffic is caused by large repository synchronization (using FTP) by two data hosting providers. On the other hand, the Irish traffic is generated mainly by Google and Facebook. Surprisingly enough, this traffic is now geolocated to their real physical location. Google is known to have a large datacenter in Ireland and some Facebook partners, such as Zynga, host their services in the Amazon datacenter in Ireland as well.
 
@@ -857,10 +857,10 @@ All implementations used in this work are available at \url{http://ics.muni.cz/~
 A lot of research is being performed in the areas of network traffic classification, anomaly detection, and network security in general. Researchers involved in these areas often evaluate their methods using live network traffic. However, performing research on live network traffic includes several caveats. First, repeating experiments on live traffic is infeasible. Second, the traffic has to be thoroughly described, since most methods heavily depend on the properties of the observed traffic. Last but not least, the network traffic's properties can change during the research cycle, which can lead to suboptimal results. Although this work does not directly utilize application flow monitoring, it provides a method of ensuring repeatability of flow monitoring experiments, which is useful both for basic and application flow monitoring.
 
 % repeatability
-To be able to repeat the experiments, a packet trace must be captured. Considering the speed and utilisation of current uplinks of the research organisations, hundreds or even thousands of gigabytes of network data would have to be stored. Together with privacy issues, this makes sharing such data sets almost impossible. 
+To be able to repeat the experiments, a packet trace must be captured. Considering the speed and utilisation of current uplinks of the research organisations, hundreds or even thousands of gigabytes of network data would have to be stored. Together with privacy issues, this makes sharing such datasets almost impossible. 
 
 % traffic description & changes
-A description of data sets is an important part of any work concerning network traffic. The properties of the traffic highly correlate with the results of any experiments. When the researchers are not able to share their data set, its description should allow other researchers to find a similar data set which would exhibit similar results. Moreover, such a description can be checked for consistency thus ensuring that the results do not unduly fluctuate over time.
+A description of datasets is an important part of any work concerning network traffic. The properties of the traffic highly correlate with the results of any experiments. When the researchers are not able to share their dataset, its description should allow other researchers to find a similar dataset which would exhibit similar results. Moreover, such a description can be checked for consistency thus ensuring that the results do not unduly fluctuate over time.
 
 %% goals
 The goal of this work is to provide a simple method for discerning different types of network traffic. This method allows us to compare network traffic from live networks and even packet traces and determine which traffic samples show similar properties. Finding similar traffic is highly desirable as it allows the independent evaluation of published experiments. Moreover, when applying the method continuously to a specific network, changes in the properties of the network can be not only observed, but also quantified.
@@ -1122,7 +1122,7 @@ The utilisation of the IPv6 protocol in the network is a Layer 3 characteristic 
 
 \subsubsection{Protocol Share}
 
-We investigated the differences in Layer 4 protocol usage in the data sets. TCP and UDP are the dominating protocols in all networks and the shares of ICMP and other protocols are so negligible that they can hardly be used to describe the networks. The shares of TCP and UDP differ significantly between day and night time. Table~\ref{tab:characterization-tcp-udp-share-flows-table} shows the average TCP and UDP shares during the day and night in flows.
+We investigated the differences in Layer 4 protocol usage in the datasets. TCP and UDP are the dominating protocols in all networks and the shares of ICMP and other protocols are so negligible that they can hardly be used to describe the networks. The shares of TCP and UDP differ significantly between day and night time. Table~\ref{tab:characterization-tcp-udp-share-flows-table} shows the average TCP and UDP shares during the day and night in flows.
 
 \begin{table}[!t]
         \centering
