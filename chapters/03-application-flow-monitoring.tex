@@ -214,7 +214,7 @@ HTTP protocol~\cite{rfc7230} has a number of properties that can be monitored an
 \begin{algorithm}[H]
 \caption{\emph{strcmp} }
 \label{alg:strcmp}
-{\fontsize{8}{10}\selectfont
+{%\fontsize{8}{10}\selectfont
 \begin{algorithmic}[1]
     \IF{first line contains ``HTTP''}
         \WHILE{\NOT end of HTTP header}
@@ -238,7 +238,7 @@ HTTP protocol~\cite{rfc7230} has a number of properties that can be monitored an
 \begin{algorithm}[H]
 \caption{\emph{pcre}}
 \label{alg:pcre}
-{\fontsize{8}{10}\selectfont
+{%\fontsize{8}{10}\selectfont
 \begin{algorithmic}[1]
     \IF{first line contains ``HTTP/x.y''}
         \FORALL{PCRE rules}
@@ -274,7 +274,7 @@ To focus only on the HTTP parsing algorithms, we decided to let the FlowMon expo
 \begin{algorithm}[tb]
 \caption{\emph{Optimized strcmp}}
 \label{alg:optimized-strcmp}
-{\fontsize{8}{10}\selectfont
+{%\fontsize{8}{10}\selectfont
 \begin{algorithmic}[1]
     \IF{payload begins with ``HTTP''}
 %       \STATE \COMMENT{HTTP response}

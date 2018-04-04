@@ -72,9 +72,7 @@ This work concludes with a vision for the future of the flow monitoring. We iden
 }
 
 \thesislong{thanks}{
-This is the acknowledgement for my thesis, which can
-
-span multiple paragraphs.
+I would like to thank my advisor, colleagues, and fellow researchers for their input and insights that helped to shape my research and this thesis. Furthermore, I could have hardly finished this work without the relentless support of my friends and family. They have my eternal gratitude.
 }
 
 \usepackage{makeidx}      %% The `makeidx` package contains
@@ -223,11 +221,6 @@ span multiple paragraphs.
 {\begin{displayquote}\setlist[itemize]{leftmargin=15mm,rightmargin=10mm,after=\vspace*{-\baselineskip}}\itshape\leftskip=5mm\rightskip=5mm}
 {\end{displayquote}}
 
-% Without geometry package
-% \newenvironment{chapintro}
-% {\begin{displayquote}\setlist[itemize]{leftmargin=*,after=\vspace*{-\baselineskip}}\itshape\leftskip=-5mm\rightskip=-5mm}
-% {\end{displayquote}}
-
 % Define our own compactitem list
 \newlist{compactitem}{itemize}{3} % 3 is max-depth
 \setlist[compactitem]{label=\textbullet,leftmargin=*,nosep,after=\vspace*{-\baselineskip}}
@@ -239,11 +232,15 @@ span multiple paragraphs.
 \newcommand{\cmark}{\raisebox{-1pt}{\ding{51}}}%
 \newcommand{\xmark}{}%
 
+% Put words in equations in \mli to correct spacing
+\newcommand{\mli}[1]{\mathit{#1}}
+
 % Load packages required by fithesis. We can setup those packages after this point
 \thesisload
 
 % Change geometry, needs to be placed after \thesisload
-\usepackage[paper=a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,foot=1cm]{geometry}
+% \usepackage[paper=a4paper,top=2.5cm,bottom=2.5cm,left=2.2cm,right=2.2cm,foot=1cm,bindingoffset=0.6cm]{geometry} % for print
+\usepackage[paper=a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,foot=1cm]{geometry} % digital
 
 % Chapter titles
 \usepackage[noindentafter]{titlesec}

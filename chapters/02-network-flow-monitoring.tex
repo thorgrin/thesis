@@ -237,7 +237,7 @@ Let us now define a \emph{\Index{flow selection function}} $\varphi$ which takes
 \begin{defn}\label{def:flow-selection-function}
 Let $\widehat{P}^*$ be a set of all finite sequences of extended packets, $\widehat{P}$ be a set of extended packets. We say that a function of type
 \begin{equation*}
-    \varphi: \widehat{P}^*\times \widehat{P} \to \{true,false\}
+    \varphi: \widehat{P}^*\times \widehat{P} \to \{\mli{true,false}\}
 \end{equation*}
 is a \emph{flow selection function}.
 \end{defn}
@@ -250,7 +250,7 @@ Before we give a formal definition of a flow\index{flow!formal definition of}, w
     \begin{algorithmic}[1]
         \STATE Denote $\mathbb{I}$ the set of packet indexes that belong to the flow $\mathcal{F}$
         \STATE Start with $\mathbb{I} = \emptyset$
-        \WHILE{An index $k$ of the first extended packet $\widehat{p}_k$ for which $\varphi((\widehat{p}_n)_{n\in \mathbb{I}},\, \widehat{p}_k) = true$ exists}
+        \WHILE{An index $k$ of the first extended packet $\widehat{p}_k$ for which $\varphi((\widehat{p}_n)_{n\in \mathbb{I}},\, \widehat{p}_k) = \mli{true}$ exists}
             \STATE Add $k$ to $\mathbb{I}$
         \ENDWHILE
         \STATE The flow $\mathcal{F}$ is a sequence of packets with indexes from $\mathbb{I}$
@@ -267,9 +267,9 @@ We define a \emph{flow index set} $\mathbb{I} = \mathbb{I}\left((\widehat{p}_i)_
 \mathbb{I} &= \bigcup_{i \to \infty} J_i \text{, where } J_i \text{ is defined inductively over }i \in \mathbb{N} \text{ as:} \notag\\
 J_i &= \left\{
     \begin{array}{ll}
-        \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = true \right\}\right\} & \text{for } i = 1 , \\[0.7em]
+        \left\{\min\left\{ \alpha \in S \mid \varphi(\widehat{p}_{\alpha}) = \mli{true} \right\}\right\} & \text{for } i = 1 , \\[0.7em]
         J_{i-1} \cup \{\min\{ \alpha \in S \mid \alpha > \max(J_{i-1}), & \multirow{2}{*}{\text{for } $i > 1$.} \\
-        \quad \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = true \}\} &
+        \quad \varphi((\widehat{p}_n)_{n\in J_{i-1}},\, \widehat{p}_{\alpha}) = \mli{true} \}\} &
     \end{array}\right.
 \end{align*}
 
@@ -580,7 +580,7 @@ The extracted packet metadata are aggregated to create flow records. The definit
             \STATE Set \textbf{found} = \FALSE
             \FORALL{flow record $\mathcal{F}$ in flow cache}
                 \STATE Apply flow selection function $\phi$ to $\mathcal{F}$ and $M$
-                \IF{$\phi(\mathcal{F}, {M}) = true$}
+                \IF{$\phi(\mathcal{F}, {M}) = \mli{true}$}
                     \STATE Aggregate $M$ to $\mathcal{F}$
                     \STATE Set \textbf{found} = \TRUE;
                     \STATE \textbf{break}

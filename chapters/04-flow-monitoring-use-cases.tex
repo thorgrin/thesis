@@ -79,15 +79,15 @@ A basic flow record usually consists of flow keys~\eqref{eq:httpsecurity-flow-ke
 
 \begin{equation} \label{eq:httpsecurity-flow-key}
     \begin{split}
-        F_{key} =\ &(L3Proto, srcIP, dstIP, \\
-        & L4Proto, srcPort, dstPort)
+        \mli{F_{key}} =\ &\mli{(L3Proto, srcIP, dstIP,} \\
+        & \mli{L4Proto, srcPort, dstPort)}
     \end{split}
 \end{equation}
 
 \begin{equation} \label{eq:httpsecurity-flow-additional}
     \begin{split}
-        F_{additional} =\ &(timeStart, timeEnd, packets, octets, \\
-        & TCPflags, ToS, srcAS, dstAS )
+        \mli{F_{additional}} =\ &\mli{(timeStart, timeEnd, packets, octets,} \\
+        & \mli{TCPflags, ToS, srcAS, dstAS )}
     \end{split}
 \end{equation}
 
@@ -95,18 +95,18 @@ A basic flow record is then a concatenation of $F_{key}$ and $F_{additional}$. T
 
 \begin{equation} \label{eq:httpsecurity-key-http}
     \begin{split}
-        F_{HTTP} =\ &(hostname, path, userAgent, requestMethod, \\
-        & responseCode, referrer, contentType )
+        \mli{F_{HTTP}} =\ &\mli{(hostname, path, userAgent, requestMethod,} \\
+        & \mli{responseCode, referrer, contentType )}
     \end{split}
 \end{equation}
 
 By concatenating a basic flow record with additional application elements an application flow record is created. In this case, it contains HTTP elements~\eqref{eq:httpsecurity-app-flow}.
 
 \begin{equation} \label{eq:httpsecurity-app-flow}
-        F_{app} = F_{key} \cdot F_{additional} \cdot F_{HTTP}
+        \mli{F_{app} = F_{key} \cdot F_{additional} \cdot F_{HTTP}}
 \end{equation}
 
-We measured the $F_{app}$ vector in the environment of our campus network for three weeks over the summer break and three weeks in the semester. Thus, we could compare the amount of overall network traffic and suspicious events over two distinct time periods and traffic loads of the network. The amount of the traffic is lower in the summer break, although still comparable to the rest of the year. However, we assume that the amount of malicious traffic is constant over the year and is more apparent in the summer break.
+We measured the $\mli{F_{app}}$ vector in the environment of our campus network for three weeks over the summer break and three weeks in the semester. Thus, we could compare the amount of overall network traffic and suspicious events over two distinct time periods and traffic loads of the network. The amount of the traffic is lower in the summer break, although still comparable to the rest of the year. However, we assume that the amount of malicious traffic is constant over the year and is more apparent in the summer break.
 
 Table~\ref{tab:httpsecurity-data-sets} shows the size of each dataset in packets, bytes, and flows. Moreover, it contains the number of HTTP requests observed. Although the number of requests is not high compared to the number of flows, there are at least as many responses, which often carry multimedia content. Therefore, the portion of HTTP traffic in bytes is very significant, despite the lower number of requests.
 
@@ -159,9 +159,9 @@ There are many other possible classes, although we found them to not be relevant
 The first query asks for repeated requests between one guest and one host. We measured the number of occurrences of each triple, consisting of source IP, destination IP, and requested URL. Our assumption was that the repetition itself is common, but outstanding numbers may point to undesired behaviour. For example, password-protected web services may be exposed to brute-force attacks, which we can observe as a series of similar requests. The repeated request (A) is defined as follows:
 \begin{equation*}
 \begin{split}
-Repeated&Request(A) \iff A = \{F \mid \forall F, F':\\
-&F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)\\
-&\land \: F(path) = F'(path)\} \: \mbox{ and } |A| > threshold
+\mli{Repeated}&\mli{Request(A)} \iff A = \{F \mid \forall F, F':\\
+&\mli{F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)}\\
+&\mli{\land \: F(path) = F'(path)\} \: \mbox{ and } |A| > threshold}
 \end{split}
 \end{equation*}
 All flows in the set share the same source IP address, destination IP address, and requested HTTP path. The total number of flows in the set is bigger than the threshold.
@@ -235,9 +235,9 @@ Subclass & Path regular expression & Portion [\%] \\
 The second query addresses identical requests from one source IP address to many destination IP addresses. Our assumption was that a guest accesses only a limited number of hosts or at least requests different paths from different hosts. Therefore, a guest accessing a large number of hosts with the same request (with the exception of ``/'') is suspicious and worth noting. We would also like to point out the similarity between this traffic pattern and network port scanning, e.g., TCP SYN scan~\cite{Bhuyan-2011-Surveying}. Therefore, we propose the name HTTP scan for this traffic class. HTTP scan (B) is defined as follows:
 \begin{equation*}
 \begin{split}
-HTTP&Scan(B) \iff B = \{F \mid \forall F, F':\\
-&F(srcip) = F'(srcip) \: \land \: F(dstip) \neq F'(dstip)\\
-&\land \: F(path) = F'(path) \} \mbox{ and } |B| > threshold
+\mli{HTTP}&\mli{Scan(B)} \iff B = \{F \mid \forall F, F':\\
+&\mli{F(srcip) = F'(srcip) \: \land \: F(dstip) \neq F'(dstip)}\\
+&\mli{\land \: F(path) = F'(path) \} \mbox{ and } |B| > threshold}
 \end{split}
 \end{equation*}
 All flows in the set share the same source IP address and requested HTTP path, while there are no flows with the same destination IP address. The total number of flows in the set is bigger than the threshold.
@@ -286,16 +286,16 @@ Second, we searched for the HTTP scans in the opposite direction, i.e., scanning
 The third query addressed the guests that requested a large number of unique paths on a single host. In this case, we seek guests that requested the majority of content from our hosts. Our assumption is that a large number of different requests from one guest to one host is a legitimate traffic pattern. On the other hand, outstanding numbers worth noting can also be observed. Then we looked for guests that requested an outstanding number of unique paths on more than one host. We assume that only crawlers behave in this way and it is unusual that any other guest would request such a large number of unique URLs on more hosts. The activity of a crawler (C) is defined as follows:
 \begin{equation*}
 \begin{split}
-Crawler&Candidate(C') \iff C' = \{F \mid \forall F, F':\\
-&F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)\\
-&\land \: F(path) \neq F'(path)\} \: \mbox{ and } |C'| > threshold_1
+\mli{Crawler}&\mli{Candidate(C')} \iff C' = \{F \mid \forall F, F':\\
+&\mli{F(srcip) = F'(srcip) \: \land \: F(dstip) = F'(dstip)}\\
+&\mli{\land \: F(path) \neq F'(path)\} \: \mbox{ and } |C'| > threshold_1}
 \end{split}
 \end{equation*}
 \begin{equation*}
 \begin{split}
-Crawler&(C) \iff C = \{F \mid \forall C^\prime_i, C^\prime_j:\\
-&F_i \in C^\prime_i \land F_j \in C^\prime_j \land F_i(srcip) = F_j(srcip)\}\\
-&\mbox{and } |C| > threshold_2
+\mli{Crawler}&\mli{(C) \iff C = \{F \mid \forall C^\prime_i, C^\prime_j:}\\
+&\mli{F_i \in C^\prime_i \land F_j \in C^\prime_j \land F_i(srcip) = F_j(srcip)\}}\\
+&\mli{\mbox{and } |C| > threshold_2}
 \end{split}
 \end{equation*}
 We detect crawlers as guests that requested many resources from more hosts. First, all flows which have the same source IP address and destination IP address, but distinct requested HTTP paths, are grouped into sets. The first threshold is a minimal number of distinct requests on a single host. Second, we select source IP addresses which appeared in more sets. The second threshold is a minimal number of crawled hosts. The thresholds were selected to include at most 10\,\% of sets.
