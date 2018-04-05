@@ -194,7 +194,7 @@ The second sample of results presented in Table~\ref{tab:httpsecurity-repeat2} w
 \begin{tabular}{| c | c | l | r|} \hline
 Guest & Host & HTTP Path & \#Flows \\ \hline
 G1  & H1 & /\textbf{proxy}/lib\textbf{proxy}.pac & 5,147 \\ \hline
-G2  & H2 & \parbox[t]{6cm}{/pub/linux/fedora/epel/6/x86\_64/ repodata/e63d28ff5a765b11a7052496\\f481f31aebab17c28545908d54e65904a\\1046ec8-filelists.sqlite.bz2} & 4,244 \\ \hline
+G2  & H2 & \parbox[t]{6.3cm}{/pub/linux/fedora/epel/6/x86\_64/ repodata/e63d28ff5a765b11a7052496\\f481f31aebab17c28545908d54e65904a\\1046ec8-filelists.sqlite.bz2} & 4,244 \\ \hline
 G3  & H3 & /senat/studenti/wp-\textbf{login}.php & 3,992 \\ \hline
 G3  & H4 & /\textbf{admin}istrator/index.php & 3,945 \\ \hline
 G3  & H5 & /slovnik/\textbf{admin}istrator/index.php & 3,934 \\ \hline
@@ -429,7 +429,7 @@ A study by~\citeauthor{Aazam-2010-Comparison}~\cite{Aazam-2010-Comparison} provi
 
 A study by~\citeauthor{Bahaman-2012-Network}~\cite{Bahaman-2012-Network} discusses the performance of 6to4 with focus on communication over TCP. It states that the TCP transmission ability is reduced by the use of 6to4. However, it is still suitable for early stages of the transition period.
 
-Other papers discuss the impact of transition tunnels on network security. Krishnan et al.~\cite{rfc6169} present security concerns with recommendations on how to minimise security exposure due to tunnels. It is pointed out that tunnels can have a negative impact on deep packet inspection and that transition mechanisms such as Teredo allow inbound access from the public Internet to a device through an opening created in a network address translation (NAT) device. This increased exposure can be used by attackers to attack a device hidden behind a NAT device effectively. A frequently proposed security practice is to avoid the usage of tunnels at all and deploy other transition schemes like dual-stack.
+Other works discuss the impact of transition tunnels on network security. An RFC by Krishnan et al.~\cite{rfc6169} presents security concerns with recommendations on how to minimise security exposure due to tunnels. It is pointed out that tunnels can have a negative impact on deep packet inspection and that transition mechanisms such as Teredo allow inbound access from the public Internet to a device through an opening created in a network address translation (NAT) device. This increased exposure can be used by attackers to attack a device hidden behind a NAT device effectively. A frequently proposed security practice is to avoid the usage of tunnels at all and deploy other transition schemes like dual-stack.
 
 Finally,~\citeauthor{Sarrar-2012-Investigating}~\cite{Sarrar-2012-Investigating} provides a brief insight into tunnelled traffic in a study of the world IPv6 day impact on IPv6 traffic. The Teredo and 6to4 transition mechanisms were monitored, and the Teredo was discovered to carry mainly control traffic. The study also showed that IPv6 fragments were responsible for a significant portion of 6to4 traffic. The authors suspect that these fragments were caused by broken software which most likely forgot to take the IPv6 header size into account.
 
@@ -443,7 +443,7 @@ Teredo~\cite{rfc4380} is designed to provide IPv6 connectivity to an endpoint be
 
 6to4~\cite{rfc3056} is only suitable for hosts with a public IPv4 address. It uses encapsulation in IP protocol 41 packets hence it is relatively easy to detect and monitor. The 6to4 relay servers are acting as a bridge between the IPv4 and IPv6 networks. These relays use any-cast prefix 192.88.99.0/24, therefore, the optimal (nearest) relay server should automatically be used for communication.
 
-Figure~\ref{fig:ipv6-tunnels-monitoring-schema} shows traffic between two endpoints (communication \ding{175}), one of which uses Teredo and the other one 6to4. The IPv6 traffic from Teredo client travels part of its path in Teredo tunnel to be later decapsulated on the edge of IPv6 Internet and shortly after that to be encapsulated again, this time by 6to4 to travel the rest of its path over the IPv4 Internet to the network of its destination. Depending on where the observation point is located, the tunnel (either Teredo or 6to4) or native IPv6 traffic can be observed.
+Figure~\ref{fig:ipv6-tunnels-monitoring-schema} shows traffic between two endpoints (communication \ding{175}), one of which uses the Teredo protocol and the other one 6to4. The IPv6 traffic from Teredo client travels part of its path in Teredo tunnel to be later decapsulated on the edge of IPv6 Internet and shortly after that to be encapsulated again, this time by 6to4 to travel the rest of its path over the IPv4 Internet to the network of its destination. Depending on where the observation point is located, the tunnel (either Teredo or 6to4) or native IPv6 traffic can be observed.
 
 \begin{figure}[!tb]
         \centering
@@ -845,7 +845,7 @@ In this section, we presented two prototypes for flow-based geolocation in large
 
 To demonstrate the applicability of real-time geolocation in large-scale networks, we have shown several examples by means of two use cases. For example, the use case on anomaly detection has shown that geolocation can help reducing the dataset to be analysed by analysis applications dramatically. If certain countries are expected to generate more malicious traffic than others, traffic from these countries can be pre-filtered. Analysis applications, such as anomaly detection systems, can then analyse the smaller dataset, which results in shorter detection times.
 
-All implementations used in this work are available at \url{http://ics.muni.cz/~celeda/geolocation/}.
+Implementation of the FlowMon geolocation plugin and \emph{nfdump} geolocation patches are available at \url{http://ics.muni.cz/~celeda/geolocation/}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -860,7 +860,7 @@ A lot of research is being performed in the areas of network traffic classificat
 To be able to repeat the experiments, a packet trace must be captured. Considering the speed and utilisation of current uplinks of the research organisations, hundreds or even thousands of gigabytes of network data would have to be stored. Together with privacy issues, this makes sharing such datasets almost impossible. 
 
 % traffic description & changes
-Description of datasets is an important part of any work concerning network traffic. The properties of the traffic highly correlate with the results of any experiments. When the researchers are not able to share their dataset, its description should allow other researchers to find a similar dataset which would exhibit similar results. Moreover, such a description can be checked for consistency thus ensuring that the results do not unduly fluctuate over time.
+Description of datasets is an important part of any work concerning network traffic. The properties of the traffic highly correlate with the results of any experiments. In case the researchers are not able to share their dataset, its description should allow other researchers to find a similar dataset which would exhibit similar results. Moreover, such a description can be checked for consistency thus ensuring that the results do not unduly fluctuate over time.
 
 %% goals
 The goal of this work is to provide a simple method for discerning different types of network traffic. This method allows us to compare network traffic from live networks and even packet traces and determine which traffic samples show similar properties. Finding similar traffic is highly desirable as it allows the independent evaluation of published experiments. Moreover, when applying the method continuously to a specific network, changes in the properties of the network can be not only observed but also quantified.
@@ -1178,7 +1178,7 @@ We have presented an analysis of network traffic measured at five different camp
     \item To describe a network used to perform an experiment, the description of behaviour using network characteristics should be complemented with absolute volumetric information.
 \end{itemize}
 
-Our measurements have confirmed that it is possible to differentiate between networks based on the observed characteristics. Moreover, the campus networks showed quite stable characteristics over time even though the measurements were taken during the winter exam and spring teaching periods. Furthermore, we tested the correlation of the described characteristics and found that they are only very weakly correlated. This shows that each of the characteristics is valuable and carries information about the network. However, the presented characteristics are not by any means complete. We analysed a subset of possible characteristics derived from flow records, which can be easily measured on a network. Thus we believe that more work is required to identify other useful characteristics and utilise them to describe the behaviour of the networks.
+Our measurements have confirmed that it is possible to differentiate between networks by utilising the observed characteristics. Moreover, the campus networks showed quite stable characteristics over time even though the measurements were taken during the winter exam and spring teaching periods. Furthermore, we tested the correlation of the described characteristics and found that they are only very weakly correlated. This shows that each of the characteristics is valuable and carries information about the network. However, the presented characteristics are not by any means complete. We analysed a subset of possible characteristics derived from flow records, which can be easily measured on a network. Thus we believe that more work is required to identify other useful characteristics and utilise them to describe the behaviour of the networks.
 
 
 \section{Summary}\label{sec:use-cases-summary}

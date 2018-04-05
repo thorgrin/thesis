@@ -12,7 +12,7 @@ The organisation of this chapter is as follows:
   \item Section~\ref{sec:traffic-description} explains the principles of several widely used encryption protocols.
   \item Section~\ref{sec:extraction} describes what information can be obtained from encrypted traffic using specific knowledge of the encryption protocols.
   \item Section~\ref{sec:taxonomy} describes the traffic classification taxonomy used in this chapter.
-  \item Section~\ref{sec:payload-classification} describes traffic classification methods based on the specific knowledge of encryption protocols.
+  \item Section~\ref{sec:payload-classification} describes traffic classification methods based on specific knowledge of encryption protocols.
   \item Section~\ref{sec:detection} surveys papers on the classification of encrypted traffic using statistical and behavioural methods.
   \item Section~\ref{sec:enc-conclusions} concludes the chapter and provides directions for future research.
 \end{itemize}
@@ -278,7 +278,7 @@ Almost every network traffic encryption protocol has a specific packet format th
 
 \subsection{Payload-Based Classification Tools}
 
-Most network traffic classification tools address all network protocols and not only the encrypted ones. The following examples represent the most widely used tools for classifying network traffic. Most of these tools are also able to distinguish specific network applications, mainly in unencrypted traffic. In terms of the taxonomy, these tools mostly use the \textit{Payload Inspection} technique on the \textit{Traffic Payload} classification input to map \textit{Flows} to \textit{Application Protocols}.
+Most network traffic classification tools aim to recognise all network protocols and not only the encrypted ones. The following examples represent the most widely used tools for classifying network traffic. Most of these tools are also able to distinguish specific network applications, mainly in unencrypted traffic. In terms of the taxonomy, these tools mostly use the \textit{Payload Inspection} technique on the \textit{Traffic Payload} classification input to map \textit{Flows} to \textit{Application Protocols}.
 
 \textit{PACE}~\cite{pace} is a commercial classification library written in C, which uses pattern matching augmented by heuristics, behavioural and statistical analysis. In addition to standard protocol and application recognition, it is able to identify obfuscated protocols such as BitTorrent or Skype. According to its website, PACE is able to identify thousands of network applications and protocols.
 
@@ -296,7 +296,7 @@ A comparison of the presented open-source tools was introduced by Finsterbusch e
 
 Another comparison of the tools was carried out by Bujlow et al.~\cite{Bujlow-2015-classification}. They compared all of the previously presented tools. They prepared a publicly available dataset for the comparison which contained encrypted and unencrypted network traffic from 17 application protocols, 25 network applications and 34 web services. Their results show that PACE and Libprotoident are the most accurate tools. Nevertheless, the Libprotoident tool was the only classifier able to identify all the encrypted protocols which were tested. Their results were generally very similar to those in the comparison by Finsterbusch et al.
 
-In general, the payload-based classification tools use regular expression matching algorithms to identify the encrypted traffic. The main difference between the tools is how much data they need to examine and whether they need both directions of the connection for the classification.
+In general, the payload-based classification tools utilise regular expression matching algorithms to identify the encrypted traffic. The main difference between the tools is how much data they need to examine and whether they need both directions of the connection for the classification.
 
 
 %%%%%%%%%%%%%%%%%%%%%% Feature-Based Traffic Classification Techniques for Encrypted Traffic %%%%%%%%%%%%%%%%%%%%%
@@ -343,7 +343,7 @@ Arndt and Zincir-Heywood~\cite{Arndt-2011-Comparison} also concentrated on the c
 % Summary of 4 Alshammari works:
 Alshammari and Zincir-Heywood have published several papers~\cite{Alshammari-2009-Classifying, Alshammari-2007-flow, Alshammari-2009-Preliminary, Alshammari-2009-Machine, Alshammari-2010-Investigation, Alshammari-2011-Can} on traffic classification using various supervised machine learning methods. They focused on recognising SSH, Skype, and in one case, Gtalk traffic using flow features without port numbers, IP addresses or payloads. A set of 22 flow features was mostly used, although in one case the authors selected the features using genetic programming. Public datasets are used as well as a private dataset generated on a test-bed network. The ground truth for public datasets was gained from port numbers, and the private dataset included the payload and was labelled with a commercial packet classification tool. The following algorithms for traffic classification were compared: AdaBoost, RIPPER, Support Vector Machine (SVM), Naive Bayes, C4.5 and Genetic Programming.
 
-Kumano et al.~\cite{Kumano-2014-Towards} investigated real-time application identification in encrypted traffic. IPsec and PPTP encryption were applied to the web, interactive and bulk transfer flows to create an evaluation dataset. C4.5 and SVM algorithms were utilised to classify the application on these datasets. The authors then tested the accuracy of the classification using a different number of packets from the start of the flows. They measured the impact of using fewer packets on the flow features and proposed using features which show the least change to classify applications at an early stage.
+Kumano et al.~\cite{Kumano-2014-Towards} investigated identification of real-time applications in encrypted traffic. IPsec and PPTP encryption were applied to the web, interactive and bulk transfer flows to create an evaluation dataset. C4.5 and SVM algorithms were utilised to classify the application on these datasets. The authors then tested the accuracy of the classification using a different number of packets from the start of the flows. They measured the impact of using fewer packets on the flow features and proposed using features which show the least change to classify applications at an early stage.
 % INPUT: Flows
 % TECHNIQUE: Supervised (C4.5, SVM)
 % OUTPUT: Flow->application type
@@ -360,7 +360,7 @@ Bernaille and Teixeira~\cite{Bernaille-2007-Early} used traffic clustering to de
 % dataset: custom, real, published
 % partial flow: yes
 
-Maolini et al.~\cite{Maiolini-2009-Real} identify SSH traffic and determine underlying protocols (SCP, SFTP, HTTP) using a $k$-means algorithm. Only three packet features are used: the direction, the number of bytes and the timestamps of each packet. Their private datasets are created from artificial traffic and contain HTTP, FTP, POP3 and SSH protocols. Control packets such as TCP handshake, retransmitted packets and ACK-only packets are removed from statistics as they negatively affect the precision. Authors use only first 3-7 packets to achieve a real-time identification.
+Maolini et al.~\cite{Maiolini-2009-Real} identify SSH traffic and determine transported application protocols, such as SCP, SFTP, and HTTP, using a $k$-means algorithm. Only three packet features are used: the direction, the number of bytes and the timestamps of each packet. Their private datasets are created from artificial traffic and contain HTTP, FTP, POP3 and SSH protocols. Control packets such as TCP handshake, retransmitted packets and ACK-only packets are removed from statistics as they negatively affect the precision. Authors use only first 3-7 packets to achieve a real-time identification.
 
 Backquet et al.~\cite{Bacquet-2009-Investigation, Bacquet-2011-Genetic} use a Multi-Objective Genetic Algorithm to select a flow feature subspace and parameters for a clustering algorithm which detects encrypted traffic. The second work employs a hierarchical $k$-means algorithm to increase the identification's accuracy. The authors evaluate both approaches on a private dataset captured at a university campus. SSH is used as a representative of encrypted traffic, and the ground truth is gained from the payload of the captured packets. Based on previous works, the authors argue that the feature selection and the number of clusters highly affect the overall accuracy. Therefore, the authors selected four objectives for the genetic algorithm: cluster cohesiveness, cluster separation, the number of clusters and the number of used flow features. The results show (a) that only 14 from a total of 38 flow features were used by the best-performing algorithm and (b) that using a hierarchical $k$-means algorithm increases the identification performance.
 % INPUT: Flow (14/38selected by MOGA)
