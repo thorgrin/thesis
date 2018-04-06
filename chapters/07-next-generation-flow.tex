@@ -84,7 +84,6 @@ Four basic types of flows are recognised by the EventFlow: HTTP requests, HTTP r
 We base the EventFlow architecture on the relations between the requests and responses. When an HTTP or a DNS flow is encountered, we must make sure that it is assigned the same EID as the related flows. Therefore, we create four sets of records: expected HTTP requests, expected HTTP responses, expected DNS requests and expected DNS responses. When processing an HTTP or a DNS flow, we add a new record to the set or sets it relates to. Then, when a next flow is processed, it is matched against appropriate expected set to see whether it is a part of existing event. If it is, an EID of the event is assigned to the flow record. For example, when a DNS response is encountered, a new record is put into the expected HTTP requests set (because of relation 2), see Figure~\ref{fig:eventflow-relations}). Then, when an HTTP request is processed, we check the expected HTTP requests set to see whether we are expecting this request based on a previous DNS response. If the request is matched, it is assigned the same EID as the DNS response. 
 
 \begin{table}[!t]
-        \caption{Matched Flow Properties.}
         \centering
         \renewcommand{\arraystretch}{1.1}
         \begin{tabular}{l|c|c|c|c|c|c}
@@ -99,6 +98,7 @@ We base the EventFlow architecture on the relations between the requests and res
                         Expected DNS Request   & \cmark &  &  &  & \cmark &  \\ \hline
                         Expected DNS Reply     & \cmark & \cmark & \cmark &  &  & \cmark \\ \bottomrule
         \end{tabular}
+        \caption{Matched Flow Properties.}
         \label{tab:eventflow-matched-properties}
 \end{table}
 
