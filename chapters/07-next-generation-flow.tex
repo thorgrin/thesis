@@ -10,7 +10,7 @@ The first proposed concept is called EventFlow and is based on the assumption th
 
 The second concept addresses the monitoring of tunnelled traffic. Currently, each flow that represents a tunnel is split into multiple flows based on the communication in that tunnel. However, this approach usually supports only a static number of encapsulation layers. We propose another approach based on a hierarchical tree of flows.
 
-Similarly to the monitoring of tunnelled traffic, application events can also cause a flow to be split into several smaller flows. This causes statistics relying on a number of flows as well as per-flow metrics to be inaccurate. The last concept proposes to handle application layer events separately from flow records. Each event would be associated with the original flow, however, would not influence its creation at all.
+Similarly to the monitoring of tunnelled traffic, application events can also cause a flow to be split into several smaller flows. This causes statistics relying on a number of flows as well as per-flow metrics to be inaccurate. The last concept proposes to handle application layer events separately from flow records. Each event would be associated with the original flow, however, it would not influence its creation at all.
 
 The paper included in this chapter is~\cite{Velan-2016-EventFlow}.
 
@@ -70,7 +70,7 @@ The usual approach to reducing the volume of collected data is to use sampling. 
 
 \subsection{EventFlow Architecture} \label{subsec:eventflow-architecture}
 
-This section describes the architecture of the EventFlow monitoring. The goal is to label all flows that are the results of a single user action with the same event identifier (EID). For example, accessing \url{http://www.w3.org/} creates 1 DNS request, 37 HTTP requests, and 8 HTTPS requests. We aim to assign a single unique EID to the flows generated for all these DNS and HTTP requests.
+This subsection describes the architecture of the EventFlow monitoring. The goal is to label all flows that are the results of a single user action with the same event identifier (EID). For example, accessing \url{http://www.w3.org/} creates 1 DNS request, 37 HTTP requests, and 8 HTTPS requests. We aim to assign a single unique EID to the flows generated for all of these DNS and HTTP requests.
 
 \begin{figure}[!tb]
     \centering 
@@ -79,19 +79,19 @@ This section describes the architecture of the EventFlow monitoring. The goal is
     \label{fig:eventflow-relations}
 \end{figure}
 
-Four basic types of flows are recognised by the EventFlow: HTTP requests, HTTP responses, DNS requests and DNS responses. There are relations between these types of flows in network traffic, as shown in Figure~\ref{fig:eventflow-relations}. When HTTP request to a new site is performed, the IP address of the site must be resolved first. Therefore, a DNS request is created. After the request is observed, a reply usually follows, which results in the relation 1). After the DNS reply arrives, the client knows the IP address of the server and makes the HTTP request, which creates the relation 2). An HTTP response follows the request, as indicated by the relation 3). The HTTP response can contain an HTML page which links to several additional resources such as external style sheets or images. The loading of these resources triggers more HTTP requests, resulting in relation 4). When these requests point to previously unresolved domains, new DNS requests are created, which introduces the relation 5).
+Four basic types of flows are recognised by the EventFlow: HTTP requests, HTTP responses, DNS requests, and DNS responses. There are relations between these types of flows in network traffic, as shown in Figure~\ref{fig:eventflow-relations}. When HTTP request to a new site is performed, the IP address of the site must be resolved first. Therefore, a DNS request is created. After the request is observed, a reply usually follows, which results in the relation 1). After the DNS reply arrives, the client knows the IP address of the server and makes the HTTP request, which creates the relation 2). An HTTP response follows the request, as indicated by the relation 3). The HTTP response can contain an HTML page which links to several additional resources such as external style sheets or images. The loading of these resources triggers more HTTP requests, resulting in relation 4). When these requests point to previously unresolved domains, new DNS requests are created, which introduces the relation 5).
 
-We base the EventFlow architecture on the relations between the requests and responses. When an HTTP or a DNS flow is encountered, we must make sure that it is assigned the same EID as the related flows. Therefore, we create four sets of records: expected HTTP requests, expected HTTP responses, expected DNS requests and expected DNS responses. When processing an HTTP or a DNS flow, we add a new record to the set or sets it relates to. Then, when a next flow is processed, it is matched against appropriate expected set to see whether it is a part of existing event. If it is, an EID of the event is assigned to the flow record. For example, when a DNS response is encountered, a new record is put into the expected HTTP requests set (because of relation 2), see Figure~\ref{fig:eventflow-relations}). Then, when an HTTP request is processed, we check the expected HTTP requests set to see whether we are expecting this request based on a previous DNS response. If the request is matched, it is assigned the same EID as the DNS response. 
+We base the EventFlow architecture on the relations between the requests and responses. When an HTTP or a DNS flow is encountered, we must make sure that it is assigned the same EID as the related flows. Therefore, we create four sets of records: expected HTTP requests, expected HTTP responses, expected DNS requests, and expected DNS responses. When processing an HTTP or a DNS flow, we add a new record to the set or sets it relates to. Then, when a next flow is processed, it is matched against appropriate expected set to see whether it is a part of existing event. If it is, an EID of the event is assigned to the flow record. For example, when a DNS response is encountered, a new record is put into the expected HTTP requests set (because of relation 2), see Figure~\ref{fig:eventflow-relations}). Then, when an HTTP request is processed, we check the expected HTTP requests set to see whether we are expecting this request based on a previous DNS response. If the request is matched, it is assigned the same EID as the DNS response. 
 
 \begin{table}[!t]
         \centering
         \renewcommand{\arraystretch}{1.1}
         \begin{tabular}{l|c|c|c|c|c|c}
-                         & \rotatebox[origin=r]{90}{\centering \textbf{Source IP}\hspace{33pt}} 
-                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination IP}\hspace{19pt}} 
-                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination Port}\hspace{9pt}} 
-                         & \rotatebox[origin=r]{90}{\centering \textbf{URL}\hspace{48pt}} 
-                         & \rotatebox[origin=r]{90}{\centering \textbf{Domain}\hspace{39pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Source IP}\hspace{53pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination IP}\hspace{29pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Destination Port}\hspace{19pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{URL}\hspace{78pt}} 
+                         & \rotatebox[origin=r]{90}{\centering \textbf{Domain}\hspace{61pt}} 
                          & \rotatebox[origin=r]{90}{\centering \hspace{3pt}\textbf{DNS Transaction ID}} \\ \toprule
                         Expected HTTP Request  & \cmark &  &  & \cmark & \cmark &  \\ \hline
                         Expected HTTP Reply    & \cmark & \cmark & \cmark &  &  &  \\ \hline
@@ -116,7 +116,7 @@ There are also several caveats that cannot be avoided. Some of the requested doc
 
 \subsection{EventFlow Prototype} \label{subsec:eventflow-prototype}
 
-We build the EventFlow prototype as a plugin for the FlowMon~\cite{FlowmonNetworks--Flowmon} flow monitoring software. The FlowMon exporter is a flexible flow exporter that provides support for various extensions. These extensions are used to implement a support for additional packet inputs, application protocol processing and different export protocols. We utilise the capabilities of the exporter to create an EventFlow extension plugin. The prototype can either be deployed to process data on a live network or to analyse captured samples.
+We build the EventFlow prototype as a plugin for the FlowMon~\cite{FlowmonNetworks--Flowmon} flow monitoring software. The capabilities of the flow exporter are utilised to create a prototype EventFlow extension plugin. The prototype can either be deployed to process data on a live network or to analyse captured samples.
 
 \begin{figure}[!tb]
     \centering 
@@ -137,7 +137,7 @@ Using an 8-byte integer for EID and assigning it incrementally to individual eve
 
 \subsection{Experimental Evaluation} \label{subsec:eventflow-evaluation}
 
-We evaluate the prototype in two scenarios. First, we assess the functionality of the prototype on a simple example web site. Once we have verified the functionality, we run EventFlow on a packet trace from live network to determine how many flows can be joined to events in real traffic. The IPFIXcol~\cite{Velan-2012-Flow} flow collector is used to collect and process the generated flows. The main advantage of the collector is that it can be easily configured to work with the Event ID element.
+We evaluate the prototype in two scenarios. First, we assess the functionality of the prototype on a simple example web site. Once we have verified the functionality, we run EventFlow on a packet trace from live network to determine how many flows can be joined to events in real traffic. The IPFIXcol~\cite{Velan-2012-Flow} flow collector is used to collect and process the generated flows. The main advantage of the collector is that it can be easily configured to work with the new Event ID element.
 
 We do not evaluate the performance of the prototype in this phase. We are aware of several performance inefficiencies that need to be solved before any valuable results can be measured. For example, one of the most expensive parts of the prototype is the management of sets of expected records. We expect that changing the underlying data structures will significantly improve the performance.
 
@@ -146,25 +146,25 @@ For the first scenario, we create a simple website with two pages, each linking 
 
 We expect to see a flow record for each of the requests and responses. However, due to the HTTP pipelining the whole communication with the web server hosting the test pages is done using a single connection. Therefore, there is a pair of flows for the accessing the two web pages with the linked images (which were on the same server), two pairs of flows for each off-site JavaScript library, and three pairs of DNS flows for IP address resolution. There are 12 flows created in this test scenario in total. The 12 flows are divided into two events by the EventFlow prototype. The first event contains flows for the two DNS requests, HTTP communication with the web server and download of the first JavaScript library. The second event does not contain an HTTP flow due to the HTTP pipelining but contains the DNS request and the subsequent download of the second JavaScript library.
 
-The functional evaluation shows that the prototype correctly recognises related flows and labels them as a part of the same event. The flow exporter can be extended to handle HTTP pipelining by creating new flow record for each pipelined request. Such extension would make the measurement more accurate, and we plan to deploy it in the future.
+The functional evaluation shows that the prototype correctly recognises related flows and labels them as a part of the same event. The flow exporter can be extended to handle HTTP pipelining by creating new flow record for each pipelined request. Such extension would make the measurement more accurate.
 
 \subsubsection{Real Traffic Evaluation}
 
 \begin{table}[!tb]
-    \caption{Real Traffic Evaluation Statistics.}
     \centering
     \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{|l|r|} \hline
-        \textit{Total Flows} & 613953 \\ \hline
-        \textit{HTTP Requests} & 33294  \\  \hline
-        \textit{HTTP Responses} & 49753  \\  \hline
-        \textit{DNS Requests} & 197926  \\  \hline
-        \textit{DNS Responses} & 224588  \\  \hline
-        \textit{Events with $>$ 1 Flow} & 28064  \\  \hline
-        \textit{Flows in Events with $>$ 1 Flow} & 55881  \\  \hline
-        \textit{All Events} & 388749 \\  \hline
-        \textit{Flows in All Events} & 418671 \\  \hline
+        \textit{Total Flows} & 613,953 \\ \hline
+        \textit{HTTP Requests} & 33,294  \\  \hline
+        \textit{HTTP Responses} & 49,753  \\  \hline
+        \textit{DNS Requests} & 197,926  \\  \hline
+        \textit{DNS Responses} & 224,588  \\  \hline
+        \textit{Events with $>$ 1 Flow} & 28,064  \\  \hline
+        \textit{Flows in Events with $>$ 1 Flow} & 55,881  \\  \hline
+        \textit{All Events} & 388,749 \\  \hline
+        \textit{Flows in All Events} & 418,671 \\  \hline
     \end{tabular}
+    \caption{Real Traffic Evaluation Statistics.}
     \label{tab:eventflow-stats}
 \end{table}
 
@@ -197,7 +197,7 @@ We propose to use a more generic approach to handle the encapsulated traffic. In
 
 The main benefit of the MetaFlow approach is that the structure of flows remains the same for an arbitrary number of encapsulation layers. Current flow exporters usually store only the innermost and outermost layers while ignoring any intermediate layers altogether. By providing a uniform way to describe more complex packet structures, we can gain more information about the traffic. Moreover, the flow records are easier to process as well. For example, it is simple to select all encapsulated flows by selecting all flows with non-empty \emph{Parent ID}.
 
-The uniform description allows running queries and algorithms on encapsulated traffic with no additional changes in the flow data processing. When the encapsulated traffic is monitored nowadays, both sets of IP addresses that are present in flow records must be handled, which creates complicated conditions in the code. However, by simplifying the flow records, this problem is removed. Another advantage of the simplified flow records it the lowered number of templates created during flow export. Currently, each layer of encapsulation creates a whole new set of templates that match the templates generated without encapsulation. For example, IPv4 packets with ICMP, UDP, and TCP transport layer protocols usually create three different templates. When the IPv4 header encapsulates another IPv4 protocol header, three new templates are created for ICMP, UDP, and TCP protocols observed in the encapsulated traffic. Handling of a large number of templates is inefficient both for flow export and flow data processing. The MetaFlow removes this inefficiency as no new templates are added at all in this scenario.
+The uniform description allows running queries and algorithms on encapsulated traffic with no additional changes in the flow data processing. When the encapsulated traffic is monitored nowadays, both sets of IP addresses that are present in flow records must be handled, which creates complicated conditions in the code. However, by simplifying the flow records, this problem is removed. Another advantage of the simplified flow records is the lowered number of templates created during flow export. Currently, each layer of encapsulation creates a whole new set of templates that match the templates generated without encapsulation. For example, IPv4 packets with ICMP, UDP, and TCP transport layer protocols usually create three different templates. When the IPv4 header encapsulates another IPv4 protocol header, three new templates are created for ICMP, UDP, and TCP protocols observed in the encapsulated traffic. Handling of a large number of templates is inefficient both for flow export and flow data processing. The MetaFlow removes this inefficiency as no new templates are added at all in this scenario.
 
 To implement MetaFlow, changes would need to be made both to flow data creation and flow data processing. The main modification is that each flow needs to have a unique \emph{ID}. There are several options for generating a unique identifier for each flow during the flow creation process:
 \begin{itemize}
@@ -206,11 +206,11 @@ To implement MetaFlow, changes would need to be made both to flow data creation 
     \item a hash.
 \end{itemize}
 
-Using a sequence number is fine as long as only a single flow cache is utilised. Shared sequence number means unnecessary synchronisation point for multiple flow caches, which could decrease performance. Moreover, when the exporter is restarted, the numbers would have to continue in the sequence, which is hard to implement in case of sudden reboots and crashes. It the sequence was restarted, the flow collector would have to detect it and renumber the flows, which would lead to consistency problems.
+Using a sequence number is fine as long as only a single flow cache is utilised. Shared sequence number means unnecessary synchronisation point for multiple flow caches, which could decrease performance. Moreover, when the exporter is restarted, the numbers would have to continue in the sequence, which is hard to implement in case of sudden reboots and crashes. If the sequence was restarted, the flow collector would have to detect it and renumber the flows, which would lead to consistency problems.
 
 Using high-precision timestamps is fine as long as each consecutive packets are guaranteed to receive different timestamp. If this condition is met, each flow can simply get its start timestamp as its \emph{ID}. For example, the precision needed for 100\,Gbps network would need to be in nanoseconds.
 
-Another option is to utilise the same hash that is used to identify the flow during the flow creation process. However, the hash needs to change when the flow is exported and never be used again. Therefore, the best option seems to be using high-precision timestamps. When they are not available, a combination of hash mixed together with a timestamp will suffice.
+Another option is to utilise the same hash that is used to identify the flow during the flow creation process. However, the hash needs to change when the flow is exported and never be used again. Therefore, the best option seems to be using high-precision timestamps. When they are not available, a combination of hash mixed together with a timestamp should suffice.
 
 Once a flow is received by a collector, the \emph{ID} and \emph{Parent ID} needs to be used together with an identification of the flow exporter. Otherwise, the flows might be mixed as there is no guarantee that each exported generates unique identifiers.
 
@@ -218,13 +218,13 @@ The implementation of flow data processing would need to be reviewed to ensure c
 
 \section{Application Events and Flow}\label{sec:app-events}
 
-A concept similar to MetaFlow can be applied to application events as well. Currently, an application flow can be split into multiple flows based on the application content, e.g. multiple HTTP requests on a single connection in separate flows. The result is the same as for encapsulated traffic. Statistical properties of basic flows are broken by the application layer. Moreover, mixing together basic flow which focuses on network and transport layers and the application data forces too narrow view of the available data. We propose to separate application layer data from the basic flow records in the same fashion as MetaFlow separates encapsulated layers from the parent flow. This would effectively decouple application events from the basic flows.
+A concept similar to MetaFlow can be applied to application events as well. Currently, an application flow can be split into multiple flows based on the application content, e.g., multiple HTTP requests on a single connection in separate flows. The result is the same as for encapsulated traffic. Statistical properties of basic flows are broken by the application layer in these cases. Moreover, mixing together basic flow which focuses on network and transport layers and the application data forces too narrow view of the available data. We propose to separate application layer data from the basic flow records in the same fashion as MetaFlow separates encapsulated layers from the parent flow. This would effectively decouple application events from the basic flows.
 
 There are three major benefits to our proposal. Firstly, the basic flows remain untouched whatever the application layer information is. This allows detection and statistical methods to rely on the properties of the basic flows without taking into account possible transformation by the application layer. Moreover, when the application layer is not necessary for flow processing, it can easily be filtered out without modification of each flow record. This might lead to major performance benefits for the flow data processing systems.
 
 Secondly, the flow exporter does not have to hold the application information in the flow cache. The flow cache can be implemented efficiently with small flow records without variable fields and dynamically allocated memory. The processing of application events would be moved to packet processing. If the event has no duration, it can be exported directly without delay. We assume that the associated flow identifier is known from the time the flow records is created in the flow cache and therefore can be assigned to the application event at any time. If the application event has a duration, the packet parser must store it in an appropriate application-specific cache until the time it is completed and exported. We expect this mode of data processing at the flow exporter to be significantly more effective than the current mode which holds all application data in flow cache together with the flow records.
 
-The last major advantage is in the processing of the application events. Since each application event is exported separately, the number of templates is significantly reduced. Instead of many combinations of network, transport and application layers, we only have combinations of network and transport layers and then separate templates for application events. Moreover, this separation can simplify the processing of the flows as well. For example, when a detection module requires only data from HTTP and DNS protocols, it can easily select only the two templates to work with. 
+The last major advantage is in the processing of the application events. Since each application event is exported separately, the number of templates is significantly reduced. Instead of many combinations of network, transport, and application layers, we only have combinations of network and transport layers and then separate templates for application events. Moreover, this separation can simplify the processing of the flows as well. For example, when a detection module requires only data from HTTP and DNS protocols, it can easily select only the two templates to work with. 
 
 The proposed approach has one notable disadvantage. The flow processing systems are going to receive application events before the flow records expire. This might cause them to buffer the data and wait for the flow records. However, basic information about each flow, such as IP addresses, transport protocol, and port numbers can be included in the application event messages as well. This should facilitate unhindered processing of the flow events while the flow records are being aggregated. Moreover, detection methods using application events could react much faster than those utilising application flow records.
 
@@ -232,9 +232,9 @@ Since the application data are effectively decoupled from the basic flows, we ca
 
 \section{Summary}\label{sec:ng-summary}
 
-We have proposed several novel concepts for application flow monitoring in this chapter. Each of our proposals could be implemented separately; however, we believe that a combination of all proposed approaches is not only possible but would provide greatest benefits for the application flow monitoring.
+We have proposed three novel concepts for application flow monitoring in this chapter. Each of our proposals could be implemented separately; however, we believe that a combination of all proposed approaches is not only possible but would provide greatest benefits for the application flow monitoring.
 
-The first proposed concept has been EventFlow. It is an extension of the flow measurement which allows preserving relations between HTTP and DNS application flows that are a part of single user action, most typically browsing a web page. We have described an architecture of the EventFlow extension and its limitations. A prototype implementation of the EventFlow has been introduced and evaluated on a packet trace from an ISP network. We have shown that a significant number of flow records can be recognised as a part of a single user action.
+The first proposed concept has been EventFlow. It is an extension of the application flow monitoring which allows preserving relations between HTTP and DNS application flows that are a part of single user action, most typically browsing a web page. We have described an architecture of the EventFlow extension and its limitations. A prototype implementation of the EventFlow has been introduced and evaluated on a packet trace from an ISP network. We have shown that a significant number of flow records can be recognised as a part of a single user action.
 
 MetaFlow has been proposed as an approach to monitoring of encapsulated traffic. We have argued that the current practice of extending flow records with information from each layer is not flexible and has several disadvantages. MetaFlow aims to create a hierarchy of encapsulated flows so that each flow is able to retain a simple structure while the information about the relations between flows is preserved. We have also discussed how to create a unique flow identifier, which is necessary for building the MetaFlow tree structure.
 
